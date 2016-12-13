@@ -1,0 +1,14 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "workbench.sideBar.location": "left",
+    "explorer.openEditors.visible": 0,
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        "",
+        "-p",
+        "test_*.py"
+    ]
+    ,
+    "python.unitTest.unittestEnabled": true
+}
