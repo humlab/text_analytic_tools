@@ -14,3 +14,4 @@ class PapalTextItem(scrapy.Item):
     year = scrapy.Field()
     date = scrapy.Field()
     base = scrapy.Field()
+    filebase = scrapy.Field()

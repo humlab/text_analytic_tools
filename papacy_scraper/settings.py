@@ -68,7 +68,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'papacy_scraper.pipelines.StoreItemPipeline': 400,
+    'papacy_scraper.pipelines.StoreItemAsTextPipeline': 400,
     'papacy_scraper.pipelines.StanfordTaggerItemPipeline': 500
 }
 

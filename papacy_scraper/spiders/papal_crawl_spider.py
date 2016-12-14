@@ -27,15 +27,21 @@ class CrawlOptions(object):
 class JobCrawlSpider(CrawlSpider):
 
     name = 'papalcrawlspider'
-    options = CrawlOptions('francesco', 'en', [ 'bulls' ])
-    start_urls = [ options.start_url ]
-    allowed_domains = [ options.target_domain ]
 
-    rules = [
-        Rule(LinkExtractor(allow=options.navigation_link_patterns, restrict_css=options.navigation_link_restrict_css, unique=True), follow=True, callback='tree_link_callback'),
-        Rule(LinkExtractor(allow=options.forward_link_pattern, restrict_css='.navigation-pages a[title="Forward"]', unique=True), follow=True, callback='forward_link_callback'),
-        Rule(LinkExtractor(allow=options.document_link_pattern, restrict_css='.documento', unique=True), follow=True, callback='document_link_callback')
-    ]
+    def __init__(self, pope_options, *args, **kwargs):
+        super(JobCrawlSpider, self).__init__(*args, **kwargs)
+        options = CrawlOptions(pope_options.pope, pope_options.lang, pope_options.categories)
+        self.output_folder = pope_options.output_folder
+        self.start_urls = [ options.start_url ]
+        self.allowed_domains = [ options.target_domain ]
+
+        self.rules = [
+            Rule(LinkExtractor(allow=options.navigation_link_patterns, restrict_css=options.navigation_link_restrict_css, unique=True), follow=True, callback='tree_link_callback'),
+            Rule(LinkExtractor(allow=options.forward_link_pattern, restrict_css='.navigation-pages a[title="Forward"]', unique=True), follow=True, callback='forward_link_callback'),
+            Rule(LinkExtractor(allow=options.document_link_pattern, restrict_css='.documento', unique=True), follow=True, callback='document_link_callback')
+        ]
+
+        self.options = options
 
     def tree_link_callback(self, response):
         log.info("LINK PAGE FOUND: " + response.url)

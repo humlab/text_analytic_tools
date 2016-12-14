@@ -2,13 +2,26 @@
 {
     "workbench.sideBar.location": "left",
     "explorer.openEditors.visible": 0,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false,
+    "python.formatting.provider": "autopep8",
+    "python.unitTest.unittestEnabled": true,
+    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
     "python.unitTest.unittestArgs": [
         "-v",
         "-s",
         "",
         "-p",
-        "test_*.py"
-    ]
-    ,
-    "python.unitTest.unittestEnabled": true
+        "*test*.py"
+    ],
+    "editor.rulers": [90],
+    "editor.roundedSelection": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        //".vscode": true,
+        "**/__pycache__": true,
+        "**/**/*.pyc": true
+    }
 }
