@@ -35,19 +35,18 @@ class PapalTextItemParser:
     http://w2.vatican.va/content/francesco/en/cotidie/2014/documents/papa-francesco-cotidie_20141219_the-time-of-re-creation.html
     '''
 
+    
     @staticmethod
     def parse(response):
 
+        get_str = lambda x:
+            if isinstance(x, tuple) and len(x) > 0:
+                x = x[0]
+            return x if isinstance(x, str) else None
+
         item = PapalTextItem()
 
-        m = re.search(r'/content/'\
-                       '(?P<pope>\w+)/'\
-                       '(?P<lang>(en|it|fr|es|la|pl|pt))/'\
-                       '(?P<type>\w+)/'\
-                       '((?P<year>\d{4})/)?'\
-                       '((?P<spec>(.*))/)?'\
-                       '(documents/)'\
-                       '(?P<base>.+)\.html', response.url)
+        m = re.search(r'/content/(?P<pope>\w+)/(?P<lang>en|it|fr|es|la|pl|pt)/(?P<type>\w+)/(?P<year>\d{4}(?:/))?(?P<spec>(.*)(?:/))?documents/(?P<base>.+)\.html$', response.url)
 
         if not m:
             raise Exception("Unable to decode url {0}".format(response.url))

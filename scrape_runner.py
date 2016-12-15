@@ -41,6 +41,6 @@ if __name__ == "__main__":
 
     settings = get_project_settings()
     process = CrawlerProcess(settings)
-    process.crawl('papalcrawlspider', options=PopeOptions)
+    process.crawl('papalcrawlspider', pope_options=PopeOptions)
     process.start()
     #self.crawler.stop()

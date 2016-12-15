@@ -5,17 +5,17 @@ from papacy_scraper.items import PapalTextItem
 from nltk.internals import find_jars_within_path
 from nltk.tag import StanfordPOSTagger
 from nltk import word_tokenize
-from pos_tagger import POSTaggerService
+from papacy_scraper.pos_tagger import POSTaggerService
 import logging
 
 class SaveItemService():
 
     @staticmethod
     def write(folder, filename, ext, data):
-        filename = os.path.join(folder, '{0}.{1}'.format(filename, ext))
-        with io.open(filename,'w',encoding='utf8') as f:
-            f.write(text)
-        logging.info('Stored item as {0} in {1}'.format(ext.upper(),filename))
+        filepath = os.path.join(folder, '{0}.{1}'.format(filename, ext))
+        with io.open(filepath,'w',encoding='utf8') as f:
+            f.write(data)
+        logging.info('Stored item as {0} in {1}'.format(ext.upper(),filepath))
 
 class StoreItemAsTextPipeline(object):
 

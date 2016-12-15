@@ -29,8 +29,9 @@ class JobCrawlSpider(CrawlSpider):
     name = 'papalcrawlspider'
 
     def __init__(self, pope_options, *args, **kwargs):
-        super(JobCrawlSpider, self).__init__(*args, **kwargs)
+
         options = CrawlOptions(pope_options.pope, pope_options.lang, pope_options.categories)
+
         self.output_folder = pope_options.output_folder
         self.start_urls = [ options.start_url ]
         self.allowed_domains = [ options.target_domain ]
@@ -41,7 +42,12 @@ class JobCrawlSpider(CrawlSpider):
             Rule(LinkExtractor(allow=options.document_link_pattern, restrict_css='.documento', unique=True), follow=True, callback='document_link_callback')
         ]
 
+        super(JobCrawlSpider, self).__init__(*args, **kwargs)
+
         self.options = options
+
+    #def start_requests(self):
+    #    return [ self.options.start_url ]
 
     def tree_link_callback(self, response):
         log.info("LINK PAGE FOUND: " + response.url)

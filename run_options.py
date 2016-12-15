@@ -1,5 +1,5 @@
 class PopeOptions:
-    pope = 'franciscus'
+    pope = 'francesco'
     lang = 'en'
-    categories = ['bulls']
+    categories = ['bulls', 'letters']
     output_folder = './output'

@@ -90,3 +90,4 @@ class XMLTranslateService(object):
 
 #     def as_string(self, root):
 #         return xmlParser.tostring(root, encoding="unicode")
+        print(translator.as_string(xml))

@@ -21,7 +21,8 @@ class TaggerTestCase(unittest.TestCase):
             Airbus also secured orders from US Airways that are worth $10bn for 22 of its A350 jets, 60 A320s and ten of its A330-200 wide-body planes.\
             A few months ago, Airbus unveiled a major cost-cutting programme aiming to reduce the workforce in Europe by 10,000, as well as announcing a group restructuring. \"I can tell you with full confidence that Airbus is back and fully back, as you have started noting yesterday as demonstrated by our\ first day announcements,\" said Mr Gallois on the second day of the air show. \
             However, Boeing also announced a deal with General Electric (GE) on the show\'s first day. GE\'s commercial aviation services placed an order for six 777 Boeing freighters valued at around $1.4bn, to be delivered in the last quarter of 2008.\
-            A Wall Street Journal website report, quoting the Delta operating chief yesterday said that Delta Air Lines were on the verge of ordering as many as 125 Boeing 787 jetliners by the end of this year. However, a spokesman for Delta later said that it had been having conversations \"with several\ aircraft makers\" and that \"no final decision\" had been made on future fleet purchases.\
+            A Wall Street Journal website report, quoting the Delta operating chief yesterday said that Delta Air Lines were on the verge of ordering as many as 125 Boeing 787 jetliners by the end of this year. However, a spokesman for Delta later said that it had been having conversations \"with several\ aircraft makers\" and that \"no final decision\" had been made on future fleet pur-\
+            chases.\
         '
 
     def xxtest_StanfordPOSTagger(self):
@@ -44,6 +45,7 @@ class TaggerTestCase(unittest.TestCase):
         output = tagger.tag(self.data)
         translator = XMLTranslateService()
         xml = translator.translate(output[0])
+        #print(xml)
 
         print(translator.as_string(xml))
 
