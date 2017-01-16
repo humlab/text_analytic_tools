@@ -130,9 +130,6 @@ class CoOccurrenceCalculator():
                 # ...and add result to matrix vector for current topic if
                 if wc > threshold:
                     matrix[topic_index] += np.array([ wc + w if w > threshold else 0.0 for w in weights  ])
-# original...                    matrix[topic_index] += np.array([ wc + w if w > threshold else 0.0 for w in weights  ])
-# test								matrix[topic_index] += np.array([ 1 if w > threshold else 0.0 for w in weights  ])
-
 
         # uncomment if you desire a normalization i.e. sum of all elements in matrix equals 1
         #matrix /= np.sum(matrix)
@@ -149,25 +146,6 @@ class CoOccurrenceCalculator():
             for i, z in enumerate(matrix):
                 # Write headers
                 f.write(";".join([str(i)] + [ locale.str(x) for x in z ] + ['\n'] ))
-
-    #def write_topic(self, matrix, topic1, output_file):
-    #    '''
-    #    Writes a UTF-8 textfile suitable for Gephi import given topic
-    #    '''
-    #    locale.setlocale(locale.LC_ALL, "")
-    #    weights = sorted([ (topic1, y, z) for y, z in enumerate(matrix[topic1]) ], key=lambda x: x[2])
-    #    with open(output_file, 'w', encoding='utf-8') as f:
-    #        f.write(";".join(['source', 'target', 'weight\n'] ))
-    #        for r in weights:
-    #            if int(r[2]) > 0: f.write(";".join([ str(r[0]), str(r[1]), locale.str(r[2]) + '\n'] ))
-
-    #def write_gephi_files(self, new_dataset, topics, destination, gephi_file_pattern):
-    #    '''
-    #    Writes a UTF-8 textfile suitable for Gephi import for each topic-of-interest.
-    #    Filename has format "nnn_gephi_file_pattern" where nnn is the topic id
-    #    '''
-    #    for topic in topics:
-    #        self.write_topic(new_dataset, topic, os.path.join(destination, str(topic) + "_" + gephi_file_pattern))
 
     def write_gephi_file(self, co_occurrence_matrix, topics, filename):
         '''
@@ -235,10 +213,6 @@ class CompositionDocumentReducer():
             # Reduce arrays of weights into a single array by adding arrays value by value
             weights = np.add.reduce([ [ 1.0 if y['weight'] > 0.15 else 0.0 for y in x] for x in items ])
 
-#    original         weights = np.add.reduce([ [ y['weight'] for y in x] for x in items ])
-# test					weights = np.add.reduce([ [ 1 if 0.15 < y['weight'] else 0 for y in x] for x in items ])
-
-
             # Normalize result
             weights /= weights.sum()
 
@@ -273,6 +247,7 @@ class CompositionDocumentReducer():
 
 
 if __name__ == "__main__":
+
     ''' Options:
         "composition_source_file":      Full path and name to source file (MALLET composition file)
         "destination_folder":           Destination folder for all output files
@@ -282,17 +257,6 @@ if __name__ == "__main__":
         "reduced_filename":             Filename of SOU-level reduced weights (based on source composition file)
         "co_occurrence_threshold":      Threshold for co-occurrence computation - all weights below threshold treated as 0.0
     '''
-        
-    options_fredrik = {
-        "composition_source_file":      "/Users/fredrik/Desktop/Kvalle-kolla_LDA/MALLET-filer_att_labba_med/1970-1979_500-topics_tutorial_composition.txt", 
-        "destination_folder":           "/Users/fredrik/Desktop/topic_co_occurrence_destination/",
-        "co_occurrence_matrix_file":    "composition_output_matrix.csv",
-        "gephi_topic_ids":              list(range(0,500)),  #list(range(0,500)), #[344],
-        "gephi_filename":               "composition_output_gephi.csv",
-        "reduced_filename":             "composition_output_sou_reduced.csv",
-        "co_occurrence_threshold":      0.15,
-        "reduce_write_threshold":       0.0,
-    }
 
     options = {
         "composition_source_file":      "J:/SOU/topic_co_occurrence/composition_test.txt", 
@@ -309,16 +273,18 @@ if __name__ == "__main__":
         print("Please create destination folder first")
         exit()
 
-    # read file and store data in list of dicts
+    # read composition file and store data in list of dicts
     dataset = CompositionParser().parse(options["composition_source_file"])
 
     # aggregate data
     calculator = CoOccurrenceCalculator()
     new_dataset = calculator.compute(dataset, options["co_occurrence_threshold"])
+
+    # write matrix and Gephi
     calculator.write(new_dataset, os.path.join(options["destination_folder"], options["co_occurrence_matrix_file"]))
     calculator.write_gephi_file(new_dataset, options["gephi_topic_ids"], os.path.join(options["destination_folder"], options["gephi_filename"]))
 
-    # Reduce splitted dext segements to SOU documents
+    # Reduce splitted sext segements to SOU documents
     reducer = CompositionDocumentReducer()
     reduced_dataset = reducer.compute(dataset)
     reducer.write(reduced_dataset, os.path.join(options["destination_folder"], options["reduced_filename"]), options["reduce_write_threshold"])
