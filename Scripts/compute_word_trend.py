@@ -6,7 +6,8 @@ import fnmatch
 import collections
 import csv
 import functools
- 
+import re
+
 def load_and_compute_frequencies(options, filenames):
 
     def process(options, filename, wc):
@@ -65,8 +66,8 @@ def main(options):
 
 if __name__ == "__main__":
 
-    # def get_most_common_words_first_year(options, counters):
-    #     return [ x for x, y in counters[0][1].most_common(options["word_count"]) ]
+    def get_most_common_words_first_year(options, counters):
+        return [ x for x, y in counters[0][1].most_common(options["word_count"]) ]
 
     # def get_most_common_words_all_time(options, counters):
     #     X = collections.Counter() 
@@ -75,7 +76,8 @@ if __name__ == "__main__":
     #     return X.most_common(options["word_count"])
 
     def get_god(options, counters):
-        return [ 'god' ]
+        # FIXME 
+        return [ ('god', 0) ]
 
     def read_stop_words(filename):
 
@@ -83,8 +85,8 @@ if __name__ == "__main__":
             return file.readlines()
 
     options = {           
-        "source_pattern": "J:\\SOU\\Arkiv-sou\\*.txt",
-        "destination": "J:\\SOU\\arkiv_sou_frequency.csv",   
+        "source_pattern": "C:\\Temp\\pope\\splits\\*.txt",
+        "destination": "C:\\Temp\\pope\\splits\\trends\\most_common_words_first_year.csv",   
         "stop_words": [], # read_stop_words(filename)
         "min_word_length": 2,
         "word_count": 20,
