@@ -29,8 +29,8 @@ class XMLStanfordPOSTagger(StanfordTagger):
     _SEPARATOR = '_'
     _JAR = 'stanford-postagger.jar'
 
-    # def __init__(self, model, jar, encoding='utf8'):
-    #     super(XMLStanfordPOSTagger, self).__init__(model, jar)
+     def __init__(self, model_filename, path_to_jar=None, encoding='utf8', verbose=False, java_options='-mx2000m')
+         super(XMLStanfordPOSTagger, self).__init__(model, model_filename, path_to_jar, encoding, verbose, java_options)
 
     @property
     def _cmd(self):
@@ -55,9 +55,14 @@ class POSTaggerService(object):
 
     def tag(self, text):
 
-        x = self.tagger.tag(word_tokenize(text))
+        try:
+            x = self.tagger.tag(word_tokenize(text))
 
-        return x
+            return x[0] if isinstance(x,list) else x
+
+        except Exception as x:
+            #print(x)
+            return None
 
 import xml.etree.ElementTree as xmlParser
 
@@ -66,6 +71,7 @@ class XMLTranslateService(object):
     def translate(self, xml_text):
         root = xmlParser.fromstring(xml_text)
         root.tag = 'corpus'
+        root.set('id', '2010')
         for sentence in root.iter('sentence'):
             for word in sentence.iter('word'):
                 word.tag = 'w'

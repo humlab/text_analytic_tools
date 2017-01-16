@@ -39,24 +39,24 @@ class PapalTextItemParser:
     @staticmethod
     def parse(response):
 
-        get_str = lambda x:
-            if isinstance(x, tuple) and len(x) > 0:
-                x = x[0]
-            return x if isinstance(x, str) else None
+        #get_str = lambda x:
+        #    if isinstance(x, tuple) and len(x) > 0:
+        #        x = x[0]
+        #    return x if isinstance(x, str) else None
 
         item = PapalTextItem()
 
-        m = re.search(r'/content/(?P<pope>\w+)/(?P<lang>en|it|fr|es|la|pl|pt)/(?P<type>\w+)/(?P<year>\d{4}(?:/))?(?P<spec>(.*)(?:/))?documents/(?P<base>.+)\.html$', response.url)
+        m = re.search(r'/content/(?P<pope>\w+)/(?P<lang>en|it|fr|es|la|pl|pt)/(?P<type>\w+)/(?P<year>\d{4})?(?:/)?(?P<spec>.*)?(?:/)?documents/(?P<base>.+)\.html$', response.url)
 
         if not m:
             raise Exception("Unable to decode url {0}".format(response.url))
 
         item['url'] = response.url
         
-        item['pope'] = m.group('pope'),
-        item['lang'] = m.group('lang'),
-        item['type'] = m.group('type'),
-        item['spec'] = m.group('spec'),
+        item['pope'] = m.group('pope')
+        item['lang'] = m.group('lang')
+        item['type'] = m.group('type')
+        item['spec'] = m.group('spec')
         item['year'] = m.group('year')
         item['base'] = m.group('base')
 
@@ -64,12 +64,12 @@ class PapalTextItemParser:
         item['text'] = PapalTextItemParser.textify(item["html"])
         item['date'] = PapalTextItemParser.get_date(response.url)
 
-        item['filebase'] = '{0}_{1}_{2}_{3}_{4}_{5}'.format(
+        item['filebase'] = '{0}_{1}_{2}_{3}{4}_{5}'.format(
             item['pope'],
             item['lang'],
             item['type'],
             int(item['year'] or (item['date'] and item['date'].year) or 0),
-            (item['spec'] or ''),
-            item['base'])
+            '_' + item['spec'] if item['spec'] else '',
+            item['base'].replace('_','-'))
 
         return item

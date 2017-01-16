@@ -5,14 +5,14 @@ from papacy_scraper.items import PapalTextItem
 from nltk.internals import find_jars_within_path
 from nltk.tag import StanfordPOSTagger
 from nltk import word_tokenize
-from papacy_scraper.pos_tagger import POSTaggerService
+from papacy_scraper.pos_tagger import POSTaggerService, XMLTranslateService
 import logging
 
-class SaveItemService():
+class StoreTextService():
 
     @staticmethod
     def write(folder, filename, ext, data):
-        filepath = os.path.join(folder, '{0}.{1}'.format(filename, ext))
+        filepath = os.path.join(folder, '{0}.{1}'.format(filename.replace('/','_'), ext))
         with io.open(filepath,'w',encoding='utf8') as f:
             f.write(data)
         logging.info('Stored item as {0} in {1}'.format(ext.upper(),filepath))
@@ -35,21 +35,28 @@ class StoreItemAsTextPipeline(object):
         if not item['filebase']:
             raise DropItem('Error in filename or output folder')
 
-        SaveItemService.write(spider.output_folder, item['filebase'], 'txt', item['text'])
+        StoreTextService.write(spider.output_folder, item['filebase'], 'txt', item['text'])
+        StoreTextService.write(spider.output_folder, item['filebase'], 'html', item['html'])
 
         return item
 
 class StanfordTaggerItemPipeline(object):
 
     tagger = POSTaggerService()
+    translator = XMLTranslateService()
 
     def process_item(self, item, spider):
+
+        x = StanfordTaggerItemPipeline.tagger
+        y = StanfordTaggerItemPipeline.translator
 
         if not 'text' in item:
             raise DropItem('Warning: Item has no text')
 
-        item['pos_text'] = StanfordTaggerItemPipeline.tagger.tag(item['text'])
+        xml = y.translate(x.tag(item['text'])[0])
 
-        SaveItemService.write(spider.output_folder, item['filebase'], 'xml', item['pos_text'])
+        item['xml'] = xml
+
+        StoreTextService.write(spider.output_folder, item['filebase'], 'xml', y.as_string(xml))
 
         return item

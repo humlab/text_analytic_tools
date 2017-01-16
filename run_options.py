@@ -1,5 +1,20 @@
 class PopeOptions:
     pope = 'francesco'
     lang = 'en'
-    categories = ['bulls', 'letters']
-    output_folder = './output'
+    categories = [
+        'angelus',
+        'apost_constitutions',
+        'apost_letters',
+        'audiences',
+        'bulls',
+        'encyclicals',
+        'homilies',
+        'letters',
+        'messages',
+        'motu_proprio',
+        'prayers',
+        'speeches',
+        'travels',
+        'cotidie'
+    ]
+    output_folder = '/tmp/output'
