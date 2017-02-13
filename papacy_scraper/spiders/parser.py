@@ -10,6 +10,8 @@ class PapalTextItemParser:
         xml = BeautifulSoup(html, "html.parser")
         for x in xml.find_all("p", { 'align': 'center' }):
             x.decompose()
+        for x in xml.find_all("center"):
+            x.decompose()
         text = xml.get_text("\n")
         text = text.replace(u'\xa0', u' ')
         text = re.sub(r'(\n+)+', r'\n', text)
@@ -36,8 +38,7 @@ class PapalTextItemParser:
 
         m = re.search(r'/content/(?P<pope>[\w-]+)/(?P<lang>en|it|fr|es|la|pl|pt)/(?P<type>\w+)/(?P<year>\d{4})?(?:/)?(?P<spec>.*)?(?:/)?documents/(?P<base>.+)\.html$', response.url)
 
-        if not m:
-            raise Exception("Unable to decode url {0}".format(response.url))
+        if not m: raise Exception("Unable to decode url {0}".format(response.url))
 
         item['url'] = response.url
         item['pope'] = m.group('pope')
