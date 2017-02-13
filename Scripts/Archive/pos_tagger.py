@@ -5,10 +5,8 @@ from nltk import word_tokenize
 import papacy_scraper.settings as settings
 
 class XMLStanfordPOSTagger(StanfordTagger):
-
     '''
     Instructions:
-
         1 Install latest version of Java https://www.java.com/sv/download/help/index_installing.xml
         2 Install http://www-nlp.stanford.edu/software/tagger.html#Download (Full)
         3 Set JAVA_HOME=C:\Program Files\Java\jre1.8.0_111 (replace version)
@@ -19,18 +17,14 @@ class XMLStanfordPOSTagger(StanfordTagger):
                Win 10: download and install scipy from  http://www.lfd.uci.edu/~gohlke/pythonlibs/
            4.3 pip install gensim
         5 Opt. Add stanford-postagger.jar path and */libs/* to CLASSPATH
-
     See base class at http://www.nltk.org/_modules/nltk/tag/stanford.html
-
     Stanford tagger docs: http://www-nlp.stanford.edu/software/pos-tagger-faq.shtml#f
-
     '''
-
     _SEPARATOR = '_'
     _JAR = 'stanford-postagger.jar'
 
-     def __init__(self, model_filename, path_to_jar=None, encoding='utf8', verbose=False, java_options='-mx2000m')
-         super(XMLStanfordPOSTagger, self).__init__(model, model_filename, path_to_jar, encoding, verbose, java_options)
+    def __init__(self, model_filename, path_to_jar=None, encoding='utf8', verbose=False, java_options='-mx1000m'):
+         super(XMLStanfordPOSTagger, self).__init__(model_filename, path_to_jar, encoding, verbose, java_options)
 
     @property
     def _cmd(self):
@@ -47,19 +41,14 @@ class XMLStanfordPOSTagger(StanfordTagger):
 class POSTaggerService(object):
 
     def __init__(self):
-
         self.jar = settings.TAGGER_JAR
         self.model = settings.TAGGER_MODEL
-
         self.tagger = XMLStanfordPOSTagger(self.model, self.jar)
 
     def tag(self, text):
-
         try:
             x = self.tagger.tag(word_tokenize(text))
-
             return x[0] if isinstance(x,list) else x
-
         except Exception as x:
             #print(x)
             return None
@@ -82,18 +71,4 @@ class XMLTranslateService(object):
     def as_string(self, root):
         return xmlParser.tostring(root, encoding="unicode")
 
-# class XMLTransformService(object):
-
-#     def transform(self, xml_text):
-#         root = xmlParser.fromstring(xml_text)
-#         root.tag = 'corpus'
-#         for sentence in root.iter('sentence'):
-#             for word in sentence.iter('word'):
-#                 word.tag = 'w'
-#                 word.set('lemma', '|' + word.get('lemma') + '|')
-#                 word.set('id', word.get('wid'))
-#         return root
-
-#     def as_string(self, root):
-#         return xmlParser.tostring(root, encoding="unicode")
-        print(translator.as_string(xml))
+#"C:\\Program Files (x86)\\Java\\jre1.8.0_73\\bin\\java.exe" -mx128m -cp \\usr\\stanford-postagger-full-2015-12-09\\stanford-postagger.jar edu.stanford.nlp.tagger.maxent.MaxentTagger -model \\usr\\stanford-postagger-full-2015-12-09\\models\\english-bidirectional-distsim.tagger -textFile #C:\\Users\\roma0050\\AppData\\Local\\Temp\\tmphdyghcot -outputFormat inlineXML -outputFormatOptions lemmatize -encoding utf8

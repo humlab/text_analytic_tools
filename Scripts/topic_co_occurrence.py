@@ -22,15 +22,24 @@ class CompositionParser():
         return [ float(x) for x in row[3::2]]
 
     def extract_source_info(self, row):
-        ''' Extract year, SOU ID and sequence number of splitted text file from filename and return values in a dictionary '''
+        ''' Extract year, basename and sequence number of splitted text file from filename and return values in a dictionary '''
         filename = row[1]
         try:
             # Extract basename of file (remove path) and split the name into its constituents
-            basename_parts = os.path.basename(os.path.splitext(filename)[0]).split("_")
+            # CHANGED 20170213: adapted to pope documents
+            document_name = os.path.basename(os.path.splitext(filename)[0])
+
+            # Extract year as 4-digits surrounded by underscores
+            m = re.search('_(?P<year>\d{4})_', document_name)
+            year = 0 if m is None else int(m.group('year'))
+
+            # Extract serial number as 4-digit group at end of basename preceeded by underscore
+            m = re.search('_(?P<serial_nr>\d{4})$', document_name)
+            serial_nr = 0 if m is None else int(m.group('serial_nr'))
             return {
-                'year': int(basename_parts[0]),
-                'sou_number': int(basename_parts[1]),
-                'sou_number_serial': int(basename_parts[2]),
+                'year': year,
+                'document_name': document_name,
+                'document_serial_nr': serial_nr,
             }
         except:
             return None
@@ -39,8 +48,8 @@ class CompositionParser():
         ''' Parse a single text row and return a dictionary
                 {
                     'year': yyyy,
-                    'sou_number': x,
-                    'sou_serial': y,
+                    'document_name': x,
+                    'document_serial_nr': y,
                     'data': values
                 }
             The values are sorted by topic-id ascending, and each value is a tuple (topic-id, weight)
@@ -166,46 +175,24 @@ class CoOccurrenceCalculator():
 class CompositionDocumentReducer():
 
     '''
-
-    Reduces a composition file by adding all items, i.e. splitted documents or rows in the file, that belongs to the same SOU into a single items.
-
-    Requirements:
-
-        Därefter får man själv bestämma var man ska dra en gräns för vad som är ett samförekommande topic.
-        Denna gräns kan sedan kvalitetskolla genom att spåra hur vanligt förekommande ett topic är i vilka SOU:er.
-
-        a.  Använd Composition-fil
-
-        b.  Räkna ut sannolikhet för topics närvaro i SOU:er
-
-            i. 	Multiplicera/addera alla vikter för ett visst topic (Topic1) i samtliga textfiler som tillhör en viss SOU Summan utgör sannolikheten (vikten?) för Topic1 i den SOU:n.
-
-                Sedan utförs samma process för alla textfiler för samtliga SOU:er. Resultatet blir en lista i fallande ordning för SOU:er som Topic1 har störst sannolikhet (vikt?)
-                att förekomma i. SOU-nummer i ena kolumnen och sammanlagt sannolikhet-vikt i den andra kolumnen (med topic-nummer som rubrik)
-
-            ii. Samma process som i. men för samtliga topics. Resultatet blir en lista med SOU-nummer i ena kolumnen. På varje finns först SOU-nummer följt av en lista i
-                fallande ordning med topics som har störst sannolikhet att förekomma i den SOU:n (topic-nummer och sammanlagd sannolikhet/vikt).
-
-                Resultatet är en komprimerad version composition-filen fast med hela SOU:er i stället för uppdelade i filer. (Anledningen till att inte
-                göra varje SOU till en textfil är för att det antas generera bättre topics med mindre filer, se Jockers 2013)
-
+    Reduces a composition file by adding all items, i.e. splitted documents or rows in the file, that belongs to the same document into a single items.
     '''
 
     def compute(self, dataset):
         '''
-        Compute a new composition data set by an addative reduce of all items that belongs to the same SOU-document
+        Compute a new composition data set by an addative reduce of all items that belongs to the same document
         '''
-
+        # CHANGED 20170213: adapted to pope documents
         result_set = np.array([ ])
 
         # Identify all distinct SOU-ids in dataset
-        distinct_sou_ids = list(set([ (x['year'], x['sou_number']) for x in dataset ]))
+        distinct_documents = list(set([ (x['year'], x['document_name']) for x in dataset ]))
 
-        # For each distinct SOU
-        for (year, sou_id) in distinct_sou_ids:
+        # For each distinct document
+        for (year, document) in distinct_documents:
 
-            # Filter out items that belong to current SOU
-            items = [ x['data'] for x in dataset if x['year'] == year and x['sou_number'] == sou_id ]
+            # Filter out items that belong to current document
+            items = [ x['data'] for x in dataset if x['year'] == year and x['document_name'] == document ]
 
             # Filter out all topic ids
             topic_ids = [ x['topic_id'] for x in items[0] ]
@@ -222,8 +209,8 @@ class CompositionDocumentReducer():
             # Add item to result set 
             result_set = np.append(result_set, {
                 'year': year,
-                'sou_number': sou_id,
-                'sou_number_serial': 0,
+                'document_name': document,
+                'document_serial_nr': 0,
                 'data': tuples
             })
 
@@ -243,7 +230,8 @@ class CompositionDocumentReducer():
             for row in dataset:
                 for y in row['data']:
                     if float(y[1]) > threshold:
-                        f.write(";".join([ str(int(y[0])), str(int(row['year']) * 1000 + int(row['sou_number'])), locale.str(y[1]) + '\n'] ))
+                        # CHANGED 20170213: document as target (instead of year and id)
+                        f.write(";".join([ str(int(y[0])), row['document_name']), locale.str(y[1]) + '\n'] ))
 
 
 if __name__ == "__main__":
@@ -254,17 +242,17 @@ if __name__ == "__main__":
         "co_occurrence_matrix_file":    Name of co-occurrence file (matrix)
         "gephi_topic_ids":              List of topic-of-interests to be written to "topic file"
         "gephi_filename":               Filename topic-of-interests file written in Gephi file format
-        "reduced_filename":             Filename of SOU-level reduced weights (based on source composition file)
+        "reduced_filename":             Filename of document-level reduced weights (based on source composition file)
         "co_occurrence_threshold":      Threshold for co-occurrence computation - all weights below threshold treated as 0.0
     '''
 
     options = {
-        "composition_source_file":      "J:/SOU/topic_co_occurrence/composition_test.txt", 
-        "destination_folder":           "J:/SOU/topic_co_occurrence/",
+        "composition_source_file":      "/some/path/composition_test.txt", 
+        "destination_folder":           "/some/path/output/",
         "co_occurrence_matrix_file":    "20161003_composition_output_matrix.csv",
         "gephi_topic_ids":              [],  #list(range(0,500)),
         "gephi_filename":               "20161016_composition_output_gephi.csv",
-        "reduced_filename":             "20161016_composition_output_sou_reduced.csv",
+        "reduced_filename":             "20161016_composition_output_reduced.csv",
         "co_occurrence_threshold":      0.15,
         "reduce_write_threshold":       0.00,
     }
@@ -284,7 +272,7 @@ if __name__ == "__main__":
     calculator.write(new_dataset, os.path.join(options["destination_folder"], options["co_occurrence_matrix_file"]))
     calculator.write_gephi_file(new_dataset, options["gephi_topic_ids"], os.path.join(options["destination_folder"], options["gephi_filename"]))
 
-    # Reduce splitted sext segements to SOU documents
+    # Aggregates splitted text segements back to document level
     reducer = CompositionDocumentReducer()
     reduced_dataset = reducer.compute(dataset)
     reducer.write(reduced_dataset, os.path.join(options["destination_folder"], options["reduced_filename"]), options["reduce_write_threshold"])

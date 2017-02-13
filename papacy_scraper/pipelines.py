@@ -2,10 +2,6 @@
 import os, io
 from scrapy.exceptions import DropItem
 from papacy_scraper.items import PapalTextItem
-from nltk.internals import find_jars_within_path
-from nltk.tag import StanfordPOSTagger
-from nltk import word_tokenize
-from papacy_scraper.pos_tagger import POSTaggerService, XMLTranslateService
 import logging
 
 class StoreTextService():
@@ -37,26 +33,5 @@ class StoreItemAsTextPipeline(object):
 
         StoreTextService.write(spider.output_folder, item['filebase'], 'txt', item['text'])
         StoreTextService.write(spider.output_folder, item['filebase'], 'html', item['html'])
-
-        return item
-
-class StanfordTaggerItemPipeline(object):
-
-    tagger = POSTaggerService()
-    translator = XMLTranslateService()
-
-    def process_item(self, item, spider):
-
-        x = StanfordTaggerItemPipeline.tagger
-        y = StanfordTaggerItemPipeline.translator
-
-        if not 'text' in item:
-            raise DropItem('Warning: Item has no text')
-
-        xml = y.translate(x.tag(item['text'])[0])
-
-        item['xml'] = xml
-
-        StoreTextService.write(spider.output_folder, item['filebase'], 'xml', y.as_string(xml))
 
         return item

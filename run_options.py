@@ -1,5 +1,5 @@
 class PopeOptions:
-    pope = 'francesco'
+    pope = 'benedict-xvi'
     lang = 'en'
     categories = [
         'angelus',
@@ -14,7 +14,7 @@ class PopeOptions:
         'motu_proprio',
         'prayers',
         'speeches',
-        'travels',
+        #'travels',
         'cotidie'
     ]
-    output_folder = '/tmp/output'
+    output_folder = '/tmp/output/benedict-xvi'

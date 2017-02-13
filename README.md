@@ -1,4 +1,13 @@
 # papacy_scraper
 A scrapy crawler for papal text retrieval
-francesco_en_speeches_2016_april__papa-francesco-20160416-lesvos-cittadinanza
-"C:\Program Files (x86)\Java\jre1.8.0_73\bin\java.exe" -mx2000m -cp \usr\stanford-postagger-full-2015-12-09\stanford-postagger-3.6.0-javadoc.jar;\usr\stanford-postagger-full-2015-12-09\stanford-postagger-3.6.0-sources.jar;\usr\stanford-postagger-full-2015-12-09\stanford-postagger-3.6.0.jar;\usr\stanford-postagger-full-2015-12-09\stanford-postagger.jar;\usr\stanford-postagger-full-2015-12-09\lib\slf4j-api.jar;\usr\stanford-postagger-full-2015-12-09\lib\slf4j-simple.jar edu.stanford.nlp.tagger.maxent.MaxentTagger -model \usr\stanford-postagger-full-2015-12-09\models\english-bidirectional-distsim.tagger -textFile C:\Users\roma0050\AppData\Local\Temp\tmp11p6ts13 -outputFormat inlineXML -outputFormatOptions lemmatize -encoding utf8
+
+# TODO
+
+* KLART           Hämta Benedictus med borttagen ingres (p.center ska bort).
+* KLART (REST)    Tagga textfiler med Stanford tagger
+* KLART EJ TESTAT Justera script "sort_pos_and_split_pope"
+* KLART EJ TESTAT Justera script "sort_mallet_composition"
+* KLART EJ TESTAT Justera script "topic_co_occurrence"
+* REDAN FIXAT?    Justera script "compute_word_trend"
+* ÅTERSTÅR        Leverera filer till Fredrik
+* ÅTERSTÅR        Test av funktionalitet: 1) Kompletthet scraping 2) Script

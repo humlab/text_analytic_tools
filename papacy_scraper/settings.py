@@ -14,8 +14,8 @@ BOT_NAME = 'papacy_scraper'
 SPIDER_MODULES = ['papacy_scraper.spiders']
 NEWSPIDER_MODULE = 'papacy_scraper.spiders'
 
-TAGGER_JAR = '\\usr\\stanford-postagger-full-2015-12-09\\stanford-postagger.jar'
-TAGGER_MODEL = '\\usr\\stanford-postagger-full-2015-12-09\\models\\english-bidirectional-distsim.tagger'
+# TAGGER_JAR = '\\usr\\stanford-postagger-full-2015-12-09\\stanford-postagger.jar'
+# TAGGER_MODEL = '\\usr\\stanford-postagger-full-2015-12-09\\models\\english-bidirectional-distsim.tagger'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -68,8 +68,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'papacy_scraper.pipelines.StoreItemAsTextPipeline': 400,
-    'papacy_scraper.pipelines.StanfordTaggerItemPipeline': 500
+    'papacy_scraper.pipelines.StoreItemAsTextPipeline': 400
+    #'papacy_scraper.pipelines.StanfordTaggerItemPipeline': 500
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

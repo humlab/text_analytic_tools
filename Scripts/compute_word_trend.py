@@ -76,8 +76,9 @@ if __name__ == "__main__":
     #     return X.most_common(options["word_count"])
 
     def get_god(options, counters):
-        # FIXME 
-        return [ ('god', 0) ]
+        # FIXME
+        words = [ 'god', 'environment']
+        return [ (x, 0) for x in words ]
 
     def read_stop_words(filename):
 
