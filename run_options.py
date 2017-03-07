@@ -1,7 +1,8 @@
 class PopeOptions:
-    pope = 'benedict-xvi'
+    pope = 'john-paul-ii'
     lang = 'en'
     categories = [
+        'apost_exhortations',
         'angelus',
         'apost_constitutions',
         'apost_letters',
@@ -14,7 +15,10 @@ class PopeOptions:
         'motu_proprio',
         'prayers',
         'speeches',
-        #'travels',
         'cotidie'
+        #'biography',
+        #'elezione',
+        #'books'
+        #'travels',
     ]
-    output_folder = '/tmp/output/benedict-xvi'
+    output_folder = '/tmp/output/john-paul-ii'

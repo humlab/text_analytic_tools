@@ -18,3 +18,4 @@ FAILED (C:\tmp\output\benedict-xvi\benedict-xvi_en_homilies_2010_hf-ben-xvi-hom-
 FAILED (C:\tmp\output\benedict-xvi\benedict-xvi_en_speeches_2007_february__hf-ben-xvi-spe-20070217-seminario-romano.txt
 FAILED (C:\tmp\output\benedict-xvi\benedict-xvi_en_speeches_2010_june__hf-ben-xvi-spe-20100606-catt-maronita.txt
 
+FAILED (C:\tmp\output\francesco\francesco_en_speeches_2016_april__papa-francesco-20160416-lesvos-cittadinanza.txt

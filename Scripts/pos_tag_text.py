@@ -127,7 +127,7 @@ def main(options):
 if __name__ == "__main__":
 
     options = {           
-        "source": "C:\\tmp\\output\\benedict-xvi\\*.txt",
+        "source": "C:\\tmp\\output\\john-paul-ii\\*.txt",
         "tagger_jar": '\\usr\\stanford-postagger-full-2015-12-09\\stanford-postagger.jar',
         "tagger_model": '\\usr\\stanford-postagger-full-2015-12-09\\models\\english-bidirectional-distsim.tagger'
     }
