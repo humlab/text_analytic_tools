@@ -231,7 +231,7 @@ class CompositionDocumentReducer():
                 for y in row['data']:
                     if float(y[1]) > threshold:
                         # CHANGED 20170213: document as target (instead of year and id)
-                        f.write(";".join([ str(int(y[0])), row['document_name']), locale.str(y[1]) + '\n'] ))
+                        f.write(";".join([ str(int(y[0])), row['document_name'], locale.str(y[1]) + '\n'] ))
 
 
 if __name__ == "__main__":
@@ -247,8 +247,8 @@ if __name__ == "__main__":
     '''
 
     options = {
-        "composition_source_file":      "/some/path/composition_test.txt", 
-        "destination_folder":           "/some/path/output/",
+        "composition_source_file":      "/tmp/tutorial_composition.txt", 
+        "destination_folder":           "/tmp/",
         "co_occurrence_matrix_file":    "20161003_composition_output_matrix.csv",
         "gephi_topic_ids":              [],  #list(range(0,500)),
         "gephi_filename":               "20161016_composition_output_gephi.csv",
