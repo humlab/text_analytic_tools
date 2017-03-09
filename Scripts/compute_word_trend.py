@@ -20,9 +20,9 @@ def load_and_compute_frequencies(options, filenames):
         # FIXME: Parse year from pope split filenames
         try:
             m = re.match('^[a-zA-Z_\-]+(\d{4})', os.path.basename(filename))
-            if is None:
+            if m is None:
                 m = re.match('^.+\d{4}((19|20)\d\d)', os.path.basename(filename))
-            if is None:
+            if m is None:
                 return None
             return m.group(1)
         except Exception as x:
