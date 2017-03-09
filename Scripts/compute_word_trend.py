@@ -19,17 +19,21 @@ def load_and_compute_frequencies(options, filenames):
     def get_key(filename):
         # FIXME: Parse year from pope split filenames
         try:
-            year = re.match('^[a-zA-Z_\-]+(\d{4})', os.path.basename(filename)).group(1)
-            return year
+            m = re.match('^[a-zA-Z_\-]+(\d{4})', os.path.basename(filename))
+            if m is None:
+                return None
+            return m.group(1)
         except Exception as x:
             print(filename)
             raise x
-
 
     key_dict = { }
     for file in filenames:
         print(os.path.basename(file))
         key = get_key(file)
+        if key is None:
+            print("Warning: Unable to parse filename, skipping file {0}".format())
+            continue
         if not key in key_dict:
             key_dict[key] = collections.Counter()
         process(options, file, key_dict[key])
