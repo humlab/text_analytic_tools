@@ -2,8 +2,11 @@
 
 A scrapy crawler for papal text archive at vatican.va
 
-# Topic CO-occurrence script topic_co_occurrence.py
-`
+___
+
+### Script topic_co_occurrence.py
+
+```
 usage: topic_co_occurrence.py [-h] [--input COMPOSITION_SOURCE_FILE]
                               [--output_folder OUTPUT_FOLDER]
                               [--co_occurrence_threshold CO_OCCURRENCE_THRESHOLD]
@@ -25,9 +28,10 @@ optional arguments:
   --reduce_write_threshold REDUCE_WRITE_THRESHOLD, -w REDUCE_WRITE_THRESHOLD
                         Threshold for co-occurrence computation - all weights
                         below threshold treated as 0.0
-`
+```
 example:
-`
+
+```
 python topic_co_occurrence.py -i /tmp/tutorial_composition.txt -o /tmp -r 0.01
 
 Computing using argument:
@@ -40,14 +44,13 @@ Output will be stored in:
   co_occurrence_matrix_file: output_co_occurrence_matrix_20170321_142407.csv
   gephi_file: output_gephi_20170321_142407.csv
   reduced_file: output_document_topics_20170321_142407.csv
-`
+```
 
 
 # Failed files
-`
-FAILED benedict-xvi_en_angelus_2009_hf-ben-xvi-ang-20090927-brno.txt
-FAILED benedict-xvi_en_homilies_2010_hf-ben-xvi-hom-20100606-instr-laboris.txt
-FAILED benedict-xvi_en_speeches_2007_february__hf-ben-xvi-spe-20070217-seminario-romano.txt
-FAILED benedict-xvi_en_speeches_2010_june__hf-ben-xvi-spe-20100606-catt-maronita.txt
-FAILED francesco_en_speeches_2016_april__papa-francesco-20160416-lesvos-cittadinanza.txt
-`
+
+* benedict-xvi_en_angelus_2009_hf-ben-xvi-ang-20090927-brno.txt
+* benedict-xvi_en_homilies_2010_hf-ben-xvi-hom-20100606-instr-laboris.txt
+* benedict-xvi_en_speeches_2007_february__hf-ben-xvi-spe-20070217-seminario-romano.txt
+* benedict-xvi_en_speeches_2010_june__hf-ben-xvi-spe-20100606-catt-maronita.txt
+* francesco_en_speeches_2016_april__papa-francesco-20160416-lesvos-cittadinanza.txt
