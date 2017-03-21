@@ -268,9 +268,9 @@ if __name__ == "__main__":
     print('  reduce_write_threshold:  {0}'.format(options["reduce_write_threshold"]))
 
     print('Output will be stored in:')
-    print('  co_occurrence_matrix_file: {0}'.format(options["composition_source_file"]))
-    print('  gephi_file: {0}'.format(options["composition_source_file"]))
-    print('  reduced_file: {0}'.format(options["composition_source_file"]))
+    print('  co_occurrence_matrix_file: {0}'.format(co_occurrence_matrix_file))
+    print('  gephi_file: {0}'.format(gephi_file))
+    print('  reduced_file: {0}'.format(reduced_file))
 
     if not os.path.isdir(options["output_folder"]):
         print("Error: Please create destination folder first")
@@ -281,7 +281,7 @@ if __name__ == "__main__":
         exit()
 
     print("Computing...please wait...")
-    
+
     # read composition file and store data in list of dicts
     dataset = CompositionParser().parse(options["composition_source_file"])
 
