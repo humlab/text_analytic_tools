@@ -34,7 +34,7 @@ def load_and_compute_frequencies(options, filenames):
         print(os.path.basename(file))
         key = get_key(file)
         if key is None:
-            print("Warning: Unable to parse filename, skipping file {0}".format())
+            print("Warning: Unable to parse filename, skipping file {0}".format(os.path.basename(file)))
             continue
         if not key in key_dict:
             key_dict[key] = collections.Counter()

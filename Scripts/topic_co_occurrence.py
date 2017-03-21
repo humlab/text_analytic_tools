@@ -5,6 +5,8 @@ import re
 import collections
 import numpy as np
 import locale
+import time
+import argparse
 
 '''
 '''
@@ -178,7 +180,7 @@ class CompositionDocumentReducer():
     Reduces a composition file by adding all items, i.e. splitted documents or rows in the file, that belongs to the same document into a single items.
     '''
 
-    def compute(self, dataset):
+    def compute(self, dataset, threshold=0.0):
         '''
         Compute a new composition data set by an addative reduce of all items that belongs to the same document
         '''
@@ -198,8 +200,10 @@ class CompositionDocumentReducer():
             topic_ids = [ x['topic_id'] for x in items[0] ]
 
             # Reduce arrays of weights into a single array by adding arrays value by value
-            weights = np.add.reduce([ [ 1.0 if y['weight'] > 0.15 else 0.0 for y in x] for x in items ])
+            weights = np.add.reduce([ [ 1.0 if y['weight'] >= threshold else 0.0 for y in x] for x in items ])
 
+            if weights.sum() == 0.0:
+                print("Warning: ")
             # Normalize result
             weights /= weights.sum()
 
@@ -236,31 +240,48 @@ class CompositionDocumentReducer():
 
 if __name__ == "__main__":
 
-    ''' Options:
-        "composition_source_file":      Full path and name to source file (MALLET composition file)
-        "destination_folder":           Destination folder for all output files
-        "co_occurrence_matrix_file":    Name of co-occurrence file (matrix)
-        "gephi_topic_ids":              List of topic-of-interests to be written to "topic file"
-        "gephi_filename":               Filename topic-of-interests file written in Gephi file format
-        "reduced_filename":             Filename of document-level reduced weights (based on source composition file)
-        "co_occurrence_threshold":      Threshold for co-occurrence computation - all weights below threshold treated as 0.0
-    '''
+    current_dir = os.path.dirname(os.path.realpath(__file__))
 
-    options = {
-        "composition_source_file":      "/tmp/tutorial_composition.txt", 
-        "destination_folder":           "/tmp/",
-        "co_occurrence_matrix_file":    "20161003_composition_output_matrix.csv",
-        "gephi_topic_ids":              [],  #list(range(0,500)),
-        "gephi_filename":               "20161016_composition_output_gephi.csv",
-        "reduced_filename":             "20161016_composition_output_reduced.csv",
-        "co_occurrence_threshold":      0.15,
-        "reduce_write_threshold":       0.00,
-    }
-    
-    if not os.path.isdir(options["destination_folder"]):
-        print("Please create destination folder first")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input', '-i', action="store", dest="composition_source_file", help="Full path and name to source file (MALLET composition file)", default=os.path.join(current_dir, "tutorial_composition.txt"))
+    parser.add_argument('--output_folder', '-o', action="store", dest="output_folder", help="Destination folder for output files", default=current_dir)
+    parser.add_argument('--co_occurrence_threshold', '-c', action="store", dest="co_occurrence_threshold", help="Reduce to documents: weights below threshold are treated as 0.0 in computation", type=float, default=0.15)
+    parser.add_argument('--reduce_threshold', '-r', action="store", dest="reduce_threshold", help="Reduce to documents: reduced weights below threshold are written to output file", type=float, default=0.0)
+    parser.add_argument('--reduce_write_threshold', '-w', action="store", dest="reduce_write_threshold", help="Threshold for co-occurrence computation - all weights below threshold treated as 0.0", type=float, default=0.0)
+
+    options = vars(parser.parse_args())
+    gephi_topic_ids =  [ ]
+
+    # Assign output filenames
+
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+
+    co_occurrence_matrix_file = "output_co_occurrence_matrix_{0}.csv".format(timestamp)
+    gephi_file = "output_gephi_{0}.csv".format(timestamp)
+    reduced_file = "output_document_topics_{0}.csv".format(timestamp)
+
+    print('Computing using argument:')
+    print('  input:                   {0}'.format(options["composition_source_file"]))
+    print('  output_folder:           {0}'.format(options["output_folder"]))
+    print('  co_occurrence_threshold: {0}'.format(options["co_occurrence_threshold"]))
+    print('  reduce_threshold:        {0}'.format(options["reduce_threshold"]))
+    print('  reduce_write_threshold:  {0}'.format(options["reduce_write_threshold"]))
+
+    print('Output will be stored in:')
+    print('  co_occurrence_matrix_file: {0}'.format(options["composition_source_file"]))
+    print('  gephi_file: {0}'.format(options["composition_source_file"]))
+    print('  reduced_file: {0}'.format(options["composition_source_file"]))
+
+    if not os.path.isdir(options["output_folder"]):
+        print("Error: Please create destination folder first")
         exit()
 
+    if not os.path.isfile(options["composition_source_file"]):
+        print("Error (Not found): {0}".format(options["composition_source_file"]))
+        exit()
+
+    print("Computing...please wait...")
+    
     # read composition file and store data in list of dicts
     dataset = CompositionParser().parse(options["composition_source_file"])
 
@@ -269,12 +290,12 @@ if __name__ == "__main__":
     new_dataset = calculator.compute(dataset, options["co_occurrence_threshold"])
 
     # write matrix and Gephi
-    calculator.write(new_dataset, os.path.join(options["destination_folder"], options["co_occurrence_matrix_file"]))
-    calculator.write_gephi_file(new_dataset, options["gephi_topic_ids"], os.path.join(options["destination_folder"], options["gephi_filename"]))
+    calculator.write(new_dataset, os.path.join(options["output_folder"], co_occurrence_matrix_file))
+    calculator.write_gephi_file(new_dataset, gephi_topic_ids, os.path.join(options["output_folder"], gephi_file))
 
-    # Aggregates splitted text segements back to document level
+    # Aggregates splitted text segments back to document level
     reducer = CompositionDocumentReducer()
-    reduced_dataset = reducer.compute(dataset)
-    reducer.write(reduced_dataset, os.path.join(options["destination_folder"], options["reduced_filename"]), options["reduce_write_threshold"])
+    reduced_dataset = reducer.compute(dataset, options["reduce_threshold"])
+    reducer.write(reduced_dataset, os.path.join(options["output_folder"], reduced_file), options["reduce_write_threshold"])
 
 
