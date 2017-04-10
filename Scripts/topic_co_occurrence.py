@@ -28,16 +28,20 @@ class CompositionParser():
         filename = row[1]
         try:
             # Extract basename of file (remove path) and split the name into its constituents
-            # CHANGED 20170213: adapted to pope documents
             document_name = os.path.basename(os.path.splitext(filename)[0])
+
+            # Extract serial number as 4-digit group at end of basename preceeded by underscore
+            m = re.search('_(?P<serial_nr>\d{4})$', document_name)
+            if m is None: return None
+            serial_nr = int(m.group('serial_nr'))
 
             # Extract year as 4-digits surrounded by underscores
             m = re.search('_(?P<year>\d{4})_', document_name)
             year = 0 if m is None else int(m.group('year'))
 
-            # Extract serial number as 4-digit group at end of basename preceeded by underscore
-            m = re.search('_(?P<serial_nr>\d{4})$', document_name)
-            serial_nr = 0 if m is None else int(m.group('serial_nr'))
+            # Strip away trailing serial number
+            document_name = document_name[:-5]
+
             return {
                 'year': year,
                 'document_name': document_name,
@@ -92,9 +96,7 @@ class CompositionParser():
 class CoOccurrenceCalculator():
 
     '''
-
     Requirements:
-
         Rangordna samförekommande topics
         a.  Använd Composition-fil
         b.  Identifiera ett eller flera topics (Topic1) att undersöka dessa samförekomster med
@@ -103,15 +105,12 @@ class CoOccurrenceCalculator():
                 i. 	Föra flera topics gör samma procedur om även för dessa
         d.  Skapa en lista i fallande ordning för de topics som samförekommer med Topic1 (topic-nummer och dess sammanlagda
             sannolikhetsvikt). En kolumn med det/de topic som man har valt ut för samförekomstanalys
-
     Implementation:
-
         1. Initialize an n x n matrix where n is the max topic-id
         2. For each item in the parsed dataset i.e. for each row in the compositon file:
                 For each w in items weights
                     Compute w's co-occurrences for specific items with all other topics (add scalar w with all weights)
                         Add weights to total accumulated wights for this topic
-
     '''
 
     def compute(self, dataset, threshold):
@@ -187,7 +186,7 @@ class CompositionDocumentReducer():
         # CHANGED 20170213: adapted to pope documents
         result_set = np.array([ ])
 
-        # Identify all distinct SOU-ids in dataset
+        # Identify all distinct documents in dataset
         distinct_documents = list(set([ (x['year'], x['document_name']) for x in dataset ]))
 
         # For each distinct document
@@ -200,10 +199,12 @@ class CompositionDocumentReducer():
             topic_ids = [ x['topic_id'] for x in items[0] ]
 
             # Reduce arrays of weights into a single array by adding arrays value by value
-            weights = np.add.reduce([ [ 1.0 if y['weight'] >= threshold else 0.0 for y in x] for x in items ])
+            weights = np.add.reduce([ [ y['weight'] if y['weight'] >= threshold else 0.0 for y in x] for x in items ])
 
             if weights.sum() == 0.0:
-                print("Warning: ")
+                print("Warning: Skipping document {0} since sum of weights is ZERO.".format(document))
+                continue
+
             # Normalize result
             weights /= weights.sum()
 
@@ -234,18 +235,19 @@ class CompositionDocumentReducer():
             for row in dataset:
                 for y in row['data']:
                     if float(y[1]) > threshold:
-                        # CHANGED 20170213: document as target (instead of year and id)
                         f.write(";".join([ str(int(y[0])), row['document_name'], locale.str(y[1]) + '\n'] ))
 
 
 if __name__ == "__main__":
 
     current_dir = os.path.dirname(os.path.realpath(__file__))
-
+    default_output_dir = os.path.join(current_dir, "output/")
+    default_input_file = os.path.join(current_dir, "./tutorial_composition.txt")
+    
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input', '-i', action="store", dest="composition_source_file", help="Full path and name to source file (MALLET composition file)", default=os.path.join(current_dir, "tutorial_composition.txt"))
-    parser.add_argument('--output_folder', '-o', action="store", dest="output_folder", help="Destination folder for output files", default=current_dir)
-    parser.add_argument('--co_occurrence_threshold', '-c', action="store", dest="co_occurrence_threshold", help="Reduce to documents: weights below threshold are treated as 0.0 in computation", type=float, default=0.15)
+    parser.add_argument('--input', '-i', action="store", dest="composition_source_file", help="Full path and name to source file (MALLET composition file)", default=default_input_file)
+    parser.add_argument('--output_folder', '-o', action="store", dest="output_folder", help="Destination folder for output files", default=default_output_dir)
+    parser.add_argument('--co_occurrence_threshold', '-c', action="store", dest="co_occurrence_threshold", help="Reduce to documents: weights below threshold are treated as 0.0 in computation", type=float, default=0.01)
     parser.add_argument('--reduce_threshold', '-r', action="store", dest="reduce_threshold", help="Reduce to documents: reduced weights below threshold are written to output file", type=float, default=0.0)
     parser.add_argument('--reduce_write_threshold', '-w', action="store", dest="reduce_write_threshold", help="Threshold for co-occurrence computation - all weights below threshold treated as 0.0", type=float, default=0.0)
 
@@ -253,7 +255,6 @@ if __name__ == "__main__":
     gephi_topic_ids =  [ ]
 
     # Assign output filenames
-
     timestamp = time.strftime("%Y%m%d_%H%M%S")
 
     co_occurrence_matrix_file = "output_co_occurrence_matrix_{0}.csv".format(timestamp)
@@ -285,11 +286,11 @@ if __name__ == "__main__":
     # read composition file and store data in list of dicts
     dataset = CompositionParser().parse(options["composition_source_file"])
 
-    # aggregate data
+    # # aggregate data
     calculator = CoOccurrenceCalculator()
     new_dataset = calculator.compute(dataset, options["co_occurrence_threshold"])
 
-    # write matrix and Gephi
+    # # write matrix and Gephi
     calculator.write(new_dataset, os.path.join(options["output_folder"], co_occurrence_matrix_file))
     calculator.write_gephi_file(new_dataset, gephi_topic_ids, os.path.join(options["output_folder"], gephi_file))
 
