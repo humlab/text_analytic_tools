@@ -34,6 +34,7 @@ def create_tokenizer(options):
 def read_file(filename):
     with codecs.open(filename, "r", "utf-8") as f:
         return f.read()
+
 def create_statistics(entities):
     wc = collections.Counter()
     wc.update(entities)
@@ -64,7 +65,7 @@ def main(options):
             text        = read_file(filename)
             tokens      = tokenizer.tokenize(text)
             data        = nerrer.tag(tokens)
-            entities    = extract_entity_phrases(data,  [ 'LOCATION', 'PERSON'])
+            entities    = extract_entity_phrases(data,  [ 'LOCATION', 'PERSON', 'ORGANIZATION' ])
             statistics  = create_statistics(entities)
             content     = serialize_content(statistics, filename)
 
@@ -81,6 +82,7 @@ if __name__ == "__main__":
 
     os.environ['STANFORD_MODELS'] = os.path.join(options["ner_path"], "classifiers")
     os.environ['JAVAHOME'] = 'C:\\Program Files\\Java\\jre1.8.0_121'
-    os.environ['CLASSPATH'] = os.path.join(options["ner_path"], "stanford-ner.jar") + ";"  + os.path.join("C:\\Usr\\stanford-postagger-full-2015-12-09", "stanford-postagger.jar") 
+    os.environ['CLASSPATH'] = os.path.join(options["ner_path"], "stanford-ner.jar") + \
+        ";"  + os.path.join("C:\\Usr\\stanford-postagger-full-2015-12-09", "stanford-postagger.jar") 
 
     main(options)
