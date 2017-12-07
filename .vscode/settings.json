@@ -2,10 +2,12 @@
 {
     "workbench.sideBar.location": "left",
     "explorer.openEditors.visible": 0,
-    "python.linting.pylintEnabled": false,
+
+    "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": false,
+    "python.linting.pep8Enabled": false,
     "python.formatting.provider": "autopep8",
-    "python.unitTest.unittestEnabled": true,
+    "python.unitTest.unittestEnabled": false,
     "python.unitTest.pyTestEnabled": false,
     "python.unitTest.nosetestsEnabled": false,
     "python.unitTest.unittestArgs": [
@@ -23,5 +25,17 @@
         //".vscode": true,
         "**/__pycache__": true,
         "**/**/*.pyc": true
-    }
+    },
+    "python.unitTest.promptToConfigure": false,
+    "python.linting.mypyArgs": [
+        "--ignore-missing-imports",
+        "--follow-imports=silent",
+        "--class-naming-style=PascalCase",
+        "--function-naming-style=snake_case",
+        "--disable=missing-docstring",
+        "--disable=no-self-use",
+        "--disable=C0301",
+        "--disable=C0111"
+    ],
+    
 }

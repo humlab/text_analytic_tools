@@ -7,3 +7,5 @@ papacy_scraper/__pycache__/
 papacy_scraper/spiders/__pycache__/
 output.xml
 **/output/
+**/data/
+data/

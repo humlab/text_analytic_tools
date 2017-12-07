@@ -1,0 +1,2293 @@
+﻿
+
+
+DälDALUS
+
+
+*
+
+
+D Ai D A L U S
+
+
+TEKNISKA museets årsbok
+19 3 1
+
+
+
+Carl Sahlin
+
+
+SVENSKA
+LINBANEKONSTRUKTIONER
+
+
+Fil. Dr Carl Sahlin inleder en serie avhandlingar i museets
+• •
+årsböcker, som kommer att behandla svenska uppfinnare
+av vilka många förut icke uppmärksammats i tillräcklig
+grad.
+
+
+
+Georg Scheutz.
+
+
+%
+Linbanans första uppträdande inom den svenska tekniska litteraturen
+ skedde under det något fantastiska namnet »De flygande skottkärrorna».
+
+Det är i »Journal för manufakturer och hushållning» för år 1825 x)
+som en artikel läses med sagda benämning som rubrik. Däri presenteras
+' en »människokraft sparande inrättning», som säges vara uppfunnen
+eller åtminstone först beskriven av Dureau de la Malle och som avsåg
+att lätt och billigt förflytta jordmassor över oländig mark från ett
+högre till ett lägre plan. Transportmedlet bestod av ett mellan lastnings-
+ och lossningsplatserna spänt grovt rep, å vilket löpte ett med
+spar försett hjul, vari en lastlåda av trä var upphängd. Vagnen med
+sin last nedbromsades med en i hjulet fäst draglina. Vid avstjälpningsplatsen
+ lossades jorden för hand och vagnen återuppdrogs utefter bärlinan
+ med hjälp av en i andra ändan av draglinan fästad motvikt, som
+rörde sig på hjul å en andra bärlina. Den nämnda tidskriftens utgivare
+ Georg Scheutz (f. 1785, d. 1873), känd som mångkunnig mekaniker
+ och publicist, nöjde sig emellertid icke med att blott återgiva
+denna beskrivning av den flygande skottkärran (så benämnd enär
+lastkorgarna hade formen av en skottkärr-låda), utan tilläde en del
+av honom själv uttänkta viktiga förbättringar, som han även åskådliggjorde
+ å en till uppsatsen hörande litograferad ritning. Scheutz
+föreslog sålunda att ersätta motvikten med en andra lastad låda, i
+avsikt att låta nyttig last draga tillbaka den tömda lådan. Banan skulle
+därigenom bliva så att säga dubbelverkande. Men han gick ännu ett
+steg längre, i det han föreslog att fästa flera flygande skottkärror
+efter varandra på samma lina, sammansatta till ett tågsätt, varigenom
+med tillräckligt manstarkt lastare- och lossarelag en flerdubbel effekt
+skulle ernås. Slutligen gör han (not sid. 160) ett märkligt tillägg så
+lydande: lådan kan även mittpå hava ett par axlar (RS på ritningen),
+så att den lastad välver omkull, men tömd återtager sin upprätta
+
+
+56
+
+
+*) 4:de häftet, sid. 102, 160. Mycket tidigare föregångare till den moderna linbanan
+äro kända. I ett arkiv i Wien förvaras sålunda en år 1411 daterad beskrivning å ett
+slags linbana och ett kopparstick från omkr. 1607 visar personbefordran över ett
+vattendrag i på lina hängande korg, som förflyttades av de resande medelst draglina
+och block. Är 1644 användes vid fortifikationsarbeten i Danzig en linbana, med
+vilken jord och sten transporterades. Ett flertal andra exempel äro i linbanelittera-
+turen omnämnda.
+
+
+t
+Svenska linbanekonstruktioner
+
+
+ställning. Genom en anbragt stolpe och lätt avkrokad arretering kan
+så tillställas, att tömningen sker automatiskt. Arbetarne behöva då,
+säger Scheutz till sist, endast fylla lådorna, vilka tömma sig själva på
+därför bestämd plats och strax återvända till fyllningsplatsen.
+Såsom är väl känt hava dessa av Scheutz föreslagna anordningar
+vunnit vidsträckt användning vid konstruktion av rutschbanor med
+fasta å marken eller å bockar lagda rälsspår, men även för linbanor,
+som haft till uppgift att nedforsla gods från en högt belägen plats till
+en lägre har uppfinningen begagnats i stor utsträckning, särskilt i bergiga
+ länder. Den här nedan omtalade, av Ernst Nordström år 1890 i
+Norge byggda linbanan var just en bromsbana av detta slag, ehuru
+naturligtvis med rundgående rörelse för korgarna. Jag har icke undersökt
+ i vad mån Scheutz> förslag voro originalidéer, vilket emellertid
+ är mycket möjligt. I varje fall har han grundad rätt att i linbanans
+svenska historia varda ihågkommen. För övrigt var han högt uppskattad
+ redan under sin livstid. Den av honom (och hans bror) år
+1837 konstruerade räknemaskinen är mest känd bland hans uppfinningar.
+ För den fick han guldmedalj på världsutställningen i Paris
+1855. År 1860 blev han kallad till ledamot av Vetensk.-akademien
+och år 1860 tilldelade Riksdagen honom en årlig pension.
+Lätt inses att bärkablar av hampa, varmed Scheutz hade att räkna,
+niåste vara utsatta för så stark avnötning och även i övrigt vidlådas
+av så avsevärda olägenheter, att linbanor, byggda med dylika rep,
+icke annat än under mycket begränsade förhållanden kunna hava
+visat sig lämpliga. Det stora framsteg, av vilket linbanans idé skulle
+komma att skörda mycket stora, ja, avgörande fördelar, var tillkomsten
+ av linor, slagna av järn- eller ståltråd. Uppfinningen härav
+skall vara gjord redan år 1822, men först från 1834 drog nyheten en
+ahmännare uppmärksamhet till sig, sedan uppfordringslinor av järn-
+trad införts i gruvorna på Harz i Tyskland. Här fick en påpasslig
+svensk bergsman, sedermera bruksägaren C. P. Bergstén (f. 1802,
+d- 1864) under en studieresa år 1835 tillfälle att ej blott se dylika
+knor i arbete, utan även studera själva lintillverkningen i Clausthal.
+•kiter hemkomsten förmådde han styrelsen för Stora Kopparbergs
+•ketgslag att vid Falu gruvas verkstad samma år 1835 och efter hans
+anvisning slå en lina, som blev den första i Sverige tillverkade järn-
+tradslinan. Den insattes i ett schakt i Falu gruva och visade — trots
+iverse missöden — sådant resultat, att Bergstén tillsammans med
+n o ? - o
+<1Sra vänner beslöto att bilda ett bolag (under firma C. J. Ohlson &
+
+
+57-
+
+
+
+C. G. Husberg.
+
+
+Co) för nyhetens exploaterande. Linfabriken förlädes till Falun och
+igångsattes den 5 maj 1836. Därifrån levererades under detta och en
+följd senare år en mängd linor till de större gruvfälten i Sverige och
+Norge. Fabriken torde sedermera hava överlåtits till Stora Kopparbergs
+ Bergslag, ty detta bolag bedrev lintillverkning för egen räkning
+ända till början av 1900-talet. Vid flera andra gruvfält anlades lin-
+slagerier. Så vid Striberg 1858 och vid Pershyttegruvorna på 1860-
+talet. Från början av sistnämnda årtionde övertogs emellertid denna
+industrigren allt mera av järnbruken. Lesjöfors driver lintillverkning
+sedan 1860, Blombacka (nu tillhörigt Uddeholm) sedan 1882, Fager-
+sta sedan 1884, Garphyttan sedan 1906, Varbergsverket (tillhörigt
+Gunnebo bruk) sedan 1917 och Kristinehamnsverket (nu tillhörigt
+Hällefors) sedan 1927. Även vid Bofors har på 1870-talet och senare
+lintillverkning ägt rum.
+Det är mot bakgrunden av den i Falun upptagna lintillverkningen
+som nästa svenska linbanekonstruktion bör ses. Närmast synes det
+hava varit frågan om att finna användning för de i Falu gruva kasserade
+ linorna som kommit konstmästaren därstädes, Carl Gustaf Husberg
+ (f. 1794, d. 1886), att utfundera och bygga vad som med skäl
+kallats Sveriges första linbana. När Husberg år 1839 tillträdde sin
+befattning vid gruvan, hade järntrådslinor, såsom vi sett, varit i bruk
+därstädes i över fyra år. Enär av säkerhetshänsyn uppfordringslinor
+måste kasseras, långt innan de bli utnötta, hade säkerligen en ganska
+avsevärd myckenhet av dylika linor samlats på hög. Den frågan
+trängde sig då på Husberg — liksom på så mången gruvkarl efter
+honom x) — om icke detta skrot kunde komma til! nytta. Enligt 1845
+års gruvrelation 2) byggde han det året en linbana för gråbergstrans-
+
+
+58
+
+
+1) Bland olika användningssätt för uttjänta gruvlinor må nämnas: till stängsel kring
+gruvöppningar, till stagning av gruvlavar, till bärkablar för hängande gångbroar m.
+m., varjämte tråden efter uppsnoning av linorna i stor skala använts som stängsel-
+tråd. Bekant är hurusom professor C. A. Ångström under sin anställning, som förvaltare
+ vid Tabergs gruvor i Värmland där anlade en liten trådspiksfabrik, som
+skulle arbeta med järntråd ur uppsnodda kasserade linor som råmaterial. Slutligen
+må omnämnas att vid Konung Oskar II:s besök i Grängesberg år 1900 han där fick
+åka genom en ståtlig äreport, byggd huvudsakligen av uttjänta gruvlinor och konstnärligt
+ konstruerad av den i slika ting särdeles skicklige ingenjör Ragnar Blomberg.
+Sedan martinprocessen blivit allmännare införd, gå linorna numera genaste vägen
+till omsmältning.
+
+
+port från Adolf Fredriks skrädhus upp på ett högt varp. Två bärkablar
+ förfärdigades genom sammansnoning av 6 stycken utnötta
+järntrådslinor från spelen, varvid en hamplina eller s. k. kalv inlades
+i mitten. De grova kablarna spändes mellan vid båda ändpunkterna
+resta bockar eller stol-lag, som ingenjörstermen den tiden hette, och
+ovanpå varje lina anbragtes ett »blåckhus» med sex spårade skivor
+sammankopplade efter varandra. Under blockhuset eller vagnen
+hängdes den stjälpbara, lastförande lådan. Transporten av lådorna
+skedde med särskild draglina, som drevs av gruvspelet. I relationen
+framhäves starkt den ringa anläggningskostnaden, som särskilt hade
+sin grund i att kasserade linor kommo till användning. En modell av
+konstruktionen förvaras i Stora Kopparbergs Bergslags museum i
+Falun. Där finnes även att se en annan av samme Ffusberg år 1842
+konstruerad utfraktsbana, som gjort hans namn som uppfinnare vida
+mer känt, än vad linbanan förmådde göra. Han är nämligen upphovsman
+ till det s. k. slaggspel, som efter hand blev infört vid något
+hundratal av våra masugnar. Förut hade man med häst kört bort
+hyttslaggen och stjälpt den i kringliggande skogen eller på ett lågt
+och vitt utbrett slaggvarp. Med Husbergs slaggspel vart det möjligt
+att fylla på varpet på höjden och man kom ifrån både en dyr kör-
+ningskostnad och ett alltför stort behov av stjälpningsplats. Spelet,
+som drevs med något av masugnens vattenhjul, bestod av en uppåtstigande
+ med järnräls belagd bockbana av trä, som förlängdes i mån av
+behov, samt av en på denna löpande låg vagn eller hund av järn, i
+båda gavlarna ankopplad vid en ändlös järntrådslina, som ytterst vid
+frppen styrdes av en linskiva. Linans båda halvor uppburos av två
+serier linrullar, den ena raden liggande i spåret, den andra anbragt
+vid bockbanans sida. Den viktigaste delen av uppfinningen gällde
+emellertid hundens konstruktion, i det att den gjorts självlossande.
+bottnen var rörlig kring två vid aktergaveln anbragta kraftiga gångjärn.
+ Dess framända hölls i läge med en hake, som med en nabb eller
+spets stack ned ett stycke under vagnen och som, då vagnen nått av-
+stjälpningspunkten, avkrokades därigenom att näbben motades av
+ett på banan anbragt hinder. När så spelstyraren i hytten — den enda
+Person som behövdes för banans drift — kastade om rörelsen och
+bunden började av sin egen tyngd gå nedåt, upplyftes botten likaledes
+ automatiskt och påkrokades åter. Konstruktionen är beskriven
+1 Jernkont. Annaler 1847 i det utförande, som den först erhöll, då
+det vid Falu gruva gällde att uppspela gråberg på ett högt varp. Två
+
+
+
+A. F. Westerlund.
+
+
+dylika banor blevo där byggda och de långt synliga två höga varpkäglorna
+ vid Stora Kopparberget äro minnesmärken över en uppfinning,
+ som emellertid, såsom redan sagts, blev av än större betydelse
+för masugnarna i riket. Där är den sannolikt ännu alltjämt på ett
+eller annat ställe i bruk. Husberg uttänkte även en del andra uppfinningar
+ av värde och ännu på 1890-talet, då jag var ingenjör vid
+Falu gruva, var den Husbergska lavkärran i användning. Den är beskriven
+ i Jernkont. Annaler 1846, sid 314. — Husberg var född år
+1794 i Nyköping, där han i sin faders kvarn först fick göra bekantskap
+ med mekaniska inrättningar. Någon skolundervisning synes han
+aldrig hava erhållit, utan lärde sig själv vad han behövde. Hans utpräglade
+ mekaniska anlag förde honom till Finspångs styckebruk, där
+han arbetade i verkstaden, och vidare till Falu gruva, där han 1820
+blev konststigare. Vid 28 års ålder erhöll han inträde i Bergsskolan
+i Falun, till vars allra första årskurs 1822—23 han liksom den förut
+nämnde C. P. Bergstén hörde. År 1839 befordrades han vid gruvan
+till konstmästare, ett bevis både på hans egen framstående ingenjörs-
+duglighet och på gruvstyrelsens uppskattning av vad han dittills uträttat.
+ Han erhöll på egen begäran avsked 1850 och flyttade till Västmanland,
+ där han sedan ägnade sig åt kvarnrörelse. För ådagalagt nit
+och skicklighet tilldelades honom den 23. dec. 1844 av Bergskollegiet
+»Svensk bergsmans hedersmärke för snille och flit» i guldi en av alla
+bergsmän högt skattad utmärkelse. Han avled vid nära 93 års ålder
+år 1886.
+Husbergs pioniärarbete i fråga om linbane-idéns första tillämpande
+här i landet förblev länge utan fortsättning. Man får gå fram nära
+30 år i tiden, innan detta transportmedel ånyo kom till heders. Den
+man, som då framträdde både som framstående uppfinnare på området
+ och som ivrig framhävare av linbanans stora fördelar vid lösning
+ av en del besvärliga transportproblem var ingenjören Aron Ferdinand
+ Westerlund. Hans insats blev ock av den betydelse, att han
+
+
+60
+
+
+har rätt att räknas till vårt lands mera märkliga uppfinnare. Min
+egentliga avsikt med föreliggande uppsats har ock varit att, innan
+glömskan hunnit helt begrava hans namn, draga fram detsamma i
+ljuset och söka åt uppfinnaren giva det hedersrum, som han förtjänar.
+Westerlund var född den 11 augusti 1836 vid Berga i Kalmar
+landsförsamling. Han genomgick Malmö tekn. skola, därifrån han
+utexaminerades 1861. Därefter hade han anställning på olika platser
+i Sverige samt i Ryssland, varest han var verksam dels i Uralområdet,
+«
+
+
+Georg Scheutz (f. 178}, d. 1873). Sveriges C. P. Bergstén (f. 1802, d. 1864),
+förste linhanekonstruktör. bruksägare, införde tillverkning
+av järntråd slinor i Sverige 1833.
+
+
+
+Linbana med »flygande skottkärra» år 1823.
+
+
+
+C. G. Husberg (f. 1794, l886^
+konstmästare vid Stora Kopparberget,
+ byggde vårt lands första
+linbana år 184$.
+
+
+Detalj av Husbergs, linbana.
+
+
+Modell i Tekniska Museet.
+
+
+
+Westerlunds linbana vid Bofors.
+
+
+Ur Ingeniörsföreningens förhandlingar 1878.
+
+
+
+A. F. Westerlund (f. i8j6, d. 1898), G. A. Granström, disponent,
+ingeniör, uppfinnare av det moderna linhanekonstruktör.
+2-linesystemet för linbanor.
+
+
+
+Granströms linbana mellan Stortägtsgruvan och Strömsholms kanal.
+
+
+Ernst Nordström, linbanekonstmktör.
+
+
+
+/ /
+
+
+Vignett a broschyr för Nords töms
+linbanor dr 1897.
+
+
+Linbana på Spetsbergen, byggd av Ingeniörs firman Sven Carlson, Falim.
+
+
+
+dels i Baku. Efter sin hemkomst sysslade han mest med anläggning för
+andras räkning av småindustri, men var därjämte en ivrig uppfinnare.
+Under 1870- och 1880-talen voro så kallade anläggningsingenjörer
+ganska vanliga. De fyllde en viktig uppgift i fråga om vissa näringars
+industrialisering, i det att de uppgjorda förslag till mejerier, bränne-
+rier, tegelbruk, torvfabriker, kvarnverk, tjäroljefabriker, stärkelsefabriker,
+ tvättinrättningar m. fl. anläggningar av mindre typ. Vanligen
+ åtogo sig dessa ingenjörer även att mot provision av leverantörerna
+ anskaffa allt maskineri, liksom att övervaka uppförandet och
+igångsättningen. Första gången jag sammanträffade med ingenjör
+Westerlund var omkr. år 1880, då han vistades i Lund för att uppföra
+ en tvättinrättning. Här som i många andra städer hade han uppsökt
+ en kapitalägande person (i detta fall en ung bondson) och animerat
+ honom att slå sig på mekanisk tvättning och strykning. Gärna
+talade han om sina uppfinningar, ej minst om sina automatiska lin-
+baneanordningar, dem jag för övrigt såg honom demonstrera på utställningar
+ i Malmö och i Köpenhamn, där han hela dagarna stod och
+visade korgarnas passerande förbi ändskivorna, den mekaniska urst
+ jälpningen m. m. — Vad som kommit honom att syssla med lin-
+bane-, eller såsom han genomgående kallar det, hängbane-Qvoblo.m.e.x.,
+var de olägenheter, som han funnit vidlåda en efter engelsmannen
+Hodgsons patent (av år 1867) byggd linbana vid Finspång *), vilken
+var så inrättad, att själva bärlinan var rörlig och framförde de på
+densamma hängande tomma eller lastade baljorna, i mån som linan
+själv drogs runt med maskinkraft. Fullt självständigt och utan kännedom
+ om tidigare sporadiska försök att lösa problemet på det av
+honom angivna sättet* 2) konstruerade så Westerlund en linbana,
+byggd på den sedermera segrande idén med stillastående bärlina och
+särskild rörlig draglina. Hans första svenska patent är daterat den 2
+augusti 1873 (n:r 118).3) Patentbeskrivningen är en smula dunkel,
+sasom ofta är fallet, på grund av uppfinnares önskan att inom ett
+
+
+*) Denna enligt enline-systemet konstruerade linbana, som byggdes något av åren
+1869 eller 1870, råkade snart i olag och måste bortrivas. Om orsaken meddelade
+Professor C. A. Ångström vid Jernkontorets diskussionsmöte år 1871 att linan snart
+förstördes, troligen beroende på för små skivor och därav härrörande för stark
+yrytningspåkänning.
+
+
+2) Westerlunds egna ord i denna sak.
+3) Ä automatiska linbanor erhöll han senare två svenska patent 1878. I Tyskland och
+P. S. A. erhöll han även patent 1878.
+
+
+patent innesluta alla tänkbara möjligheter av utföranden. Något
+egentligt princippatent torde han icke heller hava kunnat erhålla,
+men det som kunde patenteras var tydligen i alla fall av mycket väsentlig
+ natur, ty faktiskt utgör hans patentbrev av år 1873 en av
+huvudurkunderna, på vilka vår tids storartade utveckling av linbane-
+transportväsendet är grundad. Beträffande beskaffenheten av hans
+uppfinning är man icke hänvisad allenast till patentbeskrivningen av
+år 1873. Ty genom utförliga uppsatser, publicerade i Norden 1876,
+i Ingeniörsföreningens Förhandlingar år 1878 och i Jernkontorets
+Annaler år 1879, liksom i tvänne reklamtryck av åren 1878 och 1886,
+har han noga redogjort för konstruktionens alla viktigare detaljer.
+Därav inhämtas att det just är fråga om den av oss alla välkända
+typen av linbana, karakteriserad av två av tyngder spända bärkablar
+och på dem medels en ändlös draglina framförda, å hjul upphängda
+lastbehållare. Även en del detaljer beträffande korgarnas utväxling
+å sidospår för lastning eller lossning, deras vägning m. m. härröra
+från'honom.
+Den första Westerlundska linbana, som blev utförd, byggdes i
+Gottesberg i Schlesien. Den är beskriven i Industritidningen Norden
+1876 (n:r 28). »Ett par år därefter uppträdde ingeniör Ad. Bleichert
+i Leipzig och har sedan med stor framgång fullföljt den inslagna
+vägen», säger Westerlund. (Jernkont. Annaler 1879, sid. 479) 1).
+Efter allt att döma har Bleichert redan år 1877 köpt patenträtten av
+Westerlund, ty snart befinnes den senare bygga linbanor i Sverige
+som ombud för firman Bleichert. Det skedde första gången nämnda
+år 1877, då vid Åmmeberg i Närke en 88 meter lång linbana anlades
+för zinkmalmstransport från sligmagasinet till rostugnarna. Den
+transportbanan var i verksamhet till år 1912, då vaskverket ombyggdes.
+ Den andra svenska linbanan efter Westerlunds system byggdes
+vid Bofors år 1878. Dess uppgift var att transportera glödande
+smältstycken från Lancashiresmedjan tvärs över Timsälven till valsverket,
+ där de urstjälptes direkt i en regenerativ vällugn. Då denna
+sistnämnda år 1901 slopades, revs även linbanan.
+Emellertid blev det blott i ringa mån som det Westerlundska patentet
+ blev tillämpat i Sverige, innan detsamma utlöpte. Utomlands * 3
+
+
+f
+3) Ingeniör Bleichert erhöll år 1874 sina första patent, omfattande en mängd detaljuppfinningar.
+ Tillsammans med ingeniör Otto etablerade han byrå för linbanekonstruktioner
+ i juli 1874. Sedan Otto utträtt, kallades firman från början av år 1877
+Adolf Bleichert.
+
+
+kommo däremot en mängd storartade anläggningar till stånd efter
+detta system, tack vare närmast den energiska och världsomfattande
+verksamhet, som av firman Ad. Bleichert & Co i Leipzig bedrevs.
+Den svenske uppfinnarens namn kom icke att bli fäst vid dessa anläggningar
+ och något system Westerlund är över huvud knappast
+känt bland konstruktörerna. I mån som konstruktionen erövrade
+världen blevo de därunder fallande linbanorna helt enkelt betecknade
+ såsom byggda enligt 2-line-systemet.
+Ingenjör Westerlund samlade en ganska avsevärd förmögenhet på
+sitt ingenjörsyrke. Huru mycket därav som härrörde av linbane-
+patenten känner jag icke. Emellertid drog han sig tidigt tillbaka och
+bosatte sig i Stockholm, där han med största intresse ägnade sig åt
+numismatiska studier och dithörande samlarverksamhet. Särskilt ägnade
+ han mycket arbete på en specialitet, som kan förefalla den oinvigde
+ en smula underlig, men som bottnade i ett tekniskt-historiskt
+intresse av värde. Han samlade nämligen under många år drottning
+Kristinas 1/4-ören, vilka han till varje pris inropade på alla myntauktioner
+ och köpte upp var helst de eljes visade sig. Sin avsikt att
+med denna samlings hjälp studera stämpelsnidarnas arbete hann han
+aldrig fullfölja. Och hans förhoppning att samlingen för framtiden
+skulle förvaras oskingrad, varom han träffat testamentarisk disposition,
+ vart heller icke uppfylld. Den säregna kollektionen existerar
+icke längre, sedan däri ingående mynt blivit på auktion år 1927
+försålda. Större delen av hans även i övrigt märkliga myntsamling
+donerades till Timmermansorden i Stockholm, vars »myntmästare»
+han var. — Westerlund hade ännu en hobby: han älskade kaffe och
+det både av smak och av vetgirighet. Vid mitt sista besök hos den
+alltid välvillige och med märkvärdiga industriminnen laddade ingenjören
+ kom jag att berätta att jag läst hans bok om »Kaffe, dess kultur,
+beståndsdelar, beredning, egenskaper och historia», tryckt i Stockholm
+ år 1884. Det meddelandet renderade mig en kaffebjudning till
+påföljande dag, varvid ett mångtal kaffesorter från olika kaffeländer
+ tillreddes på ett mångtal olika sätt och serverades. Att jag med
+klappande hjärta återvände från detta ovanliga, men med intressanta
+upplysningar ledsagade kafferep på tu man hand behöver kanske
+icke påpekas. Den märklige uppfinnaren avled ogift den 18 januari
+1898, 59 1/2 år gammal.
+Det är icke min mening att fullfölja de svenska ingenjörernas linbanekonstruktioner
+ ända fram till den dag som i dag är. Men om två
+
+
+
+G. A. Granström.
+
+
+ännu levande konstruktörer på området och den insats de gjort vill
+jag dock ytterligare erinra.
+Efter en paus av åtta år efter den sista av Westerlund fullbordade
+anläggningen återupptogs linbanebyggandet hos oss år 1886 av dåvarande
+ chefen för Norbergs Gemensamma Gruvförvaltning, disponenten
+ G. A. Granström, som i intimt samarbete med ingenjören
+P. A. Croelius under några år utarbetade omkr. ett dussin förslag, de
+flesta för gruvor och verk inom vår bergshantering. De båda ingenjörerna
+ valde det engelska av Hodgson 1867 uppfunna och härovan
+redan omnämnda systemet med en enda lina, som således var både
+bärande och dragande. Den första av Granström gjorda anläggningen
+var en malmbana av 1 kilometers längd, ledande mellan den Fagersta
+bruk tillhöriga Stortägtsgruvan och Strömsholms kanal. Då banan
+konstruerades utan förbindelse med uppfinnaren (vars patent då
+längesedan utlöpt) fingo så gott som alla detaljer en självständig utformning.
+ Banan löpte i rak linje genom tämligen jämn terräng. Den
+fyllde sitt ändamål på ett utmärkt sätt och nedbringade transportkostnaderna
+ (inkl. ränta, amortering och underhåll) till 60 0/0 av den
+förut utbetalda forlönen. Ända till år 1917 var denna linbana i tjänst
+och dess rivning berodde på flyttning av Fagerstabolagets tackjärns-
+blåsning och i samband därmed stående förändringar.
+Utom en bergtransportbana vid Sala gruva och en träkoisbana vid
+Sandvikens järnverk, byggda 1891 efter Hodgsons system, konstruerade
+ Granström och hans vän Croelius år 1890 den stora transportbana
+ för malm, tackjärn, träkol och sågat virke, som är känd under
+namnet Högforsbanan och var Sveriges dittills största linbaneanlägg-
+ning. På grund av de mångahanda fordringar, som för denna transportled
+ måste uppställas, blev byggnaden i omfattande grad grundad
+på nykonstruktioner, dock med systemet Hodgson i princip bibehållet.
+ Banans längd var 8 km och dess lina hade en vikt av 33 ton.
+Sedan transportleden blivit i sin helhet färdig, vart densamma i närvaro
+ av en stor samling inbjudna högtidligt pådragen och invigd den
+28 september 1891. Aftonen förut, då man för säkerhets skull »körde
+runt» ett tag med det tunga systemet, hände en malör, i det att det
+stora kugghjulet vid kraftmaskinen brast i stycken. Sådant förvånar
+ju icke den, som känner till de många, då för tiden okända påkän-
+ningsstorheter, som konstruktörerna haft att räkna med. Under
+
+
+68
+
+
+natten till invigningsdagen lagades emellertid hjulet nödtorftigt
+genom att, sedan de många bitarna lagts i rätt läge i en gjutflaska,
+
+
+kring dem göts en tjock kaka tackjärn, som sammanband styckena
+till ett helt. Invigningen gick glänsande, ehuru man naturligtvis körde
+försiktigt och blott en kort stund. Vid den efterföljande festmåltiden
+var det nog bland alla de närvarande inte mer än en enda person, som
+visste vilka svårigheter, som man vid konstruktionens utarbetande
+haft att kämpa med och vilka svagheter, som trots all förtänksamhet
+ändå vidlådde den i sitt slag väldiga anläggningen. Det gällde ju att
+vid driften draga runt en 16 kilometer lång lina av 33 tons vikt med
+därå upphängda flera hundra lastade eller olastade »burkar» av järn.
+över hela Bergslagen berättades även hurusom den alltid i sanningens
+intresse ogenerade disponenten Granström såsom svar på tacksägelsetalet
+ till konstruktörerna yttrade att det vid detta som vid andra utpräglat
+ tekniska byggnadsföretag gällde att fullkomligheten icke
+nåddes i första hugget, men man finge hoppas att efter en eller annan
+ombyggnad Högforsbanan bleve bra och komme att fylla högt
+ställda fordringar. Jag har funnit detta uttalande antecknat i papperen
+ rörande anläggningen och med min vän Granströms tillåtelse berättar
+ jag därom, på samma gång jag gör det tillägget att han blev
+ganska sannspådd. Det visade sig att de klimatiska vinterförhållandena
+ i trakten gjorde Hodgsons system mindre lämpligt, åtminstone
+vid den berg- och dalbaneprofil, som är utmärkande för linjen
+Högfors—Sköttgruvan—Silverhöjden. Linbanan ombyggdes därför
+snart efter det Westerlundska systemet, men icke heller i detta skick
+blev den gammal. Den bortrevs år 1902, sedan en bredspårig järnväg
+placerats i dess ställe.
+Den konstruktör, som gjort mera än någon annan för linbaneidéns
+tillämpande i Sverige, är ingenjören Ernst Nordström. Efter grundliga
+ förstudier i utlandet etablerade han år 1894 i Falun en ingenjörs-
+byrå för denna speciella uppgift, varvid han lade det Westerlundska
+systemet till grund för sina konstruktioner. Sin första linbana hade
+han byggt i Norge redan år 1890 och hans första svenska utfördes
+1894 för Sommelii fabriker vid Henriksdal utanför Stockholm. Sedan
+kommo i rask följd ett stort antal anläggningar till stånd i in- och
+utlandet, så att enligt en publikation av år 1922 dittills av honom och
+det efter honom benämnda bolaget konstruerats och till största delen
+• • •
+jämväl byggts linbanor med en sammanlagd längd av 1,200 kilometer
+och med en transportkapacitet av tillhopa cirka 5,000 ton i timmen,
+v ar och en som något känner till detta område för ingenjörsverksamhet,
+ förstår att med den starka växling, som terräng- och säregna
+
+
+Ernst Nordström.
+
+
+69
+
+
+
+industriella förhållanden förete, problem av mer eller mindre svårlöst
+beskaffenhet ständigt måste uppkomma, fordrande av konstruktören
+en utpräglad uppfinnareförmåga och en påhittighet nästan utan
+gräns. Det kan icke komma i fråga, att här söka redogöra för den
+mängd specialkonstruktioner, som äro uttänkta för de Nordströmska
+linbanorna, än mindre att uppräkna alla de många anläggningarna#
+själva. Vår bergshantering, liksom sten- och lerindustrierna, hava i
+första hand tillgodogjort sig detta transportmedel, men genom ingenjör
+ Nordströms energiska bedrivande har sedermera även de på
+skogen grundade industrigrenarna adopterat detsamma och det i än
+större omfattning. Särskilt förtjänar erinras om de linbanorna närstående
+ kabelkranarna och deras utvecklade »spelnings»-förmåga.
+Det första av dessa hjälpmedel här i landet var den av Ernst Nordström
+ år 1896 x) konstruerade kabelkranen vid Frånö cellulosafabrik
+i Norrland, avsedd för lossning av kalksten och stenkol. Den hade
+en spännvidd av 107 meter, dess kajbock var 19,5 meter hög och
+transportförmågan utgjorde 7,5 ton i timmen. I synnerhet hava detta
+slags kranar vunnit stor användning vid uppläggning och transport
+på korta håll av pappersved och kolved. Nordströms pioniärarbete
+med avseende å sådana kranars införande här i landet har erhållit
+efterföljd i stor utsträckning och för närvarande torde flera tiotal
+sådana upplagskranar vara i verksamhet i Sverige * 2). Vid våra masugnar
+ erbjuda sig ofta specialproblem beträffande uppspelning av
+träkol från kolhusen upp på hyttkransen och i fråga om bortforsling
+av slaggen. För båda dessa ändamål hava av Nordström sinnrika och
+billigt arbetande konstruktioner blivit uttänkta. Den längsta av
+honom byggda linbanan torde vara den vid Rejmyre glasbruk utförda,
+ vilken hade en total längd över land och vatten av nära
+1,5 mil. Flans högsta linbanebock var 35 meter hög och den största
+spännvidden, som han vid en linbana tillämpat, 850 meter.
+Beträffande de senast gångna tre decenniernas utveckling inom
+linbanetekniken må några ord tilläggas. Till omkr. år 1900 användes
+i regel kablar av ohärdat material med 60 kgs brottbelastning per
+
+
+’) Den första kabelkranen i Tyskland lär vara byggd år 1901.
+2) I dessa dagar meddelas om en av A.-B. Nordströms Linbanor vid Domsjö sulfitfabriks
+ vedgård byggd dubbel kabelkran med 532 meters spännvidd och ett dubbeltorn
+ vid fabriken av 60 meters höjd. Nettolasten utgör 22 kub. meter massaved
+och kranen behärskar ett område av cirka 16 hektar. I fråga om kabelkranar torde
+denna hålla världsrekord.
+
+
+mm2, men därefter övergick man här i landet helt till kablar, spunna
+av härdad ståltråd med 120 kgs brottbelastning per mm2 eller mera.
+Samtidigt började man förlägga draglinan i jämnhöjd med vagns-
+överredet i stället för under detsamma, såsom dittills varit vanligt. I
+de flesta fall betingades denna konstruktion därav, att man önskade
+kunna med hjälp av draglinan framföra vagnarna automatiskt runt
+kurvor vid stationer och å linjen. Under senare tider har man för
+längre linbanor återgått till att placera draglinan under överredet, då
+konstruktionen av vagnarna numera möjliggör dessas framförande i
+kurvor på samma sätt som vid överlinan. — Till början av innevarande
+ sekel användes kopplingsapparater för vagnarna så beskaffade,
+ att fastlåsandet vid draglinan skedde genom en svag böjning av
+linan mellan en övre och en undre back. Förmedlingen av till- och
+frånkoppling skedde medelst enkla styranordningar. Efter sagda tidpunkt
+ övergick man till att använda lastens tyngd som verkande
+kraft för vagnens fastlåsande vid draglinan, vilken anordning då
+börjat användas av den Bleichertska firman. Ett viktigt steg i utvecklingen
+ var tillverkningen av vagnarnas överreden och kopplingsapparater
+ av stålgjutgods i stället för av smidesjärn och tackjärnsgods,
+såsom under 1800-talet var vanligt. Ett flertal goda konstruktioner
+av kopplingsapparater hava påfunnits av de kända linbanespecialis-
+terna ingenjörerna Sven Carlson, Harald Larsson och Erik Widén.
+Uen sistnämndes konstruktion användes vid Sveriges för närvarande
+största linbana, den 20 kilom. långa Marma—Vallvik-banan med
+20—25 tons transportförmåga per timme. — De flesta linbanor i
+vart land äro utförda med bockar av trä. Ävenså äro stationerna i
+huvudsak byggda av detta material. På senare åren har man dock
+alltmera övergått till järnkonstruktioner för att därigenom ernå
+längre tids varaktighet. Det företräde som träbyggnaderna förr hade
+genom sin billighet är numera nästan utplånat. Armerad betong har i
+vissa fall även kommit till användning.
+I allmänhet kan sägas att vi här i landet i relativt stor och mångsidig
+ omfattning tillgodogjort oss den hjälp vid transport av mass-
+gods, som linbanan erbjuder, samt att våra ingenjörer på detta liksom
+Pa sa många andra tekniska områden skapat sig en hedersam historia,
+l^e ha skaffat sig ett arbetsfält, som sträcker sig från det innersta
+Rysslands ödemarker i öster till de Colombianska Cordillerernas
+ganska otillgängliga bergstrakter i väster och som i norr tillsvidare
+har sin yttersta gräns vid de norska stenkolsgruvorna på Spetsbergen.
+
+
+Sven Carlson.
+
+
+71
+
+
+
+E. Hubendick
+
+
+»MERA ARBETE»
+
+
+Mera allmänna tekniskt vetenskapliga problem komma
+att behandlas i årsböckerna. På detta är Professor E.
+Hubendicks bidrag i år ett exempel.
+
+
+Den stam på vilken kulturen växer heter arbete. Ju större och
+kraftigare denna stam blir, ju yvigare och vackrare blir den kulturens
+krona, som den uppbär. Vi skulle kunna likna bladen och grenverket
+ vid handens verksamhet, vilken med hjälp av verktyg och
+produktionsmaskiner framställer materiella produkter och vi skulle
+kunna likna blommorna vid tankens verksamhet, skapande konst
+och vetenskap. Ingen av dessa verksamheter kunna vi mäta i endast
+
+
+kilogrammeter, ty vid båda tillkommer något mera. Men den sav,
+som i rikt flöde kommer från stammen och utan vilken både handens
+och tankens verksamhet skulle vissna bort mäta vi i kilogrammeter.
+Det är denna råa, oförädlade produkt, det mekaniska arbetet, som
+vi i första rummet behöva för kulturens fortsatta växt och blomstring.
+Homo primigenius förstod blott att nyttja detta råa, oförädlade,
+mekaniska arbete i gåendet, springandet, slående, lyftandet och
+kanske kastandet. Men en dag började handen forma föremål och
+tanken medvetet förutbestämma deras form. Homo sapiens hade
+framträtt, stammen hade fått de första bladen och blommorna,
+kulturen hade börjat uppstå såsom något nytt, oväntat, oanat
+på vår jord.
+Den mängd mekaniskt arbete som stod forntidens människa till
+buds var ej stort. Med slaveriets hjälp skapades väl en häpnadsväckande
+ kultur, en underbar konst och en förnämlig vetenskap.
+Men då summa arbete ej ökades genom slaveriet frodades dessa lysande
+ blommor på bekostnad av andra delar, av kronan, vilka förkrympte.
+ Vi skulle kunna säga att kulturens träd under denna
+period blommade »på bar kvist».
+Först med domestisering av dragdjuren erhöll människan ett
+verkligt arbetstillskott, men klumpigt och ohanterligt. Seglet, även
+det en forntidens uppfinning, var däremot något helt nytt. Människan
+ hade uppfunnit en maskin med vars hjälp »icke organiserat»
+arbete kunde tagas i hennes tjänst. Visserligen var användbarheten
+av denna maskin mycket begränsad, men dock av ofantlig betydelse.
+ Dess största betydelse låg emellertid däri att en helt ny väg
+öppnats, att man funnit en helt ny princip.
+Medeltidens bidrag att med hjälp av denna nya princip öka människans
+ tillgång på mekaniskt arbete utgjordes av väderkvarnen och
+
+
+vattenhjulet. Dessas betydelse för människans frigörande för
+högre kulturellt arbete kan sannolikt ej överskattas; ingen har ännu
+undersökt vilken andel dessa mekaniskt arbete producerande maskiner
+ hava i renässansens uppkomst; i händernas och andens frigörelse
+ från malstenen som måste hållas i gång för att mala mjöl
+till brödet, och många andra arbetskrävande anordningar. Men vattenkraften
+ fanns sällan där den behövdes och vinden ej alltid när
+den behövdes. Tillskottet i mekaniskt arbete var väl betydligt men
+°tillgängligt och opålitligt.
+En revolution i arbetstillgången förde den nyare tiden med sig
+genom uppfinningen av värmemotorerna, först ångmaskinen, sedan
+varmluftmaskinen, till sist förbränningsmaskinen. Dessa kunde giva
+urbete var som helst och när som helst ty kolet och oljan, dessa
+oerhörda koncentrat av energi, kunde transporteras till arbetsplatsen
+°ch uppläggas i förråd. Alltjämt vidlådde arbetet en viss obekväm-
+het, en bristande smidighet vid applicerandet. Då kom genom det
+elektriska transmitterandet av arbetet en ny revolution, som gjorde
+de avlägsnaste energikällor användbara, medgav arbetets överförande
+Pa ofattbara sträckor och i en häpnadsväckande fördelningsgrad
+samt gjorde dess applicerande bekvämt och smidigt utan gräns.
+Det rinnande vattnet, kolet och oljan äro våra energitillgångar.
+MänniskanS tillgång till mekaniskt arbete har sedan forntiden tio-
+dubblats flera gånger om. Från vattenhjulet med en verkningsgrad
+av mindre än i % hava vi kommit till turbinen med mer än 90
+/o verkningsgrad. Den första ångmaskinen i slutet av 1600-talet,
+uade 0,3 °/0 verkningsgrad. I slutet av 1700-talet var verkningsgraden
+ uppe i 3 % och i slutet av 1800-talet hade dieselmotorn nått
+3° /o verkningsgrad. För närvarande finnas dieselmotorer vilkas
+Verkningsgrad är över 40 %. På de vägar tekniken hittills vandrat
+ar° vi mycket nära de gränser som äro teoretiskt möjliga. Vi borde
+kunna vara nöjda och stolta.
+Men vi skönja redan den fjärran dag då jordens kol- och olje-
+tulgangar äro uttömda och då all vattenenergi är tillvaratagen, men
+eJ räcker att förse våra efterkommande ens med så mycket meka-
+ruskt arbete, som vi nu hava till vårt förfogande. Kunna vi vara
+,ribjda, då vi frukta att lämna en skövlad jord i arv till kommande
+slakten, kunna vi vara stolta då vi frukta deras förbannelse. Vartill
+tjanar den härliga kronan på kulturens träd om stammen ej längre
+kan bära den.
+
+
+Yi få därför ej stanna med beundran inför det som teknikens
+historia lär oss att forna släkten uträttat eller inför de bevis därför,
+som samlats i våra tekniska museer. Människosläktet får ej slå sig
+till ro med våra dagars fulländning. Teknikerns arbete har varit
+och måste förbliva såsom uppstigandet på ett väldigt »Himalaja».
+Varje topp han strävat upp till ger honom utsikt över nya, väldigare,
+ ännu mera lysande, avlägsnare, men eftersträvansvärda toppar,
+ vilka han måste försöka nå. Ej ens de avlägsnaste i molnen
+höljda topparna får han lämna ur sikte. De nya utsikterna måste
+locka honom, entusiasmera honom och öka hans ansträngningar.
+Och ingenjörens hopp är, i medvetandet om huru litet individen i
+regel kan uträtta, att däruppifrån, sedan han gjort sin egen insats,
+slutligen få skåda en flik av det »Kanaans land» på vilket mänskligheten
+ hoppas. I det landet väntar han sig finna »mera kraft»
+trots sinande bränsletillgångar.
+Ett sätt att tillsvidare undvika den sterila region, som bränsletillgångarnas
+ uttömmande innebär, är att öka våra maskiners verkningsgrad.
+ Den nyss nämnda omständigheten, att värmemotorernas
+verkningsgrad redan närmar sig den teoretiskt möjliga gränsen beror
+därpå att den praktiska utförbarheten uppställer gränser med vilka
+teorin måste räkna. Dessa praktiska gränser äro i regel temperatur-,
+tryck- och volymgränser. Kunna vi skjuta undan dessa praktiska
+gränser erbjuder teorien nya möjligheter. Men de praktiska gränsernas
+ förskjutning förutsätter bättre maskinbyggnadsmaterialier, nya
+utförandemöjligheter och mycket annat. Kunna dessa krav förverkligas
+ så kunna tryck och temperaturer ökas. Ängans tryck kan stegras
+ till eller över 100 atm., ja måhända över kritiska trycket och i
+förbränningsmotorerna kan kompressionsförhållandet ökas, vattenångan
+ kan ersättas med andra ångor, såsom kvicksilverånga eller
+den kan ersättas med binära blandningar, avloppsarbetet eller av-
+loppsvärmet kan tillvaratagas o. s. v. Många dylika problem studeras
+men de innebära alla endast en verkningsgradshöjning. Den tid är
+dock slut då värmemotorernas verkningsgrad tiofaldigades under loppet
+ av 100 år. Till 100 % verkningsgrad kunna vi ej komma. Därmed
+ är även den tid inne då vi måste börja se oss om efter nya energikällor.
+
+Tillgodogörandet av vulkaniskt värme löser ej detta problem, det
+ger oss blott ett litet arbetstillskott. Vindenergien, denna enorma
+arbetstillgång är, åtminstone f. n. i stort sett för oåtkomlig.
+
+
+Mycket har talats om förvandling av omgivningens värme till
+arbete. Men då denna princip innebär ett perpetuum mobile av andra
+ordningen är den stridande mot termodynamikens andra huvudsats
+och enligt vetenskapens resultat ej möjlig.
+Uttagandet av arbete ur lufthavet eller ur havsvattnet på grund
+av de olika temperaturerna på olika höjder eller olika djup bearbetas.
+ Så även uttagandet av arbete ur polartrakternas ismassor
+genom förångning av lättflyktig vätska och dess kondensering i fruset
+ saltvatten. Det har sagts att detta är förvandling av omgivningens
+värme till arbete, men detta är oriktigt. Vi utnyttja här två värme-
+niagasin med olika temperatur. Yärmemagasinen äro väldiga men
+värmet svåråtkomligt och temperaturdifferenserna små.
+Än väldigare är den energitillgång som materian som sådan representerar.
+ Kunde vi förvandla materian till energi skulle vi med
+i gram materia kunna producera flera tusen hästkrafter under ett
+år. Men den maskin med vilken detta skulle kunna ske känna vi ej,
+vi känna ej ens den process med vars hjälp materian kan förvandlas
+till energi närmare än att den försiggår först vid en temperatur som är
+flera millioner grader C. och vi veta endast att detta sker i solarna.
+Genom solstrålningen till vår jord erhålla vi även all den energi
+som omger oss och som vi försöka fånga för att förvandla till arbete.
+ Hittills har detta blott lyckats i ringa utsträckning med vindenergien,
+ i något större utsträckning med vattenkraftenergien men
+framför allt med den i kol och oljor såsom kemisk energi sedan
+svunna epoker upplagrade solenergien. Och nu hänvisas vi åter till
+solenergien!
+Skola vi en gång kunna bygga maskiner vilka direkt upptaga
+oen strålande energien och förvandla denna till arbete eller skola
+yi liksom hittills vara tvungna att gå omvägen över det organiska
+livet?
+
+
+Energi omgiver oss på alla håll, även energi i form av meka-
+oiskt arbete. Men att fånga denna energi och förvandla den till arbete
+ eller att fånga det mekaniska arbetet självt så att vi kunna an-
+vända det för kulturbehoven är det stora problem mänskligheten
+bar att kämpa med. Återgå vi ännu en gång till omgivningens värme
+ar det otvivelaktigt att dylika perpetuum mobile av andra ord-
+mngen ej blott äro möjliga utan att i naturen även av sig själv för-
+sl&Sa förändringar från mera till mindre sannolika tillstånd, men
+alltid i en sådan ringa skala att de äro obrukbara för våra behov;
+
+
+möjligen kunna de vara mikroorganismerna till gagn. Någon möjlighet
+ att reproducera dem i stor skala skönja vi ej ty då framträder
+genast andra huvudsatsen i hela sin styrka.
+Stora och svåra problem tränga sig allt mera på de ingenjörer
+som arbeta på motorområdet, nämligen nödvändigheten att försöka
+ finna någon helt ny princip med vars hjälp mekaniskt arbete
+kan framställas i för oss människor användbar form. Huruvida en
+dylik maskin kommer att bliva en ångmotor, en förbränningsmotor
+ eller något helt nytt slag av motor kunna vi ej förutse. Ingen
+kan ens angiva de principer efter vilka den skall tänkas arbeta.
+Termodynamikens huvudsatser måste den lyda. Men andra huvudsatsens
+ konsekvenser äro måhända ännu ej uttömda, vår kännedom
+om dess innersta väsen ännu så pass grumlig att vi hava rätt hoppas
+att inom dess giltighetsområde nya möjligheter skola yppa sig. Kravet
+ på en dylik maskin kommer därför att bliva allt mer
+påträngande. Vi hava rätt att hoppas att mänskligt snille framdeles
+liksom hittills skall kunna finna de ännu förborgade vägar som naturen
+ erbjuder för uppnåendet av detta avlägsna mål.
+Men detta mål är blott medlet varigenom då som nu människan
+skall erhålla ökat tillfälle till andligt arbete och förvärvandet' av
+ökad visdom. Sannolikt betyder den ökade tillgången på mekaniskt
+arbete i detta avseende mer än ökad nativitet bland intelligensen;
+kanske betyder den en »homo novus».
+
+
+4
+
+
+Dalarnas sista lancasbiresmedja Korså
+Stora Kopparbergs Bergslags AB., s smedja.
+Här en bild från en annan sadan nu , , der
+Häfla Bruk, Östergötland. Den stora smaltan klyv
+vattenhammaren till smältstycken.
+6**
+
+
+
+Kabelklämmorna pä stranden.
+
+
+Kabeltrumman med bromsband sanordningen
+
+
+Bernhard Eli
+
+
+VÄRLDENS FÖRSTA STARKSTRÖM-
+SJÖKABEL PÅ 360 METERS DJUP
+
+
+Tekniska Museet försöker att till sitt arkiv erhålla personliga
+ anteckningar om ingeniörers och industrimäns
+erinringar om av dem utförda arbeten. Överingeniör
+Bernhard Elis bidrag är ett exempel på detta.
+
+
+På våren 1917 erhöll Sieverts Kabelverk förfrågan på en 31x6
+kvmm. 7500 volt sjökabel, att levereras i en enda längd om 2000
+meter och förläggas på ett vattendjup av 360 meter, genom konsulterande
+ ingeniören Jens Skjerdal i Bergen, Norge, för Brudviks Fdek-
+tricitetsverks räkning. Kabeln var avsedd att förläggas över Sörfjor-
+den och förbinda Vaksdal med Brudvik.
+Då ej förut någon kabel för starkström förlagts på större djup än
+120 meter, hyste man vissa betänkligheter huruvida en förläggning
+på 360 meter över huvud taget vore möjlig. Utländska kabelverks-
+tekniker ansågo en starkströmskabelförläggning på detta djup såsom
+liggande utanför möjligheternas gräns.
+Före ovan nämnda, år 1917 på 120 meters djup förlagda kabel,
+vilken var en 25000 volt 3-faskabel av Sieverts Kabel verks tillverkning
+ och förlagd av Kgl. Vattenfallstyrelsens ingeniör Nilsson vid
+Trollhättans Kraftverk, hade ingen starkströmskabel förlagts på
+större djup än 30 meter. Då undertecknad var närvarande vid denna
+förläggning, som utfördes i halv storm, erhölls en god del erfarenhet,
+ vilken kom till nytta vid förläggningen på 360 meters djup.
+Emellertid konstruerades en för detta förläggningsdjup lämplig
+kabel enligt följande dimensioner. Ledare: koppar 7X1 >71 nim. kablade
+ till 5,1 mm. diam. Isolering: impregn. cellulosapapper av 2,4 mm.
+väggtjocklek. Tre sådana ledare ihopkablade med cellulosapappers-
+inlägg. Mantelisolering: impregnerat cellulosapapper av 2,4 mm.
+väggtj. Torkning och impregnering under vacuum och därpå ompressning
+ av en 2,1 mm. tjock blymantel, vars yttre diameter var 30,3 mm.
+Härpå lindades ett väl impregnerat pappersband och ett 3 mm. impr.
+jutelager som bädd för 22 stycken väl galvaniserade järntrådar, 5,4
+mm., vilka i sin tur skyddades av ett väl impregnerat jutelager av
+2 mm. tjocklek. Kabelns yttre diameter var 50,1 mm. Se fig. 1. Kabelns
+ totala nettovikt var 16,2 ton och bruttovikt 19 ton.
+Trummans dimensioner voro: yttre diameter = 2800 mm. och
+bredd =1800 mm.
+Av elektriska egenskaper var: kapaciteten = 0,18 mfd. och iso-
+lationsmotståndet = 240 mgm. per km. vid i5°C. Provspänningen
+var i fabriken = 15,000 volt under 15 min. och efter förläggningen
+10,000 volt under 15 min.
+
+
+Den garanterade momentana genomslagsspänningen var 84,000
+volt. Vid offertens avsändande kom naturligtvis frågan före, huruvida
+ vi även kunde övertaga förläggningen på detta djup, vilket
+jag på direktör Ernst Sieverts förfrågan bejakade. Härpå svarade
+han: »Då får också överingeniören själv lägga kabeln.»
+Vid en förläggning på detta stora djup måste allting vara väl för-
+beredt, dels för att förläggningen må kunna försiggå obehindrat,
+°ch dels att kabeln ligger på bottnen, så att ej kabeln kommer i
+svängningar av flod och ebb. Skulle kabeln komma i svängningar,
+kommer blymanteln att kristalliseras och så småningom spricka sönder.
+ Dessutom måste förläggningen ske med minsta förbrukning av
+kabel och utan bildandet av kinkar.
+Vi erhöllo beställning på kabeln i fråga och fingo även i uppdrag
+att förlägga densamma på våren 1918. För förläggningen anskaffades
+ en större däckad pråm, å vars däck kabeltrumman vridbart an-
+bragtes på tvenne kraftiga träbockar. Då bromsningen av kabeln
+ vid så stort djup var av särdeles stor vikt, hade för första gången
+1 kabelförläggningens historia bromsband anbragta å trumflänsarna
+kommit till användning. Ett bromsband anbragtes å vardera trumflänsen.
+ Dessa band voro försedda med små styrjärn för att hålla ban-
+det kvar på flänsen. Bromsbanden kunde åtdragas medelst utväx-
+llrig till en skruvgänga med ratt.
+Då avståndet mellan fjordstränderna var 1,300 meter och djupet
+360 meter, måste först en profilkarta uppgöras, och för kursens hållande
+ i rät linje mellan kabelns landningsplatser uppsattes stora sig-
+^aldukar, två på varje sida om fjorden, så att de tillsammans bil-
+oade en god syftlinje. För bestämmandet av båtens läge i fjorden
+bade en teodolit uppställts på stranden på så pass stort avstånd
+fran förläggningslinjen att goda vinkelmätningar kunde erhållas. Ä
+pråmens akter hade uppsats ett c:a 1,2 meters hjul, med spår format
+för kabeldiametern. Å pråmen var dessutom uppställd en mindre
+kabeltrumma, vars kabel skulle förläggas mellan Brudvik och Ulfs-
+ttesöen, en sträcka på 641 meter.
+I maj månad år 1918 avgick förläggningspråmen från Bergen,
+och förankrades på kvällen före förläggningsdagen i Vaksdal. Följande
+ morgon kl. 5 fm. avgick pråmen, bogserad av en 175 hkr.
+ogserbat, till förläggningsplatsen ett stycke (2 km.) upp i Sörfjor-
+en dess andra sida, varifrån förläggningen skulle utgå. Vädret
+var jämförelsevis lugnt, men i stället regnade det så mycket mera,
+
+
+så att sikten var allt annat än god. Man kunde endast med möda
+urskilja motsatta strandens konturer, men ej där uppställda syft-
+märken. Kl. 6 fm. anlände pråmen till förläggningsplatsen och
+förtöjdes därstädes medelst tvenne linor i land, medan bogserbåten
+höll ut pråmen i kabelförläggningens riktning. Kabelns ilandförande
+vidtog omedelbart och var förenat med stora svårigheter genom
+den branta stranden, bestående av en berghäll i vilken en grop förut
+blivit insprängd. Kabeln fästes medelst tvenne långa klämmor, vilka
+medelst stållinor förankrades i berggrunden.
+Kl. 10 fm. var kabeln väl förankrad och utläggningen av
+kabeln tog sin början. Förtöjningslinorna lossades och bogserbåten,
+som placerats framför pråmen, började sitt arbete att föra pråmen
+över till fjordens andra sida, därvid användande sig av syftmär-
+kena på närmaste strand för innehållandet av kursen. Då bromsningen
+ var den viktigaste operationen ombord, tog jag själv hand om
+denna, medan övermontör Simon Karlsson övervakade kabeln vid
+utlöpningshjulet och den vinkel kabeln bildade mot vattenytan.
+Själva förläggningen fick till stor del gå på känn genom reglering
+med bromsarna. På var 2 5-te meter påsattes kabeln klämmor, som
+hade till ändamål, dels att förhindra flytning av blyet och dels till
+att få kabeln att bättre fästa vid fjällväggarna under vattnet. Till
+förhindrande av eventuell drift på grund av flod eller ebb var dessutom
+ en bogserbåt på 80 hkr. till hands, att när så erfordrades stöda
+upp pråmen mot strömmen. Under hela förläggningen stod regnet
+som »spö i backen».
+Först då vi kommit halvvägs ut i fjorden kunde motsatta
+strandens syfttecken upptäckas och därigenom underlättades
+kursens innehållande. Kabelåtgången kontrollerades allt som oftast
+med teodolitens vinkelbestämning efter förut uppgjord tabell,
+profilkartan och antalet varv av kabel på trumman, motsvarande
+ en viss kabellängd även härför var tabell på förhand
+uppgjord. På grund av det stora djupet var det, då vi befunno
+oss mitt i fjorden, endast 4V2 varvlager kabel kvar på trumman, vilket
+ motsvarade c:a 750 meter. Detta såg ju onekligen hotande ut,
+att kabeln skulle bliva för kort, och man kan mycket väl förstå
+ingeniör Skjerdals och driftsbestyrerns utrop: »Det är bäst vi hoppa
+i sjön, ty vi hava beställt för kort kabel.» Jag lugnade dem dock
+med att de skulle få 200 meter till övers, när vi lagt kabeln. Det
+fingo de även. Teodoliten hade även överflyttats till andra stranden,
+
+
+Varigenom bättre avståndsbedömning kunde ernås. Förläggningen
+gick jämförelsevis långsamt på grund av påsättandet av klämmorna.
+Kl. i em. uppnåddes motsatta stranden, där pråmen förtöjdes. Det
+hade således tagit 3 timmar i anspråk för förläggningen. Det svåraste
+ arbetet återstod, nämligen ilandförandet av kabeländen, då
+bergväggen här var mycket brant, samtidigt som kabeln hade benägenhet
+ att åka tillbaka ned i djupet. Först sedan en kabelklämma,
+enligt fig. 4, anbragts och fastgjorts vid berghällen, så att avhåll på
+kabeln erhållits, kunde ändens ilandförande vidtagas.
+Först kl. 5 em. var kabeln på sin plats i den även här i berget
+1nsprängda kabelgropen. Den andra kabelklämman hade dessutom
+Pasatts och fastgjorts i de redan i förväg fastsatta öglorna.
+Tiderna för de olika operationerna hade till punkt och pricka
+samanträffat med de, vilka jag föregående dag delgivit ingeniör
+Skjerdal, så att han efter förläggningen sade, att förläggningen gått
+fullkomligt enligt tidtabell. Att allt gått efter beräkning berodde i
+första hand på ett väl förberett arbete, och i andra hand på tur, ty
+vädrets makter äro i dessa trakter omöjliga att förutsäga. Dagen
+mnan förläggningen var det full storm, liksom även dagen därpå.
+Följande dag pådrogos grova gjutjämsrör å kabeländarna i vattenbrynet
+ och ändboxarna inmonterades, vilka voro 10,000 volt massa-
+fyllda boxar. Efter kabelns provning blev den dagen därpå tagen i
+drift, och har allt sedan dess funktionerat till full belåtenhet. Som
+skydd mot åskväder försågos kabelns båda ändar med hornåskledare
+°ch drosselspolar.
+Teodolitbestämningarna utfördes på ett förtjänstfullt sätt av
+ingeniör Skjerdals assistent, ingeniör Jordal.
+Fa hösten 1918 förläde Sievers Kabelverk en 3X35 kvmm. 8,000
+volt sjokabel, beställd genom ingeniör G. E. Bonde i Bergen, även
+denna på 360—400 meters djup. Denna kabel ligger uti havsbandet
+°ch förbinder Askön med Kvarven, och funktionerar ännu i dag.
+Tid denna anläggning användes automatiska maximalströmbrytare
+°ch hornåskledare.
+Genom dessa båda kabelförläggningar har Sieverts Kabelverk påvisat
+ möjligheten att förlägga starkströmskablar på stora djup.
+Solhem, Spånga den 27. februari 1931.
+
+
+Ivar Svedberg
+
+
+ANDRÉES BALLONGHUS
+
+
+i ’
+
+
+Överingeniören, Fil. Dr Ivar Svedbergs bidrag till årsboken
+ ansluter sig till en av de märkligaste händelserna
+under år 1930, då spillrorna av S. A. Andrées ballongexpedition
+ återfunnos på Vitön.
+
+
+De underbara händelser, som under sensommaren 1930 inträffade
+och genom vilka de jordiska kvarlevorna av S. A. Andrée, Nils
+Strindberg och Knut Fraenkel återbördades till hemlandet, förde åter
+i minnet — och på ett sätt som väl saknar motstycke — händelserna
+kring och i samband med den så länge glömda Andrées Polarexpedition
+ år 1897 och väckte till liv ett starkt intresse för hela denna
+expedition och allt som står därmed i samband, och det är väl som
+ett utslag av detta nyvaknande intresse denna årsboks redaktion anmodat
+ mig att lämna en kort redogörelse för tillkomsten och konstruktionen
+ av en av de många detaljerna i Polarexpeditionens utrustning
+ — ballonghuset — för vilket ansvaret kom att vila på mig.
+Låt mig då först som sist betona, att ballonghusets konstruktion i
+och för sig icke var något märkvärdigt, och det intresse, som dock
+otvivelaktigt kom denna detalj och mig personligen till del, kan enklast
+ förklaras av det ändamål, det hela kom att tjäna. Att jag överhuvud
+ taget kom att syssla med denna sak berodde på en ren tillfällighet,
+ i det jag en vacker dag i »Aftonbladet» upptäckte en av Andrée
+utlyst tävlan om den bästa lösningen på problemet att åstadkomma en
+lämplig konstruktion för en byggnad, avsedd att uppföras på någon
+plats på Spetsbergen, i än4amål att under fyllningen och sedermera
+under väntetiden på lämplig sydlig vind hysa och skydda ballongen.
+Priset för den bästa lösningen var det efter nuvarande förhållanden
+blygsamma beloppet av 300 kronor!
+Vid tävlingstidens utgång voro 14 olika förslag inlämnade, och
+vid den granskning av dem alla, som gjordes av Andrée själv jämte
+de särskilt tillkallade sakkunniga professorerna Almqvist och Wes-
+tin, befanns det, att det förslag, som inlämnats av signaturen »In-
+terested», kunde enhälligt tillerkännas priset, och så blev det detta
+förslag, som sedermera lades till grund för utförandet.
+Även om som sagt den därvid tillämpade konstruktionen i och
+för sig icke kunde anses som något särskilt underbart, så kom den
+dock att visa sig i allt fylla de uppställda fordringarna — ja, mer än
+dessa, i det att den stora av synnerligen klent material utförda byggnaden
+ uthärdade en hel polarvinters stormar och efter dem stod i det
+närmaste oskadd klar att fylla sin uppgift, när 1897 polarfärden
+efter ett års uppskov blev utav.
+
+
+
+Ballonghuset pä Danskön nedanför Svedbergs berg.
+
+
+
+o»?
+
+
+BALLONGHUS
+för Öfveringon*ör ANDREES polarexpedition.
+
+
+t toc
+
+
+j/r»//» m » ftt* f.iyt;
+Avr.VtvW’/*
+
+
+konstruktions ritningar till ballongh uset.
+
+
+Modell av Andrées bal långhus
+i Hälsingborgs Museum.
+
+
+.. - •
+
+
+Av färden mot Nordpolen den //. juli i^97- E** ur flygteknisk
+synpunkt värdefullt material från Andrées ballongexpedition
+finnes i Tekniska Museets samlingar.
+
+
+Det var i varje fall världens första hangar för polarexpeditioner,
+°ch enligt en uppgift i Professor Behouneks skildring av »Italia»-
+expeditionen säger han bl. a., att den av »Italia» använda hanga-
+ren på Spetsbergen var uppförd med tillämpning av »samma konstruktionsprinciper
+ som Andrées ballonghus».
+Enligt tävlingsprogrammet skulle huset rymma en ballong om 20,5
+diameter samt därjämte erbjuda ett utrymme utomkring ballongen
+av minst 1,75 meter. Minsta innermåttet blev alltså 24 meter. Husets
+
+
+Vaggar fingo ej understiga 20 meter i höjd, varjämte väggarna på
+husets södra hälft skulle kunna under avfärden provisoriskt höjas
+ytterligare 5,0 meter. Norra hälften av huset skulle i och för bal-
+l°ngens fria utfärd kunna helt avlägsnas inom högst 2 timmar efter
+uet order därom givits, och den återstående södra halvan — nu höjd
+tlU 25 meter — dock vara stabil nog att stå som skydd emot vind
+°ui minst 1 o— 15 sekundmeter.
+Invändigt skulle huset vara så lätt som möjligt och alla utskjutande
+ hörn och delar, som kunde skada ballongen, undvikas. Runt
+0rukring upptill på 2o-meters höjden skulle löpa en balkong med
+tymliga manöverplatser och ordentliga trappor leda från marken till
+balkongen.
+Någon planering av marken kunde ej förutsättas. Huset skulle
+kunna lätt transporteras i skilda delar och lätt uppsättas samt skulle
+kunna motstå ett vindtryck sådant det orsakas av en storm med 25
+uieters sekundhastighet. Tak skulle finnas — ej så mycket för att
+skydda emot nederbörd, som för att hindra ballongen att olovandes
+
+
+ge sig iväg uppåt.
+Nåväl: det gällde nu att klara allt detta, men jag måste medge,
+jag icke gjorde det helt och hållet själv utan hade en utmärkt
+hjälpreda i — min lilla då ett-åriga dotter. Hennes stående anspråk
+Pa sin pappa var nämligen det, att han skulle rita för henne en »kok-
+ka», d. v. s. en urtavla, var gång order därom gavs. Pappa ritade
+till en början ytterst samvetsgrant den ena urtavlan efter den andra
+°ch alla försedda med timtal i fint utarbetade romerska siffror. Allt
+efter som emellertid efterfrågan på produkten steg, sökte jag lät-
+tare komma från det petiga jobbet med de romerska siffrorna och
+förenklade timtalen till enkla streck — precis som på de nu så moderna
+ funktionalistiska urtavlorna på Statens järnvägars stationer —
+och detta gillades i hög grad. Förenklingen fördes emellertid vidare:
+et var lättare att förse urtavlan med åtta timtecken än med tolv,
+
+
+vilket även godtogs av den flitiga beställaren. När så en gång en dylik
+ funktionalistisk åtta-timmarstavla levererats, kom plötsligt den
+idén, att om man på ett rätt sätt sammanbunde dessa timtecken, så
+fick man en utmärkt plan till ett ballonghus, och det blev i realiteten
+den, som kom till användning.
+Emellertid frångick jag till en början detta i så måtto, att jag utbildade
+ det första utkastet så att jag tänkt mig framsidan täckt av tvenne
+stora »skjutdörrar», styrda upptill och nedtill på särskilt sätt, men
+Andrée påminde mig om Artemus Wards humoresk »Byrålådan» och
+befarade, att så elegant utfunderade portarna än vore skulle de komma
+att ställa till minst lika mycken förargelse som Wards byrålåda, och
+så fick jag gå tillbaka till min ursprungliga plan — en sluten åttkant.
+Så galet måtte emellertid inte dörrarna varit utspekulerade, ity att
+samma eller liknande konstruktioner numera tillämpas på många moderna
+ luftskeppshangarer. Den definitiva planen blev alltså sådan den
+framgår av här återgiven ritning och av denna synes tydligt, huru
+hela strävsystemet konstruerades.
+Hela byggnaden uppfördes med alla detaljer av Byggmästaren F.
+O. Pettersson i Göteborg, varefter den åter sönderplockades och med
+s/s Virgo jämte all annan expeditionens material fördes till Spetsbergen.
+ Uppsättningsarbetet därstädes utfördes på följande sätt.
+På den frusna och ojämna marken utspändes först en tågpolygon
+av samma form som byggnadens plan, och i alla polygonens hörn
+byggdes av sleepers, lagda korsvis, grundpelare, som fylldes och täcktes
+ — liksom mellan pelarna liggande mark — med sågspån för att
+söka förebygga upptining. Utgående från en i husets centrum inlagd
+kraftig fyrkantig ram i golvhöjd lades radiellt utlöpande golvstockar
+till polygonens alla hörn. På dessa golvstockar lades så alla till det
+understa ramverket hörande bjälkar, och på dessa upprestes därefter
+de 5 meter höga vertikalramar, som på en gång bilda underlag för
+nästa högre liggande ramverk och husets vertikalförstyvning. I regel
+ användes inga genomgående bultar utan istället kraftiga klämmor.
+ Sålunda klämdes alla horisontalt liggande bjälkar fast mellan
+exempelvis en understående och en ovanpåstående vertikalram. Klämmorna
+ själva bestodo av tvenne kraftiga bultar samt ett dem sammanbindande
+ underslag och ett överslag av smidesjärn. I överslaget
+var därjämte det ena bulthålet utslitsat, så att man genom att lossa en
+mutter kunde vrida överslaget åt sidan och så få snabbt hela förbindningen
+ löst. Detta var av särskild vikt, när det gällde den snabba
+
+
+rivningen, som ju därjämte skulle äga rum under rätt så kraftig vind.
+I^et visade sig ock, att denna såväl som alla andra detaljer fungerade
+ tämligen klanderfritt.
+Väggarna utgjordes av c:a 2,4 meter höga och 0,80 meter breda
+luckor av spåntade bräder, vilka inskötos i rännor på de bjälkar,
+som bildade de ovanför varandra liggande inre ått-kanterna. Rännorna
+ hade åstadkommits genom att på dessa bjälkar spika parallella
+träribbor, emellan vilka lämnades en ränna. På den norra sidan, som
+skulle rivas, och. där det gällde att snabbt få bort luckorna, hade
+speciella anordningar vid den yttre av dessa lister vidtagits, så att
+de kunde snabbt avlägsnas och luckorna glida ned etage efter etage.
+&en detaljen krånglade emellertid litet i det byiga vädret, men i alla
+full gick dock hela rivningen programenligt.
+En och annan lucka ersattes med ett »fönster», bestående av ett
+oojligt och med metallnäs inlagt »glas» — av holländskt ursprung
+0ch kallat »Tectorium». I understa etagen funnos flera större och
+ttundre dörrar. Den provisoriska höjningen av södra halvan utfördes
+ medelst segelduk, lätt upphissad på därför avsedda master.
+»Taket», i den form det slutligen fick, utgjordes av 8 trianglar av
+Segelduk, vilka kunde medelst linor förenas i en spets, uppburen av
+en blockvagn, löpande på en tvärs över huset spänd lina. Genom sär-.
+skilda anordningar kunde de enskilda dukarna därefter snöras intill
+Varandra. (Detta tak konstruerades och utfördes av P. Eriksson &
+C-*o, Persiennefabrik i Göteborg). För övrigt torde bilderna, tagna ef-
+ter en modell av ballonghuset i Hälsingborgs Museum, bättre än ord
+Vlsa, hur det hela var utfört även i detalj.
+När Andrée och hans kamrater sedan alla förberedelser voro klara
+•f * *
+°r avfärd från Spetsbergen 1896 förgäves väntat på den sydliga
+^mden, återstod för expeditionen ej annat än att åter tömma bal-
+ngen och medtaga denna jämte en hel del av utrustningen hem till
+verige med föresatsen att göra om försöket året därpå.
+Vad ballonghuset angår så måste det ju kvarlämnas, men för att
+en man det ansågs möjligt och lämpligt vidtogos dock åtgärder
+or att förebygga ett sammanstörtande eller dess skadande i övrigt,
+a unda borttogs golvbeläggningen till större delen, för att ej snö-
+e/^n^n§en på bjälklaget skulle bliva för stor.
+aggluckorna i husets i:sta, i:dje och 4:de 5-meters etage bort-
+o,??’ oc^ ^ ^en mån så kunde ske anbragtes förstagningar medelst
+mor. Varför man nu kvarlämnade luckorna i 2:dra eta-
+
+
+gen fick jag aldrig klart för mig, men sannolikt ville man göra
+arbetet vid återkomsten så ringa som möjligt, och man litade så
+på stagningen såsom uppvägande den ökade risk för husets bestånd
+luckornas kvarlämnande medförde. Jag kan förstå detta, ty då jag
+tillskrev Andrée mina bekymmer för huset i anledning av luckornas
+kvarlämnande, svarade han mig lugnande, tilläggande att »om du
+får alla dina barn så stagade emot livets stormar, som det du anförtrott
+ åt mig, behöver du inte vara orolig för dem».
+Nå — oron spreds i alla fall även till Andrée, och jag fick i uppdrag
+ dels att spekulera ut, vad som kunde tänkas hava under vintern
+ hänt med huset, dels vad som kunde och borde förberedas för
+att möta olika situationer, inklusive den att huset helt störtat. För
+egen del fann jag, att blott de kvarlämnade luckorna ville blåsa bort
+snarast möjligt — och de voro i realiteten icke alltför styva — så
+vore de sannolikt, att huset skulle stå sig även för en 3 o-meter orkan
+eller ännu värre. Jag hoppades sålunda att det skulle stå, men gjorde
+i alla fall förslag till en helt ny nödutrustning för det fall huset skulle
+hava mer eller mindre skadats.
+Stor blev därför Andrées och hans kamraters glädje, då de vid
+ankomsten till Spetsbergen år 1897 redan på avstånd fingo se husets
+översta delar stå kvar, och än mer när de sedermera sågo, att huset
+i stort sett var oskadat — tack vare att de flesta av de kvarlämnade
+väggluckorna blåst ut, därmed minskande stormarnas angreppsyta
+och nedbrytande kraft.
+Vad som hänt och hur situationen var och blev framgår av följande
+ telegram till mig:
+
+
+Husets nedersta våning starkt vriden men huset stående. Grunden
+ orubbad. Ena Y-sträfvans bottenbjelke tvärt af tryckt vid
+ändan. Huset idag färdigt att mottaga ballongen. Många tysta
+tack sändes till dig under dessa dagar. Alla väl. Tolfte juni. Bref.
+Andrée.
+
+
+Detta telegram var alltså skrivet den 12. juni 1897 på Danskön,
+men det kunde expedieras från Tromsö först 9 dagar senare eller den
+21. juni — en bild så god som någon framhävande skillnaden emellan
+då och nu i dessa radions dagar!
+
+
+
+Huru länge efter avfärden den n. juli 1897 den norra halvan av
+ballonghuset stod är mig obekant, men så synnerligen länge kan det
+eJ gärna hava varit.
+Då Professor Nathorst år 1898 under sin efterforskningsfärd besökte
+ Danskön, låg allt i spillror, som då liksom senare hemför-
+des som minnen av Andrées och
+bga färd mot Nordpolen!
+Hälsingborg den 13. mars 1931.
+
+
+hans kamraters djärva men olyck-
+
+
+E. Lundeberg
+
+
+HESSELMANMOTORN
+SOM BILMOTOR I
+
+
+I museets årsböcker kommer så vitt möjligt en eller
+annan uppsats att ägnas något tekniskt eller industriellt
+problem, som under året varit särskilt uppmärksammat.
+Civilingeniör Erik Lundebergs uppsats inleder denna serie.
+
+
+På få områden torde en sådan stark utveckling kommit till synes
+inom industrien under de senaste årtiondena som vad automobiltill-
+verkningen kan uppvisa. Vid sekelskiftet kunde man knappast tala
+om någon egentlig automobilindustri, utan de vagnar, som då byggdes,
+ voro närmast att anse som experiment, ehuru de redan då betydde
+ett kolossalt framsteg för alla landsvägstransporter i förhållande till
+de häsidrivna fordonen. Efter denna tidpunkt utvecklades emellertid
+denna industri med dittills oanad hastighet, och den utgör numera en
+av de större, åtminstone i Amerika.
+• Samtidigt med denna industriella utveckling skedde även en omdaning
+ av transportväsendet på sådant sätt att hästarna alltmera
+undanträngdes av de motordrivna fordonen, vilka dessutom omhän-
+dertogo många transportbehov, som förr tillgodosetts på annat sätt,
+såsom av järnvägar och fartyg. Motorvagnsparken växte snabbt och
+den utgör nu c:a 28,000,000 motordrivna fordon i världen. Som
+bränsle för denna vagnpark kom huvudsakligen bensin till användning,
+ och värdet av bensinkonsumtionen utgör nu c:a 11,000,000,000
+kr. per år.
+Bensinens pris per värmeenhet är ju relativt högt i förhållande till
+de mera svårflyktiga bränslena, på grund av att den måste underkastas
+ ytterligare behandlingar innan den blir lämplig att komma till
+användning i en förgasarmotor, varjämte dess transport och lagring är
+mera kostsam än för en svårflyktig olja. Man försökte därför redan
+tidigt att använda billigare destillationsprodukter för drift även av
+mobila motorer på samma sätt som man redan förut gjort det vid
+stationära.
+Man stötte emellertid då på många svårigheter på den grund att
+de fordringar, som ställas på en mobil motor, voro helt annorlunda
+och större än de som ställas på de stationära. En automobilmotor
+måste till exempel tillåta att belastningen kan varieras från den högsta
+till den lägsta så gott som ögonblickligt samtidigt som även dess varvtal
+ skall kunna ändras från lägsta möjliga tomgångsvarv till högsta
+möjliga, och långt över det som erhållits med föregående konstruktioner
+ för drift med tyngre oljor.
+Många olika vägar hava prövats för att erhålla en för automobiler
+användbar motor, som kunde drivas med svårflyktig olja. Så har
+
+
+försökt att driva en vanlig förgasarmotor med sådan olja genom
+aftvändandet av särskilda förgasare, varvid förångningen underlättas
+°ck påskyndas genom förvärmningsanordningar av ett eller annat
+slag. Denna lösning ger dock rent teoretiskt mindre goda resultat,
+Vllket även bekräftats genom de praktiska proven.
+De mest tillfredsställande lösningarna ha dock erhållits genom att
+konstruera motorer enligt dieselprincipen, med hänsyn tagen till de
+speciella fordringar, som föreligga vid mobil drift. Redan före år
+19io sysslade Diesel med detta problem, och de senaste åren ha, särskilt
+ i Tyskland, flera lyckade konstruktioner på detta område
+kommit till utförande.
+På grund av de höga tryck, upp till 60 kg/cm2., vilket blir en följd
+förbränningens drivande enligt dieselprincipen, blir motorerna
+tyngre än förgasarmotorer, varjämte deras gång blir synnerligen hård.
+Svårigheter ha framkommit att erhålla tillfredsställande tomgång hos
+Motorerna, och de vägar, som kommit till användning för att förkättra
+ denna, ha ofta medfört betydande komplikationer. Problemet
+riled igångsättning av en kall motor har även varit mycket svårlöst, i
+att vid det låga varvtal, som motorn erhåller vid kringvridandet
+°r igångsättning, sådan läckning uppträder förbi kolven, att kom-
+Pressionstemperaturen nedsättes under den vid vilken säker antänd-
+lllng av bränsleluftblandningen erhålles. Ej heller har man med hit-
+tyls konstruerade bilmotorer enligt dieselprincipen lyckats uppnå så
+°ga varvtal, som numera fordras för detta ändamål. En motor för
+rirt med svårflyktig olja, vid vilken de ovan anförda svårigheterna
+tynas vara bemästrade, har emellertid nu konstruerats av Civilingen-
+l0r K. J. R. Hesselman. Här är ej platsen att ge en teknisk beskrivning
+av densamma, utan må för detta ändamål hänvisas till professor Hu-
+endicks artikel i Teknisk Tidskrift, häft. 28, år 1930.
+Hesselmanmotorn arbetar enligt fyrtaktsprincipen, och insuger
+1 SOrn dieselmotorn ren luft under insugningsslaget. Vid en lämplig
+j! PUllkt insprutas bränslet av en bränslepump i förbränningsrummet.
+etta och i synnerhet kolvens övre del är utformad på sådant sätt
+att god turbulens erhålles i bränsleluftblandningen för att underlätta
+rangningcn av bränslet. Antändning en sker på samma sätt som i en
+°^gasarmotor med hjälp av ett elektriskt tändstift.
+Rompressionstrycket är c:a 8 kg./cm2. samt det högsta förbrän-
+^IH^ttycket endast c:a 30 kg./cm2, alltså avsevärt mycket mindre än
+icselrnotorer. Detta medför att Hesselmanmotorn kan byggas
+
+
+lättare och billigare, varjämte dess gång ej blir så hård. Starten är avsevärt
+ enklare och tillförlitligare än vid dieselmotorer, då man ej är
+beroende av kompressionstemperaturen för antändningen. En kall
+motor kan mycket väl igångsättas utan vidare genom igångvridning
+för hand, men för att hastigare driva upp varvtalet brukar man dock
+underlätta de första tändningarna genom att medelst en primer in-
+spruta en obetydlig kvantitet bensin i insugningsröret. Svårigheterna,
+som funnits hos dieselmotorerna vid tomgång samt låg belastning, ha
+lösts genom införandet av en luftregulator, vilken manövreras synkront
+ med bränsleregleringen. Man har härigenom erhållit tillfredsställande
+ gång hos motorn utan sot- eller rökbildning även vid låga
+belastningar.
+Motorns utseende skiljer sig endast obetydligt från en vanlig förgasarmotor.
+ Förgasaren och insugningsröret äro dock ersatta av
+bränsiepumpar, en för varje cylinder, med tillhörande rörledningar
+och ventiler. Manövreringen av en bilmotor enligt Hesselman sker på
+precis samma sätt som vid en vanlig motor, och varje körkunnig kan
+sätta sig upp i en bil med denna motor och utan vidare köra densamma.
+
+Hesselmanmotorn har redan nu underkastats mycket ingående
+prov, såväl i provbänk som även inmonterad i motorbåt och i flera
+automobiler. Samtliga undersökningar hava givit mycket goda resultat,
+ och dessa finnas utförligt beskrivna i professor Hubendicks
+förut nämnda uppsats. Bränslebesparingen i förhållande till ett
+fordon, försett med bensinmotor och arbetande under i möjligaste
+mån lika förhållanden, har visat sig vara c:a 30 °/o. Denna siffra
+styrkes även av prov, utförda av A.-B. Stockholms Spårvägar. Här
+har under tre månader prov utförts parallellt med en buss med Hes-
+sel manmotor samt tre exakt lika bussar med bensinmotorer på samma
+linje. Bränsleförbrukningen för Hesselmanbussen blev 3,13 lit./mil,
+under det att medeltalet för de tre andra var 4,37 lit./mil, vilket gör
+en bränslebesparing av 28 %. Driftsäkerhet och köregenskaper synas
+även ha varit tillfredsställande, skötsel och underhåll ha ej heller
+vållat några svårigheter.
+Hur ställer sig nu Hesselmanmotorn i förhållande till en modern
+automobilmotor, och hur fyller den de fordringar, som kunna ställas
+på en sådan motor? Som redan ovan angivits erhålles en minskning
+av bränsleförbrukningen av c:a 30 %. Med de ovan angivna siffrorna
+från Stockholms Spårvägar blir bränslekostnaden per mil vid nuva-
+
+
+rande detaljpris på bensin och motorolja, 22 resp. 9 öre/liter, vid
+hesselmanmotorn 28,2 öre/mil samt för bensinmotorn 96,1 öre/mil.
+hetta motsvarar en besparing av 57,9 öre/mil eller c:a 60 %, alltså
+eri mycket vacker siffra.
+betraktar man emellertid detaljpriset på bensin, ligger i dessa
+22 öre skatt och tull på 6 öre per liter. Dessutom finnes där en distributionskostnad
+ till bensinstationerna samt kostnaden för försälj-
+bmgen i dessa. Storleken av de sistnämnda variera visserligen, men
+tlllsammans torde de uppgå till c:a 4 öre per liter, i medeltal. Kommer
+°ba till lika allmän användning vid automobildrift som bensin torde
+ahmänheten ha lika stora fordringar på distributionen av denna som
+jkn nu har beträffande bensin. Likaså kommer väl under sådana förhållanden
+ skatt och tull bli densamma för såväl bensin som olja.
+bör att erhålla en jämförelse mellan kostnaden för bränslet bör
+uarrör det nuvarande oljepriset, vilket gäller levererat i fat hos leve-
+rantÖren, höjas med 6 -f- 4 öre till 19 öre/liter, och den blir då för
+hesselmanmotorn i det förut använda exemplet 59 öre/mil. Detta ger
+eri besparing av 37,1 öre/mil eller 38,5 %, vilket även detta är en myc-
+vacker siffra. För en lastautomobil i stadstrafik, med en körlängd
+av 3° km. per dag, en tämligen normal siffra för en något större
+Vagn, innebär detta en besparing av 334 kr. per år under det att för
+t; cx. en buss med en körlängd av 20 mil per dag besparingen går upp
+3>340 kr. per år.
+hån dessa siffror får dock fråndragas den ökade ränta och amor-
+tenng, som påfordras av Hesselmanmotorns åtminstone hittills högre
+bris ån bensinmotorns. Hur stor denna summa blir, som måste från-
+ragas, beror på automobilens utnyttjning samt prisskillnaden. Vid
+Vagnar med stor körlängd torde den dock bli av mindre betydelse,
+Ullder det att vid automobiler, som endast köras en kortare väglängd
+Pei ar> kan amorteringsökningen i vissa fall helt uppväga den min-
+s ade bränsleåtgången.
+handhavandet av en automobil, försedd med Hesselmanmotor, är
+SOm förut framhållits enahanda som vid vanliga automobiler. Ett
+annat förhållande är det dock vid skötseln och i synnerhet vid repa-
+r.ationerna. ^ ^ela världen finnes nu en kår motorskötare och repara-
+t0rer, vilka äro upplärda och helt vana vid förgasarmotorer. De äro
+vana vid de problem, som förekomma vid den mekaniskt sett täm-
+selm ^r°Va förgasaren. Helt andra förhållanden möta dem vid Hes-
+anmotorn, där pumparna äro verkligt precisionsarbete, och det
+
+
+torde väl ta en avsevärd tid innan bilverkstäderna i allmänhet hinna
+lära sig justera och reparera de för Hesselmanmotorn speciella detaljerna.
+ Detta kommer att fördröja möjligheten till en god service,
+vilken är bland de viktigaste momenten för den moderna automo-
+bilen. Detta kommer i synnerhet att göra sig gällande beträffande
+trafiken på landsbygden, under det att för stadstrafik detta problem
+kommer att ställa sig något gynnsammare.
+Fordringarna på automobilmotorerna ha under de senaste åren
+kraftigt stegrats. Detta gäller i synnerhet det vridande momentet,
+vilket skall vara tillfredsställande över ett mycket stort varvtals-
+område för att erhålla tillfredsställande köregenskaper hos automo-
+bilen. Man vill vara i stånd att köra motorn vid ett par hundra varv,
+med full belastning, samtidigt som man för att kunna erhålla stor
+maximihastighet på samma växel fordrar att dess effektkurva ej skall
+börja sjunka förrän vid så högt varvtal som möjligt. På personauto-
+mobiler har man sedan många år haft maximivarvtal över 3,000 upp
+till 4,000 varv/min. och mera, och utvecklingen för lastautomobi-
+lerna synes, åtminstone i Amerika, gå i samma riktning och till
+samma gränser. Dessutom fordrar man för att få goda manöveregenskaper
+ hos fordonet, att motorn mycket snabbt skall kunna acceleras,
+men även att dess varvtal vid behov skall retarderas lika hastigt.
+De hittills konstruerade dieselmotorerna för bildrift ha ej kunnat
+uppfylla dessa fordringar, vare sig beträffande maximi- eller mini-
+mivarvtal eller flexibilitet, vilket direkt följer av de konstruktioner
+och förbränningsförlopp, som hittills kommit till användning vid
+dem. Hesselmanmotorn har på grund av sin utformning såväl i det ena
+som i det andra avseendet större möjligheter att motsvara fordringarna.
+ Dess maximala varvtal torde nu ligga vid c:a 2,500 v./min., mot
+ungefär 2,000 för dieselmotorerna. Minimigränsen beror ju även på
+cylinderantalet, men den ligger dock över vad som kan erhållas av
+en motsvarande förgasarmotor. För en fyrcylindrig motor torde det
+minsta varvtalet med tillfredsställande gång vara omkring 400 v./min.
+Dessa siffror äro ju i och för sig mycket tillfredsställande, och fylla
+väl de fordringar, som enligt europeisk praxis ställas på en motor,
+avsedd för lastautomobiler, och liknande fordon, åtminstone beträffande
+ det maximala varvtalet. En del amerikanska lastvagnsmtorer
+ställa sig dock fördelaktigare i berörda hänseenden, och detta kommer
+ i praktiken att ge sig tillkänna genom ökad förmåga att följa
+den allt snabbare trafiken med dess ökade fordringar på en samtidigt
+
+
+
+§°d acceleration och hög maximihastighet jämte låg minimihastighet,
+på samma växel. Även ha de hittills byggda Hesselmanmotorerna
+Vlsat sig vara tröga i jämförelse med andra bilmotorer, d. v. s. acce-
+^ration och retardation av varvtalet försiggå relativt långsamt, ett
+Erhållande som är ägnat att göra köregenskaperna mindre goda i
+Sadan trafik, varest många manövrar erfordras.
+Att märka är, att de motorer, som hittills provats, äro för Hessel-
+^andrift ändrade bensinmotorer, vilkas ursprungliga egenskaper
+kunna tänkas hava menligt inverkat på resultatet. I vad mån de uppfällda
+ fordringarna, t. ex. beträffande varvtalet, endast äro att be-
+fakta som modesaker, är svårt att avgöra, liksom det även undantar
+ sig mitt bedömande, huruvida en Hesselmanmotor, vilken från
+kprjan konstruerats med särskild tanke på dessa förhållanden, kan få
+Sadana egenskaper, att den i alla hänseenden blir jämnställd med en
+förgasarmotor. Möjligt är ju även att man genom användandet av
+andra element än de nu vanliga mellan motor och vägbana, t. ex. en
+kontinuerlig växellåda, kan erhålla fullt tillfredsställande köregen-
+skaper med en relativt långsamtgående och trög motor.
+. På många områden har emellertid Hesselmans motor stora fördelar
+1 förhållande till de nu använda konstruktionerna, på grund av att
+^eri kombinerar förgasarmotorns och dieselmotorns goda egenskaper,
+^tan att hava någonderas nackdelar. Detta gäller i synnerhet, där det
+°rdras en enkel, lättstartad och lättskött motor med låg vikt och låg
+ranslekostnad, och där belastnings- och varvtalsvariationerna äro
+relativt små.
+Vid automobildrift uppställer sig helt naturligt ett problemkomplex,
+ som är lika svårutrett som svårlöst. Man må därför ej förvånas
+^Vcr, om det även för en så elegant lösning av ett svårt problem, som
+en Hesselmanska motorn utgör, tar relativt lång tid att anpassa sig
+(°r det, som är avgörande för alla konstruktioners öde, nämligen de
+
+
+fördri
+
+
+ingar, som uppställas av dem, vilka skola taga den i bruk.
+
+
+
+VINT ERVIKENS‘&PRANGAMNESFABRIKER
+
+
+M M
+
+
+4 •
+
+
+« \ *
+
+
+TILL-ERINRAN-OM-ALFRED-NOBELSUPP'
+finnargärning-och-till-hugfästan*
+
+
+TARE*SOM‘UNDER-TROGEN*PLIKTUPP
+jrt m . ijl — ^ . J1 _ ^ ♦ ♦
+
+
+nitroglycerinaktiebolaget-år-
+
+
+:
+
+
+inestavla vid Vintervik
+
+
+en, Stockholm, avtäckt den 27. sept. 1930.
+
+
+Oljemålning av Kilian Zoll, 1840-talet, visande interiör
+från Kosta glasbruk, Småland. Originalet tillhör Mandcl-
+grenska samlingen, Lunds Universitet.
+
+
+C 4
+
+
+.9. Rönnow
+
+
+EN GLASBRUKSMÅLNING
+AV KILIAN ZOLL
+
+
+Äldre kopparstick, litografier, målningar och andra bilder
+ med motiv från industriella verk äga värde såväl ur
+konsthistorisk synpunkt som i tekniskt-historiskt hänseende.
+ Denna sak beröres i Fil. Dr Sixten Rönnows
+bidrag till årsboken. Museet mottager tacksarht för sitt
+arkiv alla uppgifter om likartade bilder.
+
+
+Den svenska, numera världsberömda glastillverkningen har en
+ärorik, mångskiftande historia från medeltiden tills nu bakom sig
+— men denna historia är tyvärr ännu oskriven, även om strödda bidrag
+ då och då publicerats i tryck av kulturforskarna. Ej heller har
+man för glasindustriens vidkommande gjort någon bildinventering
+av det slag, som på senare år med goda resultat utförts beträffande
+andra svenska industrier. Nu är ju förhållandet det, att äldre bilder
+och ritningar från svenska glasbruk äro sällsynta och fåtaliga,1)
+särskilt i jämförelse med den rika bildskörden från t. ex. järnbruken.
+Tryckta glasbruksbilder av historiskt värde kan man hitta bland litografierna
+ och träsnitten från 1800-talet. Och i Tekniska Museets omfattande
+ ritarkiv förvaras en samling glasbruksritningar i original;
+bland annat påträffas där några projekt till ugnar vid Johannis-
+holms glasbruk i Vänjans s:n, Dalarne, utförda i 1800-talets början
+av den mångsidigt begåvade kaptenmekanikus Forsgren1 2).
+Men om man frågar sig: ha några oljemålningar av kända konstnärer
+ med motiv från våra svenska glasbruk bevarats från äldre
+tider? — så blir svaret: sådana målningar äro mycket sällsynta och
+strax räknade på handens fingrar. De viktigaste torde väl Pehr Hille-
+ströms interiörer från smälthyttan i Kungsholms glasbruk på 1780-
+talet vara (se härom i S. Rönnow, Pehr Hilleström och hans bruks-
+och bcrgverksmålningar, Sthlm 1929, pl. 38—39, kap. VII och katalog
+ n:r 90—92). I samma arbete har också omnämnts existensen av
+en handskriven och handritad »glasbok» av Gust. Joh. Jung från
+omkring 1680 (i Uppsala Universitets biblioteks handskriftssamling,
+n:r D 1616) viktig för kännedomen om 1600-talets svenska glastillverkning.
+
+Under ett besök vid Lunds universitet sommaren 1928 fick jag
+tillfälle, tack vare vänligt tillmötesgående från prof. Ewert Wran-
+gels sida, att gå igenom den där förvarade s. k. Mandelgrenska samlingen.
+ Den på sin tid berömde tecknaren och litografen Nils Månsson
+
+
+1) En bidragande orsak till detta torde vara den noggranna vård om fabrikationshem-
+ligheterna, som fordom förekom — och som ännu i våra dagar fortlever här och var
+inom industrierna.
+
+
+
+^landelgren (1813—1899), känd som stiftare av Slöjdskolan i Stock-
+h°lm (nuvarande Tekniska skolan), Konstnärsgillet och Svenska
+fornminnesföreningen — för övrigt en man, som kommit att stå litet
+orättvist för mycket i skuggan av den för ungefär samma ändamål
+arbetande Artur Hazelius — denne Mandelgren samlade under sina
+Svenska resor ihop något, som han kallade »Atlas till Sveriges od-
+bngshistoria», och han donerade denna bildsamling till Lunds universitet
+ 1881. Utan att överdriva kan man säga, att den Mandelgren-
+ska bildatlasen förblivit mycket litet känd och använd av vårt lands
+forskare. Vid besöket 1928 föreföll också stora delar av samlingen
+ha slumrat orörda i sina fack i decennier. Bland bilderna — tusen-
+£als gravyrer, teckningar, akvareller — funnos många bruksvyer av
+k^rgshistoriskt intresse, som vi fingo lov att fotografera för Jernkon-
+torets räkning. Till vår förvåning fanns där också en oljemålning, en
+slät duk utan ram. Den hade själva färgsidan alldeles överklistrad av
+§ammalt papper. Efter papperets omsorgsfulla borttagande hade vi
+en förut obeaktad originalmålning av den kände 1800-talsmålaren
+^ch »diisseldorfaren» Kilian Zoll framför oss. Att det måste vara en
+■^oll framgick, utom av målningsstilen, även av den noggranna upp-
+^ften i en 1889 som manuskript tryckt förteckning över Mandelgrens
+* Atlas till Sveriges odlingshistoria», där målningen återfinnes som
+*r I^o8 under pl. 179 — Kosta glasbruk av Kilian Zoll.3) Dukens
+storlek är 42X50 cm. Någon signatur förekommer icke, men någon
+*Xkan om att det här är en äkta Zoll torde icke behöva förefinnas,
+a uppgiften härom kommer från Mandelgren själv, som säkerligen
+ande Zoll personligen.
+frosta glasbruk hade under 1840-talet (den tid, då målningen på
+an angivna grunder bör ha tillkommit), två smältugnar i drift, den
+ena för fönsterglas, den andra för småglas. Det är från den senare,
+thyttan för framställning av småglas — eller »hålglas», som en
+P 1 llla term lyder — som konstnären tagit sitt motiv. I likhet med
+C r f^iHeström gick Zoll direkt till glasbrukets hjärtpunkt för att
+atergiva glasblåsningen och glasformningen. En blick på bilden
+fo * l0^ uPplyser oss om, under vilka enkla och hantverksmässiga
+då på den tiden arbetade. En jämförelse mellan
+• 1111 ar intressant att göra och visar vad ett sekels utveckling
+-X11 enna industri förmått åstadkomma.
+
+
+N. M:
+
+
+Ml a 1 .Ml Sveriges odlingshistoria. Tryckt som
+- *"• m:son Mandelgren, Katalog till Atlas till S S
+manuskript, Sthlm 1889.
+8**
+
+
+N
+
+
+I det lilla hyttrummet ser man i bakgrunden ugnarna. Det är tydligen
+ en s. k. långugn av vid 1800-talets början redan gammal och
+välkänd typ; den består av en lägre och längre del i mitten och har
+till höger och vänster tvenne högre, kupoltäckta ugnar av den gamla
+berömda venetianska typen.4) Den här till vänster, från åskådaren
+räknat, synliga kupolugnen har 3 våningar; från en halvmånformig
+öppning i den övre våningen (vanligen använd till glasens kylning)
+ser man en eldslåga slå ut.
+Ungefär på scenens mitt sitter i stark belysning framför en ugnsöppning
+ en medelålders glasmakare på en bänk och formar sitt glas
+med en knipsax. Han tycks vara den ende till mogen ålder komne
+arbetaren i hyttan — alla de övriga äro pojkar, och vi räkna att vi
+se tillsammans 7 stycken småländska hyttpojkar i olika sysselsättningar.
+ Den mest betydande personen bland alla i rummet är dock en
+besökande fin herre. Det är en stadig, välklädd karl i sin bästa ålder,
+med örnnäsa under skärmmössan och i långrock. Han står där i profil
+och röker på en långpipa, och bakom sig har han en pojke i sällskap.
+Vem kan då denne herre vara, som här synes avlägga det traditionella
+»herrskapsbesöket i hyttan»? Att det är ett porträtt, är tydligt, och
+troligast är, att vi här se den person, som beställde och köpte målningen
+ av Zoll. Närmast till hands ligger antagandet, att det är bruksförvaltaren,
+ som här gör en visit i hyttan för att kontrollera arbetets
+gång — under 1840-talet var en broder till den store J. J. Berzelius
+bruksförvaltare vid Kosta5) — eller också kan det vara en av ägarna.
+Glasbruket hade nämligen vid denna tid flera ägare, bl. a. en Anger-
+stein, som man kunde gissa på. Bland brukets fem samägare på 1840-
+talet, som Per Wieselgren i sin kända Smålandsbeskrivning namngiver
+ 6), finna vi f. ö. också en dam, en mamsell Borg, dotter till Per
+Aron Borg. Nå, vem mannen i skärmmössan verkligen är, får kommande
+ porträttjämförelser visa.
+Den tekniska utrustningen för glastillverkningen, som vi här pre-
+
+
+4) I M. Eidem, Berättelser ur den äldre glasindustriens historia, Göteborg 1912, finnas
+reproducerade några av G. Agricola meddelade venetianska kupolugnar från ijoo-talet,
+vilkas typ man återfinner på både Hilleströms och Zolls målningar.
+6) Meddelat i G. W:son Cronquist, Data ur Kosta glasbruks historia, i Teknisk Tidskrift
+ 1930, avd. Kemi, sid. 17.
+c) P. Wieselgren, Ny Smålands beskrifning, II, Växiö 1846. Kosta glasbruk hade enligt
+ honom 1843 en tillverkning av värdet 79,000 rdr riksgälds. Tio år senare, eller
+1853, hade tillverkningsvärdet stigit till 151,600 rdr rmt, och arbetarnas antal var då
+123 st. Det var skattelagt för 4 deglar.
+
+
+senteras för, är mycket anspråkslös och ålderdomligt funtad. Allt
+talar om ett gammalt traditionsbundet hantverk, och arbetarna få
+halla sig till en beprövad och säker kraftkälla, de egna händerna. Se
+Pa hyttepojkarna, som till vänster äro upptagna av sina sysslor! Där
+star en pojke i mössa, han formar sitt glas genom kringvridning i en
+vattenkyld träform på marken. En annan pojke kommer bärande med
+färdigblåst flaska på spetsen av pipan. Och längre in ha vi så
+tva pojkar till, i skjortor och toppluva, och de blåsa av hjärtans lust
+1 sina upplyftade pipor. Ytterligare en hyttpojke, den femte här,
+Sltter stilla invid ugnen.
+Slutligen påträffa vi på höger sida om ugnen en gosse i illa trasig
+skjorta och bärande på ett bastant vedträ, som han bär genom ett
+Valv in mot ugnens eldstad. Ugnseldningen skedde uteslutande med
+Ved, och det var troligen torkad granved, enär sådan var mest använd
+Vld glasbruken. På Hilleströms motsvarande interiörer från Stockholms
+ glasbruk ombestyres vedeldningen av schalettprydda kvinnor.
+Beträffande ugnen, så får man genom Zolls tavla icke någon vidare
+Harhet om dess utseende eller konstruktion. Några kontreforter, eller
+stödrnurar på utsidan, vilka voro vanliga på de äldre glasugnarna,
+Saknas här. Huruvida man hade infört roster i ugnarna vid denna
+tlch kan man ju icke se på bilden, som blott visar utsidan. En intres-
+Sant detalj av glashyttans inredning, men en smula perspektiviskt
+°klart målad, är vid ugnens vänstra del en avbalkning av några
+plankväggar i brösthöjd.
+Ett motiv som detta erbjuder många svårigheter för en konstnär
+lösa, exempelvis ljusfördelningen och figurgrupperingen. Man kan
+nte pastå, att den unge Zoll här har gett oss någon vidare konstnär-
+I^t högtstående lösning av uppgiften — det finns brister både i teck-
+och färgbehandling. Man finner lätt, att detta måste vara ett
+Yjgdomsverk av mästaren — under sin mogna period hade Zoll en
+0 rare pensel och en annan, mer brunmustig kolorit. Målningen
+rnaste ha tillkommit före hans utrikesresa 1852, det är säkert. Nu vet
+an av hevarade teckningar,7) att han besökte Kosta glasbruk år
+ha^2> Strax ^re resan till Dusseldorf. Det skulle då ligga nära till
+ands, att datera denna hans interiörmålning till samma år. Men det
+(ägare ka'1115 a‘ 1 en kännedomen om Zolls konst viktig skissbok från 1852
+glashvt at)t^n Ivar Wulfcrona, Visby) en vy över Kosta glasbruk — ur den stora
+bild a\ta^- °°^mar en tät, ljus rök. Det är i samma skissbok, som Zolls värdefulla
+sjcmalmsupptagning vintertid i:
+
+
+ingar.
+
+
+111
+
+
+kan man inte gärna göra, av stilistiska skäl. Zoll hade 1852 nått en
+aktningsvärd konstnärlig mognad: det framgår t. ex. av hans 1851
+utförda »Lektionen» (Stockholms högskola) och av hans nyssnämnda
+teckningar från 1852. Hytteinteriören däremot visar i utförandet ett
+mera odeciderat grepp, en mera opersonlig och amatöraktig prägel —
+fastän den har drag, som äro specifikt Zollska, särskilt framställandet
+av hyttepojkarna. Det ungdomligt osäkra framkommer dock i perspektivteckningen
+ och i valörbehandlingen. Målningen bör vara från
+1840-talet, ja, helst från dess början. Zoll hade gått igenom Konstakademien
+ i Stockholm 1835—39 och därefter begivit sig ut på
+vandringar i södra och mellersta Sverige. Ehuru forskningen ännu
+icke kartlagt hans leverne, öden och äventyr, vet man, att han i början
+av 1840-talet befann sig i Småland,8) och det är till den perioden av
+hans liv, jag vill datera den här återgivna Kostamålningen.
+Kilian Zoll är en av vårt lands allra mest sympatiska konstnärs-
+gestalter från 1800-talet. Han var född i Skåne 1818 och dog
+redan 1860.
+
+
+
+12
+
+
+
+MEDDELANDEN OCH FRÅGOR
+
+
+Efterföljande korta meddelanden och notiser ha i viss
+mån givits formen av frågor. Det är Tekniska Museets
+éi
+förhoppning, att intresserade läsare, som ha något att
+meddela i dessa eller andra likartade frågor, vilja sätta
+sig i förbindelse med museet och därmed aktivt medverka
+vid museets arbeten.
+
+
+Spisstolpen från Kullands I Gotlands Fornsal i Visby förvaras en spisstolpe av järn, vilken ur flera
+
+
+
+gård på Gotland.
+
+
+synpunkter är så märklig att den här må vara värd en presentation.
+En gång i tiden har den gjort tjänst vid någon av de öppna spisarna på Kullands
+ gård, belägen i Gerums s:n, på södra delen av Gotland. Sitt rykte som
+vår märkligaste spisstolpe har den främst därför, att den är försedd med en
+gutnisk runinskrift, vilken är av följande lydelse:
+Botmudr : kullanz : han : lit : gerra : hita : mur : verk : ok : sialvr : gerde /
+trri : virk : stuvu : ok : surnar : hus : ok : ta : uar : h : sunudahr : ok : k1
+: brim : stavr : i : tretando / rado : ok : lyfthadis : a : santa : simiiute : afton /
+markit : hit : hustrun.
+Eller i översättning:
+»Botmund Kullands lät göra denna spiselmur och själv gjorde han snickeriarbetet
+ i stugan och sommarhuset. Och då var h söndagsbokstav och k gyllen-
+tal i trettonde raden. Och (arbetet) lyktades dagen före de heliga Simons och
+Judas dag. Hans hustru hette Margareta» 1).
+Sällan har ett medeltida hantverksarbete fått en omsorgsfullare datering.
+Arbetet slutfördes den 27 oktober (den hel. Simons och Judas dag är nämligen
+ den 28 okt.) år 1487. Det sista årtalet har man kunnat bestämma tack
+vare det förhållandet, att skriften angiver både årets primtal och söndagsbokstav.2)
+2)
+Stolpen är 1,10 m. lång samt upptill 2,5 cm. och nedtill 2,8 cm. tjock. Till
+3/4 av längden består den av ett åttkantigt, hamrat och massivt stycke, där
+varannan av de åtta sidorna äro något bredare — detta är sannolikt den
+ursprungliga spisstolpen. Den ovan anförda inskriften står just på dessa bredare
+ sidor (utom ett ord, som man glömt och skrivit över på en av de smalare
+sidorna). Den översta fjärdedelen består av ett senare ditsvetsat stycke av en
+bösspipa, det klumpiga kornet sitter ännu kvar nära kanten. Troligen har denna
+skarvning av stolpen ägt rum i samband med någon ombyggnad och förstoring
+av spisen. F. ö. är det inte många märkliga ting att förtälja om Kullandsstol-
+pens yttre habitus. De vanliga tvärlinjerna äro 2,5 cm. och 2,7 cm. i resp. övre
+och nedre ändan. Ovanför inskriften sitter en krok på vilken grytkrokarna
+hängt och längst ned, under skriften har grytvinden varit fästad mellan två
+upphöjda ränder.
+Till stolpens ryktbarhet har emellertid i hög grad bidragit dess fantastiska
+öden, sedan den en gång slutat sin tjänst i Botmunds gård.3) Den som har
+äran av dess upptäckt är den kände antikvitetsintendenten C. G. G. Hilfeling,
+som på uppdrag av Per Tham till Dagsnäs, bereste ön 1797—1801 och därvid
+samlade fornsaker och gjorde uppteckningar om bl. a. kyrkor och fornminnen 4).
+Han besökte därvid Kullands och lyckades där komma över den gamla spis-
+
+
+*
+114
+
+
+
+
+
+stolpen, som enligt vad C. J. Bergman uppger, i flera hundra år stått nästan
+obemärkt i köket till en bondgård. Genom Hilfelings förmedling kom den nu
+till Thams samlingar, där den dock blev en kortvarig gäst. När Tham dog 1820,
+såldes hans ansenliga samlingar på auktion; bland de många sakerna fanns
+också spisstolpen men efter auktionen var den försvunnen, och ingen visste,
+vem som ropat in den. Man fruktade emellertid, att den lämnat landet, ty en
+stor del av antikviteterna hade inropats av en utlänning, Chaumette des Fossés,
+en f. d. fransk generalkonsul, korresponderande ledamot av Kungl. Vitterhets
+Historie och Antikvitets Akademien. Lyckligtvis hade den blivit avritad innan
+den lämnade Dagsnäs, låt vara något ofullständigt av Professor N. H. Sjö-
+borg c,)) och den framstående gotländska språkmannen hade efterlyst den i sina
+nyss citerade Gutniska urkunder, som utkom 1859.
+Just det året gick en svensk artist, N. M. Mandelgren, omkring och sökte i
+Paris antikbodar på jakt efter gamla vapen och smycken. I en av bodarna fick
+han se en sak, som tilldrog sig hans uppmärksamhet: en åttkantig järnstolpe med
+en runinskrift. Han skrev av runorna och sände dem till Carl Säve med en
+förfrågan, om pjäsen voro värd begärda 40 francs.
+Säve läste runorna han fått från Paris, och såg genast vad han hade för
+• »
+°gonen — Botmundr : Kullans o. s. v. — det var den försvunna spiselstolpen
+°ni vilken han samma år i sin bok frågat: »Men varest finnes denna spisstolpe
+ftu». Svaret hade kommit snabbt, stolpen fanns till salu i Paris!
+Naturligtvis gav han order om omedelbart inköp. En av hans egna lärjungar,
+Friherre R. Cederström, förde hem den och den återbördades till Gotland genom
+att Säve skänkte den till Elementarläroverkets samlingar. En del av dessa sam-
+bogar ha övertagits av Gotlands Fornsal och där har nu äntligen och till sist
+botmundr Kullans spisstolpe fått ett tryggat och stadigvarande viste.
+Genom vänligt tillmötesgående av Fornsalens intendent, Fru Ella Hellgren,
+bar stolpen ifråga ställts till mitt förfogande i Visby för ett närmare studium.
+Varvid urborrades i dess nedre del ett mindre hål för att få material till en
+kemisk analys av järnet (på initiativ av Doktor Carl Sahlin). Analysresulta-
+tet framgår av nedanstående Professor J. Petréns intyg:
+lntyg n:o 29247.
+Järn.
+borrat prof., märkt »Borrspån från spisel-
+st°lpen fr. Kullans gård, Gotland, taget 27/9
+i929» gm. John Nihlén», inlämnat den 1 okt.
+^929 av Jernkontoret gm. disponent Carl
+bahlin.
+
+
+
+Analys:
+Kol
+
+
+— 0,12 %
+
+
+Kisel
+
+
+1
+O
+O
+
+
+Mangan
+
+
+— spår (0,02
+
+
+Fosfor
+
+
+— 0,062 %
+
+
+Svavel
+
+
+— 0,009 %
+
+
+Slagg
+
+
+— 0,17 %
+
+
+Vanadin
+
+
+— 0
+
+
+Titan
+
+
+— 0
+
+
+Anal-
+
+
+alysen ger för närvarande inte anledning till några närmare slutsatser.
+en ar emellertid av värde i den mån jämförelsematerialet beträffande det
+
+
+
+Nordens äldsta byggnadsritning.
+
+
+
+Presskopiering av brev.
+
+
+
+äldre järnets sammansättning växer, särskilt med hänsyn till den exakta dateringen.
+ Den låga kolhalten visar, som var att vänta, ett mjukt, smidbart järn,
+och den relativt höga fosforhalten tyder närmast på att det. är ett järn tillverkat
+av sjö- eller myrmalm °).
+John Nihlén.
+
+
+Vid besök i museet i Ystad under sommaren 1930, var jag i tillfälle se en
+medeltida tegelsten, å vilken var inristad ritningen till ett fönster. Teglet är
+uttaget ur Gråbrödraklostfets byggnader i Ystad, vilket kloster började byggas
+år 1266. Den danske byggnadshistorikern Vilhelm Lorenzen har, enligt vad
+vid besöket meddelades, om sagda bild uttalat att den sannolikt är den äldsta
+kända byggnadsritningen från Danmarks medeltid. Det är väl troligt att vad
+som sålunda säges beträffande Danmark kan utsträckas att gälla hela Norden.
+C. 5.
+
+
+Presskopiering av brev torde väl vara att betrakta som första början till
+den mekanisering av kontorsarbetet, som i våra dagar nått så hög utveckling.
+Under sin resa i England åren 1797—99 hade Bergsrådet Gustaf Broling uppdrag
+ av Excellensen Greve Erik Ruuth, att studera den av James Watt uppfunna
+ metoden att presskopiera brev. Broling blev i tillfälle fullgöra uppdraget
+vid besök i Leeds år 1798. Han säger om Watts kopieringsmaskin: »Man kan
+inte finna en trognare, mera tystlåten eller snabbare och mindre kostsam co-
+pist. Ett brev på fyra sidor kan inom en minut kopieras, när allt är i behörig
+ordning». — Greve Ruuth, som sedan år 1797 var delägare i och högste ledare
+ av Höganäs stenkolsverk, önskade genast tillämpa den WatPska metoden,
+ men stötte på hindret att kopiepapper icke tillverkades i Sverige. Han
+lät då i Stockholm förfärdiga lämpliga formar, vilka sedan nedsändes till ett
+handpapperdsbruk i Skåne (Klippan?), där man lyckades framställa ett användbart
+ tunt papper, varav 10 ris levererades till Greve Ruuth. Troligt är
+väl att den WatPska presskopieringen därmed för första gången kom till användning
+ i Sverige. I sin år 1812 utgivna andra del av »Resa i England», varur
+ovanstående hämtats, klagar Broling »att denna inrättning så litet hos oss begagnas».
+ Ännu länge fortsatte man vid bruk och fabriker, liksom på de större
+handelskontoren, att låta unga skrivare och kontorselever avskriva all utgående
+ post. I Laxå bruksarkiv, för att taga ett exempel, som jag noga känner
+till, förvaras sålunda en mängd handskrivna kopieböcker och där infördes
+presskopiering först på 1860-talet.
+C. S. *)
+
+
+
+116
+
+
+
+delande om av överingeniör Gustaf Jansson år 1878 förfärdigat blåkopiepapper
+och därav framställd blåkopia, vilket ägde rum å Ingeniör Gustaf Uhrs Kon-
+struktionsbyrå i Lindesberg. Det ansågs troligt att denna blåkopia var den första
+i Sverige. Till ytterligare belysning av denna fråga har överingeniör K. J.
+Sunström meddelat följande. Preparerat papper för blåkopiering av ritningar
+hemfördes från Paris till Åkers styckebruk något av åren 1876 eller 1877 av
+Brukspatron A. von Stockenström. Papperet visade sig emellertid vid användning
+ skadat och obrukbart. Under sensommaren 1878 erhöll Ingeniör Sunström
+av Fil. Dr Gustaf de Laval, som då vistades vid Hagfors bruk i Värmland för
+utförande av experiment vid Bessemerprocessen, en liten rulle blåkopiepapper
+av franskt ursprung, inköpt i Fritzes bokhandel i Stockholm. Själv uttalade
+de Laval misstro till detta sätt att framställa ritningar, men överlämnade
+rullen till Ingeniör Sunström, som efter att hava bortkastat större delen av pap-
+Peret såsom ljusskadat av det innersta i rullen gjorde några blåkopior, av vilka
+en blivit tillvaratagen och för några år sedan skänkts till Tekniska Museet. D:r
+de Laval bibehöll i åtskilliga år sin motvilja mot blåkopiering av ritningar, och
+det var troligen först ett stycke in på 1880-talet, som han i detta stycke fann
+Slg böra följa med i utvecklingen.
+Ifall någon ännu äldre här i Sverige gjord blåkopia än den ovan omnämnda
+finnes bevarad, blir man å Tekniska Museet tacksam att därom erhålla upp-
+lysning- c. s. I
+
+
+kopian.
+
+
+I den nyligen utkomna »Boken om Skåne», lämnar författaren, Fil. Dr Hans
+^åhlin, följande meddelande: »Ett nu helt utplånat minne av Malmö stads
+rikedom och företagaranda var den ända till 1800-talets mitt fungerande vat-
+tenledning, som anlades på 1580-talet, tvåhundra år innan någon av det då-
+varande Sveriges städer fick samma bekvämlighet. Från en bäck nära den plats,
+där Pil dammarna nu ligga, fördes vattnet i underjordiska rör till en samlings-
+assang på Stortorget, den så kallade vattenkonsten, och vidare genom andra
+ror ut i kringliggande gårdar». I Nordisk Familjebok, 17. bandet, 1902, står
+jU* läsa: »År 1867 igenfyllde man den gamla öster om den forna högvakten
+agna, 1582 i sammanhang med stadens äldsta vattenledning från Pildammen
+an agda vattenreservoaren (»vattenkonsten»)». Att Malmö stad skulle ha ägt
+Cn Vattcnledning tvåhundra år före någon annan här i landet, torde dock icke
+Vara riktigt.
+bäAr J^49 anlades nämligen en vattenledning i Uppsala, som sedermera för-
+s^des av Olof Rudbcck. Denna vattenledning byggdes egentligen för Uppsala
+åkning, men Rudbeck uppgjorde en plan till ett vattenledningssystem för
+lä a ?tac^en‘ Ledningarna voro liksom de i Malmö av trä, och representerade en
+och I ^ n^ra ^ kil°meter* Staden underhöll emellertid ej denna vattenledning
+u beck ensam kunde icke bekosta underhållskostnaderna, utan vattenled-
+nmgen förföll redan på 1670-talet.
+
+
+Den första vattenledningen?
+
+
+
+117
+
+
+Vid grävningar i Uppsala år 1926 återfann man delar av Rudbecks vattenledning,
+ av vilka Tekniska Museet erhöll till sina samlingar urborrade trästockar
+ från denna vattenledning.
+Tekniska Museet är intresserat av att få reda på, om flera svenska städer haft
+vattenledningar under ovannämnda århundraden och om några detaljer av
+dessa blivit bevarade. ~ .
+T. A:son.
+
+
+Sveriges första järnbro?
+
+
+I Kungl. Väg- och Vattenbyggnadskårens minnesskrift 1851—1901 finnes
+införd en uppsats om brobyggnader. I denna anföres bl. a. »Vid början av 1840-
+talet förekommo här i landet, så vitt känt är, ännu inga broar av järn, endast
+trä- eller stenbroar, med få undantag av mycket enkel och konstlös beskaffenhet.»
+ Här uppgavs att de äldsta gjut järnsbroarna voro »Järnbron» i Uppsala
+och den äldre Djurgårdsbron i Stockholm, utförda under åren 1846—48. Emellertid
+ fanns åtminstone ett flertal järnbroar tidigare. (Fil. Dr Carl Sahlin,
+Djursholm, har välvilligt meddelat, att i Gruvkartekontorets samlingar
+finnes en »Dessein till en tackjärnsbro i Gefle stad 1813 av Gustaf av Uhr, 40
+alnar lång, 16 alnar bred.») Denna bro blev förmodligen då aldrig utförd.
+År 1815 byggde Samuel Owen en järnbro mellan den dåvarande s. k. Manilla
+Holme och Djurgården. En närmare, tyvärr ganska knapphändig beskrivning
+på bron kan måhända vara av intresse, enär denna bro efter allt att döma är
+den första i landet tillverkade gjutjärnsbron. Beskrivningen är hämtad ur
+Landtbrukstidningen för år 1815 (s. 334) och återgives här in extenso: »Bron
+är 5V2 aln bred. Dess övra segment är 13 alnar. Den består av 3 paralelt gående
+bågar, som hålla i tjocklek vid pass i1/4 tum, genombrutna, i likhet med ett
+fint och sirligt Galler-werk, och täckta med grova plankor, formerande själva
+bro-ytan. Wid första åskådandet, skulle man anse wardera bågen för helgjuten,
+emedan man derpå ej blir varse någon skarv eller fogning; Då man nogare
+undersöker beskaffenheten, finnes den bestå av 3 delar starkt med skruvar förenade,
+ samt än ytterligare med bly och sten-kitt, så tillsägande amalgamerade.
+De 3 paralela bågarne sammanhållas sinsemellan, medelst tums tjocka påliteliga
+jern-tenar, och vila uti sina gjutna jern-ramar, mot sten-pelarne, så att man
+finner ganska sannolikt, det denna bro icke skall swigta för 20 Sk. pds tyngd,
+vilkens överförande på en gång, hr. Owen säges hava utsatt såsom prov på.
+arbetets duglighet.» Bron lär ha kostat endast 100 R:dlr b:co. Det troliga är att
+detta pris var så lågt, att Owen gjorde en icke ringa förlust, men han hoppades
+få bygga en bro över Norrström i Stockholm och på denna försöka taga igen
+sina förlorade penningar. Denna bro är omnämnd i »Journal för Manufakturer
+och Hushållning», 1833, men torde ej kommit till utförande. Av Manilla Instituts
+ räkenskaper framgår ej priset på bron, då institutets grundläggare, Per Aron
+Borg, var ägare till Manilla Holme eller Tolföresholmen, och troligtvis uppfördes
+ bron för hans privata medel. I Institutets minnesskrift 1812—1912 läses
+bl. a. »Holmen var endast genom ett smalt sund skild från fasta landet och
+förenad med detta genom en av Samuel Owen konstruerad 11 alnar lång vacker
+järnbro». Ej ett ord står det om att Borg lät bygga bron, utan man får den upp-
+
+
+Manilla pa Djurgården i Stockholm. I mitten synes den
+av Owen byggda järnbron. Strecklitograf i pa b) cvpappc)
+fran 1840-talet.
+
+
+
+Berkinge masugn, kopparstick i K. Vetenskapsakademiens
+Handlingar 1756.
+
+
+
+Modell från omkr. 1780 av Berkinge Masugn i den av
+K. Tekniska Högskolan i Tekniska Museet deponerade
+model Isamlingen.
+
+
+fattningen att bron tillkommit före Borgs tid eller tidigare än 1812, vilket dock
+torde vara felaktigt.
+I Stockholms Stads Arkiv befintliga Relationer öfver Fabrikernes Tillstånd,
+finnes en anteckning om den Owenska verkstadens tillverkningsvärde, som för
+år 1815 uppgives till 62,500 Rdl B:co. I specifikationen står bl. a. upptaget:
+1 St Bro af Tackjern — 100 Rdl B:co. (Benäget meddelat av Fil. mag. Sam
+Owen Jansson, Stockholm.)
+I värderingsinstrument för brandförsäkring för Manilla ingiven den 5. maj
+1817 återfinnes: »En välvd bro av Tackjärn förfärdigad av Herr Sam. Owen,
+förer från fasta landet till den egentliga Manilla Holme, samt upptages, inberäknat
+ gråstenskistor och murning till 310 Rdl B:co.» Det förefaller märkligt,
+att man försäkrade en bro gjord av gjutjärn. I nästa värderingsinstrument från
+år 1838 har tillkommit ett tackjärnsstaket, varför försäkringsbeloppet blivit
+höjt till 500 riksdaler. När detta staket sattes upp, har jag ej lyckats utröna.
+Det kan tänkas, att staketet tillkom i samband med Drottning Desiderias landstigning
+ på Manilla Holme år 1823.
+När Manilla Institutet åren 1860—64 uppförde sina nuvarande byggnader,
+företogs i samband härmed åtskilliga utfyllningsarbeten och därmed hade järnbron
+ efter ett nära 50-årigt användande, spelat ut sin roll, varefter Manilla
+Holme fick sitt nuvarande utseende. Om bron då skrotades ned, eller sattes upp
+Pa en annan plats, är mig icke bekant. Av brandförsäkringshandlingarna framgår
+ emellertid, att bron var i gott stånd 1860.
+Det vore för Tekniska Museet mycket värdefullt att få reda på om tidigare
+broar av järn än ovannämnda funnits i vårt land och museet mottager tacksamt
+anteckningar m. m. till sitt arkiv om detta.
+Tore Andersson.
+
+
+Bland den stora samling av 1700- och 1800-talsmodeller, som Kungl. Tek-
+tuska Högskolan år 1925 som deposition överlämnade till Tekniska Museet
+°cl1 som till största delen härstammar från det av Christopher Polhem år 1696
+1 Stockholm grundade »Laboratorium Mechanicum», finnas flera modeller av
+verk och inrättningar inom bergshanteringen. En av dessa är en modell av den
+masugn, som Hovmarskalken John Jennings, född 1729 död 1773, lät uppföra
+^d det under Forsmarks järnbruk i Forsmarks socken, Uppland, hörande
+cikinge år 1755. Modellens mått är: längd 77 cm., bredd 39 cm. och höjd
+48 cm.
+
+
+
+Att denna modell tillhör 1700-talssamlingen framgår av den etikett, som ar
+Påsatt modellen och på vilken läses: »N:o 310. Modell på Masugn. Inventerad
+av framl e. Hofmarchalken Herr John Jennings. Se Kongl. wett: sk: akad:
+T_t *« -
+
+
+Handl.
+
+
+ar 1756. 3 q.»
+
+
+H:o 310 är det inventarienummer, som modellen har i den förteckning över
+modellerna, som dåvarande direktören för Kongl. Modellkammaren i Stock-
+io m Polhems »Laboratorium Mechanicum» hade år 1756 erhållit detta namn
+Jonas Adolf Norberg, år 1801 lät utgiva. Denna förteckning är en fortsättning
+
+
+En masugnsmodell från
+1700-talet.
+
+
+på den av Jonas Norberg, direktör för Kongl. Modellkammaren mellan åren
+1773 och 1783 och Jonas Adolf Norbergs fader, upprättade »Inventarium över
+de Machiner och Modeller, som finnas vid Kongl. Modell-Kammaren i Stockholm,
+ belägen uti gamla Kongshuset på K. Riddarholmen.» Denna inventarieförteckning
+ är tryckt i Stockholm år 1779.
+Modellen, som troligtvis är tillverkad på 1780-talet, är mycket omsorgsfullt
+utförd och har synnerligen väl, i motsats till många andra i denna modellsamling,
+ motstått alla påfrestningar under årens lopp. Hela modellsamlingen har
+nämligen sedan den förvarades på Gamla Kongshuset i Stockholm flyttats till
+den ena platsen efter den andra och dessa flyttningar ha menligt inverkat på
+modellernas beskaffenhet. Tyvärr har masugnsmodellens från början helt säkert
+rätt sköra och ömtåliga takbjälkskonstruktion förstörts och kommit undan.
+Likaså har tunnan i vilken malmen föres upp till masugnkransen kommit bort.
+Det är dock möjligt att en del av dessa delar återfinnas vid den nu pågående
+restaureringen och då kunna placeras på sina respektive platser med ledning
+av beskrivningar och bilder.
+I korthet skall nu nämnas något om de metoder efter vilka ovan nämnda
+restaureringsarbete bedrives. Samtliga modeller fotograferas innan något som
+helst göres åt dem. Dessa fotografier klistras upp på katalogkort där även angives
+modellens nummer och storlek, samt avskrift av eventuella etiketter, som äro
+anbragta på modellen.
+Genom den långa förvaringen på vindar, där modellerna stått alldeles oskyddade,
+ ha alla horisontella ytor blivit belagda med ett tjockt lager av sot och
+smuts. Detta smutslager tvättas försiktigt bort med vatten. Bit för bit fuktas
+med en pensel och därefter torkas omedelbart med trasor så att vattnet ej
+hinner tränga in i träet. Någon risk för att träet skall slå sig finnes således
+icke. På alla järndelar avlägsnas rosten på mekanisk väg varefter delarna in-
+strykas med zaponlack. Blott i enstaka fall kunna järndelarna tagas loss och
+rosten borttagas på kemisk väg.
+Sedan modellerna blivit rengjorda kan själva restaureringsarbetet vidtaga.
+I första hand sättas alla de delar fast, som blott till en del lossnat från sina
+platser. I sådana fall användes vid fastsättandet de medel, man ursprungligen
+haft, såsom lim, träpluggar eller spik. Om en modelldel är avbruten och den
+ena biten är borta, skarvas den kvarvarande biten fast vid en ny tillverkad.
+Skulle emellertid hela delar saknas och man med tillhjäp av bilder och beskrivningar
+ kan sluta sig till hur dessa sett ut, göras helt nya. Dessa göras i ett
+träslag, som till sin färg avviker från de omgivande delarnas, och dessutom
+märkes varje ny del med ett litet kors, så att det ej kan råda någon tvekan om,
+vilket som är gammalt eller nytt. Mången gång är det dock lämpligare att,
+som vid ovannämnda masugnsmodell, vänta med en ersättning av förlorade delar,
+ enär dessa kunna hittas bland de till ett antal av flera tusen uppgående lösa
+delarna. När modellen anses vara färdig fotograferas den åter, och fotografiet
+sättes upp på det förut nämnda katalogkortet. Här antecknas även allt vad
+som åtgjorts modellen, vilka nya delar som tillverkats m. m. Detta omfattande
+restaureringsarbete, som pågått sedan 1927, utföres under föreståndarens för
+
+
+Tekniska Museet ledning av Artisten D. Ljungdahl med biträde av undertecknad.
+
+I de flesta fall ha modellbyggarna tillverkat modellerna så att de kunna
+tagas sönder i flera delar för att därigenom bättre kunna studeras. Så är även
+fallet med ovannämnda masugnsmodell. Genom att taga bort den på ena långväggen
+ befintliga delen kan man se hur masugnspipan är konstruerad.
+På etiketten, som är påsatt modellen, står angivet att den är beskriven i
+K. Vetenskapsakademiens Handlingar för år 1756, 3:dje kvartalet. Denna
+beskrivning är gjord av masugnens konstruktör John Jennings. Beskrivningen
+är även illustrerad med ett kopparstick som visar masugnens byggnad.
+Att, som det står på etiketten, denna typ av masugnar skulle vara uppfunnen
+av John Jennings, är nog ej riktigt med sanningen överensstämmande, men att
+han gjorde en hel del förbättringar på en förut konstruerad masugnstyp är
+otvivelaktigt. Vetenskapsakademien, av vilken han var ledamot, tilldelade
+honom också år 1756 sin guldmedalj för hans arbeten på masugnarnas förbättrande.
+
+Den här nämnda modellen är endast ett exempel ur samlingarna. På ett
+bättre cch klarare sätt än samtidiga ritningar och beskrivningar, kunna mången
+gång dessa modeller ge en inblick i de tekniska anordningarna vid de industriella
+ verken i vårt land under 1700-talet.
+Sten Carlqvist.

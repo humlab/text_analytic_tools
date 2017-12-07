@@ -2,10 +2,11 @@ import os, glob, io, codecs, time
 import collections
 from nltk.tag import StanfordNERTagger
 from nltk.tokenize import StanfordTokenizer
+import re
 
 def extract_entity_phrases(data, classes = [ 'LOCATION', 'PERSON']):
 
-    # Extract entities of selected classes, add index to enable merge to phrases 
+    # Extract entities of selected classes, add index to enable merge to phrases
     entities = [ (i, word, wclass)
         for (i, (word, wclass)) in enumerate(data)
             if wclass in classes ]
@@ -22,7 +23,18 @@ def extract_entity_phrases(data, classes = [ 'LOCATION', 'PERSON']):
 def extract_document_info(filename):
     document_name = os.path.basename(os.path.splitext(filename)[0])
     pope, lang, genre, *tail = document_name.split('_')
-    year = next(x for x in tail if x.isnumeric() and len(x) == 4)
+    try:
+        year = next((x for x in tail if x.isnumeric() and len(x) == 4), '0')
+        if (year == '0'):
+            for item in tail:
+                item_split = re.split(r'[_\-\.]', item)
+                year = next((x[-4:] for x in item_split if x.isnumeric() and (len(x) == 4 or len(x) == 8)), '0')
+                if year != '0':
+                    break
+    except:
+        year = '0'
+        print('Parse YEAR failed: {0}'.format(filename))
+
     return (document_name, pope, lang, genre, year)
 
 def create_ner_tagger(options):
@@ -74,15 +86,15 @@ def main(options):
 if __name__ == "__main__":
 
     options = {
-        "source": "c:\\Temp\\ner_data\\*.txt",
+        "source": "c:\\Temp\\papacy_ner_data\\input\*.txt",
         "ner_path":  "c:\\Usr\\stanford-ner-2016-10-31\\",
         'ner_model': 'english.all.3class.distsim.crf.ser.gz',
-        'output_folder': 'c:\\Temp\\ner_data\\output'
+        'output_folder': 'c:\\Temp\\papacy_ner_data\\output'
     }
 
     os.environ['STANFORD_MODELS'] = os.path.join(options["ner_path"], "classifiers")
-    os.environ['JAVAHOME'] = 'C:\\Program Files\\Java\\jre1.8.0_121'
+    os.environ['JAVAHOME'] = 'C:\\Program Files\\Java\\jre1.8.0_141'
     os.environ['CLASSPATH'] = os.path.join(options["ner_path"], "stanford-ner.jar") + \
-        ";"  + os.path.join("C:\\Usr\\stanford-postagger-full-2015-12-09", "stanford-postagger.jar") 
+        ";"  + os.path.join("C:\\Usr\\stanford-postagger-full-2015-12-09", "stanford-postagger.jar")
 
     main(options)
