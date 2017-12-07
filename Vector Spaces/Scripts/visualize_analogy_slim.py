@@ -58,7 +58,8 @@ def plot_df(df,xlabel=None,ylabel=None):
     ax.scatter(df['x'], df['y'],marker='o')
     for i, txt in enumerate(df['word']):
         ax.annotate(txt, xy=(df['x'].iloc[i], df['y'].iloc[i])) #, textcoords = 'offset points', ha = 'left', va = 'top', **TEXT_KW)
-    pyplot.show()
+    # pyplot.show()
+    pyplot.savefig("plot.png")
 
 
 def seed_word_toplist(word_vectors, seed_word, topn=100):
