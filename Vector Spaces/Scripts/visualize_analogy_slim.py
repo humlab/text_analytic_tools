@@ -8,17 +8,7 @@ from scipy import spatial
 
 # %%
 
-def read_excel(filename, sheet):
-    if not os.path.isfile(filename):
-        raise Exception("File {0} does not exist!".format(filename))
-    with pd.ExcelFile(filename) as xls:
-        return pd.read_excel(xls, sheet)
 
-def save_excel(data, filename):
-    with pd.ExcelWriter(filename) as writer:
-        for (df, name) in data:
-            df.to_excel(writer, name)
-        writer.save()
 
 def load_model_vector(filename):
     model = Word2Vec.load(filename)

@@ -58,18 +58,30 @@ class Word2Vectorizer(object):
 
 class ZipFileSentenizer(object):
 
-    def __init__(self, pattern, cleanser=None, extensions = [ 'txt' ]):
+    def __init__(self, pattern, cleanser=None, extensions = [ 'txt' ], genres = None):
 
         self.pattern = pattern
         self.cleanser = cleanser
         self.extensions = extensions
+        self.genres = genres
+        self.language = 'english'
+
+    def is_satisfied_by_extension(self, filename):
+        return any(map(lambda x:  filename.endswith(x), self.extensions))
+
+    def is_satisfied_by_genre(self, filename):
+        return len(self.genres or []) == 0 or any(map(lambda x: x in filename, self.genres))
 
     def __iter__(self):
 
         for zip_path in glob.glob(self.pattern):
             with zipfile.ZipFile(zip_path) as zip_file:
-                filenames = [ name for name in zip_file.namelist() if any(map(lambda x:  name.endswith(x), self.extensions)) ]
-                print(filenames)
+                filenames = [
+                    filename for filename in zip_file.namelist()
+                        if self.is_satisfied_by_extension(filename)
+                            and self.is_satisfied_by_genre(filename)
+                ]
+                # print(filenames)
                 for filename in filenames:
                     with zip_file.open(filename) as text_file:
                         content = text_file.read().decode('utf8')
@@ -77,25 +89,17 @@ class ZipFileSentenizer(object):
                         content = content.replace('-\n','')
                         if content == '': continue
                         # fix hyphenations i.e. hypens at end om libe
-                        for sentence in sent_tokenize(content, language='swedish'):
+                        for sentence in sent_tokenize(content, language=self.language):
                             tokens = word_tokenize(sentence)
                             if not self.cleanser is None:
                                 tokens = self.cleanser.cleanse(tokens)
                             if len(tokens) > 0:
                                 yield tokens
 
-# %% https://github.com/maciejkula/glove-python/issues/42
-#import glove
-#sentences = ZipFileSentenizer('../data/input/daedalus-segmenterad.zip')
-##sentences = [['hej', 'du', 'glade']]
-#corpus = glove.Corpus()
-#corpus.fit(sentences, window=10)
-#g = glove.Glove(no_components=100, learning_rate=0.05)
-#g.fit(corpus.matrix, epochs=30, no_threads=4, verbose=True)
 
 # %%
 def create_filename(options):
-    return 'w2v_model_{}_win_{}_dim_{}_iter_{}_mc_{}{}{}{}'.format(
+    return 'w2v_model_{}_win_{}_dim_{}_iter_{}_mc_{}{}{}{}{}.dat'.format(
             'cbow' if options['sg'] == 0 else 'skip_gram',
             options.get('window', 5),
             options.get('size', 100),
@@ -103,25 +107,74 @@ def create_filename(options):
             options.get('min_count', 0),
             options.get('id',''),
             '_no_stopwords' if options.get('filter_stopwords') else '',
-            '_bigrams' if options.get('bigram_transformer') else '') + '.dat'
+            '_bigrams' if options.get('bigram_transformer') else '',
+            '_'.join(options.get('genres',[])) if options.get('genres', None) is not None else '')
 
 if __name__ == "__main__":
+    '''
+    genres = [
+        'angelus', # klockringning The Angelus is a Catholic devotion commemorating the Incarnation.
+        'audiences',
+        'homilies',  # A homily is a commentary that follows a reading of scripture
+        'speeches',
+        'letters',
+        'apost',
+        'messages',
+        'encyclicals',
+        'prayers',
+        'travels',
+        'motu',
+        'bulls',
+        'cotidie'
+    ]
+    '''
+    defaults = {
+        'skip': False,
+        'output_path': '../data/output',
+        'window': 5,
+        'sg': 1,
+        'size': 100,
+        'min_count': 5,
+        'iter': 20,
+        'workers': 10,
+        'filter_stopwords': False,
+        'bigram_transformer': False,
+        'genres': None
+    }
 
+
+#        { 'id': '_benedict-xvi', 'input_path': '../data/input/benedict-xvi_text.zip', 'size': 50, 'genres': ['speeches'] },
+#        { 'id': '_francesco', 'input_path': '../data/input/francesco_text.zip', 'size': 50, 'genres': ['speeches'] },
+#
+#        { 'id': '_benedict-xvi', 'input_path': '../data/input/benedict-xvi_text.zip' },
+#        { 'id': '_francesco', 'input_path': '../data/input/francesco_text.zip' },
+#
+#        { 'id': '_benedict-xvi', 'input_path': '../data/input/benedict-xvi_text.zip', 'genres': ['speeches'] },
+#        { 'id': '_francesco', 'input_path': '../data/input/francesco_text.zip', 'genres': ['speeches'] }
+
+#        { 'id': '_benedict-xvi', 'input_path': '../data/input/benedict-xvi_text.zip', 'bigram_transformer': False, 'filter_stopwords': False },
+#        { 'id': '_francesco', 'input_path': '../data/input/francesco_text.zip', 'bigram_transformer': False, 'filter_stopwords': False }
 
     options_list = [
-        { 'skip': False, 'id': '_benedict-xvi', 'input_path': '../data/input/benedict-xvi_text.zip', 'output_path': '../data/output', 'window': 5, 'sg': 1, 'size': 100, 'min_count': 5, 'iter': 20, 'workers': 10, 'filter_stopwords': False, 'bigram_transformer': False },
+
+        { 'id': '_benedict-xvi+francesco', 'input_path': '../data/input/benedict-xvi+francesco_text.zip', 'bigram_transformer': False, 'filter_stopwords': False }
+
     ]
 
-    for options in options_list:
+    for opt in options_list:
 
-        if options['skip']: continue
+        options = dict(defaults)
+        options.update(opt)
+
+        if options.get('skip', False) is True:
+            continue
 
         sentences = ZipFileSentenizer(options['input_path'], CorpusCleanser(options))
 
         #for x in sentences: print(x)
 
         if options.get('bigram_transformer', False):
-            bigram_transformer = gensim.models.phrases.Phraser(sentences)
+            bigram_transformer = gensim.models.Phrases(sentences)
             sentences_iterator =  bigram_transformer[sentences]
         else:
             sentences_iterator =  sentences
@@ -130,4 +183,5 @@ if __name__ == "__main__":
 
         output_path = os.path.join(options['output_path'], create_filename(options))
         model.save(output_path)
+
         W2V_TensorFlow().convert_file(output_path, dimension=options['size'])
