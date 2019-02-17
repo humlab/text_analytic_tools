@@ -9,3 +9,8 @@ output.xml
 **/output/
 **/data/
 data/
+.ipynb_checkpoints/
+.vscode/
+.spyproject/
+Archive/
+desktop.ini
