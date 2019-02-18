@@ -14,14 +14,13 @@ from w2v_projector import W2V_TensorFlow
 import zipfile
 import glob
 
-# %%
 class CorpusCleanser(object):
 
     def __init__(self, options, language='english'):
         self.stopwords = set(stopwords.words(language))
         self.options = options
 
-    def cleanse(self, sentence, min_word_size = 2):
+    def cleanse(self, sentence, min_word_size=2):
 
         sentence = [ x.lower() for x in sentence ]
         #sentence = [ x for x in sentence if len(x) >= min_word_size ]
@@ -36,7 +35,6 @@ class CorpusCleanser(object):
             with gzip.open(filename + '.gz', 'wb') as f_out:
                 shutil.copyfileobj(f_in, f_out)
 
-# %%
 
 class Word2Vectorizer(object):
 
@@ -54,7 +52,6 @@ class Word2Vectorizer(object):
                          workers=self.options['workers'])
         return model
 
-# %%
 
 class ZipFileSentenizer(object):
 
@@ -97,7 +94,6 @@ class ZipFileSentenizer(object):
                                 yield tokens
 
 
-# %%
 def create_filename(options):
     return 'w2v_model_{}_win_{}_dim_{}_iter_{}_mc_{}{}{}{}{}.dat'.format(
             'cbow' if options['sg'] == 0 else 'skip_gram',
