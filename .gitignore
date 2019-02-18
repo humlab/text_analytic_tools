@@ -1,6 +1,7 @@
 *.pyc
 *.swp
 *.swo
+.venv/
 __pycache__/
 test/__pycache__/
 papacy_scraper/__pycache__/

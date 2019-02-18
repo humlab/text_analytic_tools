@@ -37,13 +37,13 @@ class JobCrawlSpider(CrawlSpider):
             pope_options.pope,
             pope_options.lang,
             pope_options.categories,
-            pope_options.restrict_to_years
+            pope_options.year
         )
 
         self.output_folder = pope_options.output_folder
         self.start_urls = [ options.start_url ]
         self.allowed_domains = [ options.target_domain ]
-        self.deny_document = r'^(?!.*STRING1|.*STRING2|.*STRING3).*$'
+        #self.deny_document = r'^(?!.*STRING1|.*STRING2|.*STRING3).*$'
 
         self.rules = [
             Rule(LinkExtractor(allow=options.navigation_link_patterns, restrict_css=options.navigation_link_restrict_css, unique=True), follow=True, callback='tree_link_callback'),
