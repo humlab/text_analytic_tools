@@ -1,5 +1,5 @@
 class PopeOptions:
-    pope = 'john-paul-ii'
+    pope = 'francesco'
     lang = 'en'
     categories = [
         'apost_exhortations',
@@ -21,4 +21,5 @@ class PopeOptions:
         #'books'
         #'travels',
     ]
-    output_folder = '/tmp/output/john-paul-ii'
+    output_folder = './data/francesco-2018'
+    year = 2018
