@@ -11,6 +11,11 @@ nltk = "*"
 spacy = "*"
 textacy = "*"
 bs4 = "*"
+gensim = "*"
+pandas = "*"
+matplotlib = "*"
+numpy = "*"
+scipy = "*"
 
 [requires]
 python_version = "3.5"
