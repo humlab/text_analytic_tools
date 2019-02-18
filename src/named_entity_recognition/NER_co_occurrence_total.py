@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import math
 #from sklearn.neighbors.kde import KernelDensity
-# %%
 class LocationRepository:
 
     def __init__(self, data_folder):
