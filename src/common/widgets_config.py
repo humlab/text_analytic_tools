@@ -26,6 +26,9 @@ def toggles(description, options, value, **kwopts):  # pylint: disable=W0613
 def dropdown(description, options, value, **kwargs):  # pylint: disable=W0613
     return widgets.Dropdown(**kwargser(locals()))
 
+def selectmultiple(description, options, value, **kwargs):  # pylint: disable=W0613
+    return widgets.SelectMultiple(**kwargser(locals()))
+
 def slider(description, min, max, value, **kwargs):  # pylint: disable=W0613, W0622
     return widgets.IntSlider(**kwargser(locals()))
 

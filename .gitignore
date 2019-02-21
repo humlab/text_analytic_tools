@@ -1,6 +1,8 @@
 *.pyc
 *.swp
 *.swo
+*.gz
+*.bin
 .venv/
 __pycache__/
 test/__pycache__/
@@ -10,6 +12,8 @@ output.xml
 **/output/
 **/data/
 data/
+lib
+results/
 .ipynb_checkpoints/
 .vscode/
 .spyproject/

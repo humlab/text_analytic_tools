@@ -53,7 +53,7 @@ def compile_tokenizer_args(gui, corpus, **opts):
     
     return args
 
-def compute_topic_model(data_folder, corpus, method, n_topics, gui, n_topic_window=0, tick=utility.noop, **opts):
+def compute_topic_model(data_folder, corpus, document_index, method, n_topics, gui, n_topic_window=0, tick=utility.noop, **opts):
     
     result = None
     
@@ -78,6 +78,7 @@ def compute_topic_model(data_folder, corpus, method, n_topics, gui, n_topic_wind
             
             data = topic_model.compute(
                 corpus=corpus,
+                documents=document_index,
                 tick=tick,
                 method=method,
                 vec_args=vectorizer_args,
@@ -115,7 +116,7 @@ def compute_topic_model(data_folder, corpus, method, n_topics, gui, n_topic_wind
     finally:
         return result
     
-def display_topic_model_gui(data_folder, state, corpus, **opts):
+def display_topic_model_gui(data_folder, state, corpus, document_index, **opts):
     
     def spinner_widget(filename="images/spinner-02.gif", width=40, height=40):
         with open(filename, "rb") as image_file:
@@ -208,7 +209,16 @@ def display_topic_model_gui(data_folder, state, corpus, **opts):
         with gui.output:
             
             try:
-                state.data = compute_topic_model(data_folder, corpus, gui.method.value, gui.n_topics.value, gui, tick=tick, **opts)
+                state.data = compute_topic_model(
+                    data_folder,
+                    corpus,
+                    document_index,
+                    gui.method.value,
+                    gui.n_topics.value,
+                    gui,
+                    tick=tick,
+                    **opts
+                )
 
                 topics = topic_model_utility.get_topics_unstacked(
                     state.topic_model,

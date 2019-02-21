@@ -1,25 +1,30 @@
-import re
+# -*- coding: utf-8 -*-
+import re, sys
 import zipfile
 import pandas as pd
 import logging
-import textacy
+import msgpack
 import logging
 import collections
-
+import textacy
 import spacy
 
 from spacy.language import Language
 from spacy import attrs
+from spacy.tokens.doc import Doc as SpacyDoc
+
+sys.path = list(set(['.', '..']) - set(sys.path)) + sys.path
 
 import common.utility as utility
-import treaty_corpus
+import text_corpus
 
 from common.utility import deprecated
 
 logger = utility.getLogger('corpus_text_analysis')
 
-LANGUAGE_MODEL_MAP = { 'en': 'en_core_web_sm', 'fr': 'fr_core_news_sm', 'it': 'it_core_web_sm', 'de': 'de_core_web_sm' }
-    
+LANGUAGE_MODEL_MAP = { 'en': 'en_core_web_lg', 'fr': 'fr_core_news_sm', 'it': 'it_core_web_sm', 'de': 'de_core_web_sm' }
+HYPHEN_REGEXP = re.compile(r'\b(\w+)-\s*\r?\n\s*(\w+)\b', re.UNICODE)
+
 import itertools
 
 def count_documents_by_pivot(corpus, attribute):
@@ -62,6 +67,7 @@ class CorpusContainer():
         self.textacy_corpus = None
         self.nlp = None
         self.word_count_scores = None
+        self.document_index = None
     
     def get_word_count(self, normalize):
         key = 'word_count_' + normalize
@@ -94,7 +100,7 @@ class CorpusContainer():
             raise CorpusNotLoaded('Corpus not loaded or computed')
         
         return CorpusContainer.container().textacy_corpus
-
+    
 def preprocess_text(source_filename, target_filename, tick=utility.noop):
     '''
     Pre-process of zipped archive that contains text documents
@@ -277,32 +283,14 @@ def extract_corpus_terms(corpus, extract_args):
         
     return terms
 
-def get_treaty_doc(corpus, treaty_id):
-    for doc in corpus.get(lambda x: x.metadata['treaty_id'] == treaty_id, limit=1):
+# CHANGE: previously named 'get_treaty_doc', with field_name 'treaty_id'
+def get_document_by_id(corpus, document_id, field_name='document_id'):
+    for doc in corpus.get(lambda x: x.metadata[field_name] == document_id, limit=1):
         return doc
+    assert False, 'Document {} not found in corpus'.format(document_id)
     return None
-
-# FIXME: Move to 
-def get_document_stream(corpus_path, lang, treaties):
-    
-    if 'treaty_id' not in treaties.columns:
-        treaties['treaty_id'] = treaties.index
         
-    documents = treaty_corpus.TreatyCompressedFileReader(corpus_path, lang, list(treaties.index))
-    
-    for treaty_id, language, filename, text in documents:
-        assert language == lang
-        metadata = treaties.loc[treaty_id]
-        yield filename, text, metadata
-        
-def create_textacy_corpus(documents, nlp, tick=utility.noop):
-    corpus = textacy.Corpus(nlp)
-    for filename, text, metadata in documents:
-        corpus.add_text(text, utility.extend(dict(filename=filename), metadata))
-        tick()
-    return corpus
-
-def generate_corpus_filename(source_path, language, nlp_args=None, preprocess_args=None, compression='bz2', period_group=''):
+def generate_corpus_filename(source_path, language, nlp_args=None, preprocess_args=None, compression='bz2', period_group='', extension='bin'):
     nlp_args = nlp_args or {}
     preprocess_args = preprocess_args or {}
     disabled_pipes = nlp_args.get('disable', ())
@@ -312,10 +300,49 @@ def generate_corpus_filename(source_path, language, nlp_args=None, preprocess_ar
         '_disable({})'.format(','.join(disabled_pipes)) if len(disabled_pipes) > 0 else '',
         (period_group or '')
     )
-    filename = utility.path_add_suffix(source_path, suffix, new_extension='.pkl')
+    filename = utility.path_add_suffix(source_path, suffix, new_extension='.' + extension)
     if compression is not None:
         filename += ('.' + compression)
     return filename
+
+def get_disabled_pipes_from_filename(filename):
+    re_pipes = r'^.*disable\((.*)\).*$'
+    x = re.match(re_pipes, filename).groups(0)
+    if len(x or []) > 0:
+        return x[0].split(',')
+    return None
+
+def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop):
+    corpus = textacy.Corpus(nlp)
+    document_id = 0
+    for filename, text, metadata in corpus_reader:
+        metadata = utility.extend(metadata,dict(filename=filename, document_id=document_id))
+        corpus.add_text(text, metadata)
+        document_id += 1
+        tick()
+    return corpus
+
+def save_corpus(corpus, filename, lang=None, format='binary', include_tensor=False):
+    for doc in corpus:
+        doc.spacy_doc.user_data.update(doc.metadata)
+        doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
+    docs = (x.spacy_doc for x in corpus)
+    '''HACK: store binary to enable clearing od tensor data to save disk space'''
+    textacy.io.write_spacy_docs(docs, filename, format=format, include_tensor=include_tensor)
+
+def load_corpus(filename, lang, document_id='document_id'):
+    import textacy_patch
+    '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
+    docs = ( x for x in textacy_patch.read_spacy_docs(filename, format="binary", lang=lang))
+    corpus = textacy.Corpus(docs=docs, lang=lang)
+    for doc in corpus:
+        doc.spacy_doc.user_data['year'] = int(doc.spacy_doc.user_data['year'])
+        doc.metadata.update(doc.spacy_doc.user_data)
+        #metadata = doc.spacy_doc.user_data['textacy']['metadata']
+        #for x in ['filename', document_id]:
+        #    if x in metadata.keys():
+        #        corpus[0].metadata[x] = metadata[x]
+    return corpus
 
 def keep_hyphen_tokenizer(nlp):
     infix_re = re.compile(r'''[.\,\?\:\;\...\‘\’\`\“\”\"\'~]''')
@@ -348,10 +375,10 @@ def setup_nlp_language_model(language, **nlp_args):
     
     return nlp
 
+# FIXME VARYING ASPECTS:
 def propagate_document_attributes(corpus):
     for doc in corpus:
-        doc.spacy_doc.user_data['title'] = doc.metadata['treaty_id']
-        doc.spacy_doc.user_data['treaty_id'] = doc.metadata['treaty_id']
+        doc.spacy_doc.user_data.update(doc.metadata)
 
 POS_TO_COUNT = {
     'SYM': 0, 'PART': 0, 'ADV': 0, 'NOUN': 0, 'CCONJ': 0, 'ADJ': 0, 'DET': 0, 'ADP': 0, 'INTJ': 0, 'VERB': 0, 'NUM': 0, 'PRON': 0, 'PROPN': 0
@@ -365,11 +392,19 @@ def _get_pos_statistics(doc):
     stats = utility.extend(dict(POS_TO_COUNT), pos_counts)
     return stats
     
-def get_corpus_documents(corpus):
-    metadata = [ utility.extend({}, doc.metadata, _get_pos_statistics(doc)) for doc in corpus ]
-    df = pd.DataFrame(metadata)[['treaty_id', 'filename', 'signed_year', 'party1', 'party2', 'topic1', 'is_cultural']+POS_NAMES]
-    df['title'] = df.treaty_id
-    df['lang'] = df.filename.str.extract(r'\w{4,6}\_(\w\w)')  #.apply(lambda x: x.split('_')[1][:2])
+def get_corpus_data(corpus, document_index, title, columns_of_interest=None):
+    metadata = [ 
+        utility.extend({},
+                       dict(document_id=doc.metadata['document_id']), 
+                       _get_pos_statistics(doc)
+                      )
+        for doc in corpus
+    ]
+    df = pd.DataFrame(metadata)[['document_id'] + POS_NAMES]
+    if columns_of_interest is not None:
+        document_index = document_index[columns_of_interest]
+    df = pd.merge(df, document_index, left_on='document_id', right_index=True, how='inner')
+    df['title'] = df[title]
     df['words'] = df[POS_NAMES].apply(sum, axis=1)
     return df
 
@@ -416,8 +451,8 @@ def store_tokens_to_file(corpus, filename):
             token=t.lower_,
             lemma=t.lemma_,
             pos=t.pos_,
-            signed_year=d.metadata['signed_year'],
-            treaty_id=d.metadata['treaty_id']
+            year=d.metadata['year'],
+            document_id=d.metadata['document_id']
         ) for t in d )
     tokens = pd.DataFrame(list(itertools.chain.from_iterable(doc_tokens(d) for d in corpus )))
     

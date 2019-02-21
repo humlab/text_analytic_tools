@@ -186,7 +186,8 @@ def compile_document_topics(model, corpus, documents, doc_topic_matrix=None, min
         logger.error(ex)
         return None
 
-def compile_metadata(model, corpus, id2term, documents, vectorizer=None, doc_topic_matrix=None, n_tokens=200):
+# FIXME VARYING ASPECTS: year_column='signed_year' for tCoIR
+def compile_metadata(model, corpus, id2term, documents, vectorizer=None, doc_topic_matrix=None, n_tokens=200, year_column='year'):
     '''
     Compile metadata associated to given model and corpus
     '''
@@ -195,7 +196,13 @@ def compile_metadata(model, corpus, id2term, documents, vectorizer=None, doc_top
     alpha = model.alpha if 'alpha' in model.__dict__ else None
     topic_token_overview = compile_topic_token_overview(topic_token_weights, alpha)
     document_topic_weights = compile_document_topics(model, corpus, documents, doc_topic_matrix=doc_topic_matrix, minimum_probability=0.001)
-    year_period = (documents.signed_year.min(), documents.signed_year.max())
+    
+    # PATCH: take care of case when year is 0
+    assert year_column in documents.columns
+    years_series = documents[year_column]
+    year_period = (years_series[years_series > 0].min(), years_series.max())
+    #year_period = (documents[year_column].min(), documents[year_column].max()) if year_column in documents.columns else (None, None)
+    
     relevant_topic_ids = list(document_topic_weights.topic_id.unique())
     
     return types.SimpleNamespace(

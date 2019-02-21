@@ -9,7 +9,9 @@ import topic_model_utility
 import mallet_topic_model
 import sttm_topic_model
 import numpy as np
-    
+
+TEMP_PATH = './tmp/'
+
 # OBS OBS! https://scikit-learn.org/stable/auto_examples/applications/plot_topics_extraction_with_nmf_lda.html
 DEFAULT_VECTORIZE_PARAMS = dict(tf_type='linear', apply_idf=False, idf_type='smooth', norm='l2', min_df=1, max_df=0.95)
 
@@ -35,7 +37,13 @@ default_options = {
         }
     }
 }
+
 def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
+    
+    # FIXME VARYING ASPECT: 
+    #year_column = 'signed_year'
+    year_column = 'year'
+    
     algorithms = {
         'LSI': {
             'engine': gensim.models.LsiModel,
@@ -90,7 +98,7 @@ def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
                 'corpus': bow_corpus, 
                 'num_topics':  tm_args.get('n_topics', 0),
                 'id2word':  id2word,
-                'time_slice': textacy_utility.count_documents_by_pivot(corpus, 'signed_year')
+                'time_slice': textacy_utility.count_documents_by_pivot(corpus, year_column)
                 # 'initialize': 'gensim/own/ldamodel',
                 # 'lda_model': model # if initialize='gensim'
                 # 'lda_inference_max_iter': tm_args.get('max_iter', 0),
@@ -109,7 +117,7 @@ def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
                 'iterations': tm_args.get('max_iter', 2000),
                 'passes': tm_args.get('passes', 20),
                 
-                'prefix': './data/',
+                'prefix': TEMP_PATH,
                 'workers': 4,
                 'optimize_interval': 10,
             }
@@ -125,7 +133,7 @@ def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
                 id2word=id2word,
                 num_topics=tm_args.get('n_topics', 20),
                 iterations=tm_args.get('max_iter', 2000),
-                prefix='results/',
+                prefix=TEMP_PATH,
                 name='{}_model'.format(sttm)
                 #vectors,
                 #alpha=0.1,
@@ -135,8 +143,10 @@ def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
             )
         )
     return algorithms
-    
-def compute(corpus, tick=utility.noop, method='sklearn_lda', vec_args=None, term_args=None, tm_args=None, **args):
+
+# FIXME VARYING ASPECTS:
+# documents = textacy_utility.tCoIR_get_corpus_documents(corpus)
+def compute(corpus, documents, tick=utility.noop, method='sklearn_lda', vec_args=None, term_args=None, tm_args=None, **args):
     
     tick()
     
@@ -151,8 +161,9 @@ def compute(corpus, tick=utility.noop, method='sklearn_lda', vec_args=None, term
     doc_topic_matrix = None
     doc_term_matrix = None
     
-    documents = textacy_utility.get_corpus_documents(corpus)
-
+    if not os.path.exists(TEMP_PATH):
+        os.makedirs(TEMP_PATH)        
+    
     if method.startswith('sklearn'):
         
         vectorizer = textacy.Vectorizer(**vec_args)

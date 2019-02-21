@@ -14,34 +14,22 @@ from gensim.corpora.textcorpus import TextCorpus
 logger = logging.getLogger(__name__)
 
 HYPHEN_REGEXP = re.compile(r'\b(\w+)-\s*\r?\n\s*(\w+)\b', re.UNICODE)
-TREATY_FILENAME = re.compile(r"^([a-zA-Z0-9]*)\_(en|fr|de|it).*\.txt$")
 
-#@deprecated('Moved to TreatyCompressedFileReader.language_filename_pattern')
-def language_filename_pattern(language):
-    return re.compile("^(\w*)\_" + language + "([\_\-]corr)?\.txt$") 
-    
 def dehyphen(text):
     result = re.sub(HYPHEN_REGEXP, r"\1\2\n", text)
     return result
 
-def list_treaty_archive_files(archivename, pattern):
+def list_archive_files(archivename, pattern):
     px = lambda x: pattern.match(x) if isinstance(pattern, typing.re.Pattern) else fnmatch.fnmatch(x, pattern)
     with zipfile.ZipFile(archivename) as zf:
         return [ name for name in zf.namelist() if px(name) ]
-        
-#@deprecated('Moved to TreatyCompressedFileReader.get_treaty_filename_lookups')
-def get_treaty_filename_lookup(archivename, language):
-    pattern = language_filename_pattern(language)
-    filenames = list_treaty_archive_files(archivename, pattern)
-    treaty_lookup = { x.split('_')[0]: x for x in filenames }
-    return treaty_lookup
     
 class CompressedFileReader:
     
     def __init__(self, path, pattern='*.txt', itemfilter=None):
         self.path = path
         self.filename_pattern = pattern
-        self.archive_filenames = list_treaty_archive_files(path, pattern)
+        self.archive_filenames = list_archive_files(path, pattern)
         filenames = None
         if itemfilter is not None:
             if isinstance(itemfilter, list):
@@ -82,67 +70,9 @@ class CompressedFileReader:
             content = dehyphen(content)
             return content
         
-class TreatyCompressedFileReader(CompressedFileReader):
+class GenericTextCorpus(TextCorpus):
 
-    def __init__(self, path, language, treaty_ids):
-        
-        self.path        = path
-        self.language    = language
-        
-        pattern          = re.compile("^(\w*)\_" + language + "([\_\-]corr)?\.txt$") 
-        treaty_lookup    = { x.split('_')[0]: x for x in self._ls_archive(path, pattern) }
-        
-        self.treaty_ids  = [ x for x in treaty_ids if x in treaty_lookup ]
-        self.filenames   = [ treaty_lookup[x] for x in self.treaty_ids ]
-        
-        if len(set(treaty_ids) - set(self.treaty_ids)) > 0:
-            logger.warning('Treaties not found in archive: ' + ', '.join(list(set(treaty_ids) - set(self.treaty_ids))))
-            
-        CompressedFileReader.__init__(self, path, pattern=pattern, itemfilter=self.filenames)
-        
-    def _ls_archive(self, path, pattern):
-        
-        px = lambda x: pattern.match(x) \
-            if isinstance(pattern, typing.re.Pattern) \
-            else fnmatch.fnmatch(x, pattern)
-        
-        with zipfile.ZipFile(path) as f:
-            return [ x for x in f.namelist() if px(x) ]
-    
-    def __next__(self):
-        
-        filename, content = super(TreatyCompressedFileReader, self).__next__()
-        
-        m = TREATY_FILENAME.match(filename)
-        
-        treaty_id = m.groups(1)[0]
-        language = m.groups(1)[1]
-        
-        return treaty_id, language, filename, content
-
-def get_document_stream(corpus_path, lang, treaties):
-
-    if 'treaty_id' not in treaties.columns:
-        treaties['treaty_id'] = treaties.index
-
-    documents = TreatyCompressedFileReader(corpus_path, lang, list(treaties.index))
-
-    for treaty_id, language, filename, text in documents:
-        assert language == lang
-        metadata = treaties.loc[treaty_id]
-        yield filename, text, metadata
-    
-class TreatyCorpus(TextCorpus):
-
-    def __init__(self,
-                 stream,
-                 dictionary=None,
-                 metadata=False,
-                 character_filters=None,
-                 tokenizer=None,
-                 token_filters=None,
-                 bigram_transform=False
-    ):
+    def __init__(self, stream, dictionary=None, metadata=False, character_filters=None, tokenizer=None, token_filters=None, bigram_transform=False):
         self.stream = stream
         self.filenames = None
         self.documents = None
@@ -159,14 +89,14 @@ class TreatyCorpus(TextCorpus):
         ] + (token_filters or [])
         
         #if bigram_transform is True:
-        #    train_corpus = TreatyCorpus(content_iterator, token_filters=[ x.lower() for x in tokens ])
+        #    train_corpus = GenericTextCorpus(content_iterator, token_filters=[ x.lower() for x in tokens ])
         #    phrases = gensim.models.phrases.Phrases(train_corpus)
         #    bigram = gensim.models.phrases.Phraser(phrases)
         #    token_filters.append(
         #        lambda tokens: bigram[tokens]
         #    )           
         
-        super(TreatyCorpus, self).__init__(
+        super(GenericTextCorpus, self).__init__(
             input=True,
             dictionary=dictionary,
             metadata=metadata,
@@ -187,17 +117,14 @@ class TreatyCorpus(TextCorpus):
         """
         
         document_infos = []
-        for treaty_id, language, filename, content in self.stream:
+        for filename, content in self.stream:
             yield content
             document_infos.append({
-                'document_name': filename,
-                'treaty_id': treaty_id,
-                'language': language
+                'document_name': filename
             })
             
         self.length = len(document_infos)
         self.documents = pd.DataFrame(document_infos)
-        #self.filenames = list(self.documents.document_name)
                  
     def get_texts(self):
         '''
@@ -230,17 +157,8 @@ class TreatyCorpus(TextCorpus):
             return tokens
 
     def __get_document_info(self, filename):
-        parts = TREATY_FILENAME.match(filename)
-        if not parts:
-            return {
-            'document_name': filename,
-            'treaty_id': None,
-            'language': None
-        }
         return {
             'document_name': filename,
-            'treaty_id': parts.groups(0)[0],
-            'language': parts.groups(0)[1]
         }
 
     def ___compile_documents(self):
@@ -249,11 +167,7 @@ class TreatyCorpus(TextCorpus):
 
         documents = pd.DataFrame(list(document_data))
         documents.index.names = ['document_id']
-        dupes = documents.groupby(['treaty_id', 'language']).size().loc[lambda x: x > 1]
         
-        if len(dupes) > 0:
-            logger.critical('Warning! Duplicate treaties found in corpus: {}'.format(' '.join(list(dupes.index))))
-            
         return documents
         
 class MmCorpusStatisticsService():
@@ -356,7 +270,7 @@ class ExtMmCorpus(gensim.corpora.MmCorpus):
     def __getitem__(self, docno):
         return self.norm_tf_by_D(gensim.corpora.MmCorpus.__getitem__(self, docno))
 
-class TreatyCorpusSaveLoad():
+class GenericCorpusSaveLoad():
 
     def __init__(self, source_folder, lang):
         
@@ -364,11 +278,11 @@ class TreatyCorpusSaveLoad():
         self.dict_filename = os.path.join(source_folder, 'corpus_{}.dict.gz'.format(lang))
         self.document_index = os.path.join(source_folder, 'corpus_{}_documents.csv'.format(lang))
         
-    def store_as_mm_corpus(self, treaty_corpus):
+    def store_as_mm_corpus(self, corpus):
         
-        gensim.corpora.MmCorpus.serialize(self.mm_filename, treaty_corpus, id2word=treaty_corpus.dictionary.id2token)
-        treaty_corpus.dictionary.save(self.dict_filename)
-        treaty_corpus.document_names.to_csv(self.document_index, sep='\t')
+        gensim.corpora.MmCorpus.serialize(self.mm_filename, corpus, id2word=corpus.dictionary.id2token)
+        corpus.dictionary.save(self.dict_filename)
+        corpus.document_names.to_csv(self.document_index, sep='\t')
 
     def load_mm_corpus(self, normalize_by_D=False):
     

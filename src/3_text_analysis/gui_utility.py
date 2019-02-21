@@ -1,14 +1,31 @@
+import sys
+
+sys.path = list(set(['.', '..']) - set(sys.path)) + sys.path
 
 import textacy_corpus_utility as textacy_utility
+import ipywidgets as widgets
+import common.widgets_config as widgets_config
+import common.utility as utility
 
-def get_treaty_dropdown_options(wti_index, corpus):
-    
-    def format_treaty_name(x):
-        return '{}: {} {} {} {}'.format(x.name, x['signed_year'], x['topic'], x['party1'], x['party2'])
-    
-    documents = wti_index.treaties.loc[textacy_utility.get_corpus_documents(corpus).treaty_id]
+def generate_field_filters(documents, opts):
+    filters = []
+    for opt in opts:  # if opt['type'] == 'multiselect':
+        options =  opt.get('options', list(documents[opt['field']].unique()))
+        description = opt.get('description', '')
+        rows = min(4, len(options))
+        gf = utility.extend(opt, widget=widgets_config.selectmultiple(description, options, value=(), rows=rows))
+        filters.append(gf)
+    return filters
 
-    options = [ (v, k) for k, v in documents.apply(format_treaty_name, axis=1).to_dict().items() ]
-    options = sorted(options, key=lambda x: x[0])
+def get_document_id_by_field_filters(documents, filters):
+    df = documents
+    for k, v in filters:
+        if len(v or []) > 0:
+            df = df[df[k].isin(v)]
+    return list(df.index)
 
-    return options
+def get_documents_by_field_filters(corpus, documents, filters):
+    ids = get_document_id_by_field_filters(documents, filters)
+    docs = ( x for x in corpus if x.metadata['document_id'] in ids)
+    return docs
+        
