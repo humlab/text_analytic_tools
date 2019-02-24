@@ -1,6 +1,34 @@
 import pandas as pd
 import text_corpus
 
+# FIXME VARYING ASPECTS: 
+DOCUMENT_FILTERS = [
+        {
+            'type': 'multiselect',
+            'description': 'Pope',
+            'field': 'pope'
+        },
+        {
+            'type': 'multiselect',
+            'description': 'Genre',
+            'field': 'genre'
+        },
+        {
+            'type': 'multiselect',
+            'description': 'Year',
+            'field': 'year'
+        }
+    ]
+        
+GROUP_BY_OPTIONS = [
+    ('Year', ['year']),
+    ('Pope', ['pope']),
+    ('Pope, Year',  ['pope', 'year']),
+    ('Genre', ['genre']),
+    ('Pope, genre', ['pope', 'genre']),
+    ('Pope, year, genre', ['pope', 'year', 'genre'])
+]
+
 def compile_documents_by_filename(filenames):
 
     parts = [ x.split('_') for x in filenames ]
@@ -19,7 +47,7 @@ def compile_documents_by_filename(filenames):
     
     return df
 
-def compile_documents(corpus):
+def compile_documents(corpus, index=None):
     
     filenames = [ x.metadata['filename'] for x in corpus ]
     
@@ -45,3 +73,8 @@ def get_document_stream(source, lang, **kwargs):
         metadata = lookup.loc[filename].to_dict()
         yield filename, text, metadata
         row_id += 1
+
+# FIXME VARYING ASPECTs: What attributes to extend
+def add_domain_attributes(df, document_index):
+    df_extended = pd.merge(df, document_index, left_index=True, right_index=True, how='inner')    
+    return df_extended[['filename', 'year', 'genre', 'keyterms']]

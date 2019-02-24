@@ -3,7 +3,14 @@ import common.utility as utility
 import pandas as pd
 import textacy_corpus_utility 
 # FIXME VARYING ASPECTS
-def tCoIR_get_corpus_documents(corpus):
+
+DOCUMENT_FILTERS = [
+    ]
+        
+GROUP_BY_OPTIONS = [
+]
+
+def get_corpus_documents(corpus):
     
     metadata = [ utility.extend({}, doc.metadata, _get_pos_statistics(doc)) for doc in corpus ]
     df = pd.DataFrame(metadata)[['treaty_id', 'filename', 'signed_year', 'party1', 'party2', 'topic1', 'is_cultural']+POS_NAMES]
@@ -46,4 +53,12 @@ def get_document_stream(corpus_path, lang, document_index=None, id_extractor=Non
         metadata = None if document_index is None else document_index.iloc[document_id].to_dict()
         yield filename, text, document_id, metadata
         
-        
+# FIXME VARYING ASPECTs: What attributes to extend
+def add_domain_attributes(df, document_index):
+    # Add columns from document index
+    df_extended = pd.merge(df, document_index.treaties, left_index=True, right_index=True, how='inner')
+    group_map = document_index.get_parties()['group_name'].to_dict()        
+    df_extended['group1'] = df_extended['party1'].map(group_map)
+    df_extended['group2'] = df_extended['party2'].map(group_map)        
+    columns = ['signed_year', 'party1', 'group1', 'party2', 'group2', 'keyterms']
+    return df_extended[columns]

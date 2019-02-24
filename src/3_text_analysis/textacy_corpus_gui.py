@@ -90,7 +90,7 @@ def generate_textacy_corpus(
                 
     logger.info('Done!')
     
-def display_corpus_load_gui(data_folder, document_index=None, container=None):
+def display_corpus_load_gui(data_folder, document_index=None, container=None, compute_ner=False):
     
     lw = lambda w: widgets.Layout(width=w)
     
@@ -106,11 +106,11 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None):
         
         language=widgets_config.dropdown(description='Language', options=language_options, value='en', layout=lw('180px')),
 
-        merge_entities=widgets_config.toggle('Merge NER', False, icon='', layout=lw('100px')),
+        merge_entities=widgets_config.toggle('Merge NER', compute_ner, icon='', layout=lw('100px')),
         overwrite=widgets_config.toggle('Force', False, icon='', layout=lw('100px'), tooltip="Force generation of new corpus (even if exists)"),
         
         compute_pos=widgets_config.toggle('POS', True, icon='', layout=lw('100px'), disabled=True, tooltip="Enable Part-of-Speech tagging"),
-        compute_ner=widgets_config.toggle('NER', False, icon='', layout=lw('100px'), disabled=False, tooltip="Enable NER tagging"),
+        compute_ner=widgets_config.toggle('NER', compute_ner, icon='', layout=lw('100px'), disabled=False, tooltip="Enable NER tagging"),
         compute_dep=widgets_config.toggle('DEP', False, icon='', layout=lw('100px'), disabled=True, tooltip="Enable dependency parsing"),
         
         compute=widgets.Button(description='Compute', button_style='Success', layout=lw('100px'))
