@@ -144,7 +144,7 @@ def compile_document_topics(model, corpus, documents, doc_topic_matrix=None, min
 
             if isinstance(model, gensim.models.LsiModel):
                 # Gensim LSI Model
-                logger.warning('FIXME!!! Gensim LSI Model is ti big!!! ')
+                #logger.warning('FIXME!!! Gensim LSI Model is to big!!! ')
                 data_iter = enumerate(model[corpus])
             elif hasattr(model, 'get_document_topics'):
                 # Gensim LDA Model

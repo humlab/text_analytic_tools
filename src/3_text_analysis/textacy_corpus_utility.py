@@ -301,7 +301,7 @@ def generate_corpus_filename(source_path, language, nlp_args=None, preprocess_ar
         (period_group or '')
     )
     filename = utility.path_add_suffix(source_path, suffix, new_extension='.' + extension)
-    if compression is not None:
+    if (compression or '') != '':
         filename += ('.' + compression)
     return filename
 
@@ -313,28 +313,51 @@ def get_disabled_pipes_from_filename(filename):
     return None
 
 def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop):
+    logger.info('creating corpus (this might take some time)...')
+    batch_size = 100
     corpus = textacy.Corpus(nlp)
     document_id = 0
     for filename, text, metadata in corpus_reader:
         metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
         corpus.add_text(text, metadata)
         document_id += 1
-        tick()
+        if document_id % batch_size == 0:
+            logger.info('%s documents added...', document_id)
+            tick(document_id)
+            
     return corpus
 
-def save_corpus(corpus, filename, lang=None, format='binary', include_tensor=False):
+def save_corpus(
+    corpus,
+    filename,
+    lang=None,
+    format='binary',
+    include_tensor=False
+):
     #for doc in corpus:
     #    doc.spacy_doc.user_data.update(doc.metadata)
     #    doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
-    docs = (x.spacy_doc for x in corpus)
-    '''HACK: store binary to enable clearing od tensor data to save disk space'''
-    textacy.io.write_spacy_docs(docs, filename, format=format, include_tensor=include_tensor)
+    logger.info('storing corpus (this might take some time)...')
+    if format == 'binary':
+        docs = (x.spacy_doc for x in corpus)
+        '''HACK: store binary to enable clear of tensor data (to save disk space)'''
+        textacy.io.write_spacy_docs(docs, filename, format=format, include_tensor=include_tensor)
+    else:
+        if not include_tensor:
+            for doc in corpus:
+                doc.spacy_doc.tensor = None
+        corpus.save(filename)
 
-def load_corpus(filename, lang, document_id='document_id'):
+def load_corpus(filename, lang, document_id='document_id', format='binary'):
     import textacy_patch
-    '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
-    docs = textacy_patch.read_spacy_docs(filename, format="binary", lang=lang) 
-    corpus = textacy.Corpus(docs=docs, lang=lang)
+    logger.info('loading corpus (this might take some time)...')
+    if format == 'binary':
+        '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
+        docs = textacy_patch.read_spacy_docs(filename, format=format, lang=lang) 
+        corpus = textacy.Corpus(docs=docs, lang=lang)
+    else:
+        corpus = textacy.Corpus.load(filename)
+        
     #for doc in corpus:
     #    user_data = doc.spacy_doc.user_data
     #    user_data['year'] = int(user_data['year']) if 'year' in user_data else 0
@@ -365,8 +388,8 @@ def setup_nlp_language_model(language, **nlp_args):
  
     Language.factories['remove_whitespace_entities'] = lambda nlp, **cfg: remove_whitespace_entities
     model_name = LANGUAGE_MODEL_MAP[language]
-    if not model_name.endswith('lg'):
-        logger.warning('Selected model is not the largest availiable.')
+    #if not model_name.endswith('lg'):
+    #    logger.warning('Selected model is not the largest availiable.')
     nlp = textacy.load_spacy(model_name, **nlp_args)
     nlp.tokenizer = keep_hyphen_tokenizer(nlp)
     

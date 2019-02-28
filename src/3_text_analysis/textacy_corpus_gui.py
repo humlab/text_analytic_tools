@@ -25,6 +25,8 @@ def generate_textacy_corpus(
     language,
     merge_entities,
     overwrite=False,
+    binary_format=True,
+    use_compression=True,
     disabled_pipes=None,
     tick=utility.noop
 ):
@@ -33,6 +35,10 @@ def generate_textacy_corpus(
         container.__dict__[key] = None
         
     nlp_args = { 'disable': disabled_pipes or [] }
+    
+    store_format = 'binary' if binary_format else 'pickle'
+    store_extension = 'bin' if binary_format else 'pkl'
+    store_compression = 'bz2' if use_compression else ''
     
     container.source_path = source_path
     container.language = language
@@ -46,8 +52,8 @@ def generate_textacy_corpus(
         container.prepped_source_path,
         container.language,
         nlp_args=nlp_args,
-        extension='bin',
-        compression='bz2'
+        extension=store_extension,
+        compression=store_compression
     )
     
     container.nlp = textacy_utility.setup_nlp_language_model(container.language, **nlp_args)
@@ -67,17 +73,15 @@ def generate_textacy_corpus(
         
         container.textacy_corpus = textacy_utility.create_textacy_corpus(stream, container.nlp, tick)
         
-        #container.textacy_corpus.save(container.textacy_corpus_path)
-        
-        textacy_utility.save_corpus(container.textacy_corpus, container.textacy_corpus_path)
+        textacy_utility.save_corpus(container.textacy_corpus, container.textacy_corpus_path, format=store_format)
         
         tick(0)
         
     else:
         logger.info('Working: Loading corpus ' + container.textacy_corpus_path + '...')
-        tick(1,2)
-        # container.textacy_corpus = textacy.Corpus.load(container.textacy_corpus_path)
-        container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp)
+        tick(1, 2)
+        
+        container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp, format=store_format)
         tick(0)
         
     if merge_entities:
@@ -107,10 +111,13 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
         language=widgets_config.dropdown(description='Language', options=language_options, value='en', layout=lw('180px')),
 
         merge_entities=widgets_config.toggle('Merge NER', compute_ner, icon='', layout=lw('100px')),
-        overwrite=widgets_config.toggle('Force', False, icon='', layout=lw('100px'), tooltip="Force generation of new corpus (even if exists)"),
+
+        binary_format=widgets_config.toggle('Store as binary', False, disabled=True, icon='', layout=lw('130px')),
+        use_compression=widgets_config.toggle('Store compressed', True, disabled=True, icon='', layout=lw('130px')),
+        overwrite=widgets_config.toggle('Force if exists', False, icon='', layout=lw('130px'), tooltip="Force generation of new corpus (even if exists)"),
         
-        compute_pos=widgets_config.toggle('POS', True, icon='', layout=lw('100px'), disabled=True, tooltip="Enable Part-of-Speech tagging"),
-        compute_ner=widgets_config.toggle('NER', compute_ner, icon='', layout=lw('100px'), disabled=False, tooltip="Enable NER tagging"),
+        compute_pos=widgets_config.toggle('PoS', True, icon='', layout=lw('100px'), disabled=True, tooltip="Enable Part-of-Speech tagging"),
+        compute_ner=widgets_config.toggle('NER', compute_ner, icon='', layout=lw('100px'), disabled=False, tooltip="Enable named entity recognition"),
         compute_dep=widgets_config.toggle('DEP', False, icon='', layout=lw('100px'), disabled=True, tooltip="Enable dependency parsing"),
         
         compute=widgets.Button(description='Compute', button_style='Success', layout=lw('100px'))
@@ -119,20 +126,25 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
     display(widgets.VBox([
         gui.progress,
         widgets.HBox([
-            gui.source_path,
             widgets.VBox([
+                gui.source_path,
                 gui.language,
-            ]),
-            widgets.VBox([
-                gui.merge_entities,
-                gui.overwrite
             ]),
             widgets.VBox([
                 gui.compute_pos,
                 gui.compute_ner,
                 gui.compute_dep
             ]),
-            gui.compute]),
+            widgets.VBox([
+                gui.overwrite,
+                gui.binary_format,
+                gui.use_compression
+            ]),
+            widgets.VBox([
+                gui.compute,
+                gui.merge_entities,
+            ]),
+        ]),
         gui.output
     ]))
     def tick(step=None, max_step=None):
@@ -155,6 +167,8 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
                 language=gui.language.value,
                 merge_entities=gui.merge_entities.value,
                 overwrite=gui.overwrite.value,
+                binary_format=gui.binary_format.value,
+                use_compression=gui.use_compression.value,
                 disabled_pipes=tuple(disabled_pipes),
                 tick=tick
             )
