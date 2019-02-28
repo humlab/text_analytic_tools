@@ -9,6 +9,10 @@ from spacy.tokens.doc import Doc as SpacyDoc
 from textacy import cache
 from textacy import compat
 from textacy.io.utils import open_sesame
+from pympler import asizeof
+import humanfriendly
+import os
+import psutil
 
 # NOTE: The following code has been apdated from textacy.io.spacy.read_spacy_docs
 # The only modification is addition of arg encoding='utf8' to Unpacker()
@@ -88,7 +92,7 @@ def read_spacy_docs(fname, format="pickle", lang=None):
                         for key, value in compat.zip_(user_data_keys, user_data_values)}
                 else:
                     user_data = None
-
+                    
                 text = msg["text"]
                 attrs = msg["array_body"]
                 words = []
@@ -107,6 +111,15 @@ def read_spacy_docs(fname, format="pickle", lang=None):
                     spacy_doc.sentiment = msg["sentiment"]
                 if "tensor" in msg:
                     spacy_doc.tensor = msg["tensor"]
+                    
+                p = psutil.Process(os.getpid())
+                print(
+                    fname,
+                    'msg: ' + humanfriendly.format_size(asizeof.asizeof(msg)),
+                    'spacy_doc: ' + humanfriendly.format_size(asizeof.asizeof(spacy_doc)),
+                    'MEM: ' + humanfriendly.format_size(p.memory_info().rss)
+                )
+
                 yield spacy_doc
     else:
         raise ValueError(

@@ -9,6 +9,7 @@ DOCUMENT_FILTERS = [
         
 GROUP_BY_OPTIONS = [
 ]
+    #group_by_options = { 'Year': 'year', 'Pope': 'pope', 'Genre': 'genre' } #TREATY_TIME_GROUPINGS[k]['title']: k for k in TREATY_TIME_GROUPINGS }
 
 def get_corpus_documents(corpus):
     

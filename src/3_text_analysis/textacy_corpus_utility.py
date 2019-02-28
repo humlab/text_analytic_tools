@@ -22,7 +22,7 @@ from common.utility import deprecated
 
 logger = utility.getLogger('corpus_text_analysis')
 
-LANGUAGE_MODEL_MAP = { 'en': 'en_core_web_lg', 'fr': 'fr_core_news_sm', 'it': 'it_core_web_sm', 'de': 'de_core_web_sm' }
+LANGUAGE_MODEL_MAP = { 'en': 'en_core_web_sm', 'fr': 'fr_core_news_sm', 'it': 'it_core_web_sm', 'de': 'de_core_web_sm' }
 HYPHEN_REGEXP = re.compile(r'\b(\w+)-\s*\r?\n\s*(\w+)\b', re.UNICODE)
 
 import itertools
@@ -333,11 +333,12 @@ def save_corpus(corpus, filename, lang=None, format='binary', include_tensor=Fal
 def load_corpus(filename, lang, document_id='document_id'):
     import textacy_patch
     '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
-    docs = ( x for x in textacy_patch.read_spacy_docs(filename, format="binary", lang=lang))
+    docs = textacy_patch.read_spacy_docs(filename, format="binary", lang=lang) 
     corpus = textacy.Corpus(docs=docs, lang=lang)
     for doc in corpus:
-        doc.spacy_doc.user_data['year'] = int(doc.spacy_doc.user_data['year'])
-        doc.metadata.update(doc.spacy_doc.user_data)
+        user_data = doc.spacy_doc.user_data
+        user_data['year'] = int(user_data['year']) if 'year' in user_data else 0
+        doc.metadata.update(user_data)
         #metadata = doc.spacy_doc.user_data['textacy']['metadata']
         #for x in ['filename', document_id]:
         #    if x in metadata.keys():

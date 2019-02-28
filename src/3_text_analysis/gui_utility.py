@@ -7,10 +7,17 @@ import ipywidgets as widgets
 import common.widgets_config as widgets_config
 import common.utility as utility
 
+def _get_field_values(documents, field, as_tuple=False, query=None):
+    items = documents.query(query) if query is not None else documents
+    unique_values = sorted(list(items[field].unique()))
+    if as_tuple:
+        unique_values = [ (str(x).title(), x) for x in unique_values ]
+    return unique_values
+
 def generate_field_filters(documents, opts):
     filters = []
     for opt in opts:  # if opt['type'] == 'multiselect':
-        options =  opt.get('options', list(documents[opt['field']].unique()))
+        options =  opt.get('options', _get_field_values(documents, opt['field'], as_tuple=True, query=opt.get('query', None)))
         description = opt.get('description', '')
         rows = min(4, len(options))
         gf = utility.extend(opt, widget=widgets_config.selectmultiple(description, options, value=(), rows=rows))

@@ -16,7 +16,8 @@ DOCUMENT_FILTERS = [
         {
             'type': 'multiselect',
             'description': 'Year',
-            'field': 'year'
+            'field': 'year',
+            'query': 'year > 0'
         }
     ]
         
