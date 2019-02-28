@@ -4,6 +4,7 @@
 *.gz
 *.bin
 .venv/
+tmp/
 __pycache__/
 test/__pycache__/
 papacy_scraper/__pycache__/

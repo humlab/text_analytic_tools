@@ -111,14 +111,6 @@ def read_spacy_docs(fname, format="pickle", lang=None):
                     spacy_doc.sentiment = msg["sentiment"]
                 if "tensor" in msg:
                     spacy_doc.tensor = msg["tensor"]
-                    
-                p = psutil.Process(os.getpid())
-                print(
-                    fname,
-                    'msg: ' + humanfriendly.format_size(asizeof.asizeof(msg)),
-                    'spacy_doc: ' + humanfriendly.format_size(asizeof.asizeof(spacy_doc)),
-                    'MEM: ' + humanfriendly.format_size(p.memory_info().rss)
-                )
 
                 yield spacy_doc
     else:

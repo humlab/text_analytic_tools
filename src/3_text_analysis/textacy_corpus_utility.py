@@ -316,16 +316,16 @@ def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop):
     corpus = textacy.Corpus(nlp)
     document_id = 0
     for filename, text, metadata in corpus_reader:
-        metadata = utility.extend(metadata,dict(filename=filename, document_id=document_id))
+        metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
         corpus.add_text(text, metadata)
         document_id += 1
         tick()
     return corpus
 
 def save_corpus(corpus, filename, lang=None, format='binary', include_tensor=False):
-    for doc in corpus:
-        doc.spacy_doc.user_data.update(doc.metadata)
-        doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
+    #for doc in corpus:
+    #    doc.spacy_doc.user_data.update(doc.metadata)
+    #    doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
     docs = (x.spacy_doc for x in corpus)
     '''HACK: store binary to enable clearing od tensor data to save disk space'''
     textacy.io.write_spacy_docs(docs, filename, format=format, include_tensor=include_tensor)
@@ -335,14 +335,14 @@ def load_corpus(filename, lang, document_id='document_id'):
     '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
     docs = textacy_patch.read_spacy_docs(filename, format="binary", lang=lang) 
     corpus = textacy.Corpus(docs=docs, lang=lang)
-    for doc in corpus:
-        user_data = doc.spacy_doc.user_data
-        user_data['year'] = int(user_data['year']) if 'year' in user_data else 0
-        doc.metadata.update(user_data)
-        #metadata = doc.spacy_doc.user_data['textacy']['metadata']
-        #for x in ['filename', document_id]:
-        #    if x in metadata.keys():
-        #        corpus[0].metadata[x] = metadata[x]
+    #for doc in corpus:
+    #    user_data = doc.spacy_doc.user_data
+    #    user_data['year'] = int(user_data['year']) if 'year' in user_data else 0
+    #    doc.metadata.update(user_data)
+    #    #metadata = doc.spacy_doc.user_data['textacy']['metadata']
+    #    #for x in ['filename', document_id]:
+    #    #    if x in metadata.keys():
+    #    #        corpus[0].metadata[x] = metadata[x]
     return corpus
 
 def keep_hyphen_tokenizer(nlp):

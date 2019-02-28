@@ -28,7 +28,7 @@ def generate_textacy_corpus(
     disabled_pipes=None,
     tick=utility.noop
 ):
-
+    
     for key in container.__dict__:
         container.__dict__[key] = None
         
