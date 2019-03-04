@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import re, sys
+import re, sys, os
 import zipfile
 import pandas as pd
 import logging
@@ -8,6 +8,10 @@ import logging
 import collections
 import textacy
 import spacy
+import timeit
+import functools
+import itertools
+import time
 
 from spacy.language import Language
 from spacy import attrs
@@ -17,15 +21,12 @@ sys.path = list(set(['.', '..']) - set(sys.path)) + sys.path
 
 import common.utility as utility
 import text_corpus
-
 from common.utility import deprecated
 
 logger = utility.getLogger('corpus_text_analysis')
 
 LANGUAGE_MODEL_MAP = { 'en': 'en_core_web_sm', 'fr': 'fr_core_news_sm', 'it': 'it_core_web_sm', 'de': 'de_core_web_sm' }
 HYPHEN_REGEXP = re.compile(r'\b(\w+)-\s*\r?\n\s*(\w+)\b', re.UNICODE)
-
-import itertools
 
 def count_documents_by_pivot(corpus, attribute):
     ''' Return a list of document counts per group defined by attribute
@@ -34,6 +35,20 @@ def count_documents_by_pivot(corpus, attribute):
     fx_key = lambda doc: doc.metadata[attribute]
     return [ len(list(g)) for _, g in itertools.groupby(corpus, fx_key) ]
 
+def count_documents_in_index_by_pivot(documents, attribute):
+    ''' Return a list of document counts per group defined by attribute
+    Assumes documents are sorted by attribute!
+    Same as count_documents_by_pivot but uses document index instead of (textacy) corpus
+    '''
+    assert documents[attribute].is_monotonic_increasing, 'Documents *MUST* be sorted by TIME-SLICE attribute!'
+    # FIXME: Either sort documents (and corpus or term stream!) prior to this call - OR force sortorder by filename (i.e add year-prefix)
+    return list(documents.groupby(attribute).size().values)
+
+import numba
+from numba import jit
+print(numba.__version__)
+
+@jit(nopython=True)
 def generate_word_count_score(corpus, normalize, count):
     wc = corpus.word_freqs(normalize=normalize, weighting='count', as_strings=True)
     d = { i: set([]) for i in range(1, count+1)}
@@ -42,6 +57,7 @@ def generate_word_count_score(corpus, normalize, count):
             d[v].add(k)
     return d
 
+@jit(nopython=True)
 def generate_word_document_count_score(corpus, normalize, threshold=75):
     wc = corpus.word_doc_freqs(normalize=normalize, weighting='freq', smooth_idf=True, as_strings=True)
     d = { i: set([]) for i in range(threshold, 101)}
@@ -126,23 +142,26 @@ def preprocess_text(source_filename, target_filename, tick=utility.noop):
             tick()
     tick(0)
     
-def get_gpe_names(filename, corpus=None):
-    
-    with open(filename) as f:
-        content = f.readlines()
-        
-    lemmas = set([ x.strip() for x in content ])
-    
-    tokens = set([])
-    
-    if corpus is not None:
-        for doc in corpus:
-            candidates = set([ x.lower_ for x in doc if x.lemma_ in lemmas ])
-            tokens = tokens.union(candidates)
-        
-    tokens = tokens.union(lemmas)
-    
-    return tokens
+#def get_gpe_names(filename, corpus=None):
+#    
+#    with open(filename) as f:
+#        content = f.readlines()
+#        
+#    lemmas = set([ x.strip() for x in content ])
+#    
+#    tokens = set([])
+#    
+#    if len(lemmas) == 0:
+#        return tokens
+#
+#    if corpus is not None:
+#        for doc in corpus:
+#            candidates = set([ x.lower_ for x in doc if x.lemma_ in lemmas ])
+#            tokens = tokens.union(candidates)
+#        
+#    tokens = tokens.union(lemmas)
+#    
+#    return tokens
     
 
 def infrequent_words(corpus, normalize='lemma', weighting='count', threshold=0, as_strings=False):
@@ -327,6 +346,7 @@ def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop):
             
     return corpus
 
+@utility.timecall
 def save_corpus(
     corpus,
     filename,
@@ -337,10 +357,10 @@ def save_corpus(
     #for doc in corpus:
     #    doc.spacy_doc.user_data.update(doc.metadata)
     #    doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
-    logger.info('storing corpus (this might take some time)...')
     if format == 'binary':
         docs = (x.spacy_doc for x in corpus)
         '''HACK: store binary to enable clear of tensor data (to save disk space)'''
+        corpus[0].spacy_doc.user_data['textacy']['spacy_lang_meta'] = corpus.spacy_lang.meta
         textacy.io.write_spacy_docs(docs, filename, format=format, include_tensor=include_tensor)
     else:
         if not include_tensor:
@@ -348,13 +368,24 @@ def save_corpus(
                 doc.spacy_doc.tensor = None
         corpus.save(filename)
 
+#from cytoolz import itertoolz
+import textacy_patch
+
+@utility.timecall
 def load_corpus(filename, lang, document_id='document_id', format='binary'):
-    import textacy_patch
-    logger.info('loading corpus (this might take some time)...')
     if format == 'binary':
         '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
         docs = textacy_patch.read_spacy_docs(filename, format=format, lang=lang) 
         corpus = textacy.Corpus(docs=docs, lang=lang)
+        
+        #spacy_docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
+        #first_spacy_doc, spacy_docs = itertoolz.peek(spacy_docs)
+        #spacy_lang_meta = first_spacy_doc.user_data['textacy'].pop('spacy_lang_meta')
+        #spacy_lang = spacy.util.get_lang_class(spacy_lang_meta['lang'])(vocab=first_spacy_doc.vocab, meta=spacy_lang_meta)
+        #for name in spacy_lang_meta['pipeline']:
+        #    spacy_lang.add_pipe(spacy_lang.create_pipe(name))
+        #return cls(spacy_lang, docs=spacy_docs)
+    
     else:
         corpus = textacy.Corpus.load(filename)
         
@@ -375,6 +406,7 @@ def keep_hyphen_tokenizer(nlp):
 
     return spacy.tokenizer.Tokenizer(nlp.vocab, prefix_search=prefix_re.search, suffix_search=suffix_re.search, infix_finditer=infix_re.finditer, token_match=None)
 
+@utility.timecall
 def setup_nlp_language_model(language, **nlp_args):
     
     if (len(nlp_args.get('disable', [])) == 0):
@@ -490,3 +522,27 @@ def store_tokens_to_file(corpus, filename):
         tokens['lemma'] = tokens.token.str.replace('\n', ' ')
         tokens['lemma'] = tokens.token.str.replace('"', ' ')
         tokens.to_csv(filename, sep='\t')
+
+def load_term_substitutions(filepath, default_term='_gpe_', delim=';', vocab=None):
+    substitutions = {}
+    if not os.path.isfile(filepath):
+        return {}
+    
+    with open(filepath) as f:
+        substitutions = {
+            x[0].strip(): x[1].strip() for x in (
+                tuple(line.lower().split(delim)) + (default_term,) for line in f.readlines() 
+            ) if x[0].strip() != ''
+        }
+        
+    if vocab is not None:
+        
+        extras = { x.norm_: substitutions[x.lower_] for x in vocab if x.lower_ in substitutions }
+        substitutions.update(extras)
+        
+        extras = { x.lower_: substitutions[x.norm_] for x in vocab if x.norm_  in substitutions }
+        substitutions.update(extras)
+    
+    substitutions = { k: v for k, v in substitutions.items() if k != v }
+    
+    return substitutions

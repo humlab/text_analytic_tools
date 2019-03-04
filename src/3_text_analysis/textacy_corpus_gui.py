@@ -73,6 +73,7 @@ def generate_textacy_corpus(
         
         container.textacy_corpus = textacy_utility.create_textacy_corpus(stream, container.nlp, tick)
         
+        logger.info('storing corpus (this might take some time)...')
         textacy_utility.save_corpus(container.textacy_corpus, container.textacy_corpus_path, format=store_format)
         
         tick(0)
@@ -81,6 +82,7 @@ def generate_textacy_corpus(
         logger.info('Working: Loading corpus ' + container.textacy_corpus_path + '...')
         tick(1, 2)
         
+        logger.info('...reading corpus (this might take some time)...')
         container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp, format=store_format)
         tick(0)
         
@@ -112,8 +114,8 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
 
         merge_entities=widgets_config.toggle('Merge NER', compute_ner, icon='', layout=lw('100px')),
 
-        binary_format=widgets_config.toggle('Store as binary', False, disabled=True, icon='', layout=lw('130px')),
-        use_compression=widgets_config.toggle('Store compressed', True, disabled=True, icon='', layout=lw('130px')),
+        binary_format=widgets_config.toggle('Store as binary', False, disabled=False, icon='', layout=lw('130px')),
+        use_compression=widgets_config.toggle('Store compressed', True, disabled=False, icon='', layout=lw('130px')),
         overwrite=widgets_config.toggle('Force if exists', False, icon='', layout=lw('130px'), tooltip="Force generation of new corpus (even if exists)"),
         
         compute_pos=widgets_config.toggle('PoS', True, icon='', layout=lw('100px'), disabled=True, tooltip="Enable Part-of-Speech tagging"),

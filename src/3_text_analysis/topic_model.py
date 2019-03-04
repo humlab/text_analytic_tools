@@ -38,14 +38,14 @@ default_options = {
     }
 }
 
-def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
+def setup_gensim_algorithms(algorithm, document_index, bow_corpus, id2word, tm_args):
     
     # FIXME VARYING ASPECT: 
     #year_column = 'signed_year'
     year_column = 'year'
     
-    algorithms = {
-        'LSI': {
+    if algorithm == 'LSI':
+        return {
             'engine': gensim.models.LsiModel,
             'options': {
                 'corpus': bow_corpus, 
@@ -54,8 +54,10 @@ def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
                 'power_iters': 2,
                 'onepass': True
             }
-        },
-        'LDA': {
+        }
+    
+    if algorithm == 'LDA':
+        return {
             'engine': gensim.models.LdaModel,
             'options': {
                 'corpus': bow_corpus, 
@@ -80,8 +82,10 @@ def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
                 #    gensim.models.callbacks.ConvergenceMetric(distance='jaccard', num_words=100, logger='shell')
                 #]
             }
-        },
-        'HDP': {
+        }
+        
+    if algorithm =='HDP':
+        return {
             'engine': gensim.models.HdpModel,
             'options': {
                 'corpus': bow_corpus, 
@@ -91,22 +95,27 @@ def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
                 #'passes': tm_args.get('passes', 20),
                 #'alpha': 'auto'
             }
-        },
-        'DTM': {
+        }
+        
+    if algorithm == 'DTM':
+        return {
             'engine': gensim.models.LdaSeqModel,
             'options': {
                 'corpus': bow_corpus, 
                 'num_topics':  tm_args.get('n_topics', 0),
                 'id2word':  id2word,
-                'time_slice': textacy_utility.count_documents_by_pivot(corpus, year_column)
+                ### 'time_slice': textacy_utility.count_documents_by_pivot(corpus, year_column),
+                'time_slice': textacy_utility.count_documents_in_index_by_pivot(document_index, year_column),
                 # 'initialize': 'gensim/own/ldamodel',
                 # 'lda_model': model # if initialize='gensim'
                 # 'lda_inference_max_iter': tm_args.get('max_iter', 0),
                 # 'passes': tm_args.get('passes', 20),
                 # 'alpha': 'auto'
             }
-        },
-        'MALLET-LDA': {
+        }
+    
+    if algorithm == 'MALLET-LDA':
+        return {
             'engine': mallet_topic_model.MalletTopicModel,
             'options': {
                 'corpus': bow_corpus, 
@@ -121,40 +130,38 @@ def setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args):
                 'workers': 4,
                 'optimize_interval': 10,
             }
-        },
-    }
-    for sttm in sttm_topic_model.AVALIABLE_MODELS:
-        algorithms['STTM-{}'.format(sttm)] = dict(
-            engine=sttm_topic_model.STTMTopicModel,
-            options=dict(
-                sstm_jar_path='./lib/STTM.jar',
-                model=sttm,
-                corpus=bow_corpus,
-                id2word=id2word,
-                num_topics=tm_args.get('n_topics', 20),
-                iterations=tm_args.get('max_iter', 2000),
-                prefix=TEMP_PATH,
-                name='{}_model'.format(sttm)
-                #vectors,
-                #alpha=0.1,
-                #beta=0.01,
-                #twords=20,
-                #sstep=0
-            )
-        )
-    return algorithms
+        }
 
+    if algorithm.startswith('STTM-'):
+        sttm = algorithm[5:]
+        return {
+            'engine': sttm_topic_model.STTMTopicModel,
+            'options': {
+                'sstm_jar_path': './lib/STTM.jar',
+                'model': sttm,
+                'corpus': bow_corpus,
+                'id2word': id2word,
+                'num_topics': tm_args.get('n_topics', 20),
+                'iterations': tm_args.get('max_iter', 2000),
+                'prefix': TEMP_PATH,
+                'name': '{}_model'.format(sttm)
+                #'vectors', 'alpha'=0.1, 'beta'=0.01, 'twords'=20,sstep=0
+            }
+        }
+    
+    assert False, 'Unknown model!'
+    
 # FIXME VARYING ASPECTS:
 # documents = textacy_utility.tCoIR_get_corpus_documents(corpus)
-def compute(corpus, documents, tick=utility.noop, method='sklearn_lda', vec_args=None, term_args=None, tm_args=None, **args):
-    
-    tick()
+### def compute(corpus, documents, tick=utility.noop, method='sklearn_lda', vec_args=None, term_args=None, tm_args=None, **args):
+def compute(terms, documents, method='sklearn_lda', vec_args=None, tm_args=None, **args):
     
     vec_args = utility.extend({}, DEFAULT_VECTORIZE_PARAMS, vec_args)
     
-    terms = [ list(doc) for doc in textacy_utility.extract_corpus_terms(corpus, term_args) ]
-    fx_terms = lambda: terms # [ doc for doc in textacy_utility.extract_corpus_terms(corpus, term_args) ]
-            
+    ### terms = [ list(doc) for doc in textacy_utility.extract_corpus_terms(corpus, term_args) ]
+    ### fx_terms = lambda: terms # [ doc for doc in textacy_utility.extract_corpus_terms(corpus, term_args) ]
+    fx_terms = lambda: terms
+    
     perplexity_score = None
     coherence_score = None
     vectorizer = None
@@ -172,11 +179,7 @@ def compute(corpus, documents, tick=utility.noop, method='sklearn_lda', vec_args
         model = textacy.TopicModel(method.split('_')[1], **tm_args)
         model.fit(doc_term_matrix)
         
-        tick()
-        
         doc_topic_matrix = model.transform(doc_term_matrix)
-        
-        tick()
         
         id2word = vectorizer.id_to_term
         bow_corpus = gensim.matutils.Sparse2Corpus(doc_term_matrix, documents_columns=False)
@@ -187,20 +190,21 @@ def compute(corpus, documents, tick=utility.noop, method='sklearn_lda', vec_args
         
     elif method.startswith('gensim_'):
         
-        algorithm = method.split('_')[1].upper()
+        algorithm_name = method.split('_')[1].upper()
         
         id2word = gensim.corpora.Dictionary(fx_terms())
         bow_corpus = [ id2word.doc2bow(tokens) for tokens in fx_terms() ]
         
         if args.get('tfidf_weiging', False):
-            # assert algorithm != 'MALLETLDA', 'MALLET training model cannot (currently) use TFIDF weighed corpus'
+            # assert algorithm_name != 'MALLETLDA', 'MALLET training model cannot (currently) use TFIDF weighed corpus'
             tfidf_model = gensim.models.tfidfmodel.TfidfModel(bow_corpus)
             bow_corpus = [ tfidf_model[d] for d in bow_corpus ]
         
-        algorithms = setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args)
+        ### algorithms = setup_gensim_algorithms(corpus, bow_corpus, id2word, tm_args)
+        algorithm = setup_gensim_algorithms(algorithm_name, documents, bow_corpus, id2word, tm_args)
         
-        engine = algorithms[algorithm]['engine']
-        engine_options = algorithms[algorithm]['options']
+        engine = algorithm['engine']
+        engine_options = algorithm['options']
         
         model = engine(**engine_options)
         
@@ -234,11 +238,10 @@ def compute(corpus, documents, tick=utility.noop, method='sklearn_lda', vec_args
         processed=processed,
         perplexity_score=perplexity_score,
         coherence_score=coherence_score,
-        options=dict(method=method, vec_args=vec_args, term_args=term_args, tm_args=tm_args, **args),
+        ### options=dict(method=method, vec_args=vec_args, term_args=term_args, tm_args=tm_args, **args),
+        options=dict(method=method, vec_args=vec_args, tm_args=tm_args, **args),
         coherence_scores=None
     )
-    
-    tick(0)
     
     return model_data
 

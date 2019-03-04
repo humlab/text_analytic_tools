@@ -69,7 +69,7 @@ class CompressedFileReader:
             content = gensim.utils.to_unicode(content, 'utf8', errors='ignore')
             content = dehyphen(content)
             return content
-        
+
 class GenericTextCorpus(TextCorpus):
 
     def __init__(self, stream, dictionary=None, metadata=False, character_filters=None, tokenizer=None, token_filters=None, bigram_transform=False):
@@ -83,10 +83,7 @@ class GenericTextCorpus(TextCorpus):
         #    self.document_names = self._compile_documents()
         #    self.length = len(self.filenames)
             
-        token_filters = [
-           (lambda tokens: [ x.lower() for x in tokens ]),
-           (lambda tokens: [ x for x in tokens if any(map(lambda x: x.isalpha(), x)) ])
-        ] + (token_filters or [])
+        token_filters = self.default_token_filters() + (token_filters or [])
         
         #if bigram_transform is True:
         #    train_corpus = GenericTextCorpus(content_iterator, token_filters=[ x.lower() for x in tokens ])
@@ -105,6 +102,12 @@ class GenericTextCorpus(TextCorpus):
             token_filters=token_filters
         )
         
+    def default_token_filters(self):
+        return [
+            (lambda tokens: [ x.lower() for x in tokens ]),
+            (lambda tokens: [ x for x in tokens if any(map(lambda x: x.isalpha(), x)) ])
+        ]
+    
     def getstream(self):
         """Generate documents from the underlying plain text collection (of one or more files).
         Yields
@@ -125,7 +128,8 @@ class GenericTextCorpus(TextCorpus):
             
         self.length = len(document_infos)
         self.documents = pd.DataFrame(document_infos)
-                 
+        self.filenames = list(self.documents.document_name.values)
+        
     def get_texts(self):
         '''
         This is mandatory method from gensim.corpora.TextCorpus. Returns stream of documents.
@@ -169,7 +173,23 @@ class GenericTextCorpus(TextCorpus):
         documents.index.names = ['document_id']
         
         return documents
+    
+class SimplePreparedTextCorpus(GenericTextCorpus):
+    """Reads content in stream and returns tokenized text. No other processing.
+    """
+    def __init__(self, source):
         
+        self.reader = CompressedFileReader(source)
+        self.filenames = self.reader.filenames
+        source = self.reader
+        super(SimplePreparedTextCorpus, self).__init__(source)
+        
+    def default_token_filters(self):
+        return [ ]
+    
+    def preprocess_text(self, text):
+        return self.tokenizer(text)
+
 class MmCorpusStatisticsService():
     
     def __init__(self, corpus, dictionary, language):
