@@ -14,10 +14,8 @@ from textacy.spacier.utils import merge_spans
 
 logger = utility.getLogger('corpus_text_analysis')
 
-#FIXME VARYING ASPECTS:
-import domain_logic_vatican as domain_logic
-        
 def generate_textacy_corpus(
+    domain_logic,
     data_folder,
     container,
     document_index,  # data_frame or lambda corpus: corpus_index
@@ -88,15 +86,19 @@ def generate_textacy_corpus(
         
     if merge_entities:
         logger.info('Working: Merging named entities...')
-        for doc in container.textacy_corpus:
-            named_entities = textacy.extract.named_entities(doc)
-            merge_spans(named_entities, doc.spacy_doc)
+        try:
+            for doc in container.textacy_corpus:
+                named_entities = textacy.extract.named_entities(doc)
+                textacy.spacier.utils.merge_spans(named_entities, doc.spacy_doc)
+        except Exception as ex:
+            logger.error(ex)
+            logger.info('NER merge failed')
     else:
         logger.info('Named entities not merged')
                 
     logger.info('Done!')
     
-def display_corpus_load_gui(data_folder, document_index=None, container=None, compute_ner=False):
+def display_corpus_load_gui(data_folder, document_index=None, container=None, compute_ner=False, domain_logic=None):
     
     lw = lambda w: widgets.Layout(width=w)
     
@@ -162,6 +164,7 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
                              (() if gui.compute_ner.value else ("ner",)) + \
                              ("textcat", )
             generate_textacy_corpus(
+                domain_logic=domain_logic,
                 data_folder=data_folder,
                 container=container,
                 document_index=document_index,

@@ -36,7 +36,7 @@ def get_document_stream(corpus_path, lang, document_index=None, id_extractor=Non
 
     id_extractor = lambda filename: filename.split('_')[0]
 
-    documents = CompressedFileReader(corpus_path, lang)
+    documents = CompressedFileReader(corpus_path) #, lang)
 
     id_map = { }
     

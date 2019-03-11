@@ -3,6 +3,7 @@
 *.swo
 *.gz
 *.bin
+*.xlsx
 .venv/
 tmp/
 __pycache__/
@@ -20,3 +21,4 @@ results/
 .spyproject/
 Archive/
 desktop.ini
+global_corpus_index.txt

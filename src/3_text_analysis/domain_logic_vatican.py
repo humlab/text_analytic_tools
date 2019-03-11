@@ -1,7 +1,6 @@
 import pandas as pd
 import text_corpus
 
-# FIXME VARYING ASPECTS: 
 DOCUMENT_FILTERS = [
         {
             'type': 'multiselect',
@@ -20,7 +19,25 @@ DOCUMENT_FILTERS = [
             'query': 'year > 0'
         }
     ]
-        
+
+POPE_GROUP_FILTERS = [
+        {
+            'type': 'multiselect',
+            'description': 'Pope',
+            'field': 'pope'
+        },
+        {
+            'type': 'multiselect',
+            'description': 'Genre',
+            'field': 'genre'
+        },
+        {
+            'type': 'multiselect',
+            'description': 'Year',
+            'field': 'year'
+        }
+    ]
+
 GROUP_BY_OPTIONS = [
     ('Year', ['year']),
     ('Pope', ['pope']),
@@ -33,6 +50,7 @@ GROUP_BY_OPTIONS = [
 def compile_documents_by_filename(filenames):
 
     parts = [ x.split('_') for x in filenames ]
+ 
     pope, lang, genre, year, sub_genre = list(zip(*[ (x[0], x[1], x[2], x[3]if x[3].isdigit() else x[4], x[4] if x[3].isdigit() else x[3])  for x in parts ]))
 
     df = pd.DataFrame( {
@@ -45,6 +63,19 @@ def compile_documents_by_filename(filenames):
     })
     df['document_id'] = df.index
     df['title'] = df.filename
+    
+    return df
+
+def _compile_documents(corpus, corpus_index=None):
+    
+    if len(corpus) == 0:
+        return None
+    
+    if corpus_index is not None:
+        corpus_index = corpus_index[corpus_index.filename.isin(filenames)]
+        return corpus_index
+    
+    df = pd.DataFrame([ x.metadata for x in corpus ])
     
     return df
 
@@ -62,7 +93,7 @@ def get_document_stream(source, lang, **kwargs):
     
     if isinstance(source, str):
         # FIXME Use "smart_open" or "open_sesame" library instead 
-        reader = text_corpus.CompressedFileReader(source, lang)
+        reader = text_corpus.CompressedFileReader(source)
     else:
         reader = source
         

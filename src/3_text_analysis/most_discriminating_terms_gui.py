@@ -18,25 +18,6 @@ from IPython.display import display
 
 logger = logging.getLogger(__name__)
 
-# FIXME VARYING ASPECTS: 
-POPE_GROUP_FILTERS = [
-        {
-            'type': 'multiselect',
-            'description': 'Pope',
-            'field': 'pope'
-        },
-        {
-            'type': 'multiselect',
-            'description': 'Genre',
-            'field': 'genre'
-        },
-        {
-            'type': 'multiselect',
-            'description': 'Year',
-            'field': 'year'
-        }
-    ]
-
 generate_group_filters = gui_utility.generate_field_filters
 
 def compute_most_discriminating_terms(
@@ -79,7 +60,7 @@ def compute_most_discriminating_terms(
 def display_most_discriminating_terms(df):
     display(df)
         
-def display_gui(documents, corpus):
+def display_gui(documents, corpus, domain_logic):
     
     compute_callback = compute_most_discriminating_terms
     display_callback = display_most_discriminating_terms
@@ -97,8 +78,8 @@ def display_gui(documents, corpus):
     #period_default = (min(signed_years), max(signed_years))
     
     # FIXME VARYING ASPECTS: 
-    group1_filters = generate_group_filters(documents, POPE_GROUP_FILTERS)
-    group2_filters = generate_group_filters(documents, POPE_GROUP_FILTERS)
+    group1_filters = generate_group_filters(documents, domain_logic.DOCUMENT_FILTERS)
+    group2_filters = generate_group_filters(documents, domain_logic.DOCUMENT_FILTERS)
     
     gui = types.SimpleNamespace(
         progress=widgets.IntProgress(value=0, min=0, max=5, step=1, description='', layout=lw('90%')),

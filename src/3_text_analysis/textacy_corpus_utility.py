@@ -44,11 +44,11 @@ def count_documents_in_index_by_pivot(documents, attribute):
     # FIXME: Either sort documents (and corpus or term stream!) prior to this call - OR force sortorder by filename (i.e add year-prefix)
     return list(documents.groupby(attribute).size().values)
 
-import numba
-from numba import jit
-print(numba.__version__)
+#import numba
+#from numba import jit
+#print(numba.__version__)
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def generate_word_count_score(corpus, normalize, count):
     wc = corpus.word_freqs(normalize=normalize, weighting='count', as_strings=True)
     d = { i: set([]) for i in range(1, count+1)}
@@ -57,7 +57,7 @@ def generate_word_count_score(corpus, normalize, count):
             d[v].add(k)
     return d
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def generate_word_document_count_score(corpus, normalize, threshold=75):
     wc = corpus.word_doc_freqs(normalize=normalize, weighting='freq', smooth_idf=True, as_strings=True)
     d = { i: set([]) for i in range(threshold, 101)}
@@ -331,14 +331,26 @@ def get_disabled_pipes_from_filename(filename):
         return x[0].split(',')
     return None
 
-def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop):
+def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop, strip_tensor=True):
     logger.info('creating corpus (this might take some time)...')
     batch_size = 100
     corpus = textacy.Corpus(nlp)
     document_id = 0
+    n_chunk_threshold = 50000
     for filename, text, metadata in corpus_reader:
+        
         metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
-        corpus.add_text(text, metadata)
+        
+        if len(text) > n_chunk_threshold:
+            spacy_doc = textacy.spacier.utils.make_doc_from_text_chunks(text, lang=nlp, chunk_size=n_chunk_threshold)
+            corpus.add_doc(spacy_doc, metadata)
+        else:
+            corpus.add_text(text, metadata)
+        
+        if strip_tensor:
+            for doc in corpus:
+                doc.spacy_doc.tensor = None
+                
         document_id += 1
         if document_id % batch_size == 0:
             logger.info('%s documents added...', document_id)
@@ -346,6 +358,8 @@ def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop):
             
     return corpus
 
+    textacy.spacier.utils.make_doc_from_text_chunks(text, lang, chunk_size=100000)
+    
 @utility.timecall
 def save_corpus(
     corpus,
