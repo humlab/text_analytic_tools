@@ -67,20 +67,24 @@ def generate_textacy_corpus(
         
         logger.info('Working: Stream created...')
         
-        tick(0, len(reader.filenames))
-        
-        container.textacy_corpus = textacy_utility.create_textacy_corpus(stream, container.nlp, tick)
-        
-        logger.info('storing corpus (this might take some time)...')
-        textacy_utility.save_corpus(container.textacy_corpus, container.textacy_corpus_path, format=store_format)
-        
-        tick(0)
-        
+        if False:
+            tick(0, len(reader.filenames))
+
+            container.textacy_corpus = textacy_utility.create_textacy_corpus(stream, container.nlp, tick)
+
+            logger.info('storing corpus (this might take some time)...')
+            textacy_utility.save_corpus(container.textacy_corpus, container.textacy_corpus_path, format=store_format)
+
+            tick(0)
+        else:
+            textacy_utility.create_textacy_corpus_streamed(stream, container.nlp, container.textacy_corpus_path, format='binary', tick=utility.noop)
+            container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp, format='binary')
+            
     else:
         logger.info('Working: Loading corpus ' + container.textacy_corpus_path + '...')
         tick(1, 2)
         
-        logger.info('...reading corpus (this might take some time)...')
+        logger.info('...reading corpus (this might take several minutes)...')
         container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp, format=store_format)
         tick(0)
         

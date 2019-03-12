@@ -54,20 +54,23 @@ def chunk_text(text, step=50000):
 
 def load_corpus_index(corpus_name):
     '''Given a corpus filename "xxxxx.zip", the document index name is expected to be "xxxxx_index.txt"'''
+
+    def index_filename(corpus_name):
+        try:
+            m = re.match('(.*)\.txt.*\.zip', corpus_name)
+            return m.groups()[0] + '_stats.txt'
+        except:
+            return None
+        
+    corpus_index_name = index_filename(corpus_name)
     
-    basename, _ = os.path.splitext(corpus_name)
-    corpus_index_name = '{}_index.txt'.format(basename)
-    global_index_name = './global_corpus_index.txt'    
-    
-    if not (os.path.isfile(corpus_index_name) or os.path.isfile(global_index_name)):
-        logger.info('No Corpus Index found (looked for {} or {}.)'.format(corpus_index_name, global_index_name))
+    if corpus_index_name is None or not (os.path.isfile(corpus_index_name)):
+        logger.info('Corpus index not found (looked for {})'.format(corpus_index_name))
         return None
     
-    index_name = corpus_index_name if os.path.isfile(corpus_index_name) else global_index_name
+    logger.info('Using corpus index: {}'.format(corpus_index_name))
     
-    logger.info('Using corpus index: '.format(index_name))
-    
-    df = pd.read_csv(index_name, sep='\t')
+    df = pd.read_csv(corpus_index_name, sep='\t')
     
     return df
 

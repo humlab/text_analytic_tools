@@ -382,6 +382,53 @@ def save_corpus(
                 doc.spacy_doc.tensor = None
         corpus.save(filename)
 
+def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='binary', tick=utility.noop):
+    '''Create and store spaCy docs as a stream (without creating textaCy Doc or textaCy Corpus)'''
+    
+    assert format == 'binary', 'create_textacy_corpus_streamed: must be stored as binary!'
+    
+    logger.info('creating corpus (this might take some time)...')
+    batch_size = 100
+    document_id = 0
+    n_chunk_threshold = 99999   
+    
+    try:
+        print(nlp.pipeline)
+        with open(corpus_path, mode="wb") as f:
+
+            for filename, text, metadata in corpus_reader:
+
+                metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
+
+                logger.info('creating document %s...', document_id)
+                if len(text) > n_chunk_threshold:
+                    spacy_doc = textacy.spacier.utils.make_doc_from_text_chunks(text, lang=nlp, chunk_size=n_chunk_threshold)
+                else:
+                    spacy_doc = nlp(text)
+
+                spacy_doc.user_data["textacy"] = {}
+                spacy_doc.user_data["textacy"]["metadata"] = metadata
+
+                if document_id == 0:
+                    spacy_doc.user_data["textacy"]["spacy_lang_meta"] = nlp.meta
+
+                spacy_doc.tensor = None
+
+                logger.info('saving document %s...', document_id)
+                f.write(spacy_doc.to_bytes(tensor=False))
+
+                document_id += 1
+                
+                #if document_id % batch_size == 0:
+                logger.info('%s documents added...size was %s...', document_id, len(spacy_doc))
+                tick(document_id)
+
+                spacy_doc = None
+    except Exception as ex:
+        logger.exception(ex)
+        if os.path.isfile(corpus_path):
+            os.remove(corpus_path)
+            
 #from cytoolz import itertoolz
 import textacy_patch
 
@@ -478,7 +525,7 @@ def get_corpus_data(corpus, document_index, title, columns_of_interest=None):
     df['words'] = df[POS_NAMES].apply(sum, axis=1)
     return df
 
-def textacy_doc_to_bow(doc, target='lemma', weighting='count', as_strings=False, include=None):
+def textacy_doc_to_bow(doc, target='lemma', weighting='count', as_strings=False, include=None, n_min_count=2):
 
     spacy_doc = doc.spacy_doc
     
@@ -486,21 +533,22 @@ def textacy_doc_to_bow(doc, target='lemma', weighting='count', as_strings=False,
     target_keys = { 'lemma': attrs.LEMMA, 'lower': attrs.LOWER, 'orth': attrs.ORTH }
     
     default_exclude = lambda x: x.is_stop or x.is_punct or x.is_space
-    exclude = default_exclude if include is None else lambda x: default_exclude(x) or not include(x)
+    exclude = default_exclude if include is None else lambda x: x.is_stop or x.is_punct or x.is_space or not include(x)
     
     assert weighting in weighing_keys
     assert target in target_keys
 
     target_weights = spacy_doc.count_by(target_keys[target], exclude=exclude)
+    n_tokens = doc.n_tokens
     
     if weighting == 'freq':
-        n_tokens = sum(target_weights.values())
         target_weights = { id_: weight / n_tokens for id_, weight in target_weights.items() }
 
+    store = doc.spacy_stringstore
     if as_strings:
-        bow = { doc.spacy_stringstore[word_id]: count for word_id, count in target_weights.items() }
+        bow = { store[word_id]: count for word_id, count in target_weights.items() if count >= n_min_count}
     else:
-        bow = { word_id: count for word_id, count in target_weights.items() }
+        bow = target_weights # { word_id: count for word_id, count in target_weights.items() }
         
     return bow
 
