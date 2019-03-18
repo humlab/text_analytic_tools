@@ -1,6 +1,8 @@
 import pandas as pd
 import text_corpus
 
+DATA_FOLDER = '../../data'
+
 DOCUMENT_FILTERS = [
         {
             'type': 'multiselect',

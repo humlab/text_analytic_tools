@@ -358,8 +358,6 @@ def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop, strip_tensor=Tr
             
     return corpus
 
-    textacy.spacier.utils.make_doc_from_text_chunks(text, lang, chunk_size=100000)
-    
 @utility.timecall
 def save_corpus(
     corpus,
@@ -389,41 +387,46 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
     
     logger.info('creating corpus (this might take some time)...')
     batch_size = 100
-    document_id = 0
     n_chunk_threshold = 99999   
     
     try:
-        print(nlp.pipeline)
-        with open(corpus_path, mode="wb") as f:
-
+        def gen_docs(corpus_reader, nlp):
+            
+            document_id = 0
             for filename, text, metadata in corpus_reader:
 
                 metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
 
-                logger.info('creating document %s...', document_id)
                 if len(text) > n_chunk_threshold:
                     spacy_doc = textacy.spacier.utils.make_doc_from_text_chunks(text, lang=nlp, chunk_size=n_chunk_threshold)
                 else:
                     spacy_doc = nlp(text)
 
-                spacy_doc.user_data["textacy"] = {}
+                if "textacy" not in spacy_doc.user_data:
+                    spacy_doc.user_data["textacy"] = {}
+                
                 spacy_doc.user_data["textacy"]["metadata"] = metadata
 
                 if document_id == 0:
                     spacy_doc.user_data["textacy"]["spacy_lang_meta"] = nlp.meta
 
                 spacy_doc.tensor = None
-
-                logger.info('saving document %s...', document_id)
-                f.write(spacy_doc.to_bytes(tensor=False))
-
+                if document_id == 0:
+                    spacy_doc.user_data['textacy']['spacy_lang_meta'] = nlp.meta
+                
+                yield spacy_doc
+                
                 document_id += 1
                 
-                #if document_id % batch_size == 0:
                 logger.info('%s documents added...size was %s...', document_id, len(spacy_doc))
+                
                 tick(document_id)
 
                 spacy_doc = None
+            
+        docs = (doc for doc in gen_docs(corpus_reader, nlp))
+        textacy.io.write_spacy_docs(docs, corpus_path, format='binary', include_tensor=False)
+
     except Exception as ex:
         logger.exception(ex)
         if os.path.isfile(corpus_path):

@@ -4,6 +4,8 @@ import pandas as pd
 import textacy_corpus_utility 
 # FIXME VARYING ASPECTS
 
+DATA_FOLDER = '../../data'
+
 DOCUMENT_FILTERS = [
     ]
         

@@ -5,6 +5,8 @@ import re
 import logging
 import numpy as np
 
+DATA_FOLDER = '../../data'
+
 logger = logging.getLogger('UNESCO')
 logger.setLevel(logging.INFO)
 
@@ -72,6 +74,11 @@ def load_corpus_index(corpus_name):
     
     df = pd.read_csv(corpus_index_name, sep='\t')
     
+    df['local_number'] = df.local_number.astype(np.int64)
+    df = df.set_index('local_number')
+    df['local_number'] = df.index
+    df['document_id'] = df.index
+    
     return df
 
 def compile_unesco_corpus_index(source):
@@ -82,10 +89,10 @@ def compile_unesco_corpus_index(source):
         source_path = source.path if hasattr(source, 'path') else source
         df = load_corpus_index(source_path)
         if df is not None:
-            df['local_number'] = df.local_number.astype(np.int64)
-            df = df.set_index('local_number')
-            df['local_number'] = df.index
-            df['document_id'] = df.index
+#             df['local_number'] = df.local_number.astype(np.int64)
+#             df = df.set_index('local_number')
+#             df['local_number'] = df.index
+#             df['document_id'] = df.index
             return df
 
     if hasattr(source, 'filenames'):
@@ -120,7 +127,10 @@ def get_document_stream(source, lang, **kwargs):
     
     df_corpus_index = compile_unesco_corpus_index(reader)
     
-    reader.filenames = sorted(list(df_corpus_index[(df_corpus_index.year//10).isin([194, 195, 196, 197, 198])].filename.values))
+    #reader.filenames = sorted(list(df_corpus_index[(df_corpus_index.year//10).isin([194, 195, 196, 197, 198])].filename.values))
+    
+    logger.info('Note! Filter is applied: Only first file for each year.')
+    reader.filenames = list(df_corpus_index[df_corpus_index.filename.str.contains('en')].groupby('year')['filename'].min().values)
     
     df_corpus_index = df_corpus_index.loc[df_corpus_index.filename.isin(reader.filenames)].sort_values('filename')
     
@@ -169,6 +179,7 @@ def get_document_stream(source, lang, **kwargs):
         yielded_count += 1
 
     logger.info('Corpus read done: {} processed files, {} empty files, {} truncated files, {} files yielded'.format(processed_count, empty_count, truncated_count, yielded_count))
+    
 # FIXME VARYING ASPECTs: What attributes to extend
 def add_domain_attributes(df, document_index):
     df_extended = pd.merge(df, document_index, left_index=True, right_index=True, how='inner')    
