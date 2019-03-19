@@ -39,7 +39,10 @@ def recognize_named_entities(tagger, doc_id, text, excludes=None):
     merged_ents = []
     for sentence in sentences:
         tokens = nltk.word_tokenize(sentence)
-        ents = [ (doc_id, start_index + index, word, ent_type) for index, (word, ent_type) in enumerate(tagger.tag(tokens)) if ent_type not in excludes ]
+        tagged_data = tagger.tag(tokens)
+        print(tagged_data)
+        ents = [ (doc_id, start_index + index, word, ent_type) for index, (word, ent_type) \
+                in enumerate(tagged_data) if ent_type not in excludes ]
         start_index += len(sentence)
         merged_ents = merge_entities(ents)
     return merged_ents
@@ -75,13 +78,14 @@ def compute_stanford_ner(source_file, service_url=STANFORD_CORE_NLP_URL, exclude
     i = 0
     ner_data = []
     for filename, text, metadata in stream:
+        print(filename)
         document_id = document_index.loc[document_index.filename == filename, 'document_id'].values[0]
         ner = recognize_named_entities(tagger, document_id, text, excludes)
         ner_data.extend(ner)
         i += 1
         if i % 10 == 0:
             logger.info('Processed {} files...'.format(i))
-            #break
+        break
     return ner_data
 
 def compute_and_store_stanford_ner(source_file):
@@ -134,6 +138,6 @@ def display_stanford_ner_gui(data_folder):
 
 #data_folder = '../../data'
 #display_stanford_ner_gui(data_folder)
-for source_file in [ '../../data/benedict-xvi_curated_20190326.txt.zip', '../../data/francis_curated_20190326.txt.zip' ]:
+for source_file in [ '../../data/benedict-xvi_curated_20190326.txt.zip']: #, '../../data/francis_curated_20190326.txt.zip' ]:
     compute_and_store_stanford_ner(source_file)
     
