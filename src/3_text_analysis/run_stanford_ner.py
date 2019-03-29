@@ -32,44 +32,38 @@ def merge_entities(entities):
             merged.append((doc_id, i_n, w_n, t_n))
     return merged
 
-def recognize_named_entities(tagger, doc_id, text, excludes=None):
+def recognize_named_entities(tagger, doc_id, text, excludes=None, includes=None):
+    ''' excludes not used '''
     sentences = nltk.sent_tokenize(text)
     start_index = 0
     excludes = excludes or []
+    includes = includes or []
     merged_ents = []
     for sentence in sentences:
         tokens = nltk.word_tokenize(sentence)
         tagged_data = tagger.tag(tokens)
-        print(tagged_data)
         ents = [ (doc_id, start_index + index, word, ent_type) for index, (word, ent_type) \
-                in enumerate(tagged_data) if ent_type not in excludes ]
+                in enumerate(tagged_data) if ent_type in includes ]
         start_index += len(sentence)
-        merged_ents = merge_entities(ents)
+        merged_ents.extend(merge_entities(ents))
     return merged_ents
+           
+def compute_stanford_ner(source_file, service_url=STANFORD_CORE_NLP_URL, excludes=None, includes=None):
+    
+    includes = includes or (
+        'LOCATION', 'CITY', 'STATE_OR_PROVINCE', 'COUNTRY'
+    )
+    
+    # For English, by default, this annotator recognizes named (PERSON, LOCATION, ORGANIZATION, MISC),
+    # numerical (MONEY, NUMBER, ORDINAL, PERCENT), and temporal (DATE, TIME, DURATION, SET) entities (12 classes).
+    # Adding the regexner annotator and using the supplied RegexNER pattern files adds support for the fine-grained and additional entity 
+    # classes EMAIL, URL, CITY, STATE_OR_PROVINCE, COUNTRY, NATIONALITY, RELIGION, (job) 
+    # TITLE, IDEOLOGY, CRIMINAL_CHARGE, CAUSE_OF_DEATH (11 classes) for a total of 23 classes.
 
-#
-#     if not os.path.isfile(targetfile) or overwrite:
-#         if os.path.isfile(targetfile):
-#             os.remove(targetfile)
-#         with zipfile.ZipFile(targetfile, "w", compression=zipfile.ZIP_DEFLATED) as z:
-#             pass
-#     else:
-        
-#         with zipfile.ZipFile(targetfile, "r") as z:
-#             zip_filenames = z.namelist()
-            
-#         pdf_filepaths = list(set(pdf_filepaths) - set(zip_filenames))
-    
-#     with zipfile.ZipFile(targetfile, "a", compression=zipfile.ZIP_DEFLATED) as z:
-#         z.writestr(text_filename, pdf_text)
-            
-def compute_stanford_ner(source_file, service_url=STANFORD_CORE_NLP_URL, excludes=None):
-    
-    excludes = excludes or ('O', )
-    
     assert os.path.isfile(source_file), 'File missing!'
     
     tagger = corenlp.CoreNLPParser(url=service_url, encoding='utf8', tagtype='ner')
+    #tokenizer = corenlp.CoreNLPParser(url=service_url, encoding='utf8')
     
     reader = text_corpus.CompressedFileReader(source_file)
     document_index = domain_logic.compile_documents_by_filename(reader.filenames)
@@ -80,17 +74,19 @@ def compute_stanford_ner(source_file, service_url=STANFORD_CORE_NLP_URL, exclude
     for filename, text, metadata in stream:
         print(filename)
         document_id = document_index.loc[document_index.filename == filename, 'document_id'].values[0]
-        ner = recognize_named_entities(tagger, document_id, text, excludes)
+        ner = recognize_named_entities(tagger, document_id, text, excludes, includes)
         ner_data.extend(ner)
         i += 1
         if i % 10 == 0:
             logger.info('Processed {} files...'.format(i))
-        break
+            # break
+        
     return ner_data
 
 def compute_and_store_stanford_ner(source_file):
     
     ner_data = compute_stanford_ner(source_file=source_file)
+
     df = pd.DataFrame(ner_data, columns=['doc_id', 'pos', 'entity', 'ent_type'])
     df.index.name = 'id'
 
@@ -100,7 +96,6 @@ def compute_and_store_stanford_ner(source_file):
     )
 
     df.to_csv(store_name, sep='\t')
-
     logger.info('Result stored in %s', store_name)
     return df
         
@@ -129,15 +124,18 @@ def display_stanford_ner_gui(data_folder):
     ]))
     
     def compute_stanford_ner_callback(*_args):
+        
         gui.output.clear_output()
+        
         with gui.output:
-            compute_and_store_stanford_ner(gui.source_path.value)
-            #display(df)
+            df = compute_and_store_stanford_ner(gui.source_path.value)
+            display(df)
+            
     gui.compute.on_click(compute_stanford_ner_callback)
 
 
 #data_folder = '../../data'
 #display_stanford_ner_gui(data_folder)
-for source_file in [ '../../data/benedict-xvi_curated_20190326.txt.zip']: #, '../../data/francis_curated_20190326.txt.zip' ]:
+for source_file in [ '../../data/francis_curated_20190326.txt.zip', '../../data/benedict-xvi_curated_20190326.txt.zip', ]:
     compute_and_store_stanford_ner(source_file)
     
