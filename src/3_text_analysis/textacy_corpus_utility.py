@@ -418,14 +418,15 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
                 
                 document_id += 1
                 
-                logger.info('%s documents added...size was %s...', document_id, len(spacy_doc))
+                if document_id % 50 == 0:
+                    logger.info('%s documents added...size was %s...', document_id, len(spacy_doc))
                 
                 tick(document_id)
 
                 spacy_doc = None
             
         docs = (doc for doc in gen_docs(corpus_reader, nlp))
-        textacy.io.write_spacy_docs(docs, corpus_path, format='binary', include_tensor=False)
+        textacy.io.write_spacy_docs(docs, corpus_path, format='binary', exclude=('tensor',))
 
     except Exception as ex:
         logger.exception(ex)
@@ -439,7 +440,9 @@ import textacy_patch
 def load_corpus(filename, lang, document_id='document_id', format='binary'):
     if format == 'binary':
         '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
-        docs = textacy_patch.read_spacy_docs(filename, format=format, lang=lang) 
+        #docs = textacy_patch.read_spacy_docs(filename, format=format, lang=lang) 
+        docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
+
         corpus = textacy.Corpus(docs=docs, lang=lang)
         
         #spacy_docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
