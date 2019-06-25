@@ -86,7 +86,6 @@ def generate_textacy_corpus(
         
         logger.info('...reading corpus (this might take several minutes)...')
         container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp, format=store_format)
-        tick(0)
         
     if merge_entities:
         logger.info('Working: Merging named entities...')
@@ -100,6 +99,7 @@ def generate_textacy_corpus(
     else:
         logger.info('Named entities not merged')
                 
+    tick(0)
     logger.info('Done!')
     
 def display_corpus_load_gui(data_folder, document_index=None, container=None, compute_ner=False, domain_logic=None):

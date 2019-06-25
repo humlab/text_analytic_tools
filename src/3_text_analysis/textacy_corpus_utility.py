@@ -385,7 +385,7 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
     
     assert format == 'binary', 'create_textacy_corpus_streamed: must be stored as binary!'
     
-    logger.info('creating corpus (this might take some time)...')
+    logger.info('Notice: creating corpus from stream (this might take some time)...')
     batch_size = 100
     n_chunk_threshold = 99999   
     
@@ -422,7 +422,6 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
                     logger.info('%s documents added...size was %s...', document_id, len(spacy_doc))
                 
                 tick(document_id)
-
                 spacy_doc = None
             
         docs = (doc for doc in gen_docs(corpus_reader, nlp))
@@ -436,13 +435,35 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
 #from cytoolz import itertoolz
 import textacy_patch
 
+def debinaryfy(x):
+    y = {}
+    if not isinstance(x, dict):
+        return y
+    for key, value in x.items(): 
+        key = key if isinstance(key, str) else str(key, 'utf-8')
+        if isinstance(value, bytes):
+            value = str(value, 'utf-8')
+        elif isinstance(value, dict):
+            value = debinaryfy(value)
+        y[key] = value
+    return y
+
+def patch_metadata_stream(docs):
+    for doc in docs:
+        if not b'textacy' in doc.user_data:
+            continue
+        doc.user_data['textacy'] = debinaryfy(doc.user_data[b'textacy'])
+        del doc.user_data[b'textacy']
+        yield doc
+        
 @utility.timecall
 def load_corpus(filename, lang, document_id='document_id', format='binary'):
     if format == 'binary':
         '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
+        logger.info('Notice: loading binary corpus (this might take some time)...')
         #docs = textacy_patch.read_spacy_docs(filename, format=format, lang=lang) 
         docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
-
+        docs = patch_metadata_stream(docs)
         corpus = textacy.Corpus(docs=docs, lang=lang)
         
         #spacy_docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
