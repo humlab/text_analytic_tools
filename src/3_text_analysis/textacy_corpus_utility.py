@@ -335,9 +335,9 @@ def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop, strip_tensor=Tr
     logger.info('creating corpus (this might take some time)...')
     batch_size = 100
     corpus = textacy.Corpus(nlp)
-    document_id = 0
+    document_counter = 0
     n_chunk_threshold = 50000
-    for filename, text, metadata in corpus_reader:
+    for filename, document_id, text, metadata in corpus_reader:
         
         metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
         
@@ -351,10 +351,10 @@ def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop, strip_tensor=Tr
             for doc in corpus:
                 doc.spacy_doc.tensor = None
                 
-        document_id += 1
-        if document_id % batch_size == 0:
-            logger.info('%s documents added...', document_id)
-            tick(document_id)
+        document_counter += 1
+        if document_counter % batch_size == 0:
+            logger.info('%s documents added...', document_counter)
+            tick(document_counter)
             
     return corpus
 
@@ -392,8 +392,8 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
     try:
         def gen_docs(corpus_reader, nlp):
             
-            document_id = 0
-            for filename, text, metadata in corpus_reader:
+            document_counter = 0
+            for filename, document_id, text, metadata in corpus_reader:
 
                 metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
 
@@ -407,21 +407,21 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
                 
                 spacy_doc.user_data["textacy"]["metadata"] = metadata
 
-                if document_id == 0:
+                if document_counter == 0:
                     spacy_doc.user_data["textacy"]["spacy_lang_meta"] = nlp.meta
 
                 spacy_doc.tensor = None
-                if document_id == 0:
+                if document_counter == 0:
                     spacy_doc.user_data['textacy']['spacy_lang_meta'] = nlp.meta
                 
                 yield spacy_doc
                 
-                document_id += 1
+                document_counter += 1
                 
-                if document_id % 50 == 0:
-                    logger.info('%s documents added...size was %s...', document_id, len(spacy_doc))
+                if document_counter % 50 == 0:
+                    logger.info('%s documents added...size was %s...', document_counter, len(spacy_doc))
                 
-                tick(document_id)
+                tick(document_counter)
                 spacy_doc = None
             
         docs = (doc for doc in gen_docs(corpus_reader, nlp))
@@ -456,7 +456,7 @@ def patch_metadata_stream(docs):
         del doc.user_data[b'textacy']
         yield doc
         
-@utility.timecall
+# @utility.timecall
 def load_corpus(filename, lang, document_id='document_id', format='binary'):
     if format == 'binary':
         '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''

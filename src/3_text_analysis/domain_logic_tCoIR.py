@@ -4,34 +4,66 @@ import common.utility as utility
 import pandas as pd
 import textacy_corpus_utility
 import text_corpus
+import itertools
 
 import domain.tCoIR.treaty_state as treaty_repository
 
 # FIXME VARYING ASPECTS
 
-DATA_FOLDER = '../../data'
-INDEX_FOLDER = os.path.join(DATA_FOLDER, 'tCoIR')
+DATA_FOLDER = '../../data/tCoIR'
+
+CORPUS_NAME_PATTERN = 'tCoIR_*.txt.zip' 
+CORPUS_TEXT_FILES_PATTERN = '*.txt'
+
+WTI_INDEX_FOLDER = os.path.join(DATA_FOLDER, 'wti_index')
 
 DOCUMENT_FILTERS = [
-    ]
+]
 
-WTI_INDEX = treaty_repository.load_wti_index(INDEX_FOLDER)
 
 GROUP_BY_OPTIONS = [
 ]
     #group_by_options = { 'Year': 'year', 'Pope': 'pope', 'Genre': 'genre' } #TREATY_TIME_GROUPINGS[k]['title']: k for k in TREATY_TIME_GROUPINGS }
 
+WTI_INDEX = None
+
+def get_wti_index():
+    global WTI_INDEX
+    if WTI_INDEX is None:
+        WTI_INDEX = treaty_repository.load_wti_index(WTI_INDEX_FOLDER)
+    return WTI_INDEX
+
+def get_parties():
+    parties = get_wti_index().get_parties()
+    return parties
+
+def get_treaties(lang='en', period_group='years_1945-1972'): # , treaty_filter='is_cultural', parties=None)
+
+    columns = [ 'party1', 'party2', 'topic', 'topic1', 'signed_year']
+    treaties = get_wti_index().get_treaties(language=lang, period_group=period_group)[columns]
+    
+    group_map = get_parties()['group_name'].to_dict()
+    treaties['group1'] = treaties['party1'].map(group_map)
+    treaties['group2'] = treaties['party2'].map(group_map)        
+       
+    return treaties
+
+def get_extended_treaties(lang='en'):
+    treaties = get_treaties(lang=lang)
+    return treaties
+    
 def get_corpus_documents(corpus):
     metadata = [ utility.extend({}, doc.metadata, _get_pos_statistics(doc)) for doc in corpus ]
-    df = pd.DataFrame(metadata)[['treaty_id', 'filename', 'signed_year', 'party1', 'party2', 'topic1', 'is_cultural']+POS_NAMES]
+    df = pd.DataFrame(metadata)[['treaty_id', 'filename', 'signed_year', 'party1', 'party2', 'topic1', 'is_cultural'] + POS_NAMES]
     df['title'] = df.treaty_id
-    df['lang'] = df.filename.str.extract(r'\w{4,6}\_(\w\w)')  #.apply(lambda x: x.split('_')[1][:2])
+    df['lang'] = df.filename.str.extract(r'\w{4,6}\_(\w\w)')
     df['words'] = df[POS_NAMES].apply(sum, axis=1)
     return df
 
 def get_treaty_dropdown_options(wti_index, corpus):
     
     def format_treaty_name(x):
+        
         return '{}: {} {} {} {}'.format(x.name, x['signed_year'], x['topic'], x['party1'], x['party2'])
     
     documents = wti_index.treaties.loc[textacy_utility.get_corpus_documents(corpus).treaty_id]
@@ -45,10 +77,9 @@ def get_document_stream(source, lang, document_index=None, id_extractor=None):
 
     id_extractor = lambda filename: filename.split('_')[0]
 
-    document_index = WTI_INDEX.get_treaties(language=lang, period_group='years_1945-1972') #, treaty_filter='is_cultural', parties=None)
+    document_index = get_treaties()
     
     if isinstance(source, str):
-        # FIXME Use "smart_open" or "open_sesame" library instead 
         reader = text_corpus.CompressedFileReader(source)
     else:
         reader = source
@@ -68,28 +99,45 @@ def get_document_stream(source, lang, document_index=None, id_extractor=None):
         document_id = id_map.get(filename, None)
         metadata = df.loc[document_id].to_dict()
         metadata['filename'] = filename
+        metadata['document_id'] = document_id
         metadata['treaty_id'] = document_id
-        yield filename, text, metadata
+        yield filename, document_id, text, metadata
+
+def compile_documents_by_filename(filenames):
+    
+    treaties = get_treaties()
+    treaty_map = {
+        treaty_id: filename for (treaty_id, filename) in map(lambda x: (x.split('_')[0], x), filenames)
+    }
+    treaties = treaties[treaties.index.isin(treaty_map.keys())]
+    treaties.index.rename('index',inplace=True)
+    treaties['document_id'] = treaties.index
+    treaties['treaty_id'] = treaties.index
+    treaties['local_number'] = treaties.index
+    treaties['year'] = treaties.signed_year
+    treaties['filename'] = treaties.treaty_id.apply(lambda x: treaty_map[x])
+    
+    return treaties
 
 def compile_documents(corpus, corpus_index=None):
     
     if len(corpus) == 0:
         return None
     
-    if corpus_index is not None:
-        corpus_index = corpus_index[corpus_index.filename.isin(filenames)]
-        return corpus_index
+    # assert isinstance(corpus, text_corpus.SimplePreparedTextCorpus), "AHAT?!"
     
-    df = pd.DataFrame([ x.metadata for x in corpus ])
+    df = compile_documents_by_filename(corpus.filenames)
     
     return df
 
 # FIXME VARYING ASPECTs: What attributes to extend
 def add_domain_attributes(df, document_index):
-    # Add columns from document index
-    df_extended = pd.merge(df, document_index.treaties, left_index=True, right_index=True, how='inner')
-    group_map = document_index.get_parties()['group_name'].to_dict()        
-    df_extended['group1'] = df_extended['party1'].map(group_map)
-    df_extended['group2'] = df_extended['party2'].map(group_map)        
-    columns = ['signed_year', 'party1', 'group1', 'party2', 'group2', 'keyterms']
-    return df_extended[columns]
+    
+    treaties = get_treaties()
+    group_map = get_parties()['group_name'].to_dict()
+    
+    df_extended = pd.merge(df, treaties, left_index=True, right_index=True, how='inner')
+    return df_extended
+
+def load_corpus_index(source_name):
+    return None

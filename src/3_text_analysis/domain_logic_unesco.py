@@ -5,10 +5,13 @@ import re
 import logging
 import numpy as np
 
-DATA_FOLDER = '../../data'
+DATA_FOLDER = '../../data/UNESCO'
 
 logger = logging.getLogger('UNESCO')
 logger.setLevel(logging.INFO)
+
+CORPUS_NAME_PATTERN = 'unesco_*.txt.zip' 
+CORPUS_TEXT_FILES_PATTERN = '*.txt'
 
 DOCUMENT_FILTERS = [
         {
@@ -174,8 +177,9 @@ def get_document_stream(source, lang, **kwargs):
 #            basename = str(local_number).zfill(10) + '_' + str(i).zfill(3)
 #            yield filename, text[:100000], metadata
 #            i += 1
-            
-        yield filename, text, metadata
+        
+        document_id = yielded_count
+        yield filename, document_id, text, metadata
         yielded_count += 1
 
     logger.info('Corpus read done: {} processed files, {} empty files, {} truncated files, {} files yielded'.format(processed_count, empty_count, truncated_count, yielded_count))

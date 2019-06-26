@@ -2,6 +2,8 @@ import pandas as pd
 import text_corpus
 
 DATA_FOLDER = '../../data'
+CORPUS_NAME_PATTERN = '*.txt.zip' 
+CORPUS_TEXT_FILES_PATTERN = '*.txt'
 
 DOCUMENT_FILTERS = [
         {
@@ -105,7 +107,7 @@ def get_document_stream(source, lang, **kwargs):
     row_id = 0
     for filename, text in reader:
         metadata = lookup.loc[filename].to_dict()
-        yield filename, text, metadata
+        yield filename, row_id, text, metadata
         row_id += 1
 
 # FIXME VARYING ASPECTs: What attributes to extend

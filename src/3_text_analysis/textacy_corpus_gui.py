@@ -120,7 +120,7 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
 
         merge_entities=widgets_config.toggle('Merge NER', compute_ner, icon='', layout=lw('100px')),
 
-        binary_format=widgets_config.toggle('Store as binary', False, disabled=False, icon='', layout=lw('130px')),
+        binary_format=widgets_config.toggle('Store as binary', True, disabled=True, icon='', layout=lw('130px')),
         use_compression=widgets_config.toggle('Store compressed', True, disabled=False, icon='', layout=lw('130px')),
         overwrite=widgets_config.toggle('Force if exists', False, icon='', layout=lw('130px'), tooltip="Force generation of new corpus (even if exists)"),
         
@@ -161,26 +161,32 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
         gui.progress.value = gui.progress.value + 1 if step is None else step
             
     def compute_callback(*_args):
-        gui.output.clear_output()
-        with gui.output:
-            disabled_pipes = (() if gui.compute_pos.value else ("tagger",)) + \
-                             (() if gui.compute_dep.value else ("parser",)) + \
-                             (() if gui.compute_ner.value else ("ner",)) + \
-                             ("textcat", )
-            generate_textacy_corpus(
-                domain_logic=domain_logic,
-                data_folder=data_folder,
-                container=container,
-                document_index=document_index,
-                source_path=gui.source_path.value,
-                language=gui.language.value,
-                merge_entities=gui.merge_entities.value,
-                overwrite=gui.overwrite.value,
-                binary_format=gui.binary_format.value,
-                use_compression=gui.use_compression.value,
-                disabled_pipes=tuple(disabled_pipes),
-                tick=tick
-            )
+        try:
+            gui.output.clear_output()
+            gui.compute.disabled = True
+            with gui.output:
+                disabled_pipes = (() if gui.compute_pos.value else ("tagger",)) + \
+                                 (() if gui.compute_dep.value else ("parser",)) + \
+                                 (() if gui.compute_ner.value else ("ner",)) + \
+                                 ("textcat", )
+                generate_textacy_corpus(
+                    domain_logic=domain_logic,
+                    data_folder=data_folder,
+                    container=container,
+                    document_index=document_index,
+                    source_path=gui.source_path.value,
+                    language=gui.language.value,
+                    merge_entities=gui.merge_entities.value,
+                    overwrite=gui.overwrite.value,
+                    binary_format=gui.binary_format.value,
+                    use_compression=gui.use_compression.value,
+                    disabled_pipes=tuple(disabled_pipes),
+                    tick=tick
+                )
+        except ex as exception:
+            throw
+        finally:
+            gui.compute.disabled = False
             
     gui.compute.on_click(compute_callback)
 
