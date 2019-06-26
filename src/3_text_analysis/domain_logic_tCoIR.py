@@ -8,6 +8,8 @@ import itertools
 
 import domain.tCoIR.treaty_state as treaty_repository
 
+import textacy
+
 # FIXME VARYING ASPECTS
 
 DATA_FOLDER = '../../data/tCoIR'
@@ -18,10 +20,41 @@ CORPUS_TEXT_FILES_PATTERN = '*.txt'
 WTI_INDEX_FOLDER = os.path.join(DATA_FOLDER, 'wti_index')
 
 DOCUMENT_FILTERS = [
+#         {
+#             'type': 'multiselect',
+#             'description': 'Party #1',
+#             'field': 'party1'
+#             # FIXME: Not implemented:
+#             # 'filter_query': '(party1=={0}) | (party2=={0})'
+#         },
+#         {
+#             'type': 'multiselect',
+#             'description': 'Party #2',
+#             'field': 'party2'
+#             # FIXME: Not implemented:
+#             # 'filter_query': '(party1=={0}) | (party2=={0})'
+#         },
+#         {
+#             'type': 'multiselect',
+#             'description': 'Topic',
+#             'field': 'topic'
+#         },
+#         {
+#             'type': 'multiselect',
+#             'description': 'Year',
+#             'field': 'signed_year',
+#             'query': 'signed_year > 0'
+#         }
 ]
 
 
 GROUP_BY_OPTIONS = [
+    ('Year', ['signed_year']),
+    ('Party1', ['party1']),
+    ('Party1, Year', ['party1', 'signed_year']),
+    ('Party2, Year', ['party2', 'signed_year']),
+    ('Group1, Year', ['group1', 'signed_year']),
+    ('Group2, Year', ['group2', 'signed_year']),
 ]
     #group_by_options = { 'Year': 'year', 'Pope': 'pope', 'Genre': 'genre' } #TREATY_TIME_GROUPINGS[k]['title']: k for k in TREATY_TIME_GROUPINGS }
 
@@ -124,9 +157,12 @@ def compile_documents(corpus, corpus_index=None):
     if len(corpus) == 0:
         return None
     
-    # assert isinstance(corpus, text_corpus.SimplePreparedTextCorpus), "AHAT?!"
-    
-    df = compile_documents_by_filename(corpus.filenames)
+    if isinstance(corpus, textacy.corpus.Corpus):
+        filenames = [ doc.metadata['filename'] for doc in corpus]
+    else:
+        filenames = corpus.filenames
+        
+    df = compile_documents_by_filename(filenames)
     
     return df
 
