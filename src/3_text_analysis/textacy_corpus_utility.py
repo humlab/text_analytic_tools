@@ -372,9 +372,10 @@ def save_corpus(
     #    doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
     if format == 'binary':
         docs = (x.spacy_doc for x in corpus)
-        '''HACK: store binary to enable clear of tensor data (to save disk space)'''
+        '''HACK: store as binary so that tensor data can be cleared (to save disk space)'''
         corpus[0].spacy_doc.user_data['textacy']['spacy_lang_meta'] = corpus.spacy_lang.meta
-        textacy.io.write_spacy_docs(docs, filename, format=format, include_tensor=include_tensor)
+        exclude = ('tensor',)
+        textacy.io.write_spacy_docs(docs, filename, format=format, exclude=exclude)
     else:
         if not include_tensor:
             for doc in corpus:
