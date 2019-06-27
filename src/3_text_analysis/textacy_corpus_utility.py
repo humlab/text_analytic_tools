@@ -12,6 +12,7 @@ import timeit
 import functools
 import itertools
 import time
+import ftfy
 
 from spacy.language import Language
 from spacy import attrs
@@ -134,7 +135,7 @@ def preprocess_text(source_filename, target_filename, tick=utility.noop):
         for filename, text in texts:
             text = re.sub(HYPHEN_REGEXP, r"\1\2\n", text)
             text = textacy.preprocess.normalize_whitespace(text)
-            text = textacy.preprocess.fix_bad_unicode(text)
+            text = ftfy.fix_text(text)
             text = textacy.preprocess.replace_currency_symbols(text)
             text = textacy.preprocess.unpack_contractions(text)
             text = textacy.preprocess.remove_accents(text)
