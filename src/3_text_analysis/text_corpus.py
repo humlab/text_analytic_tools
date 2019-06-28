@@ -23,9 +23,9 @@ def list_archive_files(archivename, pattern):
     px = lambda x: pattern.match(x) if isinstance(pattern, typing.re.Pattern) else fnmatch.fnmatch(x, pattern)
     with zipfile.ZipFile(archivename) as zf:
         return [ name for name in zf.namelist() if px(name) ]
-    
+
 class CompressedFileReader:
-    
+
     def __init__(self, path, pattern='*.txt', itemfilter=None):
         self.path = path
         self.filename_pattern = pattern
@@ -44,27 +44,27 @@ class CompressedFileReader:
     def __iter__(self):
         self.iterator = None
         return self
-    
+
     def __next__(self):
         if self.iterator is None:
             self.iterator = self.get_iterator()
         return next(self.iterator)
-    
+
     def get_file(self, filename):
-        
+
         if filename not in self.filenames:
             yield  os.path.basename(filename), None
-            
+
         with zipfile.ZipFile(self.path) as zip_file:
             yield os.path.basename(filename), self._read_content(zip_file, filename)
-                    
+
     def get_iterator(self):
         with zipfile.ZipFile(self.path) as zip_file:
             for filename in self.filenames:
                 yield os.path.basename(filename), self._read_content(zip_file, filename)
-                    
+
     def _read_content(self, zip_file, filename):
-        with zip_file.open(filename, 'rU') as text_file:
+        with zip_file.open(filename, 'r') as text_file:
             content = text_file.read()
             content = gensim.utils.to_unicode(content, 'utf8', errors='ignore')
             content = dehyphen(content)
@@ -77,22 +77,22 @@ class GenericTextCorpus(TextCorpus):
         self.filenames = None
         self.documents = None
         self.length = None
-        
+
         #if 'filenames' in content_iterator.__dict__:
         #    self.filenames = content_iterator.filenames
         #    self.document_names = self._compile_documents()
         #    self.length = len(self.filenames)
-            
+
         token_filters = self.default_token_filters() + (token_filters or [])
-        
+
         #if bigram_transform is True:
         #    train_corpus = GenericTextCorpus(content_iterator, token_filters=[ x.lower() for x in tokens ])
         #    phrases = gensim.models.phrases.Phrases(train_corpus)
         #    bigram = gensim.models.phrases.Phraser(phrases)
         #    token_filters.append(
         #        lambda tokens: bigram[tokens]
-        #    )           
-        
+        #    )
+
         super(GenericTextCorpus, self).__init__(
             input=True,
             dictionary=dictionary,
@@ -101,13 +101,13 @@ class GenericTextCorpus(TextCorpus):
             tokenizer=tokenizer,
             token_filters=token_filters
         )
-        
+
     def default_token_filters(self):
         return [
             (lambda tokens: [ x.lower() for x in tokens ]),
             (lambda tokens: [ x for x in tokens if any(map(lambda x: x.isalpha(), x)) ])
         ]
-    
+
     def getstream(self):
         """Generate documents from the underlying plain text collection (of one or more files).
         Yields
@@ -118,38 +118,38 @@ class GenericTextCorpus(TextCorpus):
         -----
         After generator end - initialize self.length attribute.
         """
-        
+
         document_infos = []
         for filename, content in self.stream:
             yield content
             document_infos.append({
                 'document_name': filename
             })
-            
+
         self.length = len(document_infos)
         self.documents = pd.DataFrame(document_infos)
         self.filenames = list(self.documents.document_name.values)
-        
+
     def get_texts(self):
         '''
         This is mandatory method from gensim.corpora.TextCorpus. Returns stream of documents.
         '''
         for document in self.getstream():
             yield self.preprocess_text(document)
-            
+
     def preprocess_text(self, text):
             """Apply `self.character_filters`, `self.tokenizer`, `self.token_filters` to a single text document.
-            
+
             Parameters
             ---------
             text : str
                 Document read from plain-text file.
-                
+
             Returns
             ------
             list of str
                 List of tokens extracted from `text`.
-                
+
             """
             for character_filter in self.character_filters:
                 text = character_filter(text)
@@ -166,38 +166,38 @@ class GenericTextCorpus(TextCorpus):
         }
 
     def ___compile_documents(self):
-        
+
         document_data = map(self.get_document_info, self.filenames)
 
         documents = pd.DataFrame(list(document_data))
         documents.index.names = ['document_id']
-        
+
         return documents
-    
+
 class SimplePreparedTextCorpus(GenericTextCorpus):
     """Reads content in stream and returns tokenized text. No other processing.
     """
     def __init__(self, source):
-        
+
         self.reader = CompressedFileReader(source)
         self.filenames = self.reader.filenames
         source = self.reader
         super(SimplePreparedTextCorpus, self).__init__(source)
-        
+
     def default_token_filters(self):
         return [ ]
-    
+
     def preprocess_text(self, text):
         return self.tokenizer(text)
 
 class MmCorpusStatisticsService():
-    
+
     def __init__(self, corpus, dictionary, language):
         self.corpus = corpus
         self.dictionary = dictionary
         self.stopwords = nltk.corpus.stopwords.words(language[1])
         _ = dictionary[0]
-        
+
     def get_total_token_frequencies(self):
         dictionary = self.corpus.dictionary
         freqencies = np.zeros(len(dictionary.id2token))
@@ -268,7 +268,7 @@ class MmCorpusStatisticsService():
         df_agg = df_agg.set_index('index')
         df_agg[df_agg.columns] = df_agg[df_agg.columns].astype('int')
         return df_agg.reset_index()
-    
+
 #@staticmethod
 
 class ExtMmCorpus(gensim.corpora.MmCorpus):
@@ -282,7 +282,7 @@ class ExtMmCorpus(gensim.corpora.MmCorpus):
 
     def __init__(self, fname):
         gensim.corpora.MmCorpus.__init__(self, fname)
-        
+
     def __iter__(self):
         for doc in gensim.corpora.MmCorpus.__iter__(self):
             yield self.norm_tf_by_D(doc)
@@ -293,26 +293,26 @@ class ExtMmCorpus(gensim.corpora.MmCorpus):
 class GenericCorpusSaveLoad():
 
     def __init__(self, source_folder, lang):
-        
+
         self.mm_filename = os.path.join(source_folder, 'corpus_{}.mm'.format(lang))
         self.dict_filename = os.path.join(source_folder, 'corpus_{}.dict.gz'.format(lang))
         self.document_index = os.path.join(source_folder, 'corpus_{}_documents.csv'.format(lang))
-        
+
     def store_as_mm_corpus(self, corpus):
-        
+
         gensim.corpora.MmCorpus.serialize(self.mm_filename, corpus, id2word=corpus.dictionary.id2token)
         corpus.dictionary.save(self.dict_filename)
         corpus.document_names.to_csv(self.document_index, sep='\t')
 
     def load_mm_corpus(self, normalize_by_D=False):
-    
+
         corpus_type = ExtMmCorpus if normalize_by_D else gensim.corpora.MmCorpus
         corpus = corpus_type(self.mm_filename)
         corpus.dictionary = gensim.corpora.Dictionary.load(self.dict_filename)
-        corpus.document_names = pd.read_csv(self.document_index, sep='\t').set_index('document_id')  
+        corpus.document_names = pd.read_csv(self.document_index, sep='\t').set_index('document_id')
 
         return corpus
-    
+
     def exists(self):
         return os.path.isfile(self.mm_filename) and \
             os.path.isfile(self.dict_filename) and \
