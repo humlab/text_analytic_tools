@@ -25,7 +25,7 @@ def create_source_stream(source_path, lang, document_index=None):
 
 def create_nlp(model='en_core_web_sm', disable=None):
     nlp = spacy.load('en_core_web_sm', disable=disable)
-    #lang = textacy.load_spacy(model, disable=disable)
+    #lang = textacy.load_spacy_lang(model, disable=disable)
     nlp.tokenizer = textacy_utility.keep_hyphen_tokenizer(nlp)
     return nlp
 
@@ -49,12 +49,12 @@ for source_path in source_paths:
             logger.info('Processed {} files...{} places found...'.format(file_counter, len(places)))
             #break
         doc = None
-        
+
 df = pd.DataFrame(places, columns=['text', 'lemma', 'lemma*', 'ent_type'])
 df_grouped = df.groupby(['lemma*', 'ent_type']).size().reset_index()
 
 df_grouped.to_csv('./NER_source_text_without_tagging_total.txt', sep='\t')
 
 
-#[z for z in textacy.extract.named_entities(doc)]
-#[[ ent for ent in textacy.extract.named_entities(doc) ] for doc in corpus if len(doc.spacy_doc.ents or []) > 0 ]
+#[z for z in textacy.extract.entities(doc)]
+#[[ ent for ent in textacy.extract.entities(doc) ] for doc in corpus if len(doc.spacy_doc.ents or []) > 0 ]
