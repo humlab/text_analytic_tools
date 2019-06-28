@@ -367,20 +367,28 @@ def save_corpus(
     format='binary',
     include_tensor=False
 ):
-    #for doc in corpus:
-    #    doc.spacy_doc.user_data.update(doc.metadata)
-    #    doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
-    if format == 'binary':
-        docs = (x.spacy_doc for x in corpus)
-        '''HACK: store as binary so that tensor data can be cleared (to save disk space)'''
-        corpus[0].spacy_doc.user_data['textacy']['spacy_lang_meta'] = corpus.spacy_lang.meta
-        exclude = ('tensor',)
-        textacy.io.write_spacy_docs(docs, filename, format=format, exclude=exclude)
-    else:
-        if not include_tensor:
-            for doc in corpus:
+    # #for doc in corpus:
+    # #    doc.spacy_doc.user_data.update(doc.metadata)
+    # #    doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
+    # if format == 'binary':
+    #     docs = (x.spacy_doc for x in corpus)
+    #     '''HACK: store as binary so that tensor data can be cleared (to save disk space)'''
+    #     corpus[0].spacy_doc.user_data['textacy']['spacy_lang_meta'] = corpus.spacy_lang.meta
+    #     exclude = ('tensor',)
+    #     textacy.io.write_spacy_docs(docs, filename, format=format, exclude=exclude)
+    # else:
+    #     if not include_tensor:
+    #         for doc in corpus:
+    #             doc.spacy_doc.tensor = None
+    #     corpus.save(filename)
+
+    if not include_tensor:
+        for doc in corpus:
+            if hasattr(doc, 'tensor'):
+                doc.tensor = None
+            elif hasattr(doc, 'spacy_doc'):
                 doc.spacy_doc.tensor = None
-        corpus.save(filename)
+    corpus.save(filename)
 
 def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='binary', tick=utility.noop):
     '''Create and store spaCy docs as a stream (without creating textaCy Doc or textaCy Corpus)'''
@@ -427,7 +435,10 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
                 spacy_doc = None
 
         docs = (doc for doc in gen_docs(corpus_reader, nlp))
-        textacy.io.write_spacy_docs(docs, corpus_path, format='binary', exclude=('tensor',))
+        corpus = textacy.Corpus(nlp, data=docs)
+
+        save_corpus(corpus, corpus_path, lang=nlp)
+        #textacy.io.write_spacy_docs(docs, corpus_path, format='binary', exclude=('tensor',))
 
     except Exception as ex:
         logger.exception(ex)
@@ -437,56 +448,42 @@ def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='bina
 #from cytoolz import itertoolz
 import textacy_patch
 
-def debinaryfy(x):
-    y = {}
-    if not isinstance(x, dict):
-        return y
-    for key, value in x.items():
-        key = key if isinstance(key, str) else str(key, 'utf-8')
-        if isinstance(value, bytes):
-            value = str(value, 'utf-8')
-        elif isinstance(value, dict):
-            value = debinaryfy(value)
-        y[key] = value
-    return y
+# def debinaryfy(x):
+#     y = {}
+#     if not isinstance(x, dict):
+#         return y
+#     for key, value in x.items():
+#         key = key if isinstance(key, str) else str(key, 'utf-8')
+#         if isinstance(value, bytes):
+#             value = str(value, 'utf-8')
+#         elif isinstance(value, dict):
+#             value = debinaryfy(value)
+#         y[key] = value
+#     return y
 
-def patch_metadata_stream(docs):
-    for doc in docs:
-        if not b'textacy' in doc.user_data:
-            continue
-        doc.user_data['textacy'] = debinaryfy(doc.user_data[b'textacy'])
-        del doc.user_data[b'textacy']
-        yield doc
+# def patch_metadata_stream(docs):
+#     for doc in docs:
+#         if not b'textacy' in doc.user_data:
+#             continue
+#         doc.user_data['textacy'] = debinaryfy(doc.user_data[b'textacy'])
+#         del doc.user_data[b'textacy']
+#         yield doc
 
 # @utility.timecall
 def load_corpus(filename, lang, document_id='document_id', format='binary'):
-    if format == 'binary':
-        '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
-        logger.info('Notice: loading binary corpus (this might take some time)...')
-        #docs = textacy_patch.read_spacy_docs(filename, format=format, lang=lang)
-        docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
-        docs = patch_metadata_stream(docs)
-        corpus = textacy.Corpus(docs=docs, lang=lang)
 
-        #spacy_docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
-        #first_spacy_doc, spacy_docs = itertoolz.peek(spacy_docs)
-        #spacy_lang_meta = first_spacy_doc.user_data['textacy'].pop('spacy_lang_meta')
-        #spacy_lang = spacy.util.get_lang_class(spacy_lang_meta['lang'])(vocab=first_spacy_doc.vocab, meta=spacy_lang_meta)
-        #for name in spacy_lang_meta['pipeline']:
-        #    spacy_lang.add_pipe(spacy_lang.create_pipe(name))
-        #return cls(spacy_lang, docs=spacy_docs)
+    corpus = textacy.Corpus.load(lang, filename)
 
-    else:
-        corpus = textacy.Corpus.load(filename)
+    # if format == 'binary':
+    #     '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
+    #     logger.info('Notice: loading binary corpus (this might take some time)...')
+    #     #docs = textacy_patch.read_spacy_docs(filename, format=format, lang=lang)
+    #     docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
+    #     docs = patch_metadata_stream(docs)
+    #     corpus = textacy.Corpus(lang, data=docs)
+    # else:
+    #     corpus = textacy.Corpus.load(filename)
 
-    #for doc in corpus:
-    #    user_data = doc.spacy_doc.user_data
-    #    user_data['year'] = int(user_data['year']) if 'year' in user_data else 0
-    #    doc.metadata.update(user_data)
-    #    #metadata = doc.spacy_doc.user_data['textacy']['metadata']
-    #    #for x in ['filename', document_id]:
-    #    #    if x in metadata.keys():
-    #    #        corpus[0].metadata[x] = metadata[x]
     return corpus
 
 def keep_hyphen_tokenizer(nlp):
