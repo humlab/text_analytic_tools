@@ -43,14 +43,14 @@ def get_spinner_widget(filename="images/spinner-02.gif", width=40, height=40):
     return widgets.Image(value=image, format='gif', width=width, height=height, layout={'visibility': 'hidden'})
 
 def compute_topic_model(data_folder, method, terms, document_index, vectorizer_args, topic_modeller_args, n_topic_window=0):
-    
+
     result = None
-    
+
     try:
 
         n_topics = topic_modeller_args['n_topics']
         apply_idf = vectorizer_args['apply_idf']
-        
+
         window_coherences = [ ]
 
         for x_topics in range(max(n_topics - n_topic_window, 2), n_topics + n_topic_window + 1):
@@ -58,7 +58,7 @@ def compute_topic_model(data_folder, method, terms, document_index, vectorizer_a
             topic_modeller_args['n_topics'] = x_topics
 
             logger.info('Computing model with {} topics...'.format(x_topics))
-    
+
             data = topic_model.compute(
                 ### corpus=corpus,
                 terms=terms,
@@ -87,16 +87,16 @@ def compute_topic_model(data_folder, method, terms, document_index, vectorizer_a
             #df = df.set_index('n_topics')
             #model_result.coherence_scores = df
             result.coherence_scores = pd.DataFrame(window_coherences).set_index('n_topics')
-            
+
             #df.to_excel(utility.path_add_timestamp('perplexity.xlsx'))
             #df['perplexity_score'].plot.line()
-            
+
     except Exception as ex:
         logger.error(ex)
         raise
     finally:
         return result
-    
+
 class ComputeTopicModelUserInterface():
 
     def __init__(self, data_folder, state, document_index, **opts):
@@ -108,7 +108,7 @@ class ComputeTopicModelUserInterface():
         self.model_widgets, self.widget_boxes = self.prepare_widgets()
 
     def prepare_widgets(self):
-        
+
         gui = types.SimpleNamespace(
             apply_idf=widgets.ToggleButton(value=False, description='TF-IDF',  tooltip='Apply IDF (skikit-learn) or TF-IDF (gensim)', icon='check', layout=widgets.Layout(width='115px')),
             method=widgets.Dropdown(description='Engine', options=ENGINE_OPTIONS, value='gensim_lda', layout=widgets.Layout(width='200px')),
@@ -119,7 +119,7 @@ class ComputeTopicModelUserInterface():
             output=widgets.Output(layout={'border': '1px solid black'}),
             spinner=get_spinner_widget()
         )
-        
+
         boxes = [
             widgets.VBox([
                 gui.method,
@@ -133,9 +133,9 @@ class ComputeTopicModelUserInterface():
                 gui.spinner,
             ], layout=widgets.Layout(align_items='flex-start'))
         ]
-        
+
         return gui, boxes
-    
+
     def get_corpus_terms(self, corpus):
         # assert isinstance(corpus, collections.Isiterable), 'Must be a iterable!'
         return corpus
@@ -206,11 +206,11 @@ class ComputeTopicModelUserInterface():
         method_change_handler()
 
         display(widgets.VBox([ widgets.HBox(self.widget_boxes), self.model_widgets.output ]))
-        
+
 class TextacyCorpusUserInterface(ComputeTopicModelUserInterface):
-    
+
     def __init__(self, data_folder, state, document_index, **opts):
-        
+
         ComputeTopicModelUserInterface.__init__(self, data_folder, state, document_index, **opts)
 
         self.substitution_filename = self.opts.get('substitution_filename', None)
@@ -221,8 +221,8 @@ class TextacyCorpusUserInterface(ComputeTopicModelUserInterface):
 
     def display(self, corpus=None):
 
-        assert hasattr(corpus, 'spacy_vocab'), 'Must be a textaCy corpus!'
-        self.corpus_widgets.named_entities.disabled = len(corpus) == 0 or len(corpus[0].spacy_doc.ents) == 0
+        # assert hasattr(corpus, 'spacy_lang), 'Must be a textaCy corpus!'
+        self.corpus_widgets.named_entities.disabled = len(corpus) == 0 or len(corpus[0].ents) == 0
 
         def pos_change_handler(*args):
             with self.model_widgets.output:
@@ -246,21 +246,21 @@ class TextacyCorpusUserInterface(ComputeTopicModelUserInterface):
                 self.corpus_widgets.ngrams.disabled = True
 
         self.model_widgets.method.observe(corpus_method_change_handler, 'value')
-            
+
         ComputeTopicModelUserInterface.display(self, corpus)
 
     def get_corpus_terms(self, corpus):
-        
-        tokenizer_args = self.compile_tokenizer_args(vocab=corpus.spacy_vocab)
+
+        tokenizer_args = self.compile_tokenizer_args(vocab=corpus.spacy_lang.vocab)
         terms = [ list(doc) for doc in textacy_utility.extract_corpus_terms(corpus, tokenizer_args) ]
         return terms
-    
+
     def compile_tokenizer_args(self, vocab=None):
 
         term_substitutions = {}
-        
+
         gui = self.corpus_widgets
-        
+
         if gui.substitute_terms.value is True:
             assert self.substitution_filename is not None
             term_substitutions = textacy_utility.load_term_substitutions(self.substitution_filename, default_term='_mask_', delim=';', vocab=vocab)
@@ -285,7 +285,7 @@ class TextacyCorpusUserInterface(ComputeTopicModelUserInterface):
         )
 
         return args
-    
+
     def prepare_textacy_widgets(self):
 
         item_layout = dict(
@@ -300,7 +300,7 @@ class TextacyCorpusUserInterface(ComputeTopicModelUserInterface):
         ngrams_options = { '1': [1], '1, 2': [1, 2], '1,2,3': [1, 2, 3] }
         default_include_pos = [ 'NOUN', 'PROPN' ]
         frequent_words = [ '_mask_' ]
-        # widgets.Label(    
+        # widgets.Label(
         gui = types.SimpleNamespace(
             #min_freq=widgets.IntSlider(description='Min word freq',min=0, max=10, value=2, step=1, layout=widgets.Layout(width='240px', **item_layout)),
             #max_doc_freq=widgets.IntSlider(description='Min doc %', min=75, max=100, value=100, step=1, layout=widgets.Layout(width='240px', **item_layout)),
@@ -324,24 +324,24 @@ class TextacyCorpusUserInterface(ComputeTopicModelUserInterface):
             widgets.HBox([widgets.Label(value='STOP'), gui.stop_words ], layout=widgets.Layout(margin='0px 0px 0px 10px'))
         ]
         return gui,boxes
-    
+
 class PreparedCorpusUserInterface(ComputeTopicModelUserInterface):
-    
+
     def __init__(self, data_folder, state, fn_doc_index, **opts):
-        
+
         ComputeTopicModelUserInterface.__init__(self, data_folder, state, document_index=None, **opts)
 
         self.corpus_widgets, self.corpus_widgets_boxes = self.prepare_source_widgets()
         self.widget_boxes = self.corpus_widgets_boxes + self.widget_boxes
         self.corpus = None
         self.fn_doc_index = fn_doc_index
-        
+
     def prepare_source_widgets(self):
         corpus_files = sorted(glob.glob(os.path.join(self.data_folder, '*.tokenized.zip')))
         gui = types.SimpleNamespace(
             filepath=widgets_config.dropdown(description='Corpus', options=corpus_files, value=None, layout=widgets.Layout(width='500px'))
         )
-        
+
         return gui, [ gui.filepath ]
 
     def get_corpus_terms(self, _corpus):
@@ -350,8 +350,8 @@ class PreparedCorpusUserInterface(ComputeTopicModelUserInterface):
         doc_terms = [ list(terms) for terms in self.corpus.get_texts() ]
         self.document_index = self.fn_doc_index(self.corpus)
         return doc_terms
-    
+
     def display(self, default_source=None):
-            
+
         ComputeTopicModelUserInterface.display(self, None)
-        
+

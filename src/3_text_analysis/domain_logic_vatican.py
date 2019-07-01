@@ -2,7 +2,7 @@ import pandas as pd
 import text_corpus
 
 DATA_FOLDER = '../../data'
-CORPUS_NAME_PATTERN = '*.txt.zip' 
+CORPUS_NAME_PATTERN = '*.txt.zip'
 CORPUS_TEXT_FILES_PATTERN = '*.txt'
 
 DOCUMENT_FILTERS = [
@@ -54,7 +54,7 @@ GROUP_BY_OPTIONS = [
 def compile_documents_by_filename(filenames):
 
     parts = [ x.split('_') for x in filenames ]
- 
+
     pope, lang, genre, year, sub_genre = list(zip(*[ (x[0], x[1], x[2], x[3]if x[3].isdigit() else x[4], x[4] if x[3].isdigit() else x[3])  for x in parts ]))
 
     df = pd.DataFrame( {
@@ -67,43 +67,43 @@ def compile_documents_by_filename(filenames):
     })
     df['document_id'] = df.index
     df['title'] = df.filename
-    
+
     return df
 
 def _compile_documents(corpus, corpus_index=None):
-    
+
     if len(corpus) == 0:
         return None
-    
+
     if corpus_index is not None:
         corpus_index = corpus_index[corpus_index.filename.isin(filenames)]
         return corpus_index
-    
-    df = pd.DataFrame([ x.metadata for x in corpus ])
-    
+
+    df = pd.DataFrame([ x._.meta for x in corpus ])
+
     return df
 
 def compile_documents(corpus, index=None):
-    
-    filenames = [ x.metadata['filename'] for x in corpus ]
-    
+
+    filenames = [ x._.meta['filename'] for x in corpus ]
+
     df = compile_documents_by_filename(filenames)
-    
+
     return df
 
 def get_document_stream(source, lang, **kwargs):
 
     id_map = { }
-    
+
     if isinstance(source, str):
-        # FIXME Use "smart_open" or "open_sesame" library instead 
+        # FIXME Use "smart_open" or "open_sesame" library instead
         reader = text_corpus.CompressedFileReader(source)
     else:
         reader = source
-        
+
     lookup = compile_documents_by_filename(reader.filenames).set_index('filename')
     lookup['filename'] = lookup.index
-    
+
     row_id = 0
     for filename, text in reader:
         metadata = lookup.loc[filename].to_dict()
@@ -112,5 +112,5 @@ def get_document_stream(source, lang, **kwargs):
 
 # FIXME VARYING ASPECTs: What attributes to extend
 def add_domain_attributes(df, document_index):
-    df_extended = pd.merge(df, document_index, left_index=True, right_index=True, how='inner')    
+    df_extended = pd.merge(df, document_index, left_index=True, right_index=True, how='inner')
     return df_extended[['filename', 'year', 'genre', 'keyterms']]

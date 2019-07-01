@@ -36,51 +36,51 @@ def compute_most_discriminating_terms(
         if feature == spacy.attrs.LOWER:
             return token.lower_
         return token.orth_
-    
+
     def get_term_list(corpus, documents, filters):
         docs = gui_utility.get_documents_by_field_filters(corpus, documents, filters)
         return [[ get_token_attr(x, normalize) for x in doc if x.pos_ in include_pos and len(x) > 1 ] for doc in docs]
-        
+
     docs1 = get_term_list(corpus, documents, group1_filters)
     docs2 = get_term_list(corpus, documents, group2_filters)
-    
+
     if len(docs1) == 0 or len(docs2) == 0:
         return None
-    
+
     docs = docs1 + docs2
-    
-    in_group1 = [True] * len(docs1) + [False] * len(docs2)   
-    
+
+    in_group1 = [True] * len(docs1) + [False] * len(docs2)
+
     terms = textacy.keyterms.most_discriminating_terms(docs, in_group1, top_n_terms=top_n_terms, max_n_terms=max_n_terms)
     min_terms = min(len(terms[0]), len(terms[1]))
     df = pd.DataFrame({'Group 1': terms[0][:min_terms], 'Group 2': terms[1][:min_terms] })
-    
+
     return df
-    
+
 def display_most_discriminating_terms(df):
     display(df)
-        
+
 def display_gui(documents, corpus, domain_logic):
-    
+
     compute_callback = compute_most_discriminating_terms
     display_callback = display_most_discriminating_terms
-        
-    lw = lambda w: widgets.Layout(width=w)   
-    
+
+    lw = lambda w: widgets.Layout(width=w)
+
     include_pos_tags = [ 'ADJ', 'VERB', 'NUM', 'ADV', 'NOUN', 'PROPN' ]
     normalize_options = { 'Lemma': spacy.attrs.LEMMA, 'Lower': spacy.attrs.LOWER, 'Orth': spacy.attrs.ORTH }
-    
-    # FIXME VARYING ASPECTS: 
+
+    # FIXME VARYING ASPECTS:
     #party_preset_options = document_index.get_party_preset_options()
     #parties_options = [ x for x in document_index.get_countries_list() if x != 'ALL OTHER' ]
     #group_options = document_index.genre.unique()
-    #signed_years = { d.metadata['signed_year'] for d in corpus }
+    #signed_years = { d._.meta['signed_year'] for d in corpus }
     #period_default = (min(signed_years), max(signed_years))
-    
-    # FIXME VARYING ASPECTS: 
+
+    # FIXME VARYING ASPECTS:
     group1_filters = generate_group_filters(documents, domain_logic.DOCUMENT_FILTERS)
     group2_filters = generate_group_filters(documents, domain_logic.DOCUMENT_FILTERS)
-    
+
     gui = types.SimpleNamespace(
         progress=widgets.IntProgress(value=0, min=0, max=5, step=1, description='', layout=lw('90%')),
         group1_filters=group1_filters,
@@ -98,7 +98,7 @@ def display_gui(documents, corpus, domain_logic):
         compute=widgets.Button(description='Compute', icon='', button_style='Success', layout=lw('120px')),
         output=widgets.Output(layout={'border': '1px solid black'})
     )
-    
+
     boxes = widgets.VBox([
         widgets.HBox([
             widgets.VBox([ x['widget'] for x in group1_filters]),
@@ -123,33 +123,33 @@ def display_gui(documents, corpus, domain_logic):
         ]),
         gui.output
     ])
-    
+
     display(boxes)
-    
+
     #def on_group1_preset_change(change):
     #    if gui.group1_preset.value is None:
     #        return
-    #    gui.group1.value = gui.group1.options if 'ALL' in gui.group1_preset.value else gui.group1_preset.value   
-    
+    #    gui.group1.value = gui.group1.options if 'ALL' in gui.group1_preset.value else gui.group1_preset.value
+
     #def on_group2_preset_change(change):
     #    if gui.group2_preset.value is None:
     #        return
     #    gui.group2.value = gui.group2.options if 'ALL' in gui.group2_preset.value else gui.group2_preset.value
-        
+
     #def on_period1_change(change):
     #    if gui.sync_period.value:
     #        gui.period2.value = gui.period1.value
-            
+
     #def on_period2_change(change):
     #    if gui.sync_period.value:
     #        gui.period1.value = gui.period2.value
-            
-    #gui.group1_preset.observe(on_group1_preset_change, names='value') 
+
+    #gui.group1_preset.observe(on_group1_preset_change, names='value')
     #gui.group2_preset.observe(on_group2_preset_change, names='value')
-    
+
     #gui.period1.observe(on_period1_change, names='value')
     #gui.period2.observe(on_period2_change, names='value')
-    
+
     def compute_callback_handler(*_args):
         gui.output.clear_output()
         with gui.output:

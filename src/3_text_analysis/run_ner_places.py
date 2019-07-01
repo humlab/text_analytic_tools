@@ -15,9 +15,6 @@ def get_doc_places(doc):
     return ( (w.text, w.lemma_, str(w.lemma_).translate(DEL_CRAP_CHARS), w[0].ent_type_)
                 for w in doc.ents if w[0].ent_type_ in ['LOC', 'GPE'] and w.lemma_.strip() != '' )
 
-#def get_corpus_places(corpus):
-#    return itertools.chain.from_iterable(( get_doc_places(doc.spacy_doc) for doc in corpus ))
-
 def create_source_stream(source_path, lang, document_index=None):
     reader = text_corpus.CompressedFileReader(source_path)
     stream = domain_logic.get_document_stream(reader, lang, document_index=document_index)
@@ -57,4 +54,4 @@ df_grouped.to_csv('./NER_source_text_without_tagging_total.txt', sep='\t')
 
 
 #[z for z in textacy.extract.entities(doc)]
-#[[ ent for ent in textacy.extract.entities(doc) ] for doc in corpus if len(doc.spacy_doc.ents or []) > 0 ]
+#[[ ent for ent in textacy.extract.entities(doc) ] for doc in corpus if len(doc.ents or []) > 0 ]

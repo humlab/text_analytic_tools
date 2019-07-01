@@ -33,7 +33,7 @@ def count_documents_by_pivot(corpus, attribute):
     ''' Return a list of document counts per group defined by attribute
     Assumes documents are sorted by attribute!
     '''
-    fx_key = lambda doc: doc.metadata[attribute]
+    fx_key = lambda doc: doc._.meta[attribute]
     return [ len(list(g)) for _, g in itertools.groupby(corpus, fx_key) ]
 
 def count_documents_in_index_by_pivot(documents, attribute):
@@ -51,7 +51,7 @@ def count_documents_in_index_by_pivot(documents, attribute):
 
 #@jit(nopython=True)
 def generate_word_count_score(corpus, normalize, count):
-    wc = corpus.word_freqs(normalize=normalize, weighting='count', as_strings=True)
+    wc = corpus.word_counts(normalize=normalize, weighting='count', as_strings=True)
     d = { i: set([]) for i in range(1, count+1)}
     for k, v in wc.items():
         if v <= count:
@@ -60,7 +60,7 @@ def generate_word_count_score(corpus, normalize, count):
 
 #@jit(nopython=True)
 def generate_word_document_count_score(corpus, normalize, threshold=75):
-    wc = corpus.word_doc_freqs(normalize=normalize, weighting='freq', smooth_idf=True, as_strings=True)
+    wc = corpus.word_doc_counts(normalize=normalize, weighting='freq', smooth_idf=True, as_strings=True)
     d = { i: set([]) for i in range(threshold, 101)}
     for k, v in wc.items():
         slot = int(round(v,2)*100)
@@ -172,14 +172,14 @@ def infrequent_words(corpus, normalize='lemma', weighting='count', threshold=0, 
     if weighting == 'count' and threshold <= 1:
         return set([])
 
-    word_counts = corpus.word_freqs(normalize=normalize, weighting=weighting, as_strings=as_strings)
+    word_counts = corpus.word_counts(normalize=normalize, weighting=weighting, as_strings=as_strings)
     words = set([ w for w in word_counts if word_counts[w] < threshold ])
 
     return words
 
 def frequent_document_words(corpus, normalize='lemma', weighting='freq', dfs_threshold=80, as_strings=True):
     '''Returns set of words that occurrs freuently in many documents, candidate stopwords'''
-    document_freqs = corpus.word_doc_freqs(normalize=normalize, weighting=weighting, smooth_idf=True, as_strings=True)
+    document_freqs = corpus.word_doc_counts(normalize=normalize, weighting=weighting, smooth_idf=True, as_strings=True)
     frequent_document_words = set([ w for w, f in document_freqs.items() if int(round(f,2)*100) >= dfs_threshold ])
     return frequent_document_words
 
@@ -225,7 +225,7 @@ def extract_document_terms(doc, extract_args):
 
     terms = ( z for z in (
         tranform_token(w, substitutions)
-            for w in doc.to_terms_list(ngrams, named_entities, normalize, as_strings, **kwargs)
+            for w in doc._.to_terms_list(ngrams, named_entities, normalize, as_strings, **kwargs)
                 if len(w) >= min_length # and w not in extra_stop_words
     ) if z not in extra_stop_words)
 
@@ -303,9 +303,8 @@ def extract_corpus_terms(corpus, extract_args):
 
     return terms
 
-# CHANGE: previously named 'get_treaty_doc', with field_name 'treaty_id'
 def get_document_by_id(corpus, document_id, field_name='document_id'):
-    for doc in corpus.get(lambda x: x.metadata[field_name] == document_id, limit=1):
+    for doc in corpus.get(lambda x: x._.meta[field_name] == document_id, limit=1):
         return doc
     assert False, 'Document {} not found in corpus'.format(document_id)
     return None
@@ -332,158 +331,39 @@ def get_disabled_pipes_from_filename(filename):
         return x[0].split(',')
     return None
 
-def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop, strip_tensor=True):
-    logger.info('creating corpus (this might take some time)...')
-    batch_size = 100
+def create_textacy_corpus(corpus_reader, nlp, tick=utility.noop, n_chunk_threshold = 100000):
+
     corpus = textacy.Corpus(nlp)
-    document_counter = 0
-    n_chunk_threshold = 50000
+    counter = 0
+
     for filename, document_id, text, metadata in corpus_reader:
 
         metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
 
         if len(text) > n_chunk_threshold:
-            spacy_doc = textacy.spacier.utils.make_doc_from_text_chunks(text, lang=nlp, chunk_size=n_chunk_threshold)
-            corpus.add_doc(spacy_doc, metadata)
+            doc = textacy.spacier.utils.make_doc_from_text_chunks(text, lang=nlp, chunk_size=n_chunk_threshold)
+            corpus.add_doc(doc)
+            doc._.meta = metadata
         else:
-            corpus.add_text(text, metadata)
+            corpus.add((text, metadata))
 
-        if strip_tensor:
-            for doc in corpus:
-                doc.spacy_doc.tensor = None
-
-        document_counter += 1
-        if document_counter % batch_size == 0:
-            logger.info('%s documents added...', document_counter)
-            tick(document_counter)
+        counter += 1
+        if counter % 100 == 0:
+            logger.info('%s documents added...', counter)
+        tick(counter)
 
     return corpus
 
 @utility.timecall
-def save_corpus(
-    corpus,
-    filename,
-    lang=None,
-    format='binary',
-    include_tensor=False
-):
-    # #for doc in corpus:
-    # #    doc.spacy_doc.user_data.update(doc.metadata)
-    # #    doc.spacy_doc.user_data['year'] = str(doc.spacy_doc.user_data['year'])
-    # if format == 'binary':
-    #     docs = (x.spacy_doc for x in corpus)
-    #     '''HACK: store as binary so that tensor data can be cleared (to save disk space)'''
-    #     corpus[0].spacy_doc.user_data['textacy']['spacy_lang_meta'] = corpus.spacy_lang.meta
-    #     exclude = ('tensor',)
-    #     textacy.io.write_spacy_docs(docs, filename, format=format, exclude=exclude)
-    # else:
-    #     if not include_tensor:
-    #         for doc in corpus:
-    #             doc.spacy_doc.tensor = None
-    #     corpus.save(filename)
-
+def save_corpus(corpus, filename, lang=None, include_tensor=False):
     if not include_tensor:
         for doc in corpus:
-            if hasattr(doc, 'tensor'):
-                doc.tensor = None
-            elif hasattr(doc, 'spacy_doc'):
-                doc.spacy_doc.tensor = None
+            doc.tensor = None
     corpus.save(filename)
 
-def create_textacy_corpus_streamed(corpus_reader, nlp, corpus_path, format='binary', tick=utility.noop):
-    '''Create and store spaCy docs as a stream (without creating textaCy Doc or textaCy Corpus)'''
-
-    assert format == 'binary', 'create_textacy_corpus_streamed: must be stored as binary!'
-
-    logger.info('Notice: creating corpus from stream (this might take some time)...')
-    batch_size = 100
-    n_chunk_threshold = 99999
-
-    try:
-        def gen_docs(corpus_reader, nlp):
-
-            document_counter = 0
-            for filename, document_id, text, metadata in corpus_reader:
-
-                metadata = utility.extend(metadata, dict(filename=filename, document_id=document_id))
-
-                if len(text) > n_chunk_threshold:
-                    spacy_doc = textacy.spacier.utils.make_doc_from_text_chunks(text, lang=nlp, chunk_size=n_chunk_threshold)
-                else:
-                    spacy_doc = nlp(text)
-
-                if "textacy" not in spacy_doc.user_data:
-                    spacy_doc.user_data["textacy"] = {}
-
-                spacy_doc.user_data["textacy"]["metadata"] = metadata
-
-                if document_counter == 0:
-                    spacy_doc.user_data["textacy"]["spacy_lang_meta"] = nlp.meta
-
-                spacy_doc.tensor = None
-                if document_counter == 0:
-                    spacy_doc.user_data['textacy']['spacy_lang_meta'] = nlp.meta
-
-                yield spacy_doc
-
-                document_counter += 1
-
-                if document_counter % 50 == 0:
-                    logger.info('%s documents added...size was %s...', document_counter, len(spacy_doc))
-
-                tick(document_counter)
-                spacy_doc = None
-
-        docs = (doc for doc in gen_docs(corpus_reader, nlp))
-        corpus = textacy.Corpus(nlp, data=docs)
-
-        save_corpus(corpus, corpus_path, lang=nlp)
-        #textacy.io.write_spacy_docs(docs, corpus_path, format='binary', exclude=('tensor',))
-
-    except Exception as ex:
-        logger.exception(ex)
-        if os.path.isfile(corpus_path):
-            os.remove(corpus_path)
-
-#from cytoolz import itertoolz
-import textacy_patch
-
-# def debinaryfy(x):
-#     y = {}
-#     if not isinstance(x, dict):
-#         return y
-#     for key, value in x.items():
-#         key = key if isinstance(key, str) else str(key, 'utf-8')
-#         if isinstance(value, bytes):
-#             value = str(value, 'utf-8')
-#         elif isinstance(value, dict):
-#             value = debinaryfy(value)
-#         y[key] = value
-#     return y
-
-# def patch_metadata_stream(docs):
-#     for doc in docs:
-#         if not b'textacy' in doc.user_data:
-#             continue
-#         doc.user_data['textacy'] = debinaryfy(doc.user_data[b'textacy'])
-#         del doc.user_data[b'textacy']
-#         yield doc
-
-# @utility.timecall
-def load_corpus(filename, lang, document_id='document_id', format='binary'):
-
+@utility.timecall
+def load_corpus(filename, lang, document_id='document_id'):
     corpus = textacy.Corpus.load(lang, filename)
-
-    # if format == 'binary':
-    #     '''HACK: read docs saved in 'binary' format. NOTICE: textacy patch'''
-    #     logger.info('Notice: loading binary corpus (this might take some time)...')
-    #     #docs = textacy_patch.read_spacy_docs(filename, format=format, lang=lang)
-    #     docs = textacy.io.read_spacy_docs(filename, format=format, lang=lang)
-    #     docs = patch_metadata_stream(docs)
-    #     corpus = textacy.Corpus(lang, data=docs)
-    # else:
-    #     corpus = textacy.Corpus.load(filename)
-
     return corpus
 
 def keep_hyphen_tokenizer(nlp):
@@ -521,11 +401,6 @@ def setup_nlp_language_model(language, **nlp_args):
 
     return nlp
 
-# FIXME VARYING ASPECTS:
-def propagate_document_attributes(corpus):
-    for doc in corpus:
-        doc.spacy_doc.user_data.update(doc.metadata)
-
 POS_TO_COUNT = {
     'SYM': 0, 'PART': 0, 'ADV': 0, 'NOUN': 0, 'CCONJ': 0, 'ADJ': 0, 'DET': 0, 'ADP': 0, 'INTJ': 0, 'VERB': 0, 'NUM': 0, 'PRON': 0, 'PROPN': 0
 }
@@ -541,7 +416,7 @@ def _get_pos_statistics(doc):
 def get_corpus_data(corpus, document_index, title, columns_of_interest=None):
     metadata = [
         utility.extend({},
-                       dict(document_id=doc.metadata['document_id']),
+                       dict(document_id=doc._.meta['document_id']),
                        _get_pos_statistics(doc)
                       )
         for doc in corpus
@@ -556,8 +431,6 @@ def get_corpus_data(corpus, document_index, title, columns_of_interest=None):
 
 def textacy_doc_to_bow(doc, target='lemma', weighting='count', as_strings=False, include=None, n_min_count=2):
 
-    spacy_doc = doc.spacy_doc
-
     weighing_keys = { 'count', 'freq' }
     target_keys = { 'lemma': attrs.LEMMA, 'lower': attrs.LOWER, 'orth': attrs.ORTH }
 
@@ -567,13 +440,13 @@ def textacy_doc_to_bow(doc, target='lemma', weighting='count', as_strings=False,
     assert weighting in weighing_keys
     assert target in target_keys
 
-    target_weights = spacy_doc.count_by(target_keys[target], exclude=exclude)
-    n_tokens = doc.n_tokens
+    target_weights = doc.count_by(target_keys[target], exclude=exclude)
+    n_tokens = doc._.n_tokens
 
     if weighting == 'freq':
         target_weights = { id_: weight / n_tokens for id_, weight in target_weights.items() }
 
-    store = doc.spacy_stringstore
+    store = doc.vocab.strings
     if as_strings:
         bow = { store[word_id]: count for word_id, count in target_weights.items() if count >= n_min_count}
     else:
@@ -598,8 +471,8 @@ def store_tokens_to_file(corpus, filename):
             token=t.lower_,
             lemma=t.lemma_,
             pos=t.pos_,
-            year=d.metadata['year'],
-            document_id=d.metadata['document_id']
+            year=d._.meta['year'],
+            document_id=d._.meta['document_id']
         ) for t in d )
     tokens = pd.DataFrame(list(itertools.chain.from_iterable(doc_tokens(d) for d in corpus )))
 

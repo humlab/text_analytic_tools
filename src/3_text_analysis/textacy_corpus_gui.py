@@ -58,41 +58,45 @@ def generate_textacy_corpus(
 
     if overwrite or not os.path.isfile(container.textacy_corpus_path):
 
-        logger.info('Working: Computing new corpus ' + container.textacy_corpus_path + '...')
+        logger.info('Computing new corpus ' + container.textacy_corpus_path + '...')
 
         #FIXME VARYING ASPECTS:
         reader = text_corpus.CompressedFileReader(container.prepped_source_path)
 
         stream = domain_logic.get_document_stream(reader, container.language, document_index=document_index)
 
-        logger.info('Working: Stream created...')
+        logger.info('Stream created...')
 
-        if False:
+        if True:
+
             tick(0, len(reader.filenames))
 
+            logger.info('Creating corpus (this might take some time)...')
             container.textacy_corpus = textacy_utility.create_textacy_corpus(stream, container.nlp, tick)
 
-            logger.info('storing corpus (this might take some time)...')
-            textacy_utility.save_corpus(container.textacy_corpus, container.textacy_corpus_path, format=store_format)
+            logger.info('Storing corpus (this might take some time)...')
+            textacy_utility.save_corpus(container.textacy_corpus, container.textacy_corpus_path)
 
             tick(0)
-        else:
-            textacy_utility.create_textacy_corpus_streamed(stream, container.nlp, container.textacy_corpus_path, format='binary', tick=utility.noop)
-            container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp, format='binary')
+
+        #else:
+
+        #    textacy_utility.create_textacy_corpus_streamed(stream, container.nlp, container.textacy_corpus_path, format='binary', tick=utility.noop)
+        #    container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp, format='binary')
 
     else:
         logger.info('Working: Loading corpus ' + container.textacy_corpus_path + '...')
         tick(1, 2)
 
         logger.info('...reading corpus (this might take several minutes)...')
-        container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp, format=store_format)
+        container.textacy_corpus = textacy_utility.load_corpus(container.textacy_corpus_path, container.nlp)
 
     if merge_entities:
         logger.info('Working: Merging named entities...')
         try:
             for doc in container.textacy_corpus:
                 named_entities = textacy.extract.entities(doc)
-                textacy.spacier.utils.merge_spans(named_entities, doc.spacy_doc)
+                textacy.spacier.utils.merge_spans(named_entities, doc)
         except Exception as ex:
             logger.error(ex)
             logger.info('NER merge failed')
