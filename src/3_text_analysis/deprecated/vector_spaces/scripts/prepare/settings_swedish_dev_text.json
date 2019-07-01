@@ -1,0 +1,25 @@
+{
+    "corpus": "untitled",
+    "lang": "sv-dev",
+    "textmode": "plain",
+    "word_segmenter": "default_tokenizer",
+    "sentence_segmentation": {
+        "sentence_chunk": "paragraph",
+        "sentence_segmenter": "default_tokenizer"
+    },
+    "paragraph_segmentation": {
+        "paragraph_segmenter": "blanklines"
+    },
+    "positional_attributes": {
+        "lexical_attributes": ["pos", "msd", "lemma", "lex", "sense"],
+        "compound_attributes": ["complemgram", "compwf"],
+        "dependency_attributes": ["ref", "dephead", "deprel"],
+        "lexical_classes": ["blingbring", "swefn"],
+        "sentiment": ["sentiment"]
+    },
+    "named_entity_recognition": ["ex", "type", "subtype"],
+    "text_attributes": {
+        "readability_metrics": ["lix", "ovix","nk"],
+        "lexical_classes": ["blingbring", "swefn"]
+    }
+}
