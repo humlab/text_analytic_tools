@@ -1,0 +1,43 @@
+version: '3'
+services:
+  jupyterlab:
+    # image: "jupyter/base-notebook"
+    build:
+      context: .
+      dockerfile: ./base-image/Dockerfile
+      depends_on:
+      - stanford_core_nlp
+    ports:
+      - "8888:8888"
+    volumes:
+      - type: bind
+        source: $HOST_WORK_DIR
+        target: /home/jovyan/work
+    networks:
+      - backend
+    env_file:
+      - .env
+      # .env.windows
+    environment:
+      JUPYTER_ENABLE_LAB: 1
+    #command: "command" or [ "command", ...]
+    #entrypoint: /code/entrypoint.sh
+    restart: always
+    working_dir: /home/jovyan/work
+  stanford_core_nlp:
+    image: "nlpbox/corenlp"
+    #ports:
+    #  - "9000:9000"
+    expose:
+      - "9000"
+    networks:
+      - backend
+    restart: always
+networks:
+  backend:
+
+# TODO: RST (reStructuredText) Parser (separate image)
+#    http://www.cs.tau.ac.il/~joberant/teaching/advanced_nlp_spring_2018/files/RST.pdf
+#    docker run -p 9000:9000 nlpbox/corenlp
+
+# TODO: HFST-SweNER

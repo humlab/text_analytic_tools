@@ -1,0 +1,10 @@
+.vscode
+
+.ipynb_checkpoints
+
+**/deprecated
+**/.git
+**/node_modules
+
+**/src
+**/test
