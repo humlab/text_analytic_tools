@@ -461,6 +461,11 @@ def get_most_frequent_words(corpus, n_top, normalize='lemma', include_pos=None, 
     for doc in corpus:
         bow = textacy_doc_to_bow(doc, target=normalize, weighting=weighting, as_strings=True, include=include)
         word_counts.update(bow)
+        if normalize == 'lemma':
+            lower_cased_word_counts = Counter()
+            for k, v in word_counts.items():
+                lower_cased_word_counts.update({ k.lower(): v })
+            word_counts = lower_cased_word_counts
     return word_counts.most_common(n_top)
 
 def store_tokens_to_file(corpus, filename):

@@ -177,16 +177,28 @@ class GenericTextCorpus(TextCorpus):
 class SimplePreparedTextCorpus(GenericTextCorpus):
     """Reads content in stream and returns tokenized text. No other processing.
     """
-    def __init__(self, source):
+    def __init__(self, source, lowercase=False):
 
         self.reader = CompressedFileReader(source)
         self.filenames = self.reader.filenames
+        self.lowercase = lowercase
         source = self.reader
         super(SimplePreparedTextCorpus, self).__init__(source)
 
     def default_token_filters(self):
         return [ ]
-
+    
+    def default_token_filters(self):
+        
+        token_filters = [
+            (lambda tokens: [ x.strip('_') for x in tokens ]),            
+        ]
+        
+        if self.lowercase:
+            token_filters = token_filters + [ (lambda tokens: [ x.lower() for x in tokens ]) ]
+            
+        return token_filters
+    
     def preprocess_text(self, text):
         return self.tokenizer(text)
 
