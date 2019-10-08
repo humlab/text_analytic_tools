@@ -44,4 +44,4 @@ pick out the ones which are closer to “he” than to “she”.
 #print(model.most_similar(positive=['teknik', 'producent'], negative=['teknik']))
 #model.most_similar(positive=['flicka', 'pappa'], negative=['pojke'], topn=20)
 
-CHECK: https://stackoverflow.com/questions/43776572/visualise-word2vec-generated-from-gensim
+# CHECK: https://stackoverflow.com/questions/43776572/visualise-word2vec-generated-from-gensim
