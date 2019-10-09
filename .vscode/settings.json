@@ -35,7 +35,14 @@
         "--disable=missing-docstring",
         "--disable=no-self-use",
         "--disable=C0301",
-        "--disable=C0111"
+        "--disable=C0111",
+        "--disable=wildcard-import",
+        "--disable=W1202",
     ],
-    "python.pythonPath": "C:\\Users\\roma0050\\.virtualenvs\\text_analytic_tools-rmsZlHEZ\\Scripts\\python.exe"
+    "python.linting.pylintArgs": [
+        "--rcfile=${workspaceFolder}\\.pylintrc"
+    ],
+    "python.pythonPath": "C:\\Users\\roma0050\\.virtualenvs\\text_analytic_tools-rmsZlHEZ\\Scripts\\python.exe",
+    "python.dataScience.enableAutoMoveToNextCell": false,
+    "python.dataScience.ignoreVscodeTheme": true
 }
