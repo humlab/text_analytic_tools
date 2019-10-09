@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 import glob
 import nltk
 import gensim
@@ -138,27 +139,27 @@ class GenericTextCorpus(TextCorpus):
             yield self.preprocess_text(document)
 
     def preprocess_text(self, text):
-            """Apply `self.character_filters`, `self.tokenizer`, `self.token_filters` to a single text document.
+        """Apply `self.character_filters`, `self.tokenizer`, `self.token_filters` to a single text document.
 
-            Parameters
-            ---------
-            text : str
-                Document read from plain-text file.
+        Parameters
+        ---------
+        text : str
+            Document read from plain-text file.
 
-            Returns
-            ------
-            list of str
-                List of tokens extracted from `text`.
+        Returns
+        ------
+        list of str
+            List of tokens extracted from `text`.
 
-            """
-            for character_filter in self.character_filters:
-                text = character_filter(text)
+        """
+        for character_filter in self.character_filters:
+            text = character_filter(text)
 
-            tokens = self.tokenizer(text)
-            for token_filter in self.token_filters:
-                tokens = token_filter(tokens)
+        tokens = self.tokenizer(text)
+        for token_filter in self.token_filters:
+            tokens = token_filter(tokens)
 
-            return tokens
+        return tokens
 
     def __get_document_info(self, filename):
         return {
@@ -187,18 +188,18 @@ class SimplePreparedTextCorpus(GenericTextCorpus):
 
     def default_token_filters(self):
         return [ ]
-    
+
     def default_token_filters(self):
-        
+
         token_filters = [
-            (lambda tokens: [ x.strip('_') for x in tokens ]),            
+            (lambda tokens: [ x.strip('_') for x in tokens ]),
         ]
-        
+
         if self.lowercase:
             token_filters = token_filters + [ (lambda tokens: [ x.lower() for x in tokens ]) ]
-            
+
         return token_filters
-    
+
     def preprocess_text(self, text):
         return self.tokenizer(text)
 
@@ -259,7 +260,7 @@ class MmCorpusStatisticsService():
             'document_name': self.corpus.document_names.document_name,
             'treaty_id': self.corpus.document_names.treaty_id,
             'size': [ sum(list(zip(*document))[1]) for document in self.corpus],
-            'stopwords': [ sum([ v for (i,v) in document if id2token[i] in self.stopwords]) for document in self.corpus],
+            'stopwords': [ sum([ v for (i,v) in document if id2token[i] in stopwords]) for document in self.corpus],
         }).set_index('document_name')
         df[['size', 'stopwords']] = df[['size', 'stopwords']].astype('int')
         return df
