@@ -24,3 +24,4 @@ desktop.ini
 global_corpus_index.txt
 nohup.out
 src/3_text_analysis/*.txt
+deprecated/
