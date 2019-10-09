@@ -1,0 +1,16 @@
+{
+    "corpus": "untitled",
+    "lang": "en",
+    "textmode": "xml",
+    "root": {
+        "tag": "text",
+        "attributes": []
+    },
+    "extra_tags": [],
+    "positional_attributes": {
+        "lexical_attributes": ["pos", "msd", "lemma"]
+    },
+    "text_attributes": {
+        "readability_metrics": ["lix", "ovix", "nk"]
+    }
+}
