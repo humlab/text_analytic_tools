@@ -5,7 +5,7 @@
 
     "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": false,
-    "python.linting.pep8Enabled": false,
+    "python.linting.pycodestyleEnabled": false,
     "python.formatting.provider": "autopep8",
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": false,
@@ -37,5 +37,5 @@
         "--disable=C0301",
         "--disable=C0111"
     ],
-    "python.pythonPath": "C:\\Users\\roma0050\\.virtualenvs\\papacy_scraper-1tbwoSRV\\Scripts\\python.exe"
+    "python.pythonPath": "C:\\Users\\roma0050\\.virtualenvs\\text_analytic_tools-rmsZlHEZ\\Scripts\\python.exe"
 }
