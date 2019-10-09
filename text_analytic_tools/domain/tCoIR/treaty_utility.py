@@ -17,7 +17,7 @@ def period_group_years(period_group):
     return utility.flatten(period_years)
 
 class QueryUtility():
-    
+
     @staticmethod
     def parties_mask(parties):
         return lambda df: (df.party1.isin(parties))|(df.party2.isin(parties))
@@ -45,7 +45,7 @@ class QueryUtility():
     @staticmethod
     def topic_7cult_mask():
         return lambda df: (df.topic1=='7CULT')
-        
+
     @staticmethod
     def query_treaties(treaties, filter_masks):
         """ NOT USED but could perhaps replace functions above """
