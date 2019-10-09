@@ -1,40 +1,18 @@
-import wordcloud
-import matplotlib.pyplot as plt
 
 if '__file__' in globals():
     import os, sys
     curdir = os.path.abspath(os.path.dirname(__file__))
     if curdir not in sys.path:
         sys.path.append(curdir)
-        
-from network_utility import NetworkMetricHelper, NetworkUtility
-from widgets_utility import WidgetUtility
 
 import networkx as nx
 import bokeh.palettes
 import bokeh.models as bm
+
 from bokeh.plotting import figure
 
 if 'extend' not in globals():
     extend = lambda a,b: a.update(b) or a
-    
-class WordcloudUtility:
-    
-    def plot_wordcloud(df_data, token='token', weight='weight', figsize=(12, 12), dpi=100, **args):
-        token_weights = dict({ tuple(x) for x in df_data[[token, weight]].values })
-        image = wordcloud.WordCloud(**args,)
-        image.fit_words(token_weights)
-        plt.figure(figsize=figsize, dpi=dpi)
-        plt.imshow(image, interpolation='bilinear')
-        plt.axis("off")
-        # plt.set_facecolor('w')
-        # plt.tight_layout()
-        plt.show()
-        
-
-    # plot_correlation_network
-
-
 
 DFLT_NODE_OPTS = dict(color='green', level='overlay', alpha=1.0)
 DFLT_EDGE_OPTS = dict(color='black', alpha=0.2)
@@ -47,14 +25,13 @@ layout_algorithms = {
     'Kamada-Kawai': lambda x,**args: nx.kamada_kawai_layout(x,**args)
 }
 
-
 class PlotNetworkUtility:
-    
+
     @staticmethod
     def layout_args(layout_algorithm, network, scale):
         if layout_algorithm == 'Shell':
             if nx.is_bipartite(network):
-                nodes, other_nodes = get_bipartite_node_set(network, bipartite=0)   
+                nodes, other_nodes = get_bipartite_node_set(network, bipartite=0)
                 args = dict(nlist=[nodes, other_nodes])
 
         if layout_algorithm == 'Fruchterman-Reingold':
@@ -65,13 +42,13 @@ class PlotNetworkUtility:
             args = dict(dim=2, weight='weight', scale=1.0)
 
         return dict()
-    
+
     @staticmethod
     def get_layout_algorithm(layout_algorithm):
         if layout_algorithm not in layout_algorithms:
             raise Exception("Unknown algorithm {}".format(layout_algorithm))
         return layout_algorithms.get(layout_algorithm, None)
-    
+
     @staticmethod
     def project_series_to_range(series, low, high):
         norm_series = series / series.max()
@@ -95,13 +72,13 @@ class PlotNetworkUtility:
         if threshold > 0:
             values = nx.get_edge_attributes(network, 'weight').values()
             max_weight = max(1.0, max(values))
-            
+
             print('Max weigth: {}'.format(max_weight))
             print('Mean weigth: {}'.format(sum(values) / len(values)))
-            
+
             filter_edges = [(u, v) for u, v, d in network.edges(data=True) \
                             if d['weight'] >= (threshold * max_weight)]
-            
+
             sub_network = network.edge_subgraph(filter_edges)
         else:
             sub_network = network
@@ -134,11 +111,6 @@ class PlotNetworkUtility:
         #node_size = 'size' if node_proportions is not None else 5
         r_lines = p.multi_line('xs', 'ys', line_width='weights', source=lines_source, **line_opts)
         r_nodes = p.circle('x', 'y', size=nodes_size, source=nodes_source, **node_opts)
-
-        #p.add_tools(bm.HoverTool(renderers=[r_nodes], tooltips=None, callback=WidgetUtility.\
-        #    glyph_hover_callback(nodes_source, 'node_id', text_ids=node_description.index, \
-        #                         text=node_description, element_id=element_id))
-        #)
 
         text_opts = dict(x='x', y='y', text='name', level='overlay', text_align='center', text_baseline='middle')
 
