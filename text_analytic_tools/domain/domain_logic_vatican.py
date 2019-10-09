@@ -1,5 +1,5 @@
 import pandas as pd
-import text_corpus
+import text_analytic_tools.common.text_corpus as text_corpus
 
 DATA_FOLDER = '../../data'
 CORPUS_NAME_PATTERN = '*.txt.zip'
@@ -76,6 +76,8 @@ def _compile_documents(corpus, corpus_index=None):
         return None
 
     if corpus_index is not None:
+        assert False, "bug: filenames not defined"
+        filenames = []
         corpus_index = corpus_index[corpus_index.filename.isin(filenames)]
         return corpus_index
 

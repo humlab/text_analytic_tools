@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-import text_corpus
+import text_analytic_tools.common.text_corpus as text_corpus
 import re
 import logging
 import numpy as np
@@ -62,7 +62,7 @@ def load_corpus_index(corpus_name):
 
     def index_filename(corpus_name):
         try:
-            m = re.match('(.*)\.txt.*\.zip', corpus_name)
+            m = re.match(r'(.*)\.txt.*\.zip', corpus_name)
             return m.groups()[0] + '_stats.txt'
         except:
             return None
@@ -114,6 +114,8 @@ def compile_documents(corpus, corpus_index=None):
         return None
 
     if corpus_index is not None:
+        assert False, "bug: filenames not defined"
+        filenames = []
         corpus_index = corpus_index[corpus_index.filename.isin(filenames)]
         return corpus_index
 

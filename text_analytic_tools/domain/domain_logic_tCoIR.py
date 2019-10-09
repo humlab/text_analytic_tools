@@ -1,18 +1,21 @@
 
 import os
-import common.utility as utility
 import pandas as pd
-import textacy_corpus_utility
-import text_corpus
 import itertools
 
-import domain.tCoIR.treaty_state as treaty_repository
-
+import text_analytic_tools.utility as utility
+import text_analytic_tools.common.textacy_utility as textacy_utility
+import text_analytic_tools.common.text_corpus as text_corpus
+import text_analytic_tools.domain.tCoIR.treaty_state as treaty_repository
+import text_analytic_tools.domain.tCoIR.config as config
+import ipywidgets
 import textacy
 
 # FIXME VARYING ASPECTS
 
-DATA_FOLDER = '../../data/tCoIR'
+extend = utility.extend
+
+DATA_FOLDER = '../../../data/tCoIR'
 
 CORPUS_NAME_PATTERN = 'tCoIR_*.txt.zip'
 CORPUS_TEXT_FILES_PATTERN = '*.txt'
@@ -86,11 +89,11 @@ def get_extended_treaties(lang='en'):
     return treaties
 
 def get_corpus_documents(corpus):
-    metadata = [ utility.extend({}, doc._.meta, _get_pos_statistics(doc)) for doc in corpus ]
-    df = pd.DataFrame(metadata)[['treaty_id', 'filename', 'signed_year', 'party1', 'party2', 'topic1', 'is_cultural'] + POS_NAMES]
+    metadata = [ utility.extend({}, doc._.meta, textacy_utility._get_pos_statistics(doc)) for doc in corpus ]
+    df = pd.DataFrame(metadata)[['treaty_id', 'filename', 'signed_year', 'party1', 'party2', 'topic1', 'is_cultural'] + textacy_utility.POS_NAMES]
     df['title'] = df.treaty_id
     df['lang'] = df.filename.str.extract(r'\w{4,6}\_(\w\w)')
-    df['words'] = df[POS_NAMES].apply(sum, axis=1)
+    df['words'] = df[textacy_utility.POS_NAMES].apply(sum, axis=1)
     return df
 
 def get_treaty_dropdown_options(wti_index, corpus):
@@ -178,3 +181,42 @@ def add_domain_attributes(df, document_index):
 def load_corpus_index(source_name):
     return None
 
+def treaty_filter_widget(**kwopts):
+    default_opts = dict(
+        options=config.TREATY_FILTER_OPTIONS,
+        description='Topic filter:',
+        button_style='',
+        tooltips=config.TREATY_FILTER_TOOLTIPS,
+        value='is_cultural',
+        layout=ipywidgets.Layout(width='200px')
+    )
+    return ipywidgets.ToggleButtons(**extend(default_opts, kwopts))
+
+def parties_widget(**kwopts):
+    default_opts = dict(
+        options=[],
+        value=None,
+        rows=12,
+        description='Parties',
+        disabled=False,
+        layout=ipywidgets.Layout(width='180px')
+    )
+    return ipywidgets.SelectMultiple(**extend(default_opts, kwopts))
+
+def topic_groups_widget(**kwopts):
+    default_opts = dict(
+        options=config.TOPIC_GROUP_MAPS.keys(),
+        description='Category:',
+        value='7CORR',
+        layout=ipywidgets.Layout(width='200px')
+    )
+    return ipywidgets.Dropdown(**extend(default_opts, kwopts))
+
+def topic_groups_widget2(**kwopts):
+    default_opts = dict(
+        options=config.TOPIC_GROUP_MAPS,
+        value=config.TOPIC_GROUP_MAPS['7CORR'],
+        description='Category:',
+        layout=ipywidgets.Layout(width='200px')
+    )
+    return ipywidgets.Dropdown(**extend(default_opts, kwopts))
