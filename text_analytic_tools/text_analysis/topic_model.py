@@ -6,6 +6,7 @@ import os
 import text_analytic_tools.utility as utility
 import text_analytic_tools.text_analysis.topic_model_utility as topic_model_utility
 import text_analytic_tools.common.textacy_utility as textacy_utility
+
 from . import mallet_topic_model
 from . import sttm_topic_model
 
