@@ -1,10 +1,10 @@
 # from __future__ import print_function
-import ipywidgets as ipywidgets
-import text_analytic_tools.utility as utility
+import ipywidgets
 import bokeh
+from . import utils
+from . import config
 
-extend = utility.extend
-config = utility.config
+extend = utils.extend
 
 def kwargser(d):
     args = dict(d)
@@ -14,33 +14,31 @@ def kwargser(d):
         args.update(kwargs)
     return args
 
-# FIXME Keep project specific stuff in widget_config", move generic to "widget_utility"
-
-def toggle(description, value, **kwargs):  # pylint: disable=W0613
+def toggle(description, value, **kwargs):  # pylint: disable=unused-argument
     return ipywidgets.ToggleButton(**kwargser(locals()))
 
-def toggles(description, options, value, **kwopts):  # pylint: disable=W0613
+def toggles(description, options, value, **kwopts):  # pylint: disable=unused-argument
     return ipywidgets.ToggleButtons(**kwargser(locals()))
 
-def dropdown(description, options, value, **kwargs):  # pylint: disable=W0613
+def dropdown(description, options, value, **kwargs):  # pylint: disable=unused-argument
     return ipywidgets.Dropdown(**kwargser(locals()))
 
-def selectmultiple(description, options, value, **kwargs):  # pylint: disable=W0613
+def selectmultiple(description, options, value, **kwargs):  # pylint: disable=unused-argument
     return ipywidgets.SelectMultiple(**kwargser(locals()))
 
-def slider(description, min, max, value, **kwargs):  # pylint: disable=W0613, W0622
+def slider(description, min, max, value, **kwargs):  # pylint: disable=unused-argument, redefined-builtin
     return ipywidgets.IntSlider(**kwargser(locals()))
 
-def rangeslider(description, min, max, value, **kwargs):  # pylint: disable=W0613, W0622
+def rangeslider(description, min, max, value, **kwargs):  # pylint: disable=unused-argument, redefined-builtin
     return ipywidgets.IntRangeSlider(**kwargser(locals()))
 
-def sliderf(description, min, max, step, value, **kwargs):  # pylint: disable=W0613, W0622
+def sliderf(description, min, max, step, value, **kwargs):  # pylint: disable=unused-argument, redefined-builtin
     return ipywidgets.FloatSlider(**kwargser(locals()))
 
-def progress(min, max, step, value, **kwargs):  # pylint: disable=W0613, W0622
+def progress(min, max, step, value, **kwargs):  # pylint: disable=unused-argument, redefined-builtin
     return ipywidgets.IntProgress(**kwargser(locals()))
 
-def itext(min, max, value, **kwargs):  # pylint: disable=W0613, W0622
+def itext(min, max, value, **kwargs):  # pylint: disable=unused-argument, redefined-builtin
     return ipywidgets.BoundedIntText(**kwargser(locals()))
 
 def wrap_id_text(dom_id, value=''):
@@ -69,29 +67,9 @@ def glyph_hover_js_code(element_id, id_name, text_name, glyph_name='glyph', glyp
     """
 
 def glyph_hover_callback(glyph_source, glyph_id, text_source, element_id):
-    code = utility.widgets.glyph_hover_js_code(element_id, glyph_id, 'text', glyph_name='glyph', glyph_data='glyph_data')
+    code = glyph_hover_js_code(element_id, glyph_id, 'text', glyph_name='glyph', glyph_data='glyph_data')
     callback = bokeh.models.CustomJS(args={'glyph': glyph_source, 'glyph_data': text_source}, code=code)
     return callback
-
-def period_group_widget(index_as_value=False, **kwopts):
-    default_opts = dict(
-        options={
-            x['title']: i if index_as_value else x for i, x in enumerate(config.DEFAULT_PERIOD_GROUPS)
-        },
-        value=len(config.DEFAULT_PERIOD_GROUPS) - 1 if index_as_value else config.DEFAULT_PERIOD_GROUPS[-1],
-        description='Divisions',
-        layout=ipywidgets.Layout(width='200px')
-    )
-    return ipywidgets.Dropdown(**extend(default_opts, kwopts))
-
-def party_name_widget(**kwopts):
-    default_opts = dict(
-        options=config.PARTY_NAME_OPTIONS,
-        value='party_name',
-        description='Name',
-        layout=ipywidgets.Layout(width='200px')
-    )
-    return ipywidgets.Dropdown(**extend(default_opts, kwopts))
 
 def aggregate_function_widget(**kwopts):
     default_opts = dict(

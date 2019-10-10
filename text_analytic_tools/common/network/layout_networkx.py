@@ -1,14 +1,11 @@
-import os
-
-os.sys.path = os.sys.path if '..' in os.sys.path else os.sys.path + ['..']
+from types import SimpleNamespace as bunch
 
 import networkx as nx
 
-from common.utility import extend_single
-from common.network.networkx_utility import get_bipartite_node_set
-from types import SimpleNamespace as bunch
+from text_analytic_tools.utility import extend_single
+from text_analytic_tools.common.network.networkx_utility import get_bipartite_node_set
 
-def nx_kamada_kawai_layout(G, **kwargs):  # pylint: disable=W0613
+def nx_kamada_kawai_layout(G, **kwargs):  # pylint: disable=unused-argument
     args = dict(weight='weight', scale=1.0)
     layout = nx.kamada_kawai_layout(G, **args)
     return layout, None
@@ -20,18 +17,18 @@ def nx_spring_layout(G, **kwargs):
     layout = nx.spring_layout(G, **args)
     return layout, None
 
-def nx_shell_layout(G, **kwargs):  # pylint: disable=W0613
+def nx_shell_layout(G, **kwargs):  # pylint: disable=unused-argument
     if not nx.is_bipartite(G):
         raise Exception("NX: Shell layout only applicable on bipartite graphs")
     nodes, other_nodes = get_bipartite_node_set(G, bipartite=0)
     layout = nx.shell_layout(G, nlist=[nodes, other_nodes])
     return layout, None
 
-def nx_spectral_layout(G, **kwargs):  # pylint: disable=W0613
+def nx_spectral_layout(G, **kwargs):  # pylint: disable=unused-argument
     layout = nx.spectral_layout(G)
     return layout, None
 
-def nx_circular_layout(G, **kwargs):  # pylint: disable=W0613
+def nx_circular_layout(G, **kwargs):  # pylint: disable=unused-argument
     layout = nx.circular_layout(G)
     return layout, None
 

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+import random
 from itertools import cycle, islice
 import numpy as np
-import random
 
-from bokeh.palettes import all_palettes, Category20_20, Set1_8  # pylint: disable=E0611
+from bokeh.palettes import all_palettes, Category20_20, Set1_8  # pylint: disable=no-name-in-module
 
 DEFAULT_ALL_PALETTES = all_palettes
 DEFAULT_PALETTE = Category20_20

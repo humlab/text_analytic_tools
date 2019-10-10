@@ -1,7 +1,7 @@
-import graph_tool.draw as gt_draw  # pylint: disable=E0401
-import graph_tool.all as gt  # pylint: disable=E0401
+import graph_tool.draw as gt_draw  # pylint: disable=import-error
+import graph_tool.all as gt  # pylint: disable=import-error
 
-def plot(G_gt, layout_gt, n_range, palette, **kwargs):  # pylint: disable=W0613
+def plot(G_gt, layout_gt, n_range, palette, **kwargs):  # pylint: disable=unused-argument
 
     v_text = G_gt.vertex_properties['id']
     # v_degrees_p = G_gt.degree_property_map('out')

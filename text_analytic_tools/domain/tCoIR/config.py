@@ -1,8 +1,6 @@
 import re
 import numpy as np
 
-LANGUAGE_MAP = { 'en': 'english', 'fr': 'french', 'it': 'other', 'de': 'other' }
-
 DEFAULT_PERIOD_GROUPS = [
     {
         'id': 'years_1919-1972',

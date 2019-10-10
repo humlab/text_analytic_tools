@@ -1,5 +1,8 @@
 import re
+import collections
 import numpy as np
+
+LANGUAGE_MAP = { 'en': 'english', 'fr': 'french', 'it': 'other', 'de': 'other' }
 
 AGGREGATES = { 'mean': np.mean, 'sum': np.sum, 'max': np.max, 'std': np.std }
 
@@ -44,8 +47,6 @@ output_formats = {
     'Table': 'table',
     'Pivot': 'pivot'
 }
-
-import collections
 
 class BunchOfStuff:
     def __init__(self, **kwds):

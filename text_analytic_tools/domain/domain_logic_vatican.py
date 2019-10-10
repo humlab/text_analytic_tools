@@ -95,8 +95,6 @@ def compile_documents(corpus, index=None):
 
 def get_document_stream(source, lang, **kwargs):
 
-    id_map = { }
-
     if isinstance(source, str):
         # FIXME Use "smart_open" or "open_sesame" library instead
         reader = text_corpus.CompressedFileReader(source)
@@ -116,3 +114,4 @@ def get_document_stream(source, lang, **kwargs):
 def add_domain_attributes(df, document_index):
     df_extended = pd.merge(df, document_index, left_index=True, right_index=True, how='inner')
     return df_extended[['filename', 'year', 'genre', 'keyterms']]
+

@@ -1,17 +1,14 @@
 
 import os
+import ipywidgets
+import textacy
 import pandas as pd
-import itertools
 
 import text_analytic_tools.utility as utility
 import text_analytic_tools.common.textacy_utility as textacy_utility
 import text_analytic_tools.common.text_corpus as text_corpus
 import text_analytic_tools.domain.tCoIR.treaty_state as treaty_repository
 import text_analytic_tools.domain.tCoIR.config as config
-import ipywidgets
-import textacy
-
-# FIXME VARYING ASPECTS
 
 extend = utility.extend
 
@@ -102,7 +99,7 @@ def get_treaty_dropdown_options(wti_index, corpus):
 
         return '{}: {} {} {} {}'.format(x.name, x['signed_year'], x['topic'], x['party1'], x['party2'])
 
-    documents = wti_index.treaties.loc[textacy_utility.get_corpus_documents(corpus).treaty_id]
+    documents = wti_index.treaties.loc[get_corpus_documents(corpus).treaty_id]
 
     options = [ (v, k) for k, v in documents.apply(format_treaty_name, axis=1).to_dict().items() ]
     options = sorted(options, key=lambda x: x[0])
@@ -192,6 +189,15 @@ def treaty_filter_widget(**kwopts):
     )
     return ipywidgets.ToggleButtons(**extend(default_opts, kwopts))
 
+def party_name_widget(**kwopts):
+    default_opts = dict(
+        options=config.PARTY_NAME_OPTIONS,
+        value='party_name',
+        description='Name',
+        layout=ipywidgets.Layout(width='200px')
+    )
+    return ipywidgets.Dropdown(**extend(default_opts, kwopts))
+
 def parties_widget(**kwopts):
     default_opts = dict(
         options=[],
@@ -217,6 +223,17 @@ def topic_groups_widget2(**kwopts):
         options=config.TOPIC_GROUP_MAPS,
         value=config.TOPIC_GROUP_MAPS['7CORR'],
         description='Category:',
+        layout=ipywidgets.Layout(width='200px')
+    )
+    return ipywidgets.Dropdown(**extend(default_opts, kwopts))
+
+def period_group_widget(index_as_value=False, **kwopts):
+    default_opts = dict(
+        options={
+            x['title']: i if index_as_value else x for i, x in enumerate(config.DEFAULT_PERIOD_GROUPS)
+        },
+        value=len(config.DEFAULT_PERIOD_GROUPS) - 1 if index_as_value else config.DEFAULT_PERIOD_GROUPS[-1],
+        description='Divisions',
         layout=ipywidgets.Layout(width='200px')
     )
     return ipywidgets.Dropdown(**extend(default_opts, kwopts))

@@ -7,14 +7,16 @@ import types
 import glob
 import re
 import time
-import gensim.utils
+import zipfile
 import functools
+import string
+import gensim.utils
 
 def getLogger(name='text_analytic_tools', level=logging.INFO):
     logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=level)
-    logger = logging.getLogger(name)
-    logger.setLevel(level)
-    return logger
+    _logger = logging.getLogger(name)
+    _logger.setLevel(level)
+    return _logger
 
 logger = getLogger(__name__)
 
@@ -29,14 +31,14 @@ deprecated = gensim.utils.deprecated
 def remove_snake_case(snake_str):
     return ' '.join(x.title() for x in snake_str.split('_'))
 
-def noop(*args):  # pylint: disable=W0613
+def noop(*args):  # pylint: disable=unused-argument
     pass
 
 def isint(s):
     try:
         int(s)
         return True
-    except:
+    except:  # pylint: disable=bare-except
         return False
 
 def filter_dict(d, keys=None, filter_out=False):
@@ -137,10 +139,8 @@ def filter_kwargs(f, args):
 
     try:
         return { k: args[k] for k in args.keys() if k in inspect.getargspec(f).args }
-    except:  # pylint: disable=W0702
+    except:  # pylint: disable=bare-except
         return args
-
-import string
 
 VALID_CHARS = "-_.() " + string.ascii_letters + string.digits
 
@@ -179,17 +179,15 @@ sort_chained = lambda x, f: list(x).sort(key=f) or x
 def ls_sorted(path):
     return sort_chained(list(filter(os.path.isfile, glob.glob(path))), os.path.getmtime)
 
-def split(delimiters, string, maxsplit=0):
+def split(delimiters, text, maxsplit=0):
     regexPattern = '|'.join(map(re.escape, delimiters))
-    return re.split(regexPattern, string, maxsplit)
+    return re.split(regexPattern, text, maxsplit)
 
 HYPHEN_REGEXP = re.compile(r'\b(\w+)-\s*\r?\n\s*(\w+)\b', re.UNICODE)
 
 def dehyphen(text):
     result = re.sub(HYPHEN_REGEXP, r"\1\2\n", text)
     return result
-
-path = types.SimpleNamespace()
 
 def path_add_suffix(path, suffix, new_extension=None):
     basename, extension = os.path.splitext(path)
@@ -208,8 +206,6 @@ def path_add_sequence(path, i, j=0):
     suffix = str(i).zfill(j)
     return path_add_suffix(path, suffix)
 
-import zipfile
-
 def zip_get_filenames(zip_filename, extension='.txt'):
     with zipfile.ZipFile(zip_filename, mode='r') as zf:
         return [ x for x in zf.namelist() if x.endswith(extension) ]
@@ -220,11 +216,11 @@ def zip_get_text(zip_filename, filename):
 
 def slim_title(x):
     try:
-        m = re.match('.*\((.*)\)$', x).groups()
+        m = re.match(r'.*\((.*)\)$', x).groups()
         if m is not None and len(m) > 0:
             return m[0]
         return ' '.join(x.split(' ')[:3]) + '...'
-    except:
+    except: # pylint-ignore: bare-except
         return x
 
 def complete_value_range(values, typef=str):

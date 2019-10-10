@@ -41,7 +41,7 @@ styles = {
     }
 }
 
-def plot(G, **kwargs):   # pylint: disable=W0613
+def plot(G, **kwargs):   # pylint: disable=unused-argument
 
     P = nx.nx_pydot.to_pydot(G)
     P.format = 'svg'
