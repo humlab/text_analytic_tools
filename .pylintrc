@@ -60,6 +60,11 @@ disable=
     protected-access,
     too-few-public-methods,
     multiple-imports,
+    logging-not-lazy,
+    broad-except,
+    c-extension-no-member,
+    wrong-import-order,
+    logging-format-interpolation,
     # handled by black
     format
 
