@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os, io
 from scrapy.exceptions import DropItem
-from papacy_scraper.items import PapalTextItem
+from .items import PapalTextItem
 import logging
 
 class StoreTextService():
@@ -27,7 +27,7 @@ class StoreItemAsTextPipeline(object):
 
         if not (item and 'text' in item and item['text']):
             raise DropItem('No text in item')
-        
+
         if not item['filebase']:
             raise DropItem('Error in filename or output folder')
 

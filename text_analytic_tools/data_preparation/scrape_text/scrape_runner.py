@@ -6,7 +6,7 @@ import os
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from scrapy.utils.log import configure_logging
-from run_options import PopeOptions
+from . run_options import PopeOptions
 
 '''
 Note: To run on windows do the following.
@@ -20,7 +20,7 @@ precompiled (if VC is missing or wrong version):
 
     python -m pip install pip --upgrade
     pip install -U setuptools
-    
+
     pip install Twisted-16.4.1-cp34-cp34m-win32.whl
     pip install Scrapy-1.2.0-py2.py3-none-any.whl
 
@@ -34,7 +34,7 @@ precompiled (if VC is missing or wrong version):
 
 if __name__ == "__main__":
 
-    def get_project_dir():  
+    def get_project_dir():
         return os.path.dirname(os.path.realpath(__file__))
 
     os.chdir(get_project_dir())
