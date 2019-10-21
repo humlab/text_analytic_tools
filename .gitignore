@@ -12,6 +12,7 @@
 tmp/
 __pycache__/
 tests/__pycache__/
+**/.pytest_cache/
 output.xml
 **/output/
 **/data/
