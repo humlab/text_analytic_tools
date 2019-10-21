@@ -2,19 +2,20 @@ import os
 import types
 import glob
 import ipywidgets
-import pandas as pd
 import logging
-import bokeh
 import text_analytic_tools.utility as utility
 import text_analytic_tools.text_analysis.topic_model_utility as topic_model_utility
 import text_analytic_tools.text_analysis.topic_model as topic_model
 import text_analytic_tools.common.text_corpus as text_corpus
 import text_analytic_tools.common.textacy_utility as textacy_utility
+from . topic_model_compute import compute_topic_model
 
 logger = utility.getLogger('corpus_text_analysis')
 
 gensim_logger = logging.getLogger('gensim')
 gensim_logger.setLevel(logging.INFO)
+
+from IPython.display import display
 
 ENGINE_OPTIONS = [
     ('MALLET LDA', 'gensim_mallet-lda'),
@@ -42,60 +43,6 @@ def get_spinner_widget(filename="images/spinner-02.gif", width=40, height=40):
         image = image_file.read()
     return ipywidgets.Image(value=image, format='gif', width=width, height=height, layout={'visibility': 'hidden'})
 
-def compute_topic_model(data_folder, method, terms, document_index, vectorizer_args, topic_modeller_args, n_topic_window=0):
-
-    result = None
-
-    try:
-
-        n_topics = topic_modeller_args['n_topics']
-        apply_idf = vectorizer_args['apply_idf']
-
-        window_coherences = [ ]
-
-        for x_topics in range(max(n_topics - n_topic_window, 2), n_topics + n_topic_window + 1):
-
-            topic_modeller_args['n_topics'] = x_topics
-
-            logger.info('Computing model with {} topics...'.format(x_topics))
-
-            data = topic_model.compute(
-                ### corpus=corpus,
-                terms=terms,
-                documents=document_index,
-                ### tick=tick,
-                method=method,
-                vec_args=vectorizer_args,
-                ### tokenizer_args=tokenizer_args,
-                tm_args=topic_modeller_args,
-                tfidf_weiging=apply_idf
-            )
-
-            if x_topics == n_topics:
-                result = data
-
-            p_score = data.perplexity_score
-            c_score = data.coherence_score
-            logger.info('#topics: {}, coherence_score {} perplexity {}'.format(x_topics, c_score, p_score))
-
-            if n_topic_window > 0:
-                window_coherences.append({'n_topics': x_topics, 'perplexity_score': p_score, 'coherence_score': c_score})
-
-        if n_topic_window > 0:
-            #df = pd.DataFrame(window_coherences)
-            #df['n_topics'] = df.n_topics.astype(int)
-            #df = df.set_index('n_topics')
-            #model_result.coherence_scores = df
-            result.coherence_scores = pd.DataFrame(window_coherences).set_index('n_topics')
-
-            #df.to_excel(utility.path_add_timestamp('perplexity.xlsx'))
-            #df['perplexity_score'].plot.line()
-
-    except Exception as ex:
-        logger.error(ex)
-        raise
-    finally:
-        return result
 
 class ComputeTopicModelUserInterface():
 
@@ -241,7 +188,7 @@ class TextacyCorpusUserInterface(ComputeTopicModelUserInterface):
 
         def corpus_method_change_handler(*args):
             self.corpus_widgets.ngrams.disabled = False
-            if 'MALLET' in model_widgets.method.value:
+            if 'MALLET' in self.model_widgets.method.value:
                 self.corpus_widgets.ngrams.value = [1]
                 self.corpus_widgets.ngrams.disabled = True
 
@@ -339,7 +286,7 @@ class PreparedCorpusUserInterface(ComputeTopicModelUserInterface):
     def prepare_source_widgets(self):
         corpus_files = sorted(glob.glob(os.path.join(self.data_folder, '*.tokenized.zip')))
         gui = types.SimpleNamespace(
-            filepath=widgets_config.dropdown(description='Corpus', options=corpus_files, value=None, layout=ipywidgets.Layout(width='500px'))
+            filepath=utility.widgets.dropdown(description='Corpus', options=corpus_files, value=None, layout=ipywidgets.Layout(width='500px'))
         )
 
         return gui, [ gui.filepath ]
@@ -356,73 +303,3 @@ class PreparedCorpusUserInterface(ComputeTopicModelUserInterface):
         ComputeTopicModelUserInterface.display(self, None)
 
 BUTTON_STYLE = dict(description_width='initial', button_color='lightgreen')
-
-class WidgetUtility():
-
-    @staticmethod
-    def create_js_callback(axis, attribute, source):
-        return bokeh.models.CustomJS(args=dict(source=source), code="""
-            var data = source.data;
-            var start = cb_obj.start;
-            var end = cb_obj.end;
-            data['""" + axis + """'] = [start + (end - start) / 2];
-            data['""" + attribute + """'] = [end - start];
-            source.change.emit();
-        """)
-
-    @staticmethod
-    def glyph_hover_callback(glyph_source, glyph_id, text_ids, text, element_id):
-        source = bokeh.models.ColumnDataSource(dict(text_id=text_ids, text=text))
-        code = utility.widgets.glyph_hover_js_code(element_id, glyph_id, 'text', glyph_name='glyph', glyph_data='glyph_data')
-        callback = bokeh.models.CustomJS(args={'glyph': glyph_source, 'glyph_data': source}, code=code)
-        return callback
-
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-        # self.__dict__.update(kwargs)
-
-
-    def create_button(self, description, style=None, callback=None):
-        style = style or dict(description_width='initial', button_color='lightgreen')
-        button = ipywidgets.Button(description=description, style=style)
-        if callback is not None:
-            button.on_click(callback)
-        return button
-
-    def create_text_widget(self, element_id=None, default_value=''):
-        value = "<span class='{}'>{}</span>".format(element_id, default_value) if element_id is not None else ''
-        return ipywidgets.HTML(value=value, placeholder='', description='')
-
-    def create_prev_button(self, callback):
-        return self.create_button(description="<<", callback=callback)
-
-    def create_next_button(self, callback):
-        return self.create_button(description=">>", callback=callback)
-
-    def create_next_id_button(self, name, count):
-        that = self
-
-        def f(_):
-            control = getattr(that, name, None)
-            if control is not None:
-                control.value = (control.value + 1) % count
-
-        return self.create_button(description=">>", callback=f)
-
-    def create_prev_id_button(self, name, count):
-        that = self
-
-        def f(_):
-            control = getattr(that, name, None)
-            if control is not None:
-                control.value = (control.value - 1) % count
-
-        return self.create_button(description="<<", callback=f)
-
-    def next_topic_id_clicked(self, _):
-        self.topic_id.value = (self.topic_id.value + 1) % self.n_topics
-
-    def prev_topic_id_clicked(self, _):
-        self.topic_id.value = (self.topic_id.value - 1) % self.n_topics
-
