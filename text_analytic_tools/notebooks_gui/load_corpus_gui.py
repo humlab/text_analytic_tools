@@ -3,7 +3,8 @@ import ipywidgets
 
 import text_analytic_tools.utility as utility
 
-from . load_corpus import load_corpus
+import text_analytic_tools.common.textacy_utility as textacy_utility
+
 logger = utility.getLogger('corpus_text_analysis')
 
 from IPython.display import display
@@ -75,17 +76,17 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
                                  (() if gui.compute_dep.value else ("parser",)) + \
                                  (() if gui.compute_ner.value else ("ner",)) + \
                                  ("textcat", )
-                load_corpus(
-                    domain_logic=domain_logic,
-                    container=container,
-                    document_index=document_index,
+                textacy_utility.load_or_create(
                     source_path=gui.source_path.value,
                     language=gui.language.value,
+                    container=container,
+                    document_index=document_index,
                     merge_entities=gui.merge_entities.value,
                     overwrite=gui.overwrite.value,
-                    binary_format=gui.binary_format.value,
                     use_compression=gui.use_compression.value,
+                    binary_format=gui.binary_format.value,
                     disabled_pipes=tuple(disabled_pipes),
+                    domain=domain_logic,
                     tick=tick
                 )
         except IndexError:
@@ -96,4 +97,3 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
             gui.compute.disabled = False
 
     gui.compute.on_click(compute_callback)
-
