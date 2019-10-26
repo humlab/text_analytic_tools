@@ -295,4 +295,3 @@ def get_documents_by_field_filters(corpus, documents, filters):
     ids = get_document_id_by_field_filters(documents, filters)
     docs = ( x for x in corpus if x._.meta['document_id'] in ids)
     return docs
-
