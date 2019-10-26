@@ -88,6 +88,8 @@ def display_corpus_load_gui(data_folder, document_index=None, container=None, co
                     disabled_pipes=tuple(disabled_pipes),
                     tick=tick
                 )
+        except IndexError:
+            logger.info('no files found')
         except Exception as ex:
             raise ex
         finally:
