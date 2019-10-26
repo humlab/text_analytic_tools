@@ -7,6 +7,7 @@ import zipfile
 import typing
 import types
 import fnmatch
+import pathlib
 import pandas as pd
 import gensim
 from .utils import getLogger
@@ -14,6 +15,11 @@ from .utils import getLogger
 logger = getLogger()
 
 HYPHEN_REGEXP = re.compile(r'\b(\w+)-\s*\r?\n\s*(\w+)\b', re.UNICODE)
+
+def find_parent_folder(name):
+    path = pathlib.Path(os.getcwd())
+    folder = os.path.join(*path.parts[:path.parts.index(name)+1])
+    return folder
 
 def dehyphen(text: str):
     result = re.sub(HYPHEN_REGEXP, r"\1\2\n", text)
@@ -95,14 +101,13 @@ class FileUtility:
         basename, extension = os.path.splitext(path)
         return os.path.join(directory, '{}_{}{}'.format(basename, time.strftime("%Y%m%d%H%M"), extension))
 
-    @staticmethod
-    def zip(path):
-        if not os.path.exists(path):
-            logger.error("ERROR: file not found (zip)")
-            return
-        folder, filename = os.path.split(path)
-        basename, _ = os.path.splitext(filename)
-        zip_name = os.path.join(folder, basename + '.zip')
-        with zipfile.ZipFile(zip_name, mode='w', compression=zipfile.ZIP_DEFLATED) as zf:
-            zf.write(path)
-        os.remove(path)
+def compress_file(path):
+    if not os.path.exists(path):
+        logger.error("ERROR: file not found (zip)")
+        return
+    folder, filename = os.path.split(path)
+    basename, _ = os.path.splitext(filename)
+    zip_name = os.path.join(folder, basename + '.zip')
+    with zipfile.ZipFile(zip_name, mode='w', compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.write(path)
+    os.remove(path)
