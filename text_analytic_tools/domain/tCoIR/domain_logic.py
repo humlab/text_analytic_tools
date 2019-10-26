@@ -1,6 +1,5 @@
 
 import os
-import pathlib
 import ipywidgets
 import textacy
 import pandas as pd
@@ -8,13 +7,13 @@ import pandas as pd
 import text_analytic_tools.utility as utility
 import text_analytic_tools.common.textacy_utility as textacy_utility
 import text_analytic_tools.common.text_corpus as text_corpus
-import text_analytic_tools.domain.tCoIR.treaty_state as treaty_repository
+
+import text_analytic_tools.domain.tCoIR.treaty_repository as treaty_repository
 import text_analytic_tools.domain.tCoIR.config as config
 
 extend = utility.extend
 
-path = pathlib.Path(os.getcwd())
-root_folder = os.path.join(*path.parts[:path.parts.index('text_analytic_tools')+1])
+root_folder = utility.find_parent_folder('text_analytic_tools')
 
 DATA_FOLDER = os.path.join(root_folder, 'data/tCoIR')
 
@@ -92,7 +91,7 @@ def get_extended_treaties(lang='en'):
     return treaties
 
 def get_corpus_documents(corpus):
-    metadata = [ utility.extend({}, doc._.meta, textacy_utility._get_pos_statistics(doc)) for doc in corpus ]
+    metadata = [ utility.extend({}, doc._.meta, textacy_utility.get_pos_statistics(doc)) for doc in corpus ]
     df = pd.DataFrame(metadata)[['treaty_id', 'filename', 'signed_year', 'party1', 'party2', 'topic1', 'is_cultural'] + textacy_utility.POS_NAMES]
     df['title'] = df.treaty_id
     df['lang'] = df.filename.str.extract(r'\w{4,6}\_(\w\w)')
