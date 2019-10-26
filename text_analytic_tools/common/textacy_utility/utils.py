@@ -128,7 +128,7 @@ POS_TO_COUNT = {
 
 POS_NAMES = list(sorted(POS_TO_COUNT.keys()))
 
-def _get_pos_statistics(doc):
+def get_pos_statistics(doc):
     pos_iter = ( x.pos_ for x in doc if x.pos_ not in ['NUM', 'PUNCT', 'SPACE'] )
     pos_counts = dict(collections.Counter(pos_iter))
     stats = utility.extend(dict(POS_TO_COUNT), pos_counts)
@@ -138,7 +138,7 @@ def get_corpus_data(corpus, document_index, title, columns_of_interest=None):
     metadata = [
         utility.extend({},
                        dict(document_id=doc._.meta['document_id']),
-                       _get_pos_statistics(doc)
+                       get_pos_statistics(doc)
                       )
         for doc in corpus
     ]
