@@ -9,12 +9,24 @@ import fnmatch
 import logging
 import re
 import typing.re
+import collections
 
 from gensim.corpora.textcorpus import TextCorpus
 
 logger = logging.getLogger(__name__)
 
 HYPHEN_REGEXP = re.compile(r'\b(\w+)-\s*\r?\n\s*(\w+)\b', re.UNICODE)
+
+def build_vocab(corpus):
+    ''' Iterates corpus and add distict terms to vocabulary '''
+    logger.info('Builiding vocabulary...')
+    token2id = collections.defaultdict()
+    token2id.default_factory = token2id.__len__
+    for doc in corpus:
+        for term in doc:
+            token2id[term]
+    logger.info('Vocabulary of size {} built.'.format(len(token2id)))
+    return token2id
 
 def dehyphen(text):
     result = re.sub(HYPHEN_REGEXP, r"\1\2\n", text)
