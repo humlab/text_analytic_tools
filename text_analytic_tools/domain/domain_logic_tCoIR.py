@@ -1,5 +1,6 @@
 
 import os
+import pathlib
 import ipywidgets
 import textacy
 import pandas as pd
@@ -12,7 +13,12 @@ import text_analytic_tools.domain.tCoIR.config as config
 
 extend = utility.extend
 
-DATA_FOLDER = '../../../data/tCoIR'
+path = pathlib.Path(os.getcwd())
+root_folder = os.path.join(*path.parts[:path.parts.index('text_analytic_tools')+1])
+
+DATA_FOLDER = os.path.join(root_folder, 'data/tCoIR')
+
+print('Data folder: {}'.format(DATA_FOLDER))
 
 CORPUS_NAME_PATTERN = 'tCoIR_*.txt.zip'
 CORPUS_TEXT_FILES_PATTERN = '*.txt'
