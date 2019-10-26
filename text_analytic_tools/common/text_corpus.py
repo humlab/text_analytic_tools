@@ -1,14 +1,13 @@
 import os
 import pandas as pd
 import numpy as np
-import glob
 import nltk
 import gensim
 import zipfile
 import fnmatch
 import logging
 import re
-import typing.re
+import typing
 import collections
 
 from gensim.corpora.textcorpus import TextCorpus
@@ -180,7 +179,7 @@ class GenericTextCorpus(TextCorpus):
 
     def ___compile_documents(self):
 
-        document_data = map(self.get_document_info, self.filenames)
+        document_data = map(self.__get_document_info, self.filenames)
 
         documents = pd.DataFrame(list(document_data))
         documents.index.names = ['document_id']
@@ -197,9 +196,6 @@ class SimplePreparedTextCorpus(GenericTextCorpus):
         self.lowercase = lowercase
         source = self.reader
         super(SimplePreparedTextCorpus, self).__init__(source)
-
-    def default_token_filters(self):
-        return [ ]
 
     def default_token_filters(self):
 
@@ -226,8 +222,7 @@ class MmCorpusStatisticsService():
     def get_total_token_frequencies(self):
         dictionary = self.corpus.dictionary
         freqencies = np.zeros(len(dictionary.id2token))
-        document_stats = []
-        for document in corpus:
+        for document in self.corpus:
             for i, f in document:
                 freqencies[i] += f
         return freqencies
@@ -238,15 +233,14 @@ class MmCorpusStatisticsService():
         Returns a DataFrame with per document token frequencies i.e. "melts" doc-term matrix
         '''
         data = ((document_id, x[0], x[1]) for document_id, values in enumerate(self.corpus) for x in values )
-        pd = pd.DataFrame(list(zip(*data)), columns=['document_id', 'token_id', 'count'])
-        pd = pd.merge(self.corpus.document_names, left_on='document_id', right_index=True)
+        df = pd.DataFrame(list(zip(*data)), columns=['document_id', 'token_id', 'count'])
+        df = df.merge(self.corpus.document_names, left_on='document_id', right_index=True)
 
-        return pd
+        return df
 
     def compute_word_frequencies(self, remove_stopwords):
         id2token = self.dictionary.id2token
         term_freqencies = np.zeros(len(id2token))
-        document_stats = []
         for document in self.corpus:
             for i, f in document:
                 term_freqencies[i] += f
