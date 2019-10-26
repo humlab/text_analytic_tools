@@ -600,7 +600,7 @@ class TreatyState:
             recode_is_cultural=False,
             parties=parties
         )
-        treaties = treaties[treaties[LANGUAGE_MAP[language]]==language]
+        treaties = treaties[treaties[utility.LANGUAGE_MAP[language]]==language]
         treaties = treaties.sort_values('signed_year', ascending=True)
         return treaties
 
