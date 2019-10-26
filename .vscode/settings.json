@@ -2,31 +2,21 @@
 {
     "workbench.sideBar.location": "left",
     "explorer.openEditors.visible": 0,
-
-    "python.linting.pylintEnabled": true,
-    "python.linting.flake8Enabled": false,
-    "python.linting.pep8Enabled": false,
     "python.formatting.provider": "autopep8",
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": false,
-    "python.testing.nosetestsEnabled": false,
-    "python.testing.unittestArgs": [
-        "-v",
-        "-s",
-        "",
-        "-p",
-        "*test*.py"
-    ],
     "editor.rulers": [90],
     "editor.roundedSelection": false,
     "files.exclude": {
         "**/.git": true,
         "**/.DS_Store": true,
-        //".vscode": true,
         "**/__pycache__": true,
         "**/**/*.pyc": true
     },
-    "python.testing.promptToConfigure": false,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestArgs": [
+        "text_analytic_tools"
+    ],
     "python.linting.mypyArgs": [
         "--ignore-missing-imports",
         "--follow-imports=silent",
@@ -35,7 +25,16 @@
         "--disable=missing-docstring",
         "--disable=no-self-use",
         "--disable=C0301",
-        "--disable=C0111"
+        "--disable=C0111",
+        "--disable=wildcard-import",
+        "--disable=W1202",
     ],
-    "python.pythonPath": "C:\\Users\\roma0050\\.virtualenvs\\papacy_scraper-1tbwoSRV\\Scripts\\python.exe"
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--rcfile=${workspaceFolder}/.pylintrc"
+    ],
+    "python.dataScience.enableAutoMoveToNextCell": false,
+    "python.dataScience.ignoreVscodeTheme": true,
+    "python.pipenvPath": "/home/roger/.pyenv/shims/pipenv",
+    "python.pythonPath": "/home/roger/.local/share/virtualenvs/text_analytic_tools-LUuJUi2x/bin/python"
 }

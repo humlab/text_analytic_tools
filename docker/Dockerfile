@@ -43,7 +43,7 @@ ENV LANGUAGE=en_US.UTF-8
 COPY . .
 
 RUN pip install pipenv && \
-    pipenv install --python=three --skip-lock && \
+    pipenv install --python=3.7 --skip-lock && \
     pipenv install --skip-lock --verbose && \
     python -m nltk.downloader all
 
