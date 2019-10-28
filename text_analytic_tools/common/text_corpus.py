@@ -190,9 +190,9 @@ class GenericTextCorpus(TextCorpus):
 class SimplePreparedTextCorpus(GenericTextCorpus):
     """Reads content in stream and returns tokenized text. No other processing.
     """
-    def __init__(self, source, lowercase=False):
+    def __init__(self, source, lowercase=False, itemfilter=None):
 
-        self.reader = CompressedFileReader(source)
+        self.reader = CompressedFileReader(source, itemfilter=itemfilter)
         self.filenames = self.reader.filenames
         self.lowercase = lowercase
         source = self.reader

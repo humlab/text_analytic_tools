@@ -98,6 +98,26 @@ def get_corpus_documents(corpus):
     df['words'] = df[textacy_utility.POS_NAMES].apply(sum, axis=1)
     return df
 
+def get_region_document_index(source_path, region_name, closed_region, pattern='*.txt'):
+
+    region_country_map = {
+        region: party for (region, party) in get_wti_index().get_party_preset_options()
+    }
+
+    assert region_name in region_country_map
+
+    filenames = text_corpus.list_archive_files(source_path, pattern)
+    documents = compile_documents_by_filename(filenames)
+
+    region_countries = region_country_map[region_name]
+
+    if closed_region:
+         region_documents = documents[(documents.party1.isin(region_countries)) & (documents.party2.isin(region_countries))]
+    else:
+         region_documents = documents[(documents.party1.isin(region_countries)) | (documents.party2.isin(region_countries))]
+
+    return region_documents
+
 def get_treaty_dropdown_options(wti_index, corpus):
 
     def format_treaty_name(x):
