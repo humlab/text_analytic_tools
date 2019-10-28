@@ -55,7 +55,7 @@ def compute_source_files_by_region_filter(source_files):
         filenames = document_index.filename.tolist()
         corpus = text_corpus.SimplePreparedTextCorpus(source_file, lowercase=True, itemfilter=filenames)
         document_index = current_domain.compile_documents(corpus)
-        for window_size in [20]:
+        for window_size in [5]:
             tag = '{}_{}_{}'.format(tag, region_name.lower().replace(':','_').replace(' ', '_'), 'closed' if closed_region else 'open')
             result_filename = 'CO_tCoIR_en_45-72.{}_{}_{}_{}.xlsx'.format(time.strftime("%Y%m%d"), method, window_size, tag)
             print('Result filename: {}'.format(result_filename))
@@ -64,13 +64,13 @@ def compute_source_files_by_region_filter(source_files):
 
 # RUN FOR ENTTIRE CORPUS
 
-entire_corpus_source_files = [
-    ('data/tCoIR/tCoIR_en_45-72.txt_preprocessed_20191028.lemma.ADJ.NOUN.tokenized.zip', 'lemma.ADJ.NOUN'),
-    ('data/tCoIR/tCoIR_en_45-72.txt_preprocessed_20191028.lemma.ADJ.NOUN.VERB.tokenized.zip', 'lemma.ADJ.NOUN.VERB'),
-    ('data/tCoIR/tCoIR_en_45-72.txt_preprocessed_20191028.lemma.N.O.U.N.tokenized.zip', 'lemma.NOUN'),
-    ('data/tCoIR/tCoIR_en_45-72.txt_preprocessed_20191028.lemma.V.E.R.B.tokenized.zip', 'lemma.VERB')
-]
-compute_source_files(entire_corpus_source_files)
+# entire_corpus_source_files = [
+#     ('data/tCoIR/tCoIR_en_45-72.txt_preprocessed_20191028.lemma.ADJ.NOUN.tokenized.zip', 'lemma.ADJ.NOUN'),
+#     ('data/tCoIR/tCoIR_en_45-72.txt_preprocessed_20191028.lemma.ADJ.NOUN.VERB.tokenized.zip', 'lemma.ADJ.NOUN.VERB'),
+#     ('data/tCoIR/tCoIR_en_45-72.txt_preprocessed_20191028.lemma.N.O.U.N.tokenized.zip', 'lemma.NOUN'),
+#     ('data/tCoIR/tCoIR_en_45-72.txt_preprocessed_20191028.lemma.V.E.R.B.tokenized.zip', 'lemma.VERB')
+# ]
+# compute_source_files(entire_corpus_source_files)
 
 # RUN FOR SPECIFIC REGIONS:
 
