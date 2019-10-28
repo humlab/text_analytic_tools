@@ -5,8 +5,6 @@ import itertools
 import text_analytic_tools.utility as utility
 import text_analytic_tools.common.text_corpus as text_corpus
 
-from glove import Corpus
-
 logger = utility.getLogger('corpus_text_analysis')
 
 class HyperspaceAnalogueToLanguageVectorizer():
@@ -122,63 +120,63 @@ class HyperspaceAnalogueToLanguageVectorizer():
             dtype=np.float64
         ).T
 
-    def xxx_cwr(self, direction_sensitive=False, normalize='size'):
+    # def xxx_cwr(self, direction_sensitive=False, normalize='size'):
 
-        n = self.nw_x.shape[0]
+    #     n = self.nw_x.shape[0]
 
-        nw = self.nw_x.reshape(n,1)
-        nw_xy = self.nw_xy
+    #     nw = self.nw_x.reshape(n,1)
+    #     nw_xy = self.nw_xy
 
-        norm = 1.0
-        if normalize == 'size':
-            norm = float(self.term_count)
-        elif norm == 'max':
-            norm = float(np.max(nw_xy))
-        elif norm == 'sum':
-            norm = float(np.sum(nw_xy))
+    #     norm = 1.0
+    #     if normalize == 'size':
+    #         norm = float(self.term_count)
+    #     elif norm == 'max':
+    #         norm = float(np.max(nw_xy))
+    #     elif norm == 'sum':
+    #         norm = float(np.sum(nw_xy))
 
-        #nw.resize(nw.shape[0], 1)
+    #     #nw.resize(nw.shape[0], 1)
 
-        self.cwr = sp.lil_matrix(nw_xy / (-nw_xy + nw + nw.T)) #nw.reshape(n,1).T))
+    #     self.cwr = sp.lil_matrix(nw_xy / (-nw_xy + nw + nw.T)) #nw.reshape(n,1).T))
 
-        if norm != 1.0:
-            self.cwr = self.cwr / norm
+    #     if norm != 1.0:
+    #         self.cwr = self.cwr / norm
 
-        coo_matrix = self.cwr.tocoo(copy=False)
-        df = pd.DataFrame({
-            'x_id': coo_matrix.row,
-            'y_id': coo_matrix.col,
-            'cwr': coo_matrix.data
-        }).sort_values(['x_id', 'y_id']).reset_index(drop=True)
+    #     coo_matrix = self.cwr.tocoo(copy=False)
+    #     df = pd.DataFrame({
+    #         'x_id': coo_matrix.row,
+    #         'y_id': coo_matrix.col,
+    #         'cwr': coo_matrix.data
+    #     }).sort_values(['x_id', 'y_id']).reset_index(drop=True)
 
-        df = df.assign(
-            x_term=df.x_id.apply(lambda x: self.id2token[x]),
-            y_term=df.y_id.apply(lambda x: self.id2token[x])
-        )
+    #     df = df.assign(
+    #         x_term=df.x_id.apply(lambda x: self.id2token[x]),
+    #         y_term=df.y_id.apply(lambda x: self.id2token[x])
+    #     )
 
-        df_nw_x = pd.DataFrame(self.nw_x, columns=['nw'])
+    #     df_nw_x = pd.DataFrame(self.nw_x, columns=['nw'])
 
-        df = df.merge(df_nw_x, left_on='x_id', right_index=True, how='inner').rename(columns={'nw': 'nw_x'})
-        df = df.merge(df_nw_x, left_on='y_id', right_index=True, how='inner').rename(columns={'nw': 'nw_y'})
+    #     df = df.merge(df_nw_x, left_on='x_id', right_index=True, how='inner').rename(columns={'nw': 'nw_x'})
+    #     df = df.merge(df_nw_x, left_on='y_id', right_index=True, how='inner').rename(columns={'nw': 'nw_y'})
 
-        df = df[['x_id', 'y_id', 'x_term', 'y_term', 'cwr']]
+    #     df = df[['x_id', 'y_id', 'x_term', 'y_term', 'cwr']]
 
-        return df
+    #     return df
 
-    def cooccurence2(self, direction_sensitive=False, normalize='size', zero_diagonal=True):
-        n = self.cwr.shape[0]
-        df = pd.DataFrame([(
-                i,
-                j,
-                self.id2token[i],
-                self.id2token[j],
-                self.nw_xy[i,j],
-                self.nw_x[i],
-                self.nw_x[j],
-                self.cwr[i,j]
-            ) for i,j in itertools.product(range(0,n), repeat=2) if self.cwr[i,j] > 0 ], columns=['x_id', 'y_id', 'x_term', 'y_term', 'nw_xy', 'nw_x', 'nw_y', 'cwr'])
+    # def cooccurence2(self, direction_sensitive=False, normalize='size', zero_diagonal=True):
+    #     n = self.cwr.shape[0]
+    #     df = pd.DataFrame([(
+    #             i,
+    #             j,
+    #             self.id2token[i],
+    #             self.id2token[j],
+    #             self.nw_xy[i,j],
+    #             self.nw_x[i],
+    #             self.nw_x[j],
+    #             self.cwr[i,j]
+    #         ) for i,j in itertools.product(range(0,n), repeat=2) if self.cwr[i,j] > 0 ], columns=['x_id', 'y_id', 'x_term', 'y_term', 'nw_xy', 'nw_x', 'nw_y', 'cwr'])
 
-        return df
+    #     return df
 
     def cooccurence(self, direction_sensitive=False, normalize='size', zero_diagonal=True):
         '''Return computed co-occurrence values'''

@@ -22,7 +22,7 @@ def parties_mask(parties):
 def period_group_mask(pg):
     return lambda df: df.signed_year.isin(period_group_years(pg))
 
-def is_cultural_mask():
+def is_cultural_7corr_mask():
     def fx(df):
         df.loc[df.is_cultural, 'topic1'] = '7CORR'
         return True

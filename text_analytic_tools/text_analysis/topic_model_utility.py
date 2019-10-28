@@ -61,19 +61,19 @@ class TopicModelContainer():
 
 
 # NOT USED
-def get_doc_topic_weights_DEPRECATED(doc_topic_matrix, threshold=0.05):
-    topic_ids = range(0,doc_topic_matrix.shape[1])
-    for document_id in range(0,doc_topic_matrix.shape[1]):
-        topic_weights = doc_topic_matrix[document_id, :]
-        for topic_id in topic_ids:
-            if topic_weights[topic_id] >= threshold:
-                yield (document_id, topic_id, topic_weights[topic_id])
+# def get_doc_topic_weights_DEPRECATED(doc_topic_matrix, threshold=0.05):
+#     topic_ids = range(0,doc_topic_matrix.shape[1])
+#     for document_id in range(0,doc_topic_matrix.shape[1]):
+#         topic_weights = doc_topic_matrix[document_id, :]
+#         for topic_id in topic_ids:
+#             if topic_weights[topic_id] >= threshold:
+#                 yield (document_id, topic_id, topic_weights[topic_id])
 
 # NOT USED
-def get_df_doc_topic_weights_DEPRECATED(doc_topic_matrix, threshold=0.05):
-    it = get_doc_topic_weights(doc_topic_matrix, threshold)
-    df = pd.DataFrame(list(it), columns=['document_id', 'topic_id', 'weight']).set_index('document_id')
-    return df
+# def get_df_doc_topic_weights_DEPRECATED(doc_topic_matrix, threshold=0.05):
+#     it = get_doc_topic_weights(doc_topic_matrix, threshold)
+#     df = pd.DataFrame(list(it), columns=['document_id', 'topic_id', 'weight']).set_index('document_id')
+#     return df
 
 def compile_dictionary(model, vectorizer=None):
     logger.info('Compiling dictionary...')

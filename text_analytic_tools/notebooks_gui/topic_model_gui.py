@@ -291,7 +291,7 @@ class PreparedCorpusUserInterface(ComputeTopicModelUserInterface):
 
         return gui, [ gui.filepath ]
 
-    def get_corpus_terms(self, _corpus):
+    def get_corpus_terms(self, corpus):
         filepath = self.corpus_widgets.filepath.value
         self.corpus = text_corpus.SimplePreparedTextCorpus(filepath)
         doc_terms = [ list(terms) for terms in self.corpus.get_texts() ]

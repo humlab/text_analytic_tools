@@ -40,7 +40,7 @@ def compress_whitespaces(text):
     return result
 
 def extract_metadata(filename, **kwargs):
-    params = { x: None for x in kwargs.keys()}
+    params = { x: None for x in kwargs}
     meta =  types.SimpleNamespace(filename=filename, **params)
     for k,r in kwargs.items():
         if r is None:
@@ -83,7 +83,7 @@ class FileUtility:
 
     @staticmethod
     def save_excel(data, filename):
-        with pd.ExcelWriter(filename) as writer:
+        with pd.ExcelWriter(filename) as writer: # pylint: disable=abstract-class-instantiated
             for (df, name) in data:
                 df.to_excel(writer, name, engine='xlsxwriter')
             writer.save()

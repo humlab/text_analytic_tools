@@ -1,17 +1,20 @@
+import datetime
+import logging
 import os
-import pandas as pd
-import numpy as np
 import re
 import warnings
-import logging
-import datetime
 
-warnings.simplefilter(action='ignore', category=FutureWarning)
+import numpy as np
+import pandas as pd
 
 import text_analytic_tools.utility as utility
 
 from . import treaty_utility
-from . config import *
+from .config import *
+
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -117,7 +120,7 @@ party_correction_map = {
 
 class TreatyState:
 
-    def __init__(self, data_folder='./data', skip_columns=default_treaties_skip_columns, period_groups=None): # pylint: disable=W0102
+    def __init__(self, data_folder='./data', skip_columns=default_treaties_skip_columns, period_groups=None):
         self.data_folder = data_folder
         self.period_groups = period_groups or DEFAULT_PERIOD_GROUPS
         self.treaties_skip_columns = (skip_columns or []) + ['sequence', 'is_cultural_yesno']
@@ -179,7 +182,7 @@ class TreatyState:
 
     def _read_data(self):
         data = {}
-        na_values = ['#N/A','N/A', 'NULL', 'NaN', '-NaN']
+        # na_values = ['#N/A','N/A', 'NULL', 'NaN', '-NaN']
         for (filename, key, _) in self.csv_files:
             path = os.path.join(self.data_folder, filename)
             # data[key] = pd.read_csv(path, sep='\t', low_memory=False, na_filter=False)
@@ -339,7 +342,7 @@ class TreatyState:
 
         return df
 
-    def get_parties(self, extra_parties=default_extra_parties): # pylint: disable=W0102
+    def get_parties(self, extra_parties=default_extra_parties): # pylint: disable=dangerous-default-value
 
         parties = self.data['parties']\
             .drop(['Unnamed: 0'], axis=1)\
@@ -398,7 +401,7 @@ class TreatyState:
             d = self.parties.loc[party].to_dict()
             d['party'] = party
             return d
-        except:  # pytlint: disable=W0702
+        except:  # pytlint: disable=bare-except
             return None
 
     def get_headnotes(self):
@@ -429,7 +432,7 @@ class TreatyState:
     def filter_by_is_cultural(self, df, treaty_filter):
 
         if treaty_filter == 'is_cultural':
-            return df.loc[(df.is_cultural==True)]
+            return df.loc[(df.is_cultural)]
 
         if treaty_filter == 'is_7cult':
             return df.loc[(df.topic1=='7CULT')]

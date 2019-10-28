@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 #
 # This source code is based on gensim.models.wrapper.LdaMallet
-# 
+#
 # Copyright (C) 2014 Radim Rehurek <radimrehurek@seznam.cz>
 # Licensed under the GNU LGPL v2.1 - http://www.gnu.org/licenses/lgpl.html
-# 
+#
 r"""Python wrapper for `STTM Short text topic modelling library <https://github.com/qiang2100/STTM>`_
 
 Notes
@@ -95,34 +95,34 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
         self.model = model.upper()
         if self.model not in self.avaliable_models:
             raise ValueError("unknown model")
-            
+
         self.id2word = id2word
         self.vectors = vectors
         if self.id2word is None:
             raise ValueError("no word id mapping provided")
-            self.id2word = utils.dict_from_corpus(corpus)
-            self.num_terms = len(self.id2word)
+            # self.id2word = utils.dict_from_corpus(corpus)
+            # self.num_terms = len(self.id2word)
         else:
             self.num_terms = 0 if not self.id2word else 1 + max(self.id2word.keys())
-            
+
         if self.num_terms == 0:
             raise ValueError("empty collection (no terms)")
-            
+
         self.num_topics = num_topics
-        
+
         self.alpha = [alpha] * num_topics
         self.beta = beta
-        
+
         if prefix is None:
             rand_prefix = hex(random.randint(0, 0xffffff))[2:] + '_'
             prefix = os.path.join(tempfile.gettempdir(), rand_prefix)
-            
+
         self.prefix = prefix
         self.name = name
         self.twords = twords
         self.iterations = iterations
         self.sstep = sstep
-        
+
         if corpus is not None:
             self.train(corpus)
 
@@ -158,7 +158,7 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
 
         """
         return self.prefix + self.name + '.corpus'
-    
+
     def fvocabulary(self):
         """Get path to vocabulary text file.
 
@@ -169,7 +169,7 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
 
         """
         return self.prefix + self.name + '.vocabulary'
-    
+
     def ftopwords(self):
         """Get path to topwords text file.
 
@@ -180,7 +180,7 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
 
         """
         return self.prefix + self.name + '.topWords'
-    
+
     def fwordweights(self):
         """Get path to word weight file.
 
@@ -207,7 +207,7 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
             Opened file.
 
         """
-        for docno, doc in enumerate(corpus):
+        for _, doc in enumerate(corpus):
             if self.id2word:
                 tokens = chain.from_iterable([self.id2word[tokenid]] * int(cnt) for tokenid, cnt in doc)
             else:
@@ -251,10 +251,10 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
             self.name,
             self.sstep
         )
-        
+
         if self.vectors is not None:
             cmd += ' -vectors {}'.format(self.vectors)
-        
+
         logger.info("training STTM model with %s", cmd)
         check_output(args=cmd, shell=True)
         self.word_topics = self.load_word_topics()
@@ -277,11 +277,11 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
         #with open(self.ftopickeys(), 'r') as f:
         #    text = f.read().replace(' \n', '\n')
         #word_topics = np.loadtxt(io.StringIO(text), delimiter=' ', dtype=numpy.float64)
-        
+
         word_topics = numpy.loadtxt(self.ftopickeys(), delimiter=' ', usecols=range(0,self.num_terms), dtype=numpy.float64)
-        
+
         assert word_topics.shape == (self.num_topics, self.num_terms)
-                
+
         return word_topics
 
     def load_document_topics(self):
@@ -369,7 +369,7 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
 
         if self.word_topics is None:
             logger.warning("Run train or load_word_topics before showing topics.")
-            
+
         topic = self.word_topics[topicid]
         topic = topic / topic.sum()  # normalize to probability dist
         bestn = matutils.argsort(topic, topn, reverse=True)
@@ -402,7 +402,7 @@ class STTMTopicModel(utils.SaveLoad, basemodel.BaseTopicModel):
         doc_topics = numpy.loadtxt(fname, delimiter=' ', usecols=range(0,self.num_topics), dtype=numpy.float64)
         doc_topics[doc_topics < eps] = 0
         m = scipy.sparse.coo_matrix(doc_topics)
-        
+
         for i in range(0, m.shape[0]):
             row = m.getrow(i)
             values = list(zip(row.indices, row.data))

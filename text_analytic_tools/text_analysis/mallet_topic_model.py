@@ -3,6 +3,7 @@ import inspect
 import logging
 
 from gensim import models
+from gensim.utils import check_output
 
 logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -18,9 +19,9 @@ class MalletTopicModel(models.wrappers.LdaMallet):
         args = filter_fn_args(super(MalletTopicModel, self).__init__, args)
 
         args.update({ "workers": 4, "optimize_interval": 10 })
-        
+
         # os.environ["MALLET_HOME"] = default_mallet_home
-        
+
         mallet_home = os.environ.get('MALLET_HOME', default_mallet_home)
 
         if not mallet_home:
@@ -32,12 +33,11 @@ class MalletTopicModel(models.wrappers.LdaMallet):
             os.environ["MALLET_HOME"] = mallet_home
 
         super(MalletTopicModel, self ).__init__(mallet_path, corpus=corpus, id2word=id2word, **args)
-        
+
     def ftopicwordweights(self):
         return self.prefix + 'topicwordweights.txt'
 
     def train(self, corpus):
-        from gensim.utils import check_output
         self.convert_input(corpus, infer=False)
         cmd = self.mallet_path + ' train-topics --input %s --num-topics %s  --alpha %s --optimize-interval %s '\
             '--num-threads %s --output-state %s --output-doc-topics %s --output-topic-keys %s --topic-word-weights-file %s '\
@@ -52,4 +52,3 @@ class MalletTopicModel(models.wrappers.LdaMallet):
         check_output(args=cmd, shell=True)
         self.word_topics = self.load_word_topics()
         self.wordtopics = self.word_topics
-        

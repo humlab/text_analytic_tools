@@ -57,7 +57,7 @@ def keep_hyphen_tokenizer(nlp):
 
     return spacy.tokenizer.Tokenizer(nlp.vocab, prefix_search=prefix_re.search, suffix_search=suffix_re.search, infix_finditer=infix_re.finditer, token_match=None)
 
-_load_spacy = textacy.load_spacy_lang if hasattr(textacy, 'load_spacy_lang') else textacy.load_spacy
+_load_spacy = textacy.load_spacy_lang if hasattr(textacy, 'load_spacy_lang') else textacy.load_spacy # pylint: disable=no-member
 
 @utility.timecall
 def setup_nlp_language_model(language, **nlp_args):

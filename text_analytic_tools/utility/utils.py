@@ -10,6 +10,7 @@ import time
 import zipfile
 import functools
 import string
+import platform
 import gensim.utils
 
 def getLogger(name='text_analytic_tools', level=logging.INFO):
@@ -220,7 +221,7 @@ def slim_title(x):
         if m is not None and len(m) > 0:
             return m[0]
         return ' '.join(x.split(' ')[:3]) + '...'
-    except: # pylint-ignore: bare-except
+    except: # pylint: disable=bare-except
         return x
 
 def complete_value_range(values, typef=str):
@@ -244,7 +245,6 @@ def complete_value_range(values, typef=str):
     return list(map(typef, values))
 
 def is_platform_architecture(xxbit):
-    import platform
     assert xxbit in [ '32bit', '64bit' ]
     logger.info(platform.architecture()[0])
     return platform.architecture()[0] == xxbit

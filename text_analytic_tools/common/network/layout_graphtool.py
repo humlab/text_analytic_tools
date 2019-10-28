@@ -1,5 +1,5 @@
 from types import SimpleNamespace as bunch
-from common.network.graphtool_utility import nx2gt
+from text_analytic_tools.common.network.graphtool_utility import nx2gt
 
 try:
     import graph_tool.draw as gt_draw

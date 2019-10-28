@@ -1,15 +1,10 @@
 
-if '__file__' in globals():
-    import os, sys
-    curdir = os.path.abspath(os.path.dirname(__file__))
-    if curdir not in sys.path:
-        sys.path.append(curdir)
-
-import networkx as nx
-import bokeh.palettes
 import bokeh.models as bm
+import bokeh.palettes
+import networkx as nx
 
 from bokeh.plotting import figure
+from . utility import *
 
 if 'extend' not in globals():
     extend = lambda a,b: a.update(b) or a
