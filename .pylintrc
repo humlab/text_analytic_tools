@@ -54,17 +54,23 @@ enable=use-symbolic-message-instead,useless-supression,fixme
 
 disable=
     attribute-defined-outside-init,
-    duplicate-code,
-    invalid-name,
-    missing-docstring,
-    protected-access,
-    too-few-public-methods,
-    multiple-imports,
-    logging-not-lazy,
+    bare-except,
     broad-except,
     c-extension-no-member,
-    wrong-import-order,
+    duplicate-code,
+    invalid-name,
     logging-format-interpolation,
+    logging-not-lazy,
+    missing-docstring,
+    multiple-imports,
+    no-self-use,
+    protected-access,
+    singleton-comparision,
+    to-many-arguments,
+    too-few-public-methods,
+    unnecessary-comprehension,
+    unused-wildcard-import,
+    wrong-import-order,
     # handled by black
     format
 

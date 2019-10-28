@@ -9,7 +9,7 @@ from itertools import product
 
 if 'extend' not in globals():
     extend = lambda a,b: a.update(b) or a
-    
+
 if 'filter_kwargs' not in globals():
     import inspect
     filter_kwargs = lambda f, args: { k:args[k] for k in args.keys() if k in inspect.getargspec(f).args }
@@ -31,10 +31,10 @@ DISTANCE_METRICS = {
 }
 
 class NetworkMetricHelper:
-    
+
     @staticmethod
     def compute_centrality(network):
-        centrality = nx.algorithms.centrality.betweenness_centrality(network)   
+        centrality = nx.algorithms.centrality.betweenness_centrality(network)
         _, nodes_centrality = zip(*sorted(centrality.items()))
         max_centrality = max(nodes_centrality)
         centrality_vector = [7 + 10 * t / max_centrality for t in nodes_centrality]
@@ -43,9 +43,9 @@ class NetworkMetricHelper:
     @staticmethod
     def compute_partition(network):
         partition = community.best_partition(network)
-        p_, nodes_community = zip(*sorted(partition.items()))
+        _, nodes_community = zip(*sorted(partition.items()))
         return nodes_community
-    
+
     @staticmethod
     def partition_colors(nodes_community, color_palette=None):
         if color_palette is None:
@@ -55,7 +55,7 @@ class NetworkMetricHelper:
                              '#66a61e','#e6ab02','#a6761d','#666666']
         community_colors = [ color_palette[x % len(color_palette)] for x in nodes_community ]
         return community_colors
-    
+
     @staticmethod
     def compute_alpha_vector(value_vector):
         max_value = max(value_vector)
@@ -63,7 +63,7 @@ class NetworkMetricHelper:
         return alphas
 
 class NetworkUtility:
-    
+
     @staticmethod
     def get_edge_layout_data(network, layout):
 
@@ -71,7 +71,7 @@ class NetworkUtility:
                     for u, v, d in network.edges(data=True) ]
 
         return zip(*data)
-        
+
     #FIXME Merge these two methods, return dict instead (lose bokeh dependency)
     @staticmethod
     def get_edges_source(network, layout, scale=1.0, normalize=False):
@@ -81,7 +81,7 @@ class NetworkUtility:
         weights = [ scale * x / norm for x in  weights ]
         lines_source = bm.ColumnDataSource(dict(xs=xs, ys=ys, weights=weights))
         return lines_source
-   
+
     @staticmethod
     def get_node_subset_source(network, layout, node_list = None):
 
@@ -92,7 +92,7 @@ class NetworkUtility:
 
         nodes_source = bm.ColumnDataSource(dict(x=xs, y=ys, name=nodes, node_id=nodes))
         return nodes_source
-    
+
     @staticmethod
     def create_nodes_data_source(network, layout):
 
@@ -100,7 +100,7 @@ class NetworkUtility:
         nodes_xs, nodes_ys = list(zip(*nodes_coordinates))
         nodes_source = bm.ColumnDataSource(dict(x=nodes_xs, y=nodes_ys, name=nodes, node_id=nodes))
         return nodes_source
-    
+
     @staticmethod
     def create_network(df, source_field='source', target_field='target', weight='weight'):
 
@@ -125,7 +125,7 @@ class NetworkUtility:
 
     @staticmethod
     def get_bipartite_node_set(network, bipartite=0):
-        nodes = set(n for n,d in network.nodes(data=True) if d['bipartite']==bipartite) 
+        nodes = set(n for n,d in network.nodes(data=True) if d['bipartite']==bipartite)
         others = set(network) - nodes
         return list(nodes), list(others)
 
@@ -134,7 +134,7 @@ class NetworkUtility:
         G = nx.Graph()
         G.add_weighted_edges_from(values)
         return G
-    
+
     #@staticmethod
     #def create_network_from_correlation_matrix(matrix, threshold=0.0):
 
@@ -143,7 +143,7 @@ class NetworkUtility:
     #    values = VectorSpaceHelper.symmetric_lower_left_iterator(matrix, threshold)
     #    G.add_weighted_edges_from(values)
     #    return G
-    
+
     #@staticmethod
     #def matrix_weight_iterator(matrix, threshold=0.0):
     #    '''
@@ -156,12 +156,12 @@ class NetworkUtility:
     #    return ((i, j, 1.0 - matrix[i,j])
     #            for i, j in product(range(0,x_dim), range(0,y_dim))
     #                if i < j and (1.0 - matrix[i,j]) >= threshold)
-    
+
     #@staticmethod
     #def df_stack_correlation_matrix(cm, threshold=0.0, n_top=100):
     #    items = NetworkUtility.matrix_weight_iterator(cm, threshold)
     #    return sorted(items, key=lambda x: x[2])[:n_top]
-    
+
 # pos = nx.graphviz_layout(G, prog="twopi") # twopi, neato, circo
 
 get_edge_layout_data = NetworkUtility.get_edge_layout_data
@@ -173,4 +173,3 @@ create_bipartite_network = NetworkUtility.create_bipartite_network
 get_bipartite_node_set = NetworkUtility.get_bipartite_node_set
 create_network_from_xyw_list = NetworkUtility.create_network_from_xyw_list
 
-   
