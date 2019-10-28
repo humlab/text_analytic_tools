@@ -4,7 +4,7 @@ import text_analytic_tools.utility as utility
 
 logger = utility.getLogger("text_analytic_tools")
 
-def store_tokenized_corpus_as_archive(tokenized_docs, corpus_source_filepath, **opts):
+def store_tokenized_corpus_as_archive(tokenized_docs, target_filename):
     """Stores a tokenized (string) corpus to a zip archive
 
     Parameters
@@ -19,14 +19,12 @@ def store_tokenized_corpus_as_archive(tokenized_docs, corpus_source_filepath, **
     [type]
         [description]
     """
-    filepath = utility.path_add_timestamp(corpus_source_filepath)
-    filepath = utility.path_add_suffix(filepath, '.tokenized')
 
     file_stats = []
     process_count = 0
 
     # TODO: Enable store of all documents line-by-line in a single file
-    with zipfile.ZipFile(filepath, "w") as zf:
+    with zipfile.ZipFile(target_filename, "w") as zf:
 
         for document_id, document_name, chunk_index, tokens in tokenized_docs:
 
@@ -45,5 +43,5 @@ def store_tokenized_corpus_as_archive(tokenized_docs, corpus_source_filepath, **
 
     df_summary = pd.DataFrame(file_stats, columns=['document_id', 'document_name', 'chunk_index', 'n_tokens'])
 
-    return filepath, df_summary
+    return df_summary
 
