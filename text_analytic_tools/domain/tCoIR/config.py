@@ -1,5 +1,3 @@
-import re
-import numpy as np
 
 DEFAULT_PERIOD_GROUPS = [
     {
