@@ -30,10 +30,10 @@ def build(corpus, pos_tags, extract_tokens_callback):
 
     logger.info('Preparing corpus statistics...')
     logger.info('...word counts...')
-    word_counts = { k: textacy_utility.generate_word_count_score(corpus, k, gui.min_freq.max) for k in [ 'lemma', 'lower', 'orth' ] }
+    min_freq_stats = { k: textacy_utility.generate_word_count_score(corpus, k, gui.min_freq.max) for k in [ 'lemma', 'lower', 'orth' ] }
 
     logger.info('...word document count...')
-    word_document_counts = { k: textacy_utility.generate_word_document_count_score(corpus, k, gui.max_doc_freq.min) for k in [ 'lemma', 'lower', 'orth' ] }
+    max_doc_freq_stats = { k: textacy_utility.generate_word_document_count_score(corpus, k, gui.max_doc_freq.min) for k in [ 'lemma', 'lower', 'orth' ] }
 
     logger.info('...done!')
 
@@ -76,8 +76,8 @@ def build(corpus, pos_tags, extract_tokens_callback):
             named_entities=gui.named_entities.value,
             include_pos=gui.include_pos.value,
             chunk_size=gui.chunk_size.value,
-            word_counts=word_counts,
-            word_document_counts=word_document_counts
+            min_freq_stats=min_freq_stats,
+            max_doc_freq_stats=max_doc_freq_stats
         )
 
         gui.output.clear_output()
