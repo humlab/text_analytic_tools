@@ -80,7 +80,7 @@ def extract_document_terms(doc, extract_args):
 
     terms = ( z for z in (
         tranform_token(w, substitutions)
-            for w in doc._.to_terms_list(ngrams, named_entities, normalize, as_strings, **kwargs)
+            for w in doc._.to_terms_list(ngrams=ngrams, entities=named_entities, normalize=normalize, as_strings=as_strings, **kwargs)
                 if len(w) >= min_length # and w not in extra_stop_words
     ) if z not in extra_stop_words)
 
@@ -171,16 +171,18 @@ def extract_document_tokens(docs, **opts):
         document_id = 0
         normalize = opts['normalize'] or 'orth'
         term_substitutions = opts.get('substitutions', {})
-        word_counts = opts.get('word_counts', {})
-        word_document_counts = opts.get('word_document_counts', {})
+        min_freq_stats = opts.get('min_freq_stats', {})
+        max_doc_freq_stats = opts.get('max_doc_freq_stats', {})
         extra_stop_words = set([])
 
         if opts['min_freq'] > 1:
-            stop_words = utility.extract_counter_items_within_threshold(word_counts[normalize], 1, opts['min_freq'])
+            assert normalize in min_freq_stats
+            stop_words = utility.extract_counter_items_within_threshold(min_freq_stats[normalize], 1, opts['min_freq'])
             extra_stop_words.update(stop_words)
 
         if opts['max_doc_freq'] < 100:
-            stop_words = utility.extract_counter_items_within_threshold(word_document_counts[normalize], opts['max_doc_freq'], 100)
+            assert normalize in max_doc_freq_stats
+            stop_words = utility.extract_counter_items_within_threshold(max_doc_freq_stats[normalize], opts['max_doc_freq'], 100)
             extra_stop_words.update(stop_words)
 
         extract_args = dict(
@@ -201,7 +203,7 @@ def extract_document_tokens(docs, **opts):
         )
 
         for document_name, doc in docs:
-            logger.info(document_name)
+            # logger.info(document_name)
 
             terms = [ x for x in extract_document_terms(doc, extract_args)]
 
