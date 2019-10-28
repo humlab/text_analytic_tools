@@ -2,6 +2,8 @@ import itertools
 import text_analytic_tools.utility as utility
 import re
 import collections
+import pandas as pd
+
 from spacy import attrs
 
 def generate_word_count_score(corpus, normalize, count):
@@ -72,8 +74,8 @@ def infrequent_words(corpus, normalize='lemma', weighting='count', threshold=0, 
     if weighting == 'count' and threshold <= 1:
         return set([])
 
-    word_counts = corpus.word_counts(normalize=normalize, weighting=weighting, as_strings=as_strings)
-    words = set([ w for w in word_counts if word_counts[w] < threshold ])
+    token_counter = corpus.word_counts(normalize=normalize, weighting=weighting, as_strings=as_strings)
+    words = set([ w for w in token_counter if token_counter[w] < threshold ])
 
     return words
 
@@ -86,16 +88,16 @@ def frequent_document_words(corpus, normalize='lemma', weighting='freq', dfs_thr
 def get_most_frequent_words(corpus, n_top, normalize='lemma', include_pos=None, weighting='count'):
     include_pos = include_pos or [ 'VERB', 'NOUN', 'PROPN' ]
     include = lambda x: x.pos_ in include_pos
-    word_counts = collections.Counter()
+    token_counter = collections.Counter()
     for doc in corpus:
         bow = doc_to_bow(doc, target=normalize, weighting=weighting, as_strings=True, include=include)
-        word_counts.update(bow)
+        token_counter.update(bow)
         if normalize == 'lemma':
             lower_cased_word_counts = collections.Counter()
-            for k, v in word_counts.items():
+            for k, v in token_counter.items():
                 lower_cased_word_counts.update({ k.lower(): v })
-            word_counts = lower_cased_word_counts
-    return word_counts.most_common(n_top)
+            token_counter = lower_cased_word_counts
+    return token_counter.most_common(n_top)
 
 def doc_to_bow(doc, target='lemma', weighting='count', as_strings=False, include=None, n_min_count=2):
 
