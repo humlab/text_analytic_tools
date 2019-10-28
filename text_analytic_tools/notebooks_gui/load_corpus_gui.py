@@ -1,19 +1,20 @@
-import os, glob, types
-import ipywidgets
+import glob
+import os
+import types
 
-import text_analytic_tools.utility as utility
+import ipywidgets
+from IPython.display import display
 
 import text_analytic_tools.common.textacy_utility as textacy_utility
+import text_analytic_tools.utility as utility
 
 logger = utility.getLogger('corpus_text_analysis')
-
-from IPython.display import display
 
 def display_corpus_load_gui(data_folder, document_index=None, container=None, compute_ner=False, domain_logic=None):
 
     lw = lambda w: ipywidgets.Layout(width=w)
 
-    language_options = { utility.LANGUAGE_MAP[k].title(): k for k in utility.LANGUAGE_MAP.keys() }
+    language_options = { utility.LANGUAGE_MAP[k].title(): k for k in utility.LANGUAGE_MAP }
 
     corpus_files = sorted(glob.glob(os.path.join(data_folder, '*.txt.zip')))
 
