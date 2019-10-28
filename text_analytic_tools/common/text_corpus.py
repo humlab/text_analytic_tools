@@ -9,6 +9,7 @@ import logging
 import re
 import typing
 import collections
+from itertools import chain
 
 from gensim.corpora.textcorpus import TextCorpus
 
@@ -23,7 +24,7 @@ def build_vocab(corpus):
     token2id.default_factory = token2id.__len__
     for doc in corpus:
         for term in doc:
-            token2id[term]
+            token2id[term] # pylint: disable=pointless-statement
     logger.info('Vocabulary of size {} built.'.format(len(token2id)))
     return token2id
 
@@ -228,7 +229,6 @@ class MmCorpusStatisticsService():
         return freqencies
 
     def get_document_token_frequencies(self):
-        from itertools import chain
         '''
         Returns a DataFrame with per document token frequencies i.e. "melts" doc-term matrix
         '''
